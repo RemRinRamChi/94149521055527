@@ -30,6 +30,9 @@ import javax.swing.text.DefaultCaret;
 import spelling.SpellingList.AnswerChecker;
 import spelling.SpellingList.QuestionAsker;
 import spelling.VoiceGenerator.Voice;
+import spelling.quiz.VideoCreator;
+import spelling.settings.ClearStatistics;
+import spelling.statistics.SpellingAidStatistics;
 
 /**
  * 

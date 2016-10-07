@@ -1,4 +1,4 @@
-package spelling;
+package spelling.quiz;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

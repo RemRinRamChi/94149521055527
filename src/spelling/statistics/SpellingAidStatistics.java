@@ -1,4 +1,4 @@
-package spelling;
+package spelling.statistics;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.SwingWorker;
+
+import spelling.SpellingAid;
 
 /**
  * 

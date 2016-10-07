@@ -1,4 +1,4 @@
-package spelling;
+package spelling.settings;
 
 import java.io.File;
 import java.io.FileNotFoundException;

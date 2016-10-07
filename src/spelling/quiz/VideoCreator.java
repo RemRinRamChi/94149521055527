@@ -1,8 +1,10 @@
-package spelling;
+package spelling.quiz;
 
 import java.io.File;
 
 import javax.swing.SwingWorker;
+
+import spelling.Tools;
 
 /**
  * 

@@ -11,6 +11,8 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
+import spelling.settings.ClearStatistics;
+
 /**
  * 
  * This class controls the logic to ask questions 

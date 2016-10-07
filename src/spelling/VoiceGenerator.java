@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.swing.SwingWorker;
 
+import spelling.settings.ClearStatistics;
+
 /**
  * 
  * This class governs the main logic for generating festival voices
