@@ -6,13 +6,25 @@ import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.Insets;
 import javax.swing.JTextField;
+
+import java.awt.CardLayout;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 public class WelcomeScreen extends JPanel {
 	private JTextField nameField;
+	private SpellingAidMain mainFrame;
 
+	public WelcomeScreen(SpellingAidMain contentFrame){
+		this();
+		mainFrame = contentFrame;
+	}
 	/**
 	 * Create the panel.
 	 */
@@ -20,7 +32,7 @@ public class WelcomeScreen extends JPanel {
 		setLayout(null);
 		
 		JLabel welcomeImage = new JLabel("");
-		welcomeImage.setBounds(0, 5, 450, 200);
+		welcomeImage.setBounds(0, 11, 450, 200);
 		// change this later
 		welcomeImage.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\welcome.png"));
 		add(welcomeImage);
@@ -56,6 +68,11 @@ public class WelcomeScreen extends JPanel {
 		nameField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Confirm");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.changeCardPanel("Main");
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
