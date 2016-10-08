@@ -1,6 +1,5 @@
 package spelling;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,7 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
-import java.awt.Dimension;
 
 public class SpellingAidMain extends JFrame {
 
@@ -16,8 +14,14 @@ public class SpellingAidMain extends JFrame {
 	private JPanel welcomeScreen;
 	private JPanel mainOptions;
 
+	/**
+	 * Change panel displayed within main frame
+	 * @param mode The state VoxSpell is currently in.
+	 */
 	public void changeCardPanel(String mode){
+		// change panel to display according to mode 
 		((CardLayout) contentPane.getLayout()).show(contentPane, mode);
+		// change size of main VoxSpell frame depending on the size of the panel contained within
 		if(mode.equals("Welcome")){
 			setSize(470,490);
 		} else if (mode.equals("Main")){
@@ -32,6 +36,7 @@ public class SpellingAidMain extends JFrame {
 	public static void main(String[] args) {
 	    try 
 	    { 
+	    	// change look and feel on VoxSpell to windows L+F
 	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
 	    } 
 	    catch(Exception e){ 
@@ -58,13 +63,20 @@ public class SpellingAidMain extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
+		// set main frame's content pane to be of card layout to take in panels to switch between them easily 
 		contentPane.setLayout(new CardLayout(0, 0));
+		
+		// initialize panels corresponding to different states of VoxSpell
 		welcomeScreen = new WelcomeScreen(this);
 		mainOptions = new MainOptionsPanel(this);
 		
+		// add panels corresponding to different states of VoxSpell into content pane
 		contentPane.add(welcomeScreen,"Welcome");
-		changeCardPanel("Welcome");
 		contentPane.add(mainOptions, "Main");
+		
+		// first panel to be displayed is the welcome screen
+		changeCardPanel("Welcome");
 	}
 
 }
