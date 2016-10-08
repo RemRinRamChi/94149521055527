@@ -45,6 +45,7 @@ public class WelcomeScreen extends JPanel {
 		panel.add(nameQuery, gbc_nameQuery);
 		
 		nameField = new JTextField();
+		nameField.setToolTipText("(e.g. Sherlock)");
 		nameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_nameField = new GridBagConstraints();
 		gbc_nameField.insets = new Insets(0, 0, 5, 5);
@@ -54,14 +55,14 @@ public class WelcomeScreen extends JPanel {
 		panel.add(nameField, gbc_nameField);
 		nameField.setColumns(10);
 		
-		JButton confirmNameBtn = new JButton("Confirm");
-		GridBagConstraints gbc_confirmNameBtn = new GridBagConstraints();
-		gbc_confirmNameBtn.fill = GridBagConstraints.VERTICAL;
-		gbc_confirmNameBtn.insets = new Insets(0, 0, 0, 5);
-		gbc_confirmNameBtn.anchor = GridBagConstraints.EAST;
-		gbc_confirmNameBtn.gridx = 1;
-		gbc_confirmNameBtn.gridy = 2;
-		panel.add(confirmNameBtn, gbc_confirmNameBtn);
+		JButton btnNewButton = new JButton("Confirm");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 2;
+		panel.add(btnNewButton, gbc_btnNewButton);
 
 	}
 }
