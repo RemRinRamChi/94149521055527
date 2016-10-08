@@ -130,5 +130,8 @@ public class QuizChooser extends JDialog {
 		btnCancel.setFocusPainted(false);
 		btnCancel.setBounds(130, 259, 89, 29);
 		getContentPane().add(btnCancel);
+		
+		// centre dialog
+		setLocationRelativeTo(null);
 	}
 }

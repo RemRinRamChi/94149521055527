@@ -13,9 +13,12 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.CardLayout;
 
 public class SpellingAidStats extends JPanel {
 	private SpellingAidMain mainFrame;
+	private JPanel specificQuiz;
+	private JPanel statsPanel;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -23,7 +26,19 @@ public class SpellingAidStats extends JPanel {
 	public SpellingAidStats(SpellingAidMain contentFrame){
 		this();
 		mainFrame = contentFrame;
+		specificQuiz = new SpecificQuizStats(mainFrame,this);
+		statsPanel.add(specificQuiz, "Specific");
 	}
+	
+	/**
+	 * Change panel displayed within stats frame
+	 * @param mode The state VoxSpellStats is currently in.
+	 */
+	public void changeCardPanel(String mode){
+		// change panel to display according to mode 
+		((CardLayout) statsPanel.getLayout()).show(statsPanel, mode);
+	}
+	
 	/**
 	 * Create the panel.
 	 */
@@ -51,33 +66,49 @@ public class SpellingAidStats extends JPanel {
 		lblHereAreSomeStats.setBounds(193, 95, 272, 53);
 		friendlyPanel.add(lblHereAreSomeStats);
 		
+		statsPanel = new JPanel();
+		statsPanel.setBounds(10, 191, 450, 392);
+		add(statsPanel);
+		statsPanel.setLayout(new CardLayout(0, 0));
+		
+		JPanel overallStatsPanel = new JPanel();
+		statsPanel.add(overallStatsPanel, "Overall");
+		overallStatsPanel.setLayout(null);
+		
 		JTextArea statsTextArea = new JTextArea();
+		statsTextArea.setBounds(0, 0, 450, 300);
+		overallStatsPanel.add(statsTextArea);
 		statsTextArea.setEditable(false);
-		statsTextArea.setBounds(10, 191, 450, 300);
-		add(statsTextArea);
 		
 		JLabel lblMoreInfo = new JLabel("More on a specific quiz:");
+		lblMoreInfo.setBounds(10, 311, 176, 22);
+		overallStatsPanel.add(lblMoreInfo);
 		lblMoreInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMoreInfo.setBounds(20, 502, 176, 22);
-		add(lblMoreInfo);
 		
 		JComboBox quizComboBox = new JComboBox();
-		quizComboBox.setBounds(21, 527, 226, 22);
-		add(quizComboBox);
+		quizComboBox.setBounds(11, 336, 226, 22);
+		overallStatsPanel.add(quizComboBox);
 		
 		JButton btnSelectQuiz = new JButton("Select Quiz");
-		btnSelectQuiz.setBounds(22, 560, 89, 23);
-		add(btnSelectQuiz);
+		btnSelectQuiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				changeCardPanel("Specific");
+			}
+		});
+		btnSelectQuiz.setBounds(12, 369, 89, 23);
+		overallStatsPanel.add(btnSelectQuiz);
 		
 		JButton btnBack = new JButton("BACK");
+		btnBack.setBounds(349, 325, 89, 67);
+		overallStatsPanel.add(btnBack);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.changeCardPanel("Main");
 			}
 		});
 		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnBack.setBounds(359, 516, 89, 67);
-		add(btnBack);
+
+
 
 	}
 }
