@@ -106,6 +106,11 @@ public class MainOptionsPanel extends JPanel {
 		optionsPanel.add(btnReviewQuiz, gbc_btnReviewQuiz);
 		
 		JButton btnViewStatistics = new JButton("View Statistics");
+		btnViewStatistics.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.changeCardPanel("Stats");
+			}
+		});
 		btnViewStatistics.setFocusPainted(false);
 		btnViewStatistics.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnViewStatistics = new GridBagConstraints();

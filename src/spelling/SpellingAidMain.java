@@ -7,9 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import spelling.quiz.QuizDone;
 import spelling.quiz.QuizQuestion;
+import spelling.statistics.SpellingAidStats;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 
 public class SpellingAidMain extends JFrame {
 
@@ -17,6 +20,8 @@ public class SpellingAidMain extends JFrame {
 	private JPanel welcomeScreen;
 	private JPanel mainOptions;
 	private JPanel quizQuestion;
+	private JPanel voxSpellStats;
+	private JPanel doneQuizQuestion;
 
 
 	/**
@@ -34,8 +39,12 @@ public class SpellingAidMain extends JFrame {
 		} else if (mode.equals("Quiz")){
 			setSize(780,400);
 		} else if (mode.equals("Done")){
-			setSize(780,400);
+			setSize(780,430);
+		} else if (mode.equals("Stats")){
+			setSize(490,640);
 		}
+		// make sure to recentre main frame
+		this.setLocationRelativeTo(null);
 	}
 
 	/**
@@ -65,6 +74,7 @@ public class SpellingAidMain extends JFrame {
 	 * Create the frame.
 	 */
 	public SpellingAidMain() {
+		setResizable(false);
 		setTitle("Welcome To VOXSPELL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -79,15 +89,20 @@ public class SpellingAidMain extends JFrame {
 		welcomeScreen = new WelcomeScreen(this);
 		mainOptions = new MainOptionsPanel(this);
 		quizQuestion = new QuizQuestion(this);
+		doneQuizQuestion = new QuizDone(this);
+		voxSpellStats= new SpellingAidStats(this);
 		
 		// add panels corresponding to different states of VoxSpell into content pane
 		contentPane.add(welcomeScreen,"Welcome");
 		contentPane.add(mainOptions, "Main");
 		contentPane.add(quizQuestion, "Quiz");
+		contentPane.add(doneQuizQuestion, "Done");
+		contentPane.add(voxSpellStats, "Stats");
 
 		
 		// first panel to be displayed is the welcome screen
 		changeCardPanel("Welcome");
+		
 	}
 
 }
