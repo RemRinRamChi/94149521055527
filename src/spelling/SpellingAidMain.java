@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
+
+import spelling.quiz.QuizQuestion;
+
 import java.awt.CardLayout;
 
 public class SpellingAidMain extends JFrame {
@@ -13,6 +16,8 @@ public class SpellingAidMain extends JFrame {
 	private JPanel contentPane;
 	private JPanel welcomeScreen;
 	private JPanel mainOptions;
+	private JPanel quizQuestion;
+
 
 	/**
 	 * Change panel displayed within main frame
@@ -21,13 +26,14 @@ public class SpellingAidMain extends JFrame {
 	public void changeCardPanel(String mode){
 		// change panel to display according to mode 
 		((CardLayout) contentPane.getLayout()).show(contentPane, mode);
-		// change size of main VoxSpell frame depending on the size of the panel contained within
+		// change size of main VoxSpell frame depending on the size of the panel contained within (width+20,height+40) 
 		if(mode.equals("Welcome")){
 			setSize(470,490);
 		} else if (mode.equals("Main")){
 			setSize(470,540);
+		} else if (mode.equals("Quiz")){
+			setSize(780,400);
 		}
-
 	}
 
 	/**
@@ -70,10 +76,13 @@ public class SpellingAidMain extends JFrame {
 		// initialize panels corresponding to different states of VoxSpell
 		welcomeScreen = new WelcomeScreen(this);
 		mainOptions = new MainOptionsPanel(this);
+		quizQuestion = new QuizQuestion(this);
 		
 		// add panels corresponding to different states of VoxSpell into content pane
 		contentPane.add(welcomeScreen,"Welcome");
 		contentPane.add(mainOptions, "Main");
+		contentPane.add(quizQuestion, "Quiz");
+
 		
 		// first panel to be displayed is the welcome screen
 		changeCardPanel("Welcome");

@@ -7,6 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import spelling.SpellingAidMain;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -16,7 +19,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class QuizChooser extends JDialog {
+	private SpellingAidMain mainFrame;
 
+	/**
+	 * Create the panel after taking in the main frame so that panel can be switched based on state.
+	 */
+	public QuizChooser(SpellingAidMain contentFrame){
+		this();
+		mainFrame = contentFrame;
+	}
 
 	/**
 	 * Create the dialog.
@@ -35,6 +46,12 @@ public class QuizChooser extends JDialog {
 		getContentPane().add(lblNZCERLevel);
 		
 		JButton btn1 = new JButton("1");
+		btn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				mainFrame.changeCardPanel("Quiz");
+			}
+		});
 		btn1.setFocusPainted(false);
 		btn1.setBounds(32, 70, 39, 39);
 		getContentPane().add(btn1);

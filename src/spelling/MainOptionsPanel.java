@@ -40,7 +40,7 @@ public class MainOptionsPanel extends JPanel {
 		hiPanel.setLayout(null);
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("img\\avatar.png"));
+		avatar.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\avatar.png"));
 		avatar.setBounds(24, 11, 159, 184);
 		hiPanel.add(avatar);
 		
@@ -69,7 +69,7 @@ public class MainOptionsPanel extends JPanel {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				QuizChooser quizChooser = new QuizChooser();
+				QuizChooser quizChooser = new QuizChooser(mainFrame);
 				quizChooser.setVisible(true);
 			}
 		});
