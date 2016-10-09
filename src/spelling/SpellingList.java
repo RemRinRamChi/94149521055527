@@ -24,11 +24,6 @@ import spelling.settings.ClearStatistics;
  */
 public class SpellingList {
 	
-	// Only 2 types of quiz modes
-	public enum QuizMode{New, Review};
-	public enum QuizState{Asking, Answering, Answered };
-
-	
 	// initialising variables to use during quiz TO KEEP TRACK OF QUESTIONS AND ATTEMPT COUNTS
 
 	// There are two spelling types: new and review

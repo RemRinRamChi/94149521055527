@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import spelling.SpellingAidMain;
+import spelling.quiz.SpellList.QuizMode;
 
 import javax.swing.JLabel;
+import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -18,17 +20,19 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class QuizChooser extends JDialog {
+public class QuizChooser extends JDialog implements ActionListener {
 	private SpellingAidMain mainFrame;
 	private QuizQuestion mainQuizPanel;
+	private QuizMode theMode;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
-	public QuizChooser(SpellingAidMain contentFrame, QuizQuestion quizPanel){
+	public QuizChooser(SpellingAidMain contentFrame, QuizQuestion quizPanel, QuizMode mode){
 		this();
 		mainFrame = contentFrame;
 		mainQuizPanel = quizPanel;
+		theMode = mode;
 	}
 
 	/**
@@ -49,142 +53,76 @@ public class QuizChooser extends JDialog {
 		
 		JButton btn1 = new JButton("1");
 		btn1.setFont(new Font("Arial", Font.PLAIN, 9));
-		btn1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(1);
-			}
-		});
+		btn1.addActionListener(this);
 		btn1.setFocusPainted(false);
 		btn1.setBounds(32, 70, 39, 39);
 		getContentPane().add(btn1);
 		
 		JButton btn2 = new JButton("2");
-		btn2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(2);
-			}
-		});
+		btn2.addActionListener(this);
 		btn2.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn2.setFocusPainted(false);
 		btn2.setBounds(81, 70, 39, 39);
 		getContentPane().add(btn2);
 		
 		JButton btn3 = new JButton("3");
-		btn3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(3);
-			}
-		});
+		btn3.addActionListener(this);
 		btn3.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn3.setFocusPainted(false);
 		btn3.setBounds(130, 70, 39, 39);
 		getContentPane().add(btn3);
 		
 		JButton btn4 = new JButton("4");
-		btn4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(4);
-			}
-		});
+		btn4.addActionListener(this);
 		btn4.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn4.setFocusPainted(false);
 		btn4.setBounds(179, 70, 39, 39);
 		getContentPane().add(btn4);
 		
 		JButton btn5 = new JButton("5");
-		btn5.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(5);
-			}
-		});
+		btn5.addActionListener(this);
 		btn5.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn5.setFocusPainted(false);
 		btn5.setBounds(228, 70, 39, 39);
 		getContentPane().add(btn5);
 		
 		JButton btn6 = new JButton("6");
-		btn6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(6);
-			}
-		});
+		btn6.addActionListener(this);
 		btn6.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn6.setFocusPainted(false);
 		btn6.setBounds(277, 70, 39, 39);
 		getContentPane().add(btn6);
 		
 		JButton btn7 = new JButton("7");
-		btn7.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(7);
-			}
-		});
+		btn7.addActionListener(this);
 		btn7.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn7.setFocusPainted(false);
 		btn7.setBounds(42, 120, 39, 39);
 		getContentPane().add(btn7);
 		
 		JButton btn8 = new JButton("8");
-		btn8.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(8);
-			}
-		});
+		btn8.addActionListener(this);
 		btn8.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn8.setFocusPainted(false);
 		btn8.setBounds(91, 120, 39, 39);
 		getContentPane().add(btn8);
 		
 		JButton btn9 = new JButton("9");
-		btn9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(9);
-			}
-		});
+		btn9.addActionListener(this);
 		btn9.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn9.setFocusPainted(false);
 		btn9.setBounds(140, 120, 39, 39);
 		getContentPane().add(btn9);
 		
 		JButton btn10 = new JButton("10");
-		btn10.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(10);
-			}
-		});
+		btn10.addActionListener(this);
 		btn10.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn10.setFocusPainted(false);
 		btn10.setBounds(189, 120, 45, 39);
 		getContentPane().add(btn10);
 		
 		JButton btn11 = new JButton("11");
-		btn11.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				mainFrame.changeCardPanel("Quiz");
-				mainQuizPanel.startQuiz(11);
-			}
-		});
+		btn11.addActionListener(this);
 		btn11.setFont(new Font("Arial", Font.PLAIN, 9));
 		btn11.setFocusPainted(false);
 		btn11.setBounds(244, 120, 45, 39);
@@ -219,5 +157,12 @@ public class QuizChooser extends JDialog {
 		
 		// centre dialog
 		setLocationRelativeTo(null);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		dispose();
+		mainFrame.changeCardPanel("Quiz");
+		mainQuizPanel.startQuiz(((AbstractButton) e.getSource()).getText(),theMode);
 	}
 }

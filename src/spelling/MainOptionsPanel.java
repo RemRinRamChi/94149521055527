@@ -3,6 +3,7 @@ package spelling;
 import javax.swing.JPanel;
 
 import spelling.quiz.QuizChooser;
+import spelling.quiz.SpellList.QuizMode;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -69,7 +70,7 @@ public class MainOptionsPanel extends JPanel {
 		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion());
+				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New);
 				quizChooser.setVisible(true);
 			}
 		});
@@ -96,6 +97,12 @@ public class MainOptionsPanel extends JPanel {
 		optionsPanel.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnReviewQuiz = new JButton("Review Quiz\r\n");
+		btnReviewQuiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review);
+				quizChooser.setVisible(true);
+			}
+		});
 		btnReviewQuiz.setFocusPainted(false);
 		btnReviewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnReviewQuiz = new GridBagConstraints();

@@ -322,13 +322,13 @@ public class QuizQuestion extends JPanel {
 		spellList = new SpellList();
 	}
 
-	public void startQuiz(int quizLvl){
+	public void startQuiz(String quizLvl,QuizMode mode){
 		// clear texts from previous session if exists
 		resetScreen();
 		setCurrentStreak(":");
 		setNoOfCorrectSpellings(":");
-		//Start asking questions for the current quiz
-		spellList.createLevelList(quizLvl, QuizMode.New,this);
+		//Start asking questions for the current quiz // NEED TO CHANGE THIS TO ACCEPT STRING
+		spellList.createLevelList(Integer.parseInt(quizLvl), mode,this);
 		quizAccuracy.setText(": "+ spellList.getLvlAccuracy()+"%");
 		questionAsker = spellList.getQuestionAsker();
 		questionAsker.execute();

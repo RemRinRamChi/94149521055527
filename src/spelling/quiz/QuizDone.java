@@ -6,6 +6,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import spelling.SpellingAidMain;
+import spelling.quiz.SpellList.QuizMode;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -102,7 +103,7 @@ public class QuizDone extends JPanel {
 		btnTryAnotherLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.changeCardPanel("Main");
-				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion());
+				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New);
 				quizChooser.setVisible(true);
 			}
 		});
