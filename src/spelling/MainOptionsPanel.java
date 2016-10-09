@@ -4,8 +4,10 @@ import javax.swing.JPanel;
 
 import spelling.quiz.QuizChooser;
 import spelling.quiz.SpellList.QuizMode;
+import spelling.settings.ClearStatistics;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
@@ -127,7 +129,13 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnViewStatistics.gridy = 4;
 		optionsPanel.add(btnViewStatistics, gbc_btnViewStatistics);
 		
-		JButton btnSettings = new JButton("Settings");
+		JButton btnSettings = new JButton("Clear Statistics");
+		btnSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//CLEAR STATS info dialog
+				JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnSettings.setFocusPainted(false);
 		btnSettings.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
