@@ -42,6 +42,8 @@ public class QuizQuestion extends JPanel {
 	private JLabel longestStreak;
 	private JLabel noOfCorrectSpellings;
 	private JLabel quizAccuracy;
+	private JLabel lblSpellAgain;
+	
 
 	// spell list, question asker and answer checker to run the quiz
 	private SpellList spellList;
@@ -55,12 +57,7 @@ public class QuizQuestion extends JPanel {
 	private double theVoiceStretch;
 	private double theVoicePitch;
 	private double theVoiceRange;
-
-	// use voiceGen to say stuff
-	public void sayText(String normal, String altered){
-		voiceGen.sayText(normal, altered);
-	}
-
+	private JTextArea definitionArea;
 	// Action object is created to be added as a listener for userInput
 	// so that when the enter key is pressed, input is accepted
 	Action enterAction = new AbstractAction()
@@ -119,7 +116,7 @@ public class QuizQuestion extends JPanel {
 		avatar.setBounds(28, 36, 154, 150);
 		add(avatar);
 
-		spellQuery = new JLabel("Please spell word 1 of 8\r\n");
+		spellQuery = new JLabel("Please spell word\r\n");
 		spellQuery.setHorizontalAlignment(SwingConstants.LEFT);
 		spellQuery.setFont(new Font("Arial", Font.PLAIN, 24));
 		spellQuery.setBounds(213, 29, 286, 45);
@@ -134,11 +131,11 @@ public class QuizQuestion extends JPanel {
 		scrollPane.setBounds(213, 98, 286, 64);
 		add(scrollPane);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setFont(new Font("Arial", Font.PLAIN, 13));
-		textArea.setEditable(false);
-		scrollPane.setViewportView(textArea);
-		textArea.setBackground(Color.LIGHT_GRAY);
+		definitionArea = new JTextArea();
+		definitionArea.setFont(new Font("Arial", Font.PLAIN, 13));
+		definitionArea.setEditable(false);
+		scrollPane.setViewportView(definitionArea);
+		definitionArea.setBackground(Color.LIGHT_GRAY);
 
 		userInput = new JTextField();
 		userInput.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -198,17 +195,17 @@ public class QuizQuestion extends JPanel {
 		lblndAttempt.setBounds(213, 302, 86, 20);
 		add(lblndAttempt);
 
-		firstAttempt = new JLabel(": placeholder");
+		firstAttempt = new JLabel(": ");
 		firstAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		firstAttempt.setBounds(309, 281, 86, 20);
 		add(firstAttempt);
 
-		secondAttempt = new JLabel(": placeholder");
+		secondAttempt = new JLabel(": ");
 		secondAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		secondAttempt.setBounds(309, 302, 86, 20);
 		add(secondAttempt);
 
-		resultIndicator = new JLabel("Correct !");
+		resultIndicator = new JLabel("");
 		resultIndicator.setBackground(Color.LIGHT_GRAY);
 		resultIndicator.setForeground(Color.MAGENTA);
 		resultIndicator.setHorizontalAlignment(SwingConstants.CENTER);
@@ -216,12 +213,12 @@ public class QuizQuestion extends JPanel {
 		resultIndicator.setBounds(21, 212, 182, 23);
 		add(resultIndicator);
 
-		firstAttemptResult = new JLabel("Incorrect");
+		firstAttemptResult = new JLabel("");
 		firstAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
 		firstAttemptResult.setBounds(405, 281, 86, 20);
 		add(firstAttemptResult);
 
-		secondAttemptResult = new JLabel("Correct\r\n");
+		secondAttemptResult = new JLabel("");
 		secondAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
 		secondAttemptResult.setBounds(405, 302, 86, 20);
 		add(secondAttemptResult);
@@ -240,7 +237,7 @@ public class QuizQuestion extends JPanel {
 				}
 			}
 		});
-		btnStop.setBounds(52, 253, 114, 31);
+		btnStop.setBounds(554, 204, 114, 31);
 		add(btnStop);
 
 		JLabel lblCurrentQuiz = new JLabel("Current Quiz ");
@@ -268,30 +265,38 @@ public class QuizQuestion extends JPanel {
 		lblQuizAccuracy.setBounds(517, 172, 96, 14);
 		add(lblQuizAccuracy);
 
-		currentQuiz = new JLabel(": NZCER Lvl 1");
+		currentQuiz = new JLabel(": ");
 		currentQuiz.setFont(new Font("Arial", Font.PLAIN, 13));
 		currentQuiz.setBounds(623, 73, 127, 14);
 		add(currentQuiz);
 
-		currentStreak = new JLabel(": 2");
+		currentStreak = new JLabel(": ");
 		currentStreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		currentStreak.setBounds(623, 98, 127, 14);
 		add(currentStreak);
 
-		longestStreak = new JLabel(": 5");
+		longestStreak = new JLabel(": ");
 		longestStreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		longestStreak.setBounds(623, 122, 127, 14);
 		add(longestStreak);
 
-		noOfCorrectSpellings = new JLabel(": 7/8");
+		noOfCorrectSpellings = new JLabel(": ");
 		noOfCorrectSpellings.setFont(new Font("Arial", Font.PLAIN, 13));
 		noOfCorrectSpellings.setBounds(623, 147, 127, 14);
 		add(noOfCorrectSpellings);
 
-		quizAccuracy = new JLabel(": 77%");
+		quizAccuracy = new JLabel(": ");
 		quizAccuracy.setFont(new Font("Arial", Font.PLAIN, 13));
 		quizAccuracy.setBounds(623, 172, 127, 14);
 		add(quizAccuracy);
+		
+		lblSpellAgain = new JLabel("");
+		lblSpellAgain.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSpellAgain.setForeground(Color.MAGENTA);
+		lblSpellAgain.setFont(new Font("Arial", Font.PLAIN, 18));
+		lblSpellAgain.setBackground(Color.LIGHT_GRAY);
+		lblSpellAgain.setBounds(21, 246, 182, 23);
+		add(lblSpellAgain);
 
 		// stretch spelling on words to let 2nd language learners have more time to process an unfamiliar language
 		theVoiceStretch = 1.2;
@@ -316,7 +321,10 @@ public class QuizQuestion extends JPanel {
 	}
 
 	public void startQuiz(int quizLvl){
-		// CLEAR THE COMPONENTS here
+		// clear texts from previous session if exists
+		resetScreen();
+		setCurrentStreak(":");
+		setNoOfCorrectSpellings(":");
 		//Start asking questions for the current quiz
 		spellList.createLevelList(quizLvl, QuizMode.New,this);
 		quizAccuracy.setText(": "+ spellList.getLvlAccuracy()+"%");
@@ -366,24 +374,45 @@ public class QuizQuestion extends JPanel {
 		return currentStreak.getText();
 	}
 	public void setCurrentStreak(String streak) {
-		currentStreak.setText(streak);;
+		currentStreak.setText(streak);
 	}
 	public String getLongestStreak() {
 		return longestStreak.getText();
 	}
 	public void setLongestStreak(String streak) {
-		longestStreak.setText(streak);;
+		longestStreak.setText(streak);
 	}
 	public int getNoOfCorrectSpellings() {
 		return Integer.parseInt(noOfCorrectSpellings.getText());
 	}
-	public void setNoOfCorrectSpellings(int corrects) {
-		noOfCorrectSpellings.setText(corrects+"");;
+	public void setNoOfCorrectSpellings(String correctFraction) {
+		noOfCorrectSpellings.setText(correctFraction);
 	}
 	public void requestInputFocus(){
 		userInput.requestFocus();
 	}
-
+	public void setSpellAgain(boolean yesOrNo){
+		lblSpellAgain.setVisible(yesOrNo);
+	}
+	public void setDefinition(String definition){
+		definitionArea.setText("Definition");
+	}
+	public void setCurrentQuiz(String quiz){
+		currentQuiz.setText("quiz");
+	}
+	// reset screen at the start of every quiz
+	public void resetScreen(){
+		setResultIndicator("");
+		setSpellAgain(false);
+		setFirstAttempt("");
+		setSecondAttempt(":");
+		setFirstAttempt(":");
+		setFirstAttemptResult("");
+		setSecondAttemptResult("");
+		setDefinition("");
+		btnConfirmOrNext.setText("Confirm");
+	}
+	
 	// method to be called when quiz is done
 	public void quizIsDone(String results){
 		// display results
@@ -391,4 +420,11 @@ public class QuizQuestion extends JPanel {
 		// switch panel in card layout
 		mainFrame.changeCardPanel("Done");
 	}
+	
+	
+	// use voiceGen to say stuff
+	public void sayText(String normal, String altered){
+		voiceGen.sayText(normal, altered);
+	}
+
 }

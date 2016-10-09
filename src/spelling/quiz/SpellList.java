@@ -36,6 +36,8 @@ public class SpellList {
 	QuizMode spellType;
 	// Question Number
 	int questionNo; 	
+	// Current Streak
+	int currentStreak;
 	// Current Level
 	int currentLevel;
 	// True if question has been attempted (according to current question)
@@ -116,13 +118,18 @@ public class SpellList {
 
 	// Creates a list of words to test according to level and mode
 	public void createLevelList(int level, QuizMode spellingType, QuizQuestion spellAidApp){
+		
 		// For every level these following variables start as follows
 		questionNo = 0;
 		correctAnsCount = 0;
+		resetCurrentStreak();
 		currentLevel = level;
 		spellType=spellingType;
 		spellingAidApp = spellAidApp;
 		status = QuizState.Asking;
+
+		// update quiz field with level NEED TO CHANGE FOR CUSTOM LIST
+		spellingAidApp.setCurrentQuiz("NZCER level "+level);
 
 		// size of question list, might change depending on size of word list
 		int questionListSize = 10;
@@ -216,6 +223,8 @@ public class SpellList {
 		protected void done(){
 			// quit button is clicked <- not sure what this comment is doing here
 			if (status==QuizState.Asking){
+				// clear texts from previous question
+				spellingAidApp.resetScreen();
 				// when a question is over and it is time to ask the next question
 				spellingAidApp.goOnToNextQuestion();
 			}
@@ -270,18 +279,20 @@ public class SpellList {
 			return;
 		} 
 
-
-		// MIGHT HAVE PROBLEMS TEST THIS ~~~~~~
-		// if it is valid, start the checking
-		if(spellingAidApp.getFirstAttempt().equals("")){
-			spellingAidApp.setFirstAttempt(userAnswer);
+		// if it is valid, start the checking 
+		
+		// set the attempted word to show user
+		if(!attempt){
+			spellingAidApp.setFirstAttempt(": "+userAnswer);
 		} else {
-			spellingAidApp.setSecondAttempt(userAnswer);
+			spellingAidApp.setSecondAttempt(": "+userAnswer);
 		}
 		
 		
 		// turn to lower case for BOTH and then compare
 		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
+			spellingAidApp.setResultIndicator("Correct !");
+			spellingAidApp.setSpellAgain(false);
 			// Correct echoed if correct
 			spellingAidApp.sayText("Correct","");
 			//processStarter("echo Correct | festival --tts"); 
@@ -303,14 +314,19 @@ public class SpellList {
 			endOfQuestion = true;
 			// answer is correct and so proceed to ASKING the next question
 			status = QuizState.Asking;
+
+			incrementCurrentStreak();
 		} else {
+			spellingAidApp.setResultIndicator("Incorrect");
 			if(!attempt){
+				spellingAidApp.setSpellAgain(true);
 				spellingAidApp.setSpellQuery("Incorrect, please spell word " + questionNo + " of " + currentQuizList.size() + "again : ");
 				spellingAidApp.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
 				//processStarter("echo Incorrect, try once more: "+wordToSpell+" . "+wordToSpell+" . " + "| festival --tts");
 				// answer is wrong and a second chance is given and so back to ANSWERING
 				status = QuizState.Answering;
 			} else {
+				spellingAidApp.setSpellAgain(false);
 				spellingAidApp.sayText("Incorrect.",",");
 				//processStarter("echo Incorrect | festival --tts");
 				Tools.record(spelling_aid_statistics,wordToSpell+" Failed"); // store as failed
@@ -321,7 +337,14 @@ public class SpellList {
 				status = QuizState.Asking;
 				endOfQuestion = true;
 			}
+			if(!attempt){
+				spellingAidApp.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letters off");
+			} else {
+				spellingAidApp.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letters off");
+			}
 			attempt = true; // question has been attempted
+			
+			resetCurrentStreak();
 		}
 
 		// increment the counter which stores the total number of questions asked in the current level
@@ -496,6 +519,19 @@ public class SpellList {
 	// for the GUI to set the answer
 	public void setAnswer(String theUserAnswer){
 		userAnswer=theUserAnswer;
+	}
+	
+	private int checkLetterDiff(String w1, String w2){
+		return Math.abs(w1.length()-w2.length());
+	}
+	
+	private void incrementCurrentStreak(){
+		currentStreak++;
+		spellingAidApp.setCurrentStreak(": "+currentStreak);
+	}
+	
+	private void resetCurrentStreak(){
+		spellingAidApp.setCurrentStreak(": 0");
 	}
 
 }

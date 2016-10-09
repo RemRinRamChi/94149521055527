@@ -73,12 +73,13 @@ public class SpellingAidMain extends JFrame {
 	public static void main(String[] args) {
 	    try 
 	    { 
-	    	// change look and feel on VoxSpell to windows L+F
+	    	// change look and feel on VoxSpell to windows L+F -- for Linux
 	    	UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
 	    } 
 	    catch(Exception e){ 
 	        try {
-				//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		    	// change look and feel on VoxSpell to windows L+F -- for Windows
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
