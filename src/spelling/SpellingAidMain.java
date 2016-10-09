@@ -117,8 +117,8 @@ public class SpellingAidMain extends JFrame {
 		// initialize panels corresponding to different states of VoxSpell
 		welcomeScreen = new WelcomeScreen(this);
 		mainOptions = new MainOptionsPanel(this);
-		quizQuestion = new QuizQuestion(this);
 		doneQuizQuestion = new QuizDone(this);
+		quizQuestion = new QuizQuestion(this,doneQuizQuestion);
 		voxSpellStats= new SpellingAidStats(this);
 		
 		// add panels corresponding to different states of VoxSpell into content pane

@@ -29,6 +29,7 @@ public class QuizQuestion extends JPanel {
 	// QuizQuestion GUI components
 	private JTextField userInput;
 	private SpellingAidMain mainFrame;
+	private QuizDone mainQuizDone;
 	private JLabel spellQuery;
 	private JButton btnConfirmOrNext;
 	private JButton btnStop;
@@ -101,9 +102,10 @@ public class QuizQuestion extends JPanel {
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
-	public QuizQuestion(SpellingAidMain contentFrame){
+	public QuizQuestion(SpellingAidMain contentFrame, QuizDone quizDone){
 		this();
 		mainFrame = contentFrame;
+		mainQuizDone = quizDone;
 	}
 	/**
 	 * Create the panel.
@@ -414,9 +416,27 @@ public class QuizQuestion extends JPanel {
 	}
 	
 	// method to be called when quiz is done
-	public void quizIsDone(String results){
+	public void quizIsDone(String results,QuizMode mode, int corrects){
 		// display results
 		mainFrame.getDonePanel().setLblResults(results);
+		if(mode == QuizMode.NoQuestions){
+			mainQuizDone.changeResultPanel("No Results");
+			mainQuizDone.changeUserInteraction("No Words");
+		} else {
+			mainQuizDone.changeResultPanel("Results");
+			if(corrects >= 9){
+				if(mode == QuizMode.New){
+					mainQuizDone.changeUserInteraction("Rewards");
+				} else if(mode == QuizMode.Review){
+					mainQuizDone.changeUserInteraction("Good Job");
+				}
+			} else {
+				mainQuizDone.changeUserInteraction("Good Try");
+			}
+			
+		}
+		
+		
 		// switch panel in card layout
 		mainFrame.changeCardPanel("Done");
 	}

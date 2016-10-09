@@ -26,7 +26,7 @@ import spelling.settings.ClearStatistics;
 public class SpellList {
 	
 	// Only 2 types of quiz modes
-	public enum QuizMode{New, Review};
+	public enum QuizMode{New, Review,NoQuestions};
 	public enum QuizState{Asking, Answering, Answered };
 
 	
@@ -196,13 +196,13 @@ public class SpellList {
 		protected void done(){
 			// if noOfQuestions = 0, possible in review quiz mode
 			if(getNoOfQuestions()==0){
-				spellingAidApp.quizIsDone("No questions in this quiz !");
+				spellingAidApp.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,correctAnsCount);
 			}
 			// stop the quiz and record progress when the whole quiz list has been covered
 			if(questionNo > getNoOfQuestions()){
 				recordFailedAndTriedWordsFromLevel();
 				// quiz is done, display results
-				spellingAidApp.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !");
+				spellingAidApp.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !",spellType,correctAnsCount);
 			}
 		}
 
@@ -358,6 +358,7 @@ public class SpellList {
 			}
 		}
 		
+		updateCorrectQuestionsCountLabel();
 	}
 
 	/// This method records everything related to the current level to the file
@@ -532,6 +533,11 @@ public class SpellList {
 	
 	private void resetCurrentStreak(){
 		spellingAidApp.setCurrentStreak(": 0");
+	}
+	
+	private void updateCorrectQuestionsCountLabel(){
+		int qNo = questionNo+1;
+		spellingAidApp.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+qNo);
 	}
 
 }
