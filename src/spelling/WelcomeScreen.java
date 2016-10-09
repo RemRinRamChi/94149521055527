@@ -40,7 +40,7 @@ public class WelcomeScreen extends JPanel {
 		add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{50, 330, 50, 0};
-		gbl_panel.rowHeights = new int[]{80, 80, 28, 0};
+		gbl_panel.rowHeights = new int[]{80, 80, 32, 0};
 		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
@@ -66,7 +66,7 @@ public class WelcomeScreen extends JPanel {
 		nameField.setColumns(10);
 		
 		JButton btnConfirm = new JButton("Confirm");
-		btnConfirm.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnConfirm.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.changeCardPanel("Main");

@@ -227,6 +227,9 @@ public class SpellList {
 			if (status==QuizState.Asking){
 				// when a question is over and it is time to ask the next question
 				spellingAidApp.goOnToNextQuestion();
+				if(questionNo == getNoOfQuestions()){
+					spellingAidApp.setDoneButton();
+				}
 			}
 		}
 	}

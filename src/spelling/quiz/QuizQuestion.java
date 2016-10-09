@@ -140,7 +140,7 @@ public class QuizQuestion extends JPanel {
 		definitionArea.setBackground(Color.LIGHT_GRAY);
 
 		userInput = new JTextField();
-		userInput.setFont(new Font("Arial", Font.PLAIN, 11));
+		userInput.setFont(new Font("Arial", Font.PLAIN, 14));
 		userInput.setBounds(213, 173, 286, 20);
 		add(userInput);
 		userInput.setColumns(10);
@@ -169,7 +169,7 @@ public class QuizQuestion extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(btnConfirmOrNext.getText().equals("Confirm")){
 					takeInUserInput();
-				} else if (btnConfirmOrNext.getText().equals("Next Question")){
+				} else if (btnConfirmOrNext.getText().equals("Next Question")||btnConfirmOrNext.getText().equals("Done")){
 					// ask question when it is supposed to
 					if(spellList.status == QuizState.Asking){
 						btnConfirmOrNext.setText("Confirm");
@@ -218,12 +218,12 @@ public class QuizQuestion extends JPanel {
 
 		firstAttemptResult = new JLabel("");
 		firstAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
-		firstAttemptResult.setBounds(405, 281, 86, 20);
+		firstAttemptResult.setBounds(413, 281, 255, 20);
 		add(firstAttemptResult);
 
 		secondAttemptResult = new JLabel("");
 		secondAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
-		secondAttemptResult.setBounds(405, 302, 86, 20);
+		secondAttemptResult.setBounds(413, 302, 255, 20);
 		add(secondAttemptResult);
 
 		btnStop = new JButton("Stop\r\n Quiz");
@@ -402,6 +402,9 @@ public class QuizQuestion extends JPanel {
 	}
 	public void setCurrentQuiz(String quiz){
 		currentQuiz.setText(quiz);
+	}
+	public void setDoneButton(){
+		btnConfirmOrNext.setText("Done");
 	}
 	// reset screen at the start of every quiz
 	public void resetScreen(){
