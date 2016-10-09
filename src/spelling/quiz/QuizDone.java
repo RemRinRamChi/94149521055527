@@ -15,7 +15,12 @@ import java.awt.event.ActionEvent;
 
 public class QuizDone extends JPanel {
 	private SpellingAidMain mainFrame;
+	private JLabel lblResults;
 
+	public void setLblResults(String results) {
+		lblResults.setText(results);
+	}
+	
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
@@ -40,7 +45,7 @@ public class QuizDone extends JPanel {
 		add(resultsPanel);
 		resultsPanel.setLayout(null);
 		
-		JLabel lblResults = new JLabel("7 out of 8 correct !");
+		lblResults = new JLabel("7 out of 8 correct !");
 		lblResults.setBounds(0, 0, 373, 113);
 		resultsPanel.add(lblResults);
 		lblResults.setBackground(Color.LIGHT_GRAY);

@@ -502,12 +502,7 @@ public class SpellingAid extends JFrame implements ActionListener{
 		}
 	}
 
-	// get the text from the text box then clears it
-	private String clearTxtBox(){
-		String theReturn = userInput.getText();
-		userInput.setText("");
-		return theReturn;
-	}
+	
 
 	// checks that all the files that are storing the statistics are present and create any files that do not exist
 	private void makeSureAllNecessaryFilesArePresent() {

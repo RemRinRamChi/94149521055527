@@ -41,6 +41,7 @@ public class QuizQuestion extends JPanel {
 	private JLabel currentStreak;
 	private JLabel longestStreak;
 	private JLabel noOfCorrectSpellings;
+	private JLabel quizAccuracy;
 
 	// spell list, question asker and answer checker to run the quiz
 	private SpellList spellList;
@@ -59,7 +60,7 @@ public class QuizQuestion extends JPanel {
 	public void sayText(String normal, String altered){
 		voiceGen.sayText(normal, altered);
 	}
-	
+
 	// Action object is created to be added as a listener for userInput
 	// so that when the enter key is pressed, input is accepted
 	Action enterAction = new AbstractAction()
@@ -70,13 +71,12 @@ public class QuizQuestion extends JPanel {
 			takeInUserInput();
 		}
 	};
-	private JLabel quizAccuracy;
 
 	// Method to call to accept user input
 	private void takeInUserInput(){
 		// only take in input when it is in the ANSWERING phase
 		if(spellList.status == QuizState.Answering){
-			//spellList.setAnswer(clearTxtBox());
+			spellList.setAnswer(getAndClrInput());
 			spellList.status = QuizState.Answered;
 			ansChecker=spellList.getAnswerChecker();
 			ansChecker.execute();
@@ -84,16 +84,21 @@ public class QuizQuestion extends JPanel {
 
 	}
 
+	// get the text from the input text box then clears it
+	private String getAndClrInput(){
+		String theReturn = userInput.getText();
+		userInput.setText("");
+		return theReturn;
+	}
+
 	// Method to ask next question in the quiz
 	public void goOnToNextQuestion(){
+		btnConfirmOrNext.setText("Next Question");
 		// take note here coz maybe something wrong with accuracy recording in review quiz
 		//if(spellList.spellType.equals("new")){
 		quizAccuracy.setText(": "+spellList.getLvlAccuracy()+"%");
 		//}
-		if(spellList.status == QuizState.Asking){
-			questionAsker=spellList.getQuestionAsker();
-			questionAsker.execute();
-		}
+		
 	}
 
 	/**
@@ -162,7 +167,11 @@ public class QuizQuestion extends JPanel {
 				if(btnConfirmOrNext.getText().equals("Confirm")){
 					takeInUserInput();
 				} else if (btnConfirmOrNext.getText().equals("Next Question")){
-					// DO SOMETHING NEXT
+					// ask question when it is supposed to
+					if(spellList.status == QuizState.Asking){
+						questionAsker=spellList.getQuestionAsker();
+						questionAsker.execute();
+					}
 				}
 
 			}
@@ -283,7 +292,7 @@ public class QuizQuestion extends JPanel {
 		theVoiceStretch = 1.2;
 		theVoicePitch = 95;
 		theVoiceRange = 15;
-		
+
 		// initialise voice generator for VoxSpell
 		voiceGen = new VoiceGenerator(theVoice,theVoiceStretch,theVoicePitch,theVoiceRange);
 
@@ -292,15 +301,15 @@ public class QuizQuestion extends JPanel {
 		// immediately cancel it to allow the respell button to work on the first try to only work when 
 		// none of the voice generators are in action
 		respellGen.cancel(true); 
-		
+
 
 		// enable input accpeting when enter button is pressed
 		userInput.addActionListener(enterAction);
-		
+
 		// Initialise spellList model which all questions will be asked from and answers will be checked against
 		spellList = new SpellList();
 	}
-	
+
 	public void startQuiz(int quizLvl){
 		// CLEAR THE COMPONENTS here
 		//Start asking questions for the current quiz
@@ -308,10 +317,10 @@ public class QuizQuestion extends JPanel {
 		quizAccuracy.setText(": "+ spellList.getLvlAccuracy()+"%");
 		questionAsker = spellList.getQuestionAsker();
 		questionAsker.execute();
-		
+
 	}
-	
-	
+
+
 	public String getUserInput() {
 		return userInput.getText();
 	}
@@ -368,5 +377,13 @@ public class QuizQuestion extends JPanel {
 	}
 	public void requestInputFocus(){
 		userInput.requestFocus();
+	}
+
+	// method to be called when quiz is done
+	public void quizIsDone(String results){
+		// display results
+		mainFrame.getDonePanel().setLblResults(results);
+		// switch panel in card layout
+		mainFrame.changeCardPanel("Done");
 	}
 }

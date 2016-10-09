@@ -183,32 +183,19 @@ public class SpellList {
 		protected Void doInBackground() throws Exception {
 			if(getNoOfQuestions()!=0){
 				askNextQuestion();
-			} else {
-				// if noOfQuestions = 0, possible in review quiz mode
-				//****************************************TAKE CARE OF THIS LATER
-				//spellingAidApp.window.append(" There are no words to review in this level.\n\n");
-			}
+			} 
 			return null;
 		}		
 		protected void done(){
 			// if noOfQuestions = 0, possible in review quiz mode
 			if(getNoOfQuestions()==0){
-				//****************************************TAKE CARE OF THIS LATER
-				//spellingAidApp.revertToOriginal();
+				spellingAidApp.quizIsDone("No questions in this quiz !");
 			}
 			// stop the quiz and record progress when the whole quiz list has been covered
 			if(questionNo > getNoOfQuestions()){
 				recordFailedAndTriedWordsFromLevel();
-				//****************************************TAKE CARE OF THIS LATER
-/*
-				if(spellType.equals("new")){
-					// new spelling quiz has a next level option
-					spellingAidApp.window.append("\n You got "+ correctAnsCount +" out of "+ getNoOfQuestions() + " words correct on the first attempt.\n\n" );
-					spellingAidApp.changeToNextState();
-				} else if (spellType.equals("review")){
-					spellingAidApp.window.append("\n You got "+ correctAnsCount +" out of "+ getNoOfQuestions() + " words correct.\n\n" );
-					spellingAidApp.revertToOriginal();
-				}*/
+				// quiz is done, display results
+				spellingAidApp.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !");
 			}
 		}
 
@@ -227,7 +214,7 @@ public class SpellList {
 		}
 
 		protected void done(){
-			// quit button is clicked <- not sure what this is doing here
+			// quit button is clicked <- not sure what this comment is doing here
 			if (status==QuizState.Asking){
 				// when a question is over and it is time to ask the next question
 				spellingAidApp.goOnToNextQuestion();

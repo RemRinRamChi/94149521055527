@@ -24,10 +24,14 @@ public class SpellingAidMain extends JFrame {
 	private JPanel mainOptions;
 	private QuizQuestion quizQuestion;
 	private JPanel voxSpellStats;
-	private JPanel doneQuizQuestion;
+	private QuizDone doneQuizQuestion;
 
 	public QuizQuestion getQuizQuestion() {
 		return quizQuestion;
+	}
+	
+	public QuizDone getDonePanel() {
+		return doneQuizQuestion;
 	}
 
 	/**
