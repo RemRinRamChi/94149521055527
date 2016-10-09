@@ -77,7 +77,7 @@ public class SpellingAidStats extends JPanel {
 		overallStatsPanel.setLayout(null);
 		
 		statsTextArea = new JTextArea();
-		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 13));
+		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
 		statsTextArea.setBounds(0, 0, 450, 300);
 		overallStatsPanel.add(statsTextArea);
 		statsTextArea.setEditable(false);
