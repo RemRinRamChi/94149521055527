@@ -52,7 +52,7 @@ public class SpellList {
 	private String userAnswer = "0";
 
 	// This is the SPELLING AID APP
-	private QuizQuestion spellingAidApp = null;
+	private QuizQuestion spellingAidApp;
 
 	// Number of correct answers
 	private int correctAnsCount = 0;
@@ -120,16 +120,16 @@ public class SpellList {
 	public void createLevelList(int level, QuizMode spellingType, QuizQuestion spellAidApp){
 		
 		// For every level these following variables start as follows
+		spellingAidApp = spellAidApp;
 		questionNo = 0;
 		correctAnsCount = 0;
 		resetCurrentStreak();
 		currentLevel = level;
 		spellType=spellingType;
-		spellingAidApp = spellAidApp;
 		status = QuizState.Asking;
 
 		// update quiz field with level NEED TO CHANGE FOR CUSTOM LIST
-		spellingAidApp.setCurrentQuiz("NZCER level "+level);
+		spellingAidApp.setCurrentQuiz(": NZCER level "+level);
 
 		// size of question list, might change depending on size of word list
 		int questionListSize = 10;
@@ -189,6 +189,8 @@ public class SpellList {
 	class QuestionAsker extends SwingWorker<Void, Void>{
 		protected Void doInBackground() throws Exception {
 			if(getNoOfQuestions()!=0){
+				// clear texts from previous question
+				spellingAidApp.resetScreen();
 				askNextQuestion();
 			} 
 			return null;
@@ -223,8 +225,6 @@ public class SpellList {
 		protected void done(){
 			// quit button is clicked <- not sure what this comment is doing here
 			if (status==QuizState.Asking){
-				// clear texts from previous question
-				spellingAidApp.resetScreen();
 				// when a question is over and it is time to ask the next question
 				spellingAidApp.goOnToNextQuestion();
 			}
@@ -292,16 +292,15 @@ public class SpellList {
 		// turn to lower case for BOTH and then compare
 		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
 			spellingAidApp.setResultIndicator("Correct !");
-			spellingAidApp.setSpellAgain(false);
+			spellingAidApp.displaySpellAgainLabel(false);
 			// Correct echoed if correct
 			spellingAidApp.sayText("Correct","");
-			//processStarter("echo Correct | festival --tts"); 
 			if(!attempt){
 				Tools.record(spelling_aid_statistics,wordToSpell+" Mastered"); // store as mastered
-				correctAnsCount++; //question answered correctly
 			} else {
 				Tools.record(spelling_aid_statistics,wordToSpell+" Faulted"); // store as faulted
 			}
+			correctAnsCount++; //question answered correctly in the end
 
 			// increment the counter which stores the total number of correct answers in the current level
 			int totalNumberOfCorrectsInLevel = totalCorrect.get(currentLevel)+1;
@@ -319,16 +318,13 @@ public class SpellList {
 		} else {
 			spellingAidApp.setResultIndicator("Incorrect");
 			if(!attempt){
-				spellingAidApp.setSpellAgain(true);
-				spellingAidApp.setSpellQuery("Incorrect, please spell word " + questionNo + " of " + currentQuizList.size() + "again : ");
+				spellingAidApp.displaySpellAgainLabel(true);
 				spellingAidApp.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
-				//processStarter("echo Incorrect, try once more: "+wordToSpell+" . "+wordToSpell+" . " + "| festival --tts");
 				// answer is wrong and a second chance is given and so back to ANSWERING
 				status = QuizState.Answering;
 			} else {
-				spellingAidApp.setSpellAgain(false);
+				spellingAidApp.displaySpellAgainLabel(false);
 				spellingAidApp.sayText("Incorrect.",",");
-				//processStarter("echo Incorrect | festival --tts");
 				Tools.record(spelling_aid_statistics,wordToSpell+" Failed"); // store as failed
 				if(!currentFailedList.contains(wordToSpell)){ //add to failed list if it doesn't exist
 					currentFailedList.add(wordToSpell);
@@ -338,9 +334,9 @@ public class SpellList {
 				endOfQuestion = true;
 			}
 			if(!attempt){
-				spellingAidApp.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letters off");
+				spellingAidApp.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			} else {
-				spellingAidApp.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letters off");
+				spellingAidApp.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			}
 			attempt = true; // question has been attempted
 			
@@ -356,9 +352,9 @@ public class SpellList {
 			if(!currentTriedList.contains(wordToSpell)){
 				currentTriedList.add(wordToSpell);
 			}
+			updateCorrectQuestionsCountLabel();
 		}
 		
-		updateCorrectQuestionsCountLabel();
 	}
 
 	/// This method records everything related to the current level to the file
@@ -532,12 +528,12 @@ public class SpellList {
 	}
 	
 	private void resetCurrentStreak(){
-		spellingAidApp.setCurrentStreak(": 0");
+		currentStreak = 0;
+		spellingAidApp.setCurrentStreak(": "+currentStreak);
 	}
 	
 	private void updateCorrectQuestionsCountLabel(){
-		int qNo = questionNo+1;
-		spellingAidApp.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+qNo);
+		spellingAidApp.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+questionNo);
 	}
 
 }

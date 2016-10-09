@@ -149,8 +149,8 @@ public class QuizQuestion extends JPanel {
 		btnListenAgain.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnListenAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// this button only works when the voice generator is not generating any voice
-				if((!(spellList.status==QuizState.Asking))&&respellGen.isDone()){
+				// this button only works when the voice generator is not generating any voice and when a question is not being asked
+				if((!(spellList.status==QuizState.Asking)||(btnConfirmOrNext.getText().equals("Next Question")))&&respellGen.isDone()){
 					// respell word
 					respellGen = new VoiceGenerator(theVoice,theVoiceStretch,theVoicePitch,theVoiceRange);
 					respellGen.setTextForSwingWorker("", spellList.getCurrentWord());
@@ -172,6 +172,7 @@ public class QuizQuestion extends JPanel {
 				} else if (btnConfirmOrNext.getText().equals("Next Question")){
 					// ask question when it is supposed to
 					if(spellList.status == QuizState.Asking){
+						btnConfirmOrNext.setText("Confirm");
 						questionAsker=spellList.getQuestionAsker();
 						questionAsker.execute();
 					}
@@ -292,7 +293,7 @@ public class QuizQuestion extends JPanel {
 		quizAccuracy.setBounds(623, 172, 127, 14);
 		add(quizAccuracy);
 		
-		lblSpellAgain = new JLabel("");
+		lblSpellAgain = new JLabel("Try one more");
 		lblSpellAgain.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSpellAgain.setForeground(Color.MAGENTA);
 		lblSpellAgain.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -393,19 +394,19 @@ public class QuizQuestion extends JPanel {
 	public void requestInputFocus(){
 		userInput.requestFocus();
 	}
-	public void setSpellAgain(boolean yesOrNo){
+	public void displaySpellAgainLabel(boolean yesOrNo){
 		lblSpellAgain.setVisible(yesOrNo);
 	}
 	public void setDefinition(String definition){
 		definitionArea.setText("Definition");
 	}
 	public void setCurrentQuiz(String quiz){
-		currentQuiz.setText("quiz");
+		currentQuiz.setText(quiz);
 	}
 	// reset screen at the start of every quiz
 	public void resetScreen(){
 		setResultIndicator("");
-		setSpellAgain(false);
+		displaySpellAgainLabel(false);
 		setFirstAttempt("");
 		setSecondAttempt(":");
 		setFirstAttempt(":");

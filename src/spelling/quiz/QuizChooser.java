@@ -163,6 +163,6 @@ public class QuizChooser extends JDialog implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		dispose();
 		mainFrame.changeCardPanel("Quiz");
-		mainQuizPanel.startQuiz(((AbstractButton) e.getSource()).getText(),theMode);
+		mainQuizPanel.startQuiz(((JButton) e.getSource()).getText(),theMode);
 	}
 }
