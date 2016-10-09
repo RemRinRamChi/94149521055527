@@ -16,7 +16,11 @@ import spelling.statistics.SpellingAidStats;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
-
+/**
+ * 
+ * @author yyap601
+ *
+ */
 public class SpellingAidMain extends JFrame {
 
 	private JPanel contentPane;
