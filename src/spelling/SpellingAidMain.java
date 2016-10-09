@@ -1,6 +1,8 @@
 package spelling;
 
 import java.awt.EventQueue;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
 import spelling.quiz.QuizQuestion;
+import spelling.quiz.VideoCreator;
 import spelling.statistics.SpellingAidStats;
 
 import java.awt.CardLayout;
@@ -19,10 +22,13 @@ public class SpellingAidMain extends JFrame {
 	private JPanel contentPane;
 	private JPanel welcomeScreen;
 	private JPanel mainOptions;
-	private JPanel quizQuestion;
+	private QuizQuestion quizQuestion;
 	private JPanel voxSpellStats;
 	private JPanel doneQuizQuestion;
 
+	public QuizQuestion getQuizQuestion() {
+		return quizQuestion;
+	}
 
 	/**
 	 * Change panel displayed within main frame
@@ -78,6 +84,9 @@ public class SpellingAidMain extends JFrame {
 	 * Create the frame.
 	 */
 	public SpellingAidMain() {
+		// check for the presence of the hidden statistic files that are required
+		makeSureAllNecessaryFilesArePresent();
+		
 		setResizable(false);
 		setTitle("Welcome To VOXSPELL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -107,6 +116,33 @@ public class SpellingAidMain extends JFrame {
 		// first panel to be displayed is the welcome screen
 		changeCardPanel("Welcome");
 		
+	}
+	
+	// checks that all the files that are storing the statistics are present and create any files that do not exist
+	private void makeSureAllNecessaryFilesArePresent() {
+		File spelling_aid_failed = new File(".spelling_aid_failed");
+		File spelling_aid_statistics = new File(".spelling_aid_statistics");
+		File spelling_aid_tried_words = new File(".spelling_aid_tried_words");
+		File spelling_aid_accuracy = new File(".spelling_aid_accuracy");
+		try{
+			if(! spelling_aid_failed.exists()){
+				spelling_aid_failed.createNewFile();
+			}
+			if(! spelling_aid_statistics.exists()){
+				spelling_aid_statistics.createNewFile();
+			}
+			if(! spelling_aid_tried_words.exists()){
+				spelling_aid_tried_words.createNewFile();
+			}
+			if(! spelling_aid_accuracy.exists()){
+				spelling_aid_accuracy.createNewFile();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// create special video with a background swingworker thread when the app starts
+		VideoCreator createSpecialVideo = new VideoCreator();
+		createSpecialVideo.execute();
 	}
 
 }

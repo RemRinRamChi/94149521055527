@@ -531,7 +531,7 @@ public class SpellingAid extends JFrame implements ActionListener{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// create special video with a background swingworker thread when the app starts
+		// create special video with a background swing worker thread when the app starts
 		VideoCreator createSpecialVideo = new VideoCreator();
 		createSpecialVideo.execute();
 	}

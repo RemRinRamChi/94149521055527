@@ -69,7 +69,7 @@ public class MainOptionsPanel extends JPanel {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				QuizChooser quizChooser = new QuizChooser(mainFrame);
+				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion());
 				quizChooser.setVisible(true);
 			}
 		});

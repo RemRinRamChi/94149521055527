@@ -67,7 +67,6 @@ public class SpellingList {
 	File spelling_aid_statistics;
 	File spelling_aid_accuracy;
 
-
 	// ArrayLists for storing file contents for easier processing later according to levels
 	HashMap<Integer, ArrayList<String>> mapOfWords;
 	HashMap<Integer, ArrayList<String>> mapOfFailedWords;
@@ -77,8 +76,9 @@ public class SpellingList {
 	HashMap<Integer,Integer> totalAsked;
 	HashMap<Integer,Integer> totalCorrect;
 
-
-	// Constructor of spellinglist model for current session
+	/**
+	 * Constructor of spellinglist model for current session 
+	 */
 	public SpellingList(){
 		// Files that contains the word list and statistics
 		wordList = new File("NZCER-spelling-lists.txt");
@@ -123,6 +123,7 @@ public class SpellingList {
 		spellingAidApp = spellAidApp;
 		status = "ASKING";
 
+		// size of question list, might change depending on size of word list
 		int questionListSize = 10;
 
 		// choose list to read from according to mode
@@ -133,13 +134,14 @@ public class SpellingList {
 			wordMap = mapOfFailedWords; 
 		}
 
-		// if level has not been attempted, create a list for that level since it won't exist
+		// if level has not been attempted, create a failed and tried list for that level since it won't exist
 		if(mapOfFailedWords.get(currentLevel)==null){
 			mapOfFailedWords.put(currentLevel, new ArrayList<String>());
 		}
 		if(mapOfTriedWords.get(currentLevel)==null){
 			mapOfTriedWords.put(currentLevel, new ArrayList<String>());
 		}
+		// if level has not been attempted, total questions asked is 0  
 		if(totalAsked.get(currentLevel)==null){
 			totalAsked.put(currentLevel, 0);
 			totalCorrect.put(currentLevel, 0);
@@ -150,7 +152,7 @@ public class SpellingList {
 		ArrayList<String> listOfWordsToTest = new ArrayList<String>();
 		HashMap<String,Integer> uniqueWordsToTest = new HashMap<String,Integer>();
 
-		// if the mode is review, the list size should be the size of the list is the size is less than 10
+		// if the mode is review, the list size should be the size of the list if the size is less than 10
 		if(spellingType.equals("review")){
 			if(listOfWordsToChooseFrom.size()<10){
 				questionListSize = listOfWordsToChooseFrom.size();
@@ -158,6 +160,7 @@ public class SpellingList {
 			}
 		}
 
+		// randomisation process
 		while(uniqueWordsToTest.keySet().size() != questionListSize){
 			int positionToChoose = (int) Math.floor(Math.random() * listOfWordsToChooseFrom.size());
 			if(uniqueWordsToTest.get(listOfWordsToChooseFrom.get(positionToChoose)) == null){
@@ -180,12 +183,13 @@ public class SpellingList {
 			if(getNoOfQuestions()!=0){
 				askNextQuestion();
 			} else {
-				// if noOfQuestions = 0
+				// if noOfQuestions = 0, possible in review quiz mode
 				spellingAidApp.window.append(" There are no words to review in this level.\n\n");
 			}
 			return null;
 		}		
 		protected void done(){
+			// if noOfQuestions = 0, possible in review quiz mode
 			if(getNoOfQuestions()==0){
 				spellingAidApp.revertToOriginal();
 			}
@@ -219,7 +223,7 @@ public class SpellingList {
 		}
 
 		protected void done(){
-			// quit button is clicked
+			// quit button is clicked <- not sure what this is doing here
 			if (status.equals("ASKING")){
 				// when a question is over and it is time to ask the next question
 				spellingAidApp.goOnToNextQuestion();
@@ -236,7 +240,8 @@ public class SpellingList {
 	private void askNextQuestion(){
 		// make sure user input field is cleared everytime a question is asked
 		spellingAidApp.userInput.setText("");
-		// < NoOfQuestion because questionNo is used to access the current quiz list's question which starts at 0
+		// < NoOfQuestion because questionNo is used to access the current quiz list's question which starts at 0 
+		// ie question 10 -> questionNo = 9
 		if(questionNo < getNoOfQuestions()){
 
 			// focus the answering area

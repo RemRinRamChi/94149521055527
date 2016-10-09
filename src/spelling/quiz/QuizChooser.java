@@ -20,13 +20,15 @@ import java.awt.event.ActionEvent;
 
 public class QuizChooser extends JDialog {
 	private SpellingAidMain mainFrame;
+	private QuizQuestion mainQuizPanel;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
-	public QuizChooser(SpellingAidMain contentFrame){
+	public QuizChooser(SpellingAidMain contentFrame, QuizQuestion quizPanel){
 		this();
 		mainFrame = contentFrame;
+		mainQuizPanel = quizPanel;
 	}
 
 	/**
@@ -50,6 +52,7 @@ public class QuizChooser extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				mainFrame.changeCardPanel("Quiz");
+				mainQuizPanel.startQuiz(1);
 			}
 		});
 		btn1.setFocusPainted(false);
