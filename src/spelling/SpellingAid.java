@@ -43,11 +43,13 @@ import spelling.statistics.SpellingAidStatistics;
  */
 @SuppressWarnings("serial")
 public class SpellingAid extends JFrame implements ActionListener{
-
 	JFrame frame = new JFrame("Spelling Aid ~ VOXSPELL"); //Main spelling frame
 	final JPanel tabs = new JPanel(); //Main spelling option buttons
 	final JPanel controller = new JPanel(); //Main spelling logic functions
 	final JPanel nextState = new JPanel(); //Main spelling logic functions after quiz
+	
+	//---------------------------------------------------------------------------------------//
+
 	//The Spelling List so that all buttons can access it, will be set in New/Review button
 	private SpellingList spellList = null;
 	private QuestionAsker questionAsker = null;
@@ -60,6 +62,7 @@ public class SpellingAid extends JFrame implements ActionListener{
 	public double theVoiceStretch;
 	public double theVoicePitch;
 	public double theVoiceRange;
+	//---------------------------------------------------------------------------------------//
 
 	//Creating buttons for tab menu
 	public JButton newQuiz = new JButton("New Spelling Quiz");
@@ -91,6 +94,8 @@ public class SpellingAid extends JFrame implements ActionListener{
 
 	//Layout for main GUI
 	FlowLayout options = new FlowLayout();
+
+	//---------------------------------------------------------------------------------------//
 
 	//To determine whether to clear out welcome text, if true = don't clear
 	boolean notFirstTime; 
@@ -128,6 +133,7 @@ public class SpellingAid extends JFrame implements ActionListener{
 			questionAsker.execute();
 		}
 	}
+	//---------------------------------------------------------------------------------------//
 
 	//Method to add buttons to main GUI frame
 	public void addComponentsToGUI(Container pane) {        
@@ -268,6 +274,8 @@ public class SpellingAid extends JFrame implements ActionListener{
 		DefaultCaret scroller = (DefaultCaret)window.getCaret();
 		scroller.setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
 
+		//---------------------------------------------------------------------------------------//
+
 		// stretch spelling on word
 		theVoiceStretch = 1.2;
 		theVoicePitch = 95;
@@ -285,6 +293,7 @@ public class SpellingAid extends JFrame implements ActionListener{
 		userInput.addActionListener(enterAction);
 		
 		stopQuiz.setToolTipText("You can only use this button during the answering phase in a quiz.");
+		//---------------------------------------------------------------------------------------//
 
 	}
 

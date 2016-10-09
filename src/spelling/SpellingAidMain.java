@@ -42,9 +42,13 @@ public class SpellingAidMain extends JFrame {
 			setSize(780,430);
 		} else if (mode.equals("Stats")){
 			setSize(490,640);
+		} else if (mode.equals("Settings")){
+			setSize(20,40);
 		}
+		
 		// make sure to recentre main frame
 		this.setLocationRelativeTo(null);
+		
 	}
 
 	/**
