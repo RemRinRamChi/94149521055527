@@ -20,6 +20,7 @@ public class QuizDone extends JPanel {
 	private JLabel lblResults;
 	private JPanel userInteractionPanel;
 	private JPanel resultsPanel;
+	private JPanel tryAnotherPanel;
 
 	public void setLblResults(String results) {
 		lblResults.setText(results);
@@ -99,7 +100,13 @@ public class QuizDone extends JPanel {
 		lblGoodJob.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(lblGoodJob, "Good Job");
 		
+		tryAnotherPanel = new JPanel();
+		tryAnotherPanel.setBounds(93, 305, 421, 30);
+		add(tryAnotherPanel);
+		tryAnotherPanel.setLayout(new CardLayout(0, 0));
+		
 		JButton btnTryAnotherLevel = new JButton("TRY ANOTHER LEVEL\r\n");
+		tryAnotherPanel.add(btnTryAnotherLevel, "Try");
 		btnTryAnotherLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.changeCardPanel("Main");
@@ -108,8 +115,17 @@ public class QuizDone extends JPanel {
 			}
 		});
 		btnTryAnotherLevel.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnTryAnotherLevel.setBounds(93, 305, 421, 30);
-		add(btnTryAnotherLevel);
+		
+		JButton btnReviewAnotherLevel = new JButton("REVIEW ANOTHER LEVEL\r\n");
+		btnReviewAnotherLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.changeCardPanel("Main");
+				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review);
+				quizChooser.setVisible(true);
+			}
+		});
+		btnReviewAnotherLevel.setFont(new Font("Arial", Font.PLAIN, 13));
+		tryAnotherPanel.add(btnReviewAnotherLevel, "Review");
 		
 		JLabel avatar = new JLabel("");
 		avatar.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\avatar.png"));
@@ -136,5 +152,10 @@ public class QuizDone extends JPanel {
 	// change user interaction to display according to mode 
 	public void changeUserInteraction(String mode){
 		((CardLayout) userInteractionPanel.getLayout()).show(userInteractionPanel, mode);
+	}
+	
+	// change next level option to display according to mode 
+	public void changeNextLevelPanel(String mode){
+		((CardLayout) tryAnotherPanel.getLayout()).show(tryAnotherPanel, mode);
 	}
 }

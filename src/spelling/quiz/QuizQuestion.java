@@ -435,6 +435,11 @@ public class QuizQuestion extends JPanel {
 			}
 			
 		}
+		if(mode == QuizMode.New){
+			mainQuizDone.changeNextLevelPanel("Try");
+		} else if(mode == QuizMode.Review){
+			mainQuizDone.changeNextLevelPanel("Review");
+		}
 		
 		
 		// switch panel in card layout
