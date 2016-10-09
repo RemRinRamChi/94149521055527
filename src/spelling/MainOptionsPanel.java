@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import spelling.quiz.QuizChooser;
 import spelling.quiz.SpellList.QuizMode;
 import spelling.settings.ClearStatistics;
+import spelling.statistics.SpellingAidStatistics;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -117,6 +118,9 @@ public class MainOptionsPanel extends JPanel {
 		JButton btnViewStatistics = new JButton("View Statistics");
 		btnViewStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// instantiate the statistics object and execute it
+				SpellingAidStatistics statsWin = new SpellingAidStatistics(mainFrame.getVoxSpellStats());
+				statsWin.execute();
 				mainFrame.changeCardPanel("Stats");
 			}
 		});

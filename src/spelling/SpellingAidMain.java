@@ -28,9 +28,13 @@ public class SpellingAidMain extends JFrame {
 	private JPanel welcomeScreen;
 	private JPanel mainOptions;
 	private QuizQuestion quizQuestion;
-	private JPanel voxSpellStats;
+	private SpellingAidStats voxSpellStats;
 	private QuizDone doneQuizQuestion;
 
+	public SpellingAidStats getVoxSpellStats(){
+		return voxSpellStats;
+	}
+	
 	public QuizQuestion getQuizQuestion() {
 		return quizQuestion;
 	}

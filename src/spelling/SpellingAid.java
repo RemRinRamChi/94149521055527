@@ -400,8 +400,8 @@ public class SpellingAid extends JFrame implements ActionListener{
 			notFirstTime = false; // to clear the stats
 
 			// instantiate the statistics obj and execute it
-			SpellingAidStatistics statsWin = new SpellingAidStatistics(this);
-			statsWin.execute();
+			//SpellingAidStatistics statsWin = new SpellingAidStatistics(this);
+			//statsWin.execute();
 		}
 		else if (ae.getSource() == clearStats) {
 			// Scroll bar set to an arbitrary value

@@ -24,8 +24,8 @@ import spelling.SpellingAid;
  */
 public class SpellingAidStatistics extends SwingWorker<Void,String>{
 
-	// This is the SPELLING AID APP
-	SpellingAid spellAidApp;
+	// This is the SPELLING AID STATSGUI
+	SpellingAidStats spellingAidStats;
 
 	// Files for statistics reading
 	File spelling_aid_tried_words;
@@ -43,10 +43,10 @@ public class SpellingAidStatistics extends SwingWorker<Void,String>{
 	int zeroWords; // counter to check if there are no words
 
 
-	public SpellingAidStatistics(SpellingAid spellingAidApp){
+	public SpellingAidStatistics(SpellingAidStats spellingAidStatsGUI){
 
 		// initialise variables appropriately
-		spellAidApp=spellingAidApp;
+		spellingAidStats=spellingAidStatsGUI;
 		zeroWords = 0; 
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
@@ -152,7 +152,7 @@ public class SpellingAidStatistics extends SwingWorker<Void,String>{
 	// this class displays data by publishing them to the JTextArea
 	protected void process(List<String> statsData) {
 		for (String data : statsData) {
-			spellAidApp.window.append(data);;
+			spellingAidStats.appendText(data);;
 		}
 	}
 

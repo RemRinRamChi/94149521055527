@@ -19,6 +19,7 @@ public class SpellingAidStats extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JPanel specificQuiz;
 	private JPanel statsPanel;
+	private JTextArea statsTextArea;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -75,7 +76,7 @@ public class SpellingAidStats extends JPanel {
 		statsPanel.add(overallStatsPanel, "Overall");
 		overallStatsPanel.setLayout(null);
 		
-		JTextArea statsTextArea = new JTextArea();
+		statsTextArea = new JTextArea();
 		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 13));
 		statsTextArea.setBounds(0, 0, 450, 300);
 		overallStatsPanel.add(statsTextArea);
@@ -113,5 +114,10 @@ public class SpellingAidStats extends JPanel {
 
 
 
+	}
+	
+
+	public void appendText(String txt){
+		statsTextArea.append(txt);
 	}
 }
