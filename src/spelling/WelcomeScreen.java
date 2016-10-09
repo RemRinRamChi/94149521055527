@@ -46,7 +46,7 @@ public class WelcomeScreen extends JPanel {
 		panel.setLayout(gbl_panel);
 		
 		JLabel nameQuery = new JLabel("What would you like to be called ?");
-		nameQuery.setFont(new Font("Arial Narrow", Font.BOLD, 20));
+		nameQuery.setFont(new Font("Arial", Font.PLAIN, 18));
 		GridBagConstraints gbc_nameQuery = new GridBagConstraints();
 		gbc_nameQuery.anchor = GridBagConstraints.SOUTH;
 		gbc_nameQuery.insets = new Insets(0, 0, 5, 5);
@@ -66,6 +66,7 @@ public class WelcomeScreen extends JPanel {
 		nameField.setColumns(10);
 		
 		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.changeCardPanel("Main");
