@@ -57,12 +57,12 @@ public class SpellingAidStats extends JPanel {
 		friendlyPanel.add(avatar);
 		
 		JLabel lblHi = new JLabel("Hi Sherlock");
-		lblHi.setFont(new Font("Asiago", Font.PLAIN, 40));
+		lblHi.setFont(new Font("Arial", Font.PLAIN, 40));
 		lblHi.setBounds(193, 31, 235, 64);
 		friendlyPanel.add(lblHi);
 		
 		JLabel lblHereAreSomeStats = new JLabel("Here are some statistics");
-		lblHereAreSomeStats.setFont(new Font("Asiago", Font.PLAIN, 22));
+		lblHereAreSomeStats.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereAreSomeStats.setBounds(193, 95, 272, 53);
 		friendlyPanel.add(lblHereAreSomeStats);
 		
@@ -76,6 +76,7 @@ public class SpellingAidStats extends JPanel {
 		overallStatsPanel.setLayout(null);
 		
 		JTextArea statsTextArea = new JTextArea();
+		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 13));
 		statsTextArea.setBounds(0, 0, 450, 300);
 		overallStatsPanel.add(statsTextArea);
 		statsTextArea.setEditable(false);
@@ -83,13 +84,15 @@ public class SpellingAidStats extends JPanel {
 		JLabel lblMoreInfo = new JLabel("More on a specific quiz:");
 		lblMoreInfo.setBounds(10, 311, 176, 22);
 		overallStatsPanel.add(lblMoreInfo);
-		lblMoreInfo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblMoreInfo.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		JComboBox quizComboBox = new JComboBox();
+		quizComboBox.setFont(new Font("Arial", Font.PLAIN, 11));
 		quizComboBox.setBounds(11, 336, 226, 22);
 		overallStatsPanel.add(quizComboBox);
 		
 		JButton btnSelectQuiz = new JButton("Select Quiz");
+		btnSelectQuiz.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnSelectQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				changeCardPanel("Specific");
@@ -106,7 +109,7 @@ public class SpellingAidStats extends JPanel {
 				mainFrame.changeCardPanel("Main");
 			}
 		});
-		btnBack.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnBack.setFont(new Font("Arial", Font.PLAIN, 13));
 
 
 

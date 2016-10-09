@@ -121,12 +121,12 @@ public class QuizQuestion extends JPanel {
 
 		spellQuery = new JLabel("Please spell word 1 of 8\r\n");
 		spellQuery.setHorizontalAlignment(SwingConstants.LEFT);
-		spellQuery.setFont(new Font("Arial Narrow", Font.PLAIN, 24));
+		spellQuery.setFont(new Font("Arial", Font.PLAIN, 24));
 		spellQuery.setBounds(213, 29, 286, 45);
 		add(spellQuery);
 
 		JLabel lblNewLabel = new JLabel("Definition:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblNewLabel.setBounds(213, 75, 86, 14);
 		add(lblNewLabel);
 
@@ -135,16 +135,19 @@ public class QuizQuestion extends JPanel {
 		add(scrollPane);
 
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Arial", Font.PLAIN, 13));
 		textArea.setEditable(false);
 		scrollPane.setViewportView(textArea);
 		textArea.setBackground(Color.LIGHT_GRAY);
 
 		userInput = new JTextField();
+		userInput.setFont(new Font("Arial", Font.PLAIN, 11));
 		userInput.setBounds(213, 173, 286, 20);
 		add(userInput);
 		userInput.setColumns(10);
 
 		JButton btnListenAgain = new JButton("Listen again");
+		btnListenAgain.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnListenAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// this button only works when the voice generator is not generating any voice
@@ -162,6 +165,7 @@ public class QuizQuestion extends JPanel {
 		add(btnListenAgain);
 
 		btnConfirmOrNext = new JButton("Confirm");
+		btnConfirmOrNext.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnConfirmOrNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(btnConfirmOrNext.getText().equals("Confirm")){
@@ -180,27 +184,27 @@ public class QuizQuestion extends JPanel {
 		add(btnConfirmOrNext);
 
 		JLabel lblYouOnlyHave = new JLabel("You only have 2 attempts");
-		lblYouOnlyHave.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblYouOnlyHave.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblYouOnlyHave.setBounds(213, 256, 258, 14);
 		add(lblYouOnlyHave);
 
 		JLabel lblstAttempt = new JLabel("1st attempt");
-		lblstAttempt.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblstAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblstAttempt.setBounds(213, 281, 86, 20);
 		add(lblstAttempt);
 
 		JLabel lblndAttempt = new JLabel("2nd attempt");
-		lblndAttempt.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblndAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblndAttempt.setBounds(213, 302, 86, 20);
 		add(lblndAttempt);
 
 		firstAttempt = new JLabel(": placeholder");
-		firstAttempt.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		firstAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		firstAttempt.setBounds(309, 281, 86, 20);
 		add(firstAttempt);
 
 		secondAttempt = new JLabel(": placeholder");
-		secondAttempt.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		secondAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		secondAttempt.setBounds(309, 302, 86, 20);
 		add(secondAttempt);
 
@@ -208,21 +212,22 @@ public class QuizQuestion extends JPanel {
 		resultIndicator.setBackground(Color.LIGHT_GRAY);
 		resultIndicator.setForeground(Color.MAGENTA);
 		resultIndicator.setHorizontalAlignment(SwingConstants.CENTER);
-		resultIndicator.setFont(new Font("Arial Narrow", Font.PLAIN, 22));
+		resultIndicator.setFont(new Font("Arial", Font.PLAIN, 22));
 		resultIndicator.setBounds(21, 212, 182, 23);
 		add(resultIndicator);
 
 		firstAttemptResult = new JLabel("Incorrect");
-		firstAttemptResult.setFont(new Font("Tahoma", Font.BOLD, 14));
+		firstAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
 		firstAttemptResult.setBounds(405, 281, 86, 20);
 		add(firstAttemptResult);
 
 		secondAttemptResult = new JLabel("Correct\r\n");
-		secondAttemptResult.setFont(new Font("Tahoma", Font.BOLD, 14));
+		secondAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
 		secondAttemptResult.setBounds(405, 302, 86, 20);
 		add(secondAttemptResult);
 
 		btnStop = new JButton("Stop\r\n Quiz");
+		btnStop.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnStop.setToolTipText("Only available during answring phase.");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -239,52 +244,52 @@ public class QuizQuestion extends JPanel {
 		add(btnStop);
 
 		JLabel lblCurrentQuiz = new JLabel("Current Quiz ");
-		lblCurrentQuiz.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCurrentQuiz.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblCurrentQuiz.setBounds(517, 73, 77, 14);
 		add(lblCurrentQuiz);
 
 		JLabel lblCurrentStreak = new JLabel("Current Streak");
-		lblCurrentStreak.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblCurrentStreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblCurrentStreak.setBounds(517, 98, 96, 14);
 		add(lblCurrentStreak);
 
 		JLabel lblLongeststreak = new JLabel("Longest Streak\r\n");
-		lblLongeststreak.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblLongeststreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblLongeststreak.setBounds(517, 122, 96, 14);
 		add(lblLongeststreak);
 
 		JLabel lblSpelledCorrectly = new JLabel("Spelled Correctly");
-		lblSpelledCorrectly.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblSpelledCorrectly.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblSpelledCorrectly.setBounds(517, 147, 108, 14);
 		add(lblSpelledCorrectly);
 
 		JLabel lblQuizAccuracy = new JLabel("Quiz Accuracy\r\n");
-		lblQuizAccuracy.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblQuizAccuracy.setFont(new Font("Arial", Font.PLAIN, 13));
 		lblQuizAccuracy.setBounds(517, 172, 96, 14);
 		add(lblQuizAccuracy);
 
 		currentQuiz = new JLabel(": NZCER Lvl 1");
-		currentQuiz.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		currentQuiz.setFont(new Font("Arial", Font.PLAIN, 13));
 		currentQuiz.setBounds(623, 73, 127, 14);
 		add(currentQuiz);
 
 		currentStreak = new JLabel(": 2");
-		currentStreak.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		currentStreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		currentStreak.setBounds(623, 98, 127, 14);
 		add(currentStreak);
 
 		longestStreak = new JLabel(": 5");
-		longestStreak.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		longestStreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		longestStreak.setBounds(623, 122, 127, 14);
 		add(longestStreak);
 
 		noOfCorrectSpellings = new JLabel(": 7/8");
-		noOfCorrectSpellings.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		noOfCorrectSpellings.setFont(new Font("Arial", Font.PLAIN, 13));
 		noOfCorrectSpellings.setBounds(623, 147, 127, 14);
 		add(noOfCorrectSpellings);
 
 		quizAccuracy = new JLabel(": 77%");
-		quizAccuracy.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		quizAccuracy.setFont(new Font("Arial", Font.PLAIN, 13));
 		quizAccuracy.setBounds(623, 172, 127, 14);
 		add(quizAccuracy);
 

@@ -45,12 +45,12 @@ public class MainOptionsPanel extends JPanel {
 		hiPanel.add(avatar);
 		
 		JLabel lblHiSherlock = new JLabel("Hi Sherlock");
-		lblHiSherlock.setFont(new Font("Asiago", Font.PLAIN, 40));
+		lblHiSherlock.setFont(new Font("Arial", Font.PLAIN, 40));
 		lblHiSherlock.setBounds(193, 49, 235, 64);
 		hiPanel.add(lblHiSherlock);
 		
 		JLabel lblHereToHelp = new JLabel("I am here to help you \r\n");
-		lblHereToHelp.setFont(new Font("Asiago", Font.PLAIN, 22));
+		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereToHelp.setBounds(193, 113, 247, 53);
 		hiPanel.add(lblHereToHelp);
 		
@@ -66,7 +66,7 @@ public class MainOptionsPanel extends JPanel {
 		
 		JButton btnNewButton = new JButton("New Quiz");
 		btnNewButton.setFocusPainted(false);
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion());
@@ -82,7 +82,7 @@ public class MainOptionsPanel extends JPanel {
 		optionsPanel.add(verticalStrut, gbc_verticalStrut);
 		
 		JLabel lblPleaseSelectOne = new JLabel("Please select one of the following options");
-		lblPleaseSelectOne.setFont(new Font("Arial Narrow", Font.PLAIN, 16));
+		lblPleaseSelectOne.setFont(new Font("Arial", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblPleaseSelectOne = new GridBagConstraints();
 		gbc_lblPleaseSelectOne.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPleaseSelectOne.gridx = 1;
@@ -97,7 +97,7 @@ public class MainOptionsPanel extends JPanel {
 		
 		JButton btnReviewQuiz = new JButton("Review Quiz\r\n");
 		btnReviewQuiz.setFocusPainted(false);
-		btnReviewQuiz.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnReviewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnReviewQuiz = new GridBagConstraints();
 		gbc_btnReviewQuiz.fill = GridBagConstraints.BOTH;
 		gbc_btnReviewQuiz.insets = new Insets(0, 0, 5, 5);
@@ -112,7 +112,7 @@ public class MainOptionsPanel extends JPanel {
 			}
 		});
 		btnViewStatistics.setFocusPainted(false);
-		btnViewStatistics.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnViewStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnViewStatistics = new GridBagConstraints();
 		gbc_btnViewStatistics.fill = GridBagConstraints.BOTH;
 		gbc_btnViewStatistics.insets = new Insets(0, 0, 5, 5);
@@ -122,7 +122,7 @@ public class MainOptionsPanel extends JPanel {
 		
 		JButton btnSettings = new JButton("Settings");
 		btnSettings.setFocusPainted(false);
-		btnSettings.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnSettings.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
 		gbc_btnSettings.fill = GridBagConstraints.BOTH;
 		gbc_btnSettings.insets = new Insets(0, 0, 5, 5);
@@ -137,7 +137,7 @@ public class MainOptionsPanel extends JPanel {
 			}
 		});
 		btnQuit.setFocusPainted(false);
-		btnQuit.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnQuit.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuit = new GridBagConstraints();
 		gbc_btnQuit.fill = GridBagConstraints.BOTH;
 		gbc_btnQuit.insets = new Insets(0, 0, 5, 5);

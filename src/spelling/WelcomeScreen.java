@@ -56,7 +56,7 @@ public class WelcomeScreen extends JPanel {
 		
 		nameField = new JTextField();
 		nameField.setToolTipText("(e.g. Sherlock)");
-		nameField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		nameField.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_nameField = new GridBagConstraints();
 		gbc_nameField.insets = new Insets(0, 0, 5, 5);
 		gbc_nameField.fill = GridBagConstraints.HORIZONTAL;

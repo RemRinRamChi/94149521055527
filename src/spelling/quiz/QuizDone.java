@@ -35,7 +35,7 @@ public class QuizDone extends JPanel {
 		setLayout(null);
 		
 		JLabel lblYourResults = new JLabel("Time for your results ...");
-		lblYourResults.setFont(new Font("Arial Narrow", Font.PLAIN, 22));
+		lblYourResults.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblYourResults.setBounds(189, 31, 401, 37);
 		add(lblYourResults);
 		
@@ -50,15 +50,15 @@ public class QuizDone extends JPanel {
 		resultsPanel.add(lblResults);
 		lblResults.setBackground(Color.LIGHT_GRAY);
 		lblResults.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResults.setFont(new Font("Arial Narrow", Font.PLAIN, 34));
+		lblResults.setFont(new Font("Arial", Font.PLAIN, 34));
 		
 		JLabel lblGoodJob = new JLabel("Good job! Please claim for reward");
-		lblGoodJob.setFont(new Font("Arial Narrow", Font.PLAIN, 20));
+		lblGoodJob.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblGoodJob.setBounds(93, 208, 421, 37);
 		add(lblGoodJob);
 		
 		JButton btnTryAnotherLevel = new JButton("TRY ANOTHER LEVEL\r\n");
-		btnTryAnotherLevel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnTryAnotherLevel.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnTryAnotherLevel.setBounds(93, 305, 421, 30);
 		add(btnTryAnotherLevel);
 		
@@ -68,12 +68,12 @@ public class QuizDone extends JPanel {
 		rewardPanel.setLayout(null);
 		
 		JButton btnVideo = new JButton("Video Reward");
-		btnVideo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnVideo.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnVideo.setBounds(0, 0, 194, 28);
 		rewardPanel.add(btnVideo);
 		
 		JButton btnAudio = new JButton("Audio Reward");
-		btnAudio.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnAudio.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnAudio.setBounds(227, 0, 194, 28);
 		rewardPanel.add(btnAudio);
 		
@@ -88,7 +88,7 @@ public class QuizDone extends JPanel {
 				mainFrame.changeCardPanel("Main");
 			}
 		});
-		btnDone.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnDone.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnDone.setBounds(93, 346, 421, 30);
 		add(btnDone);
 

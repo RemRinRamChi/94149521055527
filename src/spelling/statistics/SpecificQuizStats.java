@@ -53,7 +53,7 @@ public class SpecificQuizStats extends JPanel {
 		add(verticalStrut, gbc_verticalStrut);
 		
 		JLabel lblNewLabel = new JLabel("NZCER Lvl 1 Statistics\r\n");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 22));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -72,7 +72,7 @@ public class SpecificQuizStats extends JPanel {
 		
 		table = new JTable();
 		table.setRowHeight(22);
-		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		table.setFont(new Font("Arial", Font.PLAIN, 14));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null},
@@ -107,7 +107,7 @@ public class SpecificQuizStats extends JPanel {
 		scrollPane.setViewportView(table);
 		
 		JLabel lblMasteredFaulted = new JLabel("Mastered: 10   Faulted: 10   Failed: 10");
-		lblMasteredFaulted.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblMasteredFaulted.setFont(new Font("Arial", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblMasteredFaulted = new GridBagConstraints();
 		gbc_lblMasteredFaulted.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMasteredFaulted.gridx = 2;
@@ -123,6 +123,7 @@ public class SpecificQuizStats extends JPanel {
 		add(panel, gbc_panel);
 		
 		JButton btnNewButton = new JButton("Overall Stats");
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainStats.changeCardPanel("Overall");
@@ -136,6 +137,7 @@ public class SpecificQuizStats extends JPanel {
 		panel.add(horizontalStrut);
 		
 		JButton btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainStats.changeCardPanel("Overall");
