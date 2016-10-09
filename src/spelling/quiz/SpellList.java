@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
+import spelling.Tools;
 import spelling.settings.ClearStatistics;
 
 /**
@@ -242,13 +243,13 @@ public class SpellList {
 	// Start asking the new question
 	private void askNextQuestion(){
 		// make sure user input field is cleared everytime a question is asked
-		spellingAidApp.userInput.setText("");
+		spellingAidApp.setUserInput("");
 		// < NoOfQuestion because questionNo is used to access the current quiz list's question which starts at 0 
 		// ie question 10 -> questionNo = 9
 		if(questionNo < getNoOfQuestions()){
 
 			// focus the answering area
-			spellingAidApp.userInput.requestFocus();
+			spellingAidApp.requestInputFocus();
 			// attempt is true only when the question has been attempted, so it starts as false
 			attempt = false;
 			// endOfQuestion is true when it is time to move on to the next question
@@ -259,11 +260,11 @@ public class SpellList {
 			// then increment the question no to represent the real question number
 			questionNo++;
 
-			spellingAidApp.window.append("\n Spell word " + questionNo + " of " + currentQuizList.size() + ": ");
-			spellingAidApp.voiceGen.sayText("Please spell word " + questionNo + " of " + currentQuizList.size() + ": " + ",",wordToSpell+",");
+			spellingAidApp.setSpellQuery("Please spell word " + questionNo + " of " + currentQuizList.size() + ": ");
+			spellingAidApp.sayText("Please spell ",wordToSpell+",");
 
 			// after ASKING, it is time for ANSWERING
-			status = "ANSWERING";
+			status = QuizState.Answering;
 		} else {
 			questionNo++;
 		}
@@ -278,18 +279,24 @@ public class SpellList {
 			// warning dialog for invalid user input
 			JOptionPane.showMessageDialog(spellingAidApp, "Please enter in ALPHABETICAL LETTERS and use appropriate symbols.", "Input Warning",JOptionPane.WARNING_MESSAGE);
 			// go back to ANSWERING since current answer is invalid
-			status = "ANSWERING";
+			status = QuizState.Answered;
 			return;
 		} 
 
 
-
+		// MIGHT HAVE PROBLEMS TEST THIS ~~~~~~
 		// if it is valid, start the checking
-		spellingAidApp.window.append(userAnswer+"\n");
+		if(spellingAidApp.getFirstAttempt().equals("")){
+			spellingAidApp.setFirstAttempt(userAnswer);
+		} else {
+			spellingAidApp.setSecondAttempt(userAnswer);
+		}
+		
+		
 		// turn to lower case for BOTH and then compare
 		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
 			// Correct echoed if correct
-			spellingAidApp.voiceGen.sayText("Correct","");
+			spellingAidApp.sayText("Correct","");
 			//processStarter("echo Correct | festival --tts"); 
 			if(!attempt){
 				Tools.record(spelling_aid_statistics,wordToSpell+" Mastered"); // store as mastered
@@ -308,23 +315,23 @@ public class SpellList {
 			attempt = true; // question has been attempted
 			endOfQuestion = true;
 			// answer is correct and so proceed to ASKING the next question
-			status = "ASKING";
+			status = QuizState.Asking;
 		} else {
 			if(!attempt){
-				spellingAidApp.window.append("      Incorrect, try once more: ");
-				spellingAidApp.voiceGen.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
+				spellingAidApp.setSpellQuery("Incorrect, please spell word " + questionNo + " of " + currentQuizList.size() + "again : ");
+				spellingAidApp.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
 				//processStarter("echo Incorrect, try once more: "+wordToSpell+" . "+wordToSpell+" . " + "| festival --tts");
 				// answer is wrong and a second chance is given and so back to ANSWERING
-				status = "ANSWERING";
+				status = QuizState.Answering;
 			} else {
-				spellingAidApp.voiceGen.sayText("Incorrect.",",");
+				spellingAidApp.sayText("Incorrect.",",");
 				//processStarter("echo Incorrect | festival --tts");
 				Tools.record(spelling_aid_statistics,wordToSpell+" Failed"); // store as failed
 				if(!currentFailedList.contains(wordToSpell)){ //add to failed list if it doesn't exist
 					currentFailedList.add(wordToSpell);
 				}
 				// answer is wrong on second attempt and so back to ASKING
-				status = "ASKING";
+				status = QuizState.Asking;
 				endOfQuestion = true;
 			}
 			attempt = true; // question has been attempted

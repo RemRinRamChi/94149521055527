@@ -55,6 +55,11 @@ public class QuizQuestion extends JPanel {
 	private double theVoicePitch;
 	private double theVoiceRange;
 
+	// use voiceGen to say stuff
+	public void sayText(String normal, String altered){
+		voiceGen.sayText(normal, altered);
+	}
+	
 	// Action object is created to be added as a listener for userInput
 	// so that when the enter key is pressed, input is accepted
 	Action enterAction = new AbstractAction()
@@ -208,7 +213,7 @@ public class QuizQuestion extends JPanel {
 		secondAttemptResult.setBounds(405, 302, 86, 20);
 		add(secondAttemptResult);
 
-		btnStop = new JButton("Stop\r\n");
+		btnStop = new JButton("Stop\r\n Quiz");
 		btnStop.setToolTipText("Only available during answring phase.");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -221,7 +226,7 @@ public class QuizQuestion extends JPanel {
 				}
 			}
 		});
-		btnStop.setBounds(58, 253, 108, 31);
+		btnStop.setBounds(52, 253, 114, 31);
 		add(btnStop);
 
 		JLabel lblCurrentQuiz = new JLabel("Current Quiz ");
@@ -307,52 +312,61 @@ public class QuizQuestion extends JPanel {
 	}
 	
 	
-	public JTextField getUserInput() {
-		return userInput;
+	public String getUserInput() {
+		return userInput.getText();
 	}
-	public void setUserInput(JTextField userInput) {
-		this.userInput = userInput;
+	public void setUserInput(String input) {
+		userInput.setText(input);;
 	}
-	public JLabel getSpellQuery() {
-		return spellQuery;
+	public void setSpellQuery(String query) {
+		spellQuery.setText(query);
 	}
-	public void setSpellQuery(JLabel spellQuery) {
-		this.spellQuery = spellQuery;
+	public void setResultIndicator(String result) {
+		resultIndicator.setText(result);
 	}
-	public JLabel getResultIndicator() {
-		return resultIndicator;
+	public String getFirstAttempt() {
+		return firstAttempt.getText();
 	}
-	public void setResultIndicator(JLabel resultIndicator) {
-		this.resultIndicator = resultIndicator;
+	public void setFirstAttempt(String attempt) {
+		firstAttempt.setText(attempt);
 	}
-	public JLabel getFirstAttemptResult() {
-		return firstAttemptResult;
+	public String getSecondAttempt() {
+		return secondAttempt.getText();
 	}
-	public void setFirstAttemptResult(JLabel firstAttemptResult) {
-		this.firstAttemptResult = firstAttemptResult;
+	public void setSecondAttempt(String attempt) {
+		secondAttempt.setText(attempt);
 	}
-	public JLabel getSecondAttemptResult() {
-		return secondAttemptResult;
+	public String getFirstAttemptResult() {
+		return firstAttemptResult.getText();
 	}
-	public void setSecondAttemptResult(JLabel secondAttemptResult) {
-		this.secondAttemptResult = secondAttemptResult;
+	public void setFirstAttemptResult(String result) {
+		firstAttemptResult.setText(result);
 	}
-	public JLabel getCurrentStreak() {
-		return currentStreak;
+	public String getSecondAttemptResult() {
+		return secondAttemptResult.getText();
 	}
-	public void setCurrentStreak(JLabel currentStreak) {
-		this.currentStreak = currentStreak;
+	public void setSecondAttemptResult(String result) {
+		secondAttemptResult.setText(result);
 	}
-	public JLabel getLongestStreak() {
-		return longestStreak;
+	public String getCurrentStreak() {
+		return currentStreak.getText();
 	}
-	public void setLongestStreak(JLabel longestStreak) {
-		this.longestStreak = longestStreak;
+	public void setCurrentStreak(String streak) {
+		currentStreak.setText(streak);;
 	}
-	public JLabel getNoOfCorrectSpellings() {
-		return noOfCorrectSpellings;
+	public String getLongestStreak() {
+		return longestStreak.getText();
 	}
-	public void setNoOfCorrectSpellings(JLabel noOfCorrectSpellings) {
-		this.noOfCorrectSpellings = noOfCorrectSpellings;
+	public void setLongestStreak(String streak) {
+		longestStreak.setText(streak);;
+	}
+	public int getNoOfCorrectSpellings() {
+		return Integer.parseInt(noOfCorrectSpellings.getText());
+	}
+	public void setNoOfCorrectSpellings(int corrects) {
+		noOfCorrectSpellings.setText(corrects+"");;
+	}
+	public void requestInputFocus(){
+		userInput.requestFocus();
 	}
 }
