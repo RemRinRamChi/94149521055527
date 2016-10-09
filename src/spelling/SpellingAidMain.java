@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
@@ -73,9 +74,14 @@ public class SpellingAidMain extends JFrame {
 	    try 
 	    { 
 	    	// change look and feel on VoxSpell to windows L+F
-	        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
+	    	UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
 	    } 
 	    catch(Exception e){ 
+	        try {
+				//UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 	    }
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
