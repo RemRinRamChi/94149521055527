@@ -129,7 +129,7 @@ public class SpellList {
 
 		// choose list to read from according to mode
 		HashMap<Integer, ArrayList<String>> wordMap;
-		if(spellingType.equals("new")){
+		if(spellingType==QuizMode.New){
 			wordMap = mapOfWords;
 		} else {
 			wordMap = mapOfFailedWords; 
@@ -154,7 +154,7 @@ public class SpellList {
 		HashMap<String,Integer> uniqueWordsToTest = new HashMap<String,Integer>();
 
 		// if the mode is review, the list size should be the size of the list if the size is less than 10
-		if(spellingType.equals("review")){
+		if(spellingType==QuizMode.Review){
 			if(listOfWordsToChooseFrom.size()<10){
 				questionListSize = listOfWordsToChooseFrom.size();
 

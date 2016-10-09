@@ -56,8 +56,9 @@ public class SpellingAidMain extends JFrame {
 			setSize(20,40);
 		}
 		
+		// DOESN'T work on Linux
 		// make sure to recentre main frame
-		this.setLocationRelativeTo(null);
+		//this.setLocationRelativeTo(null);
 		
 	}
 
@@ -119,6 +120,8 @@ public class SpellingAidMain extends JFrame {
 		
 		// first panel to be displayed is the welcome screen
 		changeCardPanel("Welcome");
+		
+		// set location here
 		
 	}
 	
