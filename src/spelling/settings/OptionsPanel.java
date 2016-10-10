@@ -87,12 +87,12 @@ public class OptionsPanel extends JPanel {
 		btnBack.setBounds(265, 278, 104, 41);
 		add(btnBack);
 		
-		JComboBox comboBox = new JComboBox();
+		final JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(comboBox.getSelectedItem().toString().equals("Default")){
 					mainFrame.setVoice("Default");
-				} else if (comboBox.getSelectedItem().toString().equals("Default")){
+				} else if (comboBox.getSelectedItem().toString().equals("Auckland")){
 					mainFrame.setVoice("Auckland");
 				}
 			}
