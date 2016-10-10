@@ -60,7 +60,7 @@ public class SpellingAidStats extends JPanel {
 		add(friendlyPanel);
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("img\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img/avatar.png"));
 		avatar.setBounds(24, 11, 159, 155);
 		friendlyPanel.add(avatar);
 		

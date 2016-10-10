@@ -150,7 +150,7 @@ public class QuizDone extends JPanel {
 		tryAnotherPanel.add(btnReviewAnotherLevel, "Review");
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("img\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img/avatar.png"));
 		avatar.setBounds(20, 42, 159, 150);
 		add(avatar);
 		
