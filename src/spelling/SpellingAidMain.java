@@ -58,7 +58,7 @@ public class SpellingAidMain extends JFrame {
 		} else if (mode.equals("Quiz")){
 			setSize(780,400);
 		} else if (mode.equals("Done")){
-			setSize(780,430);
+			setSize(610,430);
 		} else if (mode.equals("Stats")){
 			setSize(490,640);
 		} else if (mode.equals("Settings")){

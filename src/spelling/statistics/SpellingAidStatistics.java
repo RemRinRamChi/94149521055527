@@ -107,6 +107,8 @@ public class SpellingAidStatistics extends SwingWorker<Void,String>{
 
 	// SWINGWORKER ~~
 	protected Void doInBackground(){
+		// new everytime , in case if
+		spellingAidStats.clearStatsArea();
 		if(zeroWords == 0){
 			publish("\n There Are NO Attempted Words !!!");
 		} else { // tried words file not empty
@@ -154,6 +156,10 @@ public class SpellingAidStatistics extends SwingWorker<Void,String>{
 		for (String data : statsData) {
 			spellingAidStats.appendText(data);;
 		}
+	}
+	
+	protected void done(){
+		spellingAidStats.scrollToTop();
 	}
 
 	// calculate the accuracy for the current level

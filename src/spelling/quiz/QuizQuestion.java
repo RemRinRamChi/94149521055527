@@ -231,8 +231,8 @@ public class QuizQuestion extends JPanel {
 		btnStop.setToolTipText("Only available during answring phase.");
 		btnStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// quiz only stoppable after a question is done asking (i.e. Answering state)
-				if(spellList.status==QuizState.Answering){
+				// quiz only stoppable after a question is done asking (i.e. Answering state) or when is question is done answered
+				if(spellList.status==QuizState.Answering||btnConfirmOrNext.getText().equals("Next Question")){
 					// record stats even though stopped
 					spellList.recordFailedAndTriedWordsFromLevel();
 					// go back to main panel
@@ -403,8 +403,10 @@ public class QuizQuestion extends JPanel {
 	public void setCurrentQuiz(String quiz){
 		currentQuiz.setText(quiz);
 	}
+	
 	public void setDoneButton(){
 		btnConfirmOrNext.setText("Done");
+		btnStop.setVisible(false); // no more stop quiz since quiz is done
 	}
 	// reset screen at the start of every quiz
 	public void resetScreen(){
@@ -443,6 +445,12 @@ public class QuizQuestion extends JPanel {
 			mainQuizDone.changeNextLevelPanel("Try");
 		} else if(mode == QuizMode.Review){
 			mainQuizDone.changeNextLevelPanel("Review");
+		} else if(mode == QuizMode.NoQuestions){
+			if(corrects == -1){
+				mainQuizDone.changeNextLevelPanel("Try");
+			} else if (corrects == -2){
+				mainQuizDone.changeNextLevelPanel("Review");
+			}
 		}
 		
 		

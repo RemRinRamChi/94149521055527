@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
+import javax.swing.JScrollPane;
 
 public class SpellingAidStats extends JPanel {
 	private SpellingAidMain mainFrame;
@@ -76,10 +77,13 @@ public class SpellingAidStats extends JPanel {
 		statsPanel.add(overallStatsPanel, "Overall");
 		overallStatsPanel.setLayout(null);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 450, 300);
+		overallStatsPanel.add(scrollPane);
+		
 		statsTextArea = new JTextArea();
+		scrollPane.setViewportView(statsTextArea);
 		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
-		statsTextArea.setBounds(0, 0, 450, 300);
-		overallStatsPanel.add(statsTextArea);
 		statsTextArea.setEditable(false);
 		
 		JLabel lblMoreInfo = new JLabel("More on a specific quiz:");
@@ -116,8 +120,16 @@ public class SpellingAidStats extends JPanel {
 
 	}
 	
+	public void scrollToTop(){
+		statsTextArea.setCaretPosition(1);
+		statsTextArea.setCaretPosition(0);
+	}
 
 	public void appendText(String txt){
 		statsTextArea.append(txt);
+	}
+	
+	public void clearStatsArea(){
+		statsTextArea.setText("");
 	}
 }

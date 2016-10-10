@@ -109,7 +109,6 @@ public class QuizDone extends JPanel {
 		tryAnotherPanel.add(btnTryAnotherLevel, "Try");
 		btnTryAnotherLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.changeCardPanel("Main");
 				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New);
 				quizChooser.setVisible(true);
 			}
@@ -119,7 +118,6 @@ public class QuizDone extends JPanel {
 		JButton btnReviewAnotherLevel = new JButton("REVIEW ANOTHER LEVEL\r\n");
 		btnReviewAnotherLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.changeCardPanel("Main");
 				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review);
 				quizChooser.setVisible(true);
 			}

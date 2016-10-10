@@ -198,7 +198,13 @@ public class SpellList {
 		protected void done(){
 			// if noOfQuestions = 0, possible in review quiz mode
 			if(getNoOfQuestions()==0){
-				spellingAidApp.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,correctAnsCount);
+				int specialKeyToDetermineMode = -1;
+				if(spellType==QuizMode.New){
+					specialKeyToDetermineMode = -1;
+				} else if (spellType==QuizMode.Review){
+					specialKeyToDetermineMode = -2;
+				}
+				spellingAidApp.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,specialKeyToDetermineMode);
 			}
 			// stop the quiz and record progress when the whole quiz list has been covered
 			if(questionNo > getNoOfQuestions()){
@@ -278,7 +284,8 @@ public class SpellList {
 			// warning dialog for invalid user input
 			JOptionPane.showMessageDialog(spellingAidApp, "Please enter in ALPHABETICAL LETTERS and use appropriate symbols.", "Input Warning",JOptionPane.WARNING_MESSAGE);
 			// go back to ANSWERING since current answer is invalid
-			status = QuizState.Answered;
+			status = QuizState.Answering;
+			spellingAidApp.requestInputFocus();
 			return;
 		} 
 
@@ -323,6 +330,7 @@ public class SpellList {
 			if(!attempt){
 				spellingAidApp.displaySpellAgainLabel(true);
 				spellingAidApp.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
+				spellingAidApp.requestInputFocus();
 				// answer is wrong and a second chance is given and so back to ANSWERING
 				status = QuizState.Answering;
 			} else {
