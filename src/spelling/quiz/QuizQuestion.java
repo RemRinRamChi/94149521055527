@@ -115,7 +115,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		spellQuery = new JLabel("Please spell word\r\n");
 		spellQuery.setHorizontalAlignment(SwingConstants.LEFT);
 		spellQuery.setFont(new Font("Arial", Font.PLAIN, 24));
-		spellQuery.setBounds(213, 29, 286, 45);
+		spellQuery.setBounds(213, 29, 380, 45);
 		add(spellQuery);
 
 		JLabel lblNewLabel = new JLabel("Definition:");
