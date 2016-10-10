@@ -11,7 +11,6 @@ import java.awt.Toolkit;
 import javax.swing.SwingConstants;
 
 import spelling.SpellingAidMain;
-import spelling.SpellingList;
 import spelling.VoiceGenerator;
 import spelling.quiz.SpellList.AnswerChecker;
 import spelling.quiz.SpellList.QuestionAsker;

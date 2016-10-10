@@ -12,7 +12,6 @@ import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
 import spelling.quiz.QuizQuestion;
-import spelling.quiz.VideoCreator;
 import spelling.statistics.SpellingAidStats;
 
 import java.awt.CardLayout;
@@ -163,8 +162,8 @@ public class SpellingAidMain extends JFrame {
 			e.printStackTrace();
 		}
 		// create special video with a background swingworker thread when the app starts
-		VideoCreator createSpecialVideo = new VideoCreator();
-		createSpecialVideo.execute();
+		//VideoCreator createSpecialVideo = new VideoCreator();
+		//createSpecialVideo.execute();
 	}
 
 }

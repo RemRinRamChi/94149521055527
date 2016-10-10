@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
-import spelling.SpellingAid;
 
 /**
  * 
