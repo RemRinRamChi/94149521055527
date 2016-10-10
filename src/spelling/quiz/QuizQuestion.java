@@ -6,6 +6,8 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.SwingConstants;
 
 import spelling.SpellingAidMain;
@@ -23,9 +25,11 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
-public class QuizQuestion extends JPanel {
+public class QuizQuestion extends JPanel implements KeyListener{
 	// QuizQuestion GUI components
 	private JTextField userInput;
 	private SpellingAidMain mainFrame;
@@ -59,16 +63,6 @@ public class QuizQuestion extends JPanel {
 	private double theVoicePitch;
 	private double theVoiceRange;
 	private JTextArea definitionArea;
-	// Action object is created to be added as a listener for userInput
-	// so that when the enter key is pressed, input is accepted
-	Action enterAction = new AbstractAction()
-	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			takeInUserInput();
-		}
-	};
 
 	// Method to call to accept user input
 	private void takeInUserInput(){
@@ -317,7 +311,9 @@ public class QuizQuestion extends JPanel {
 
 
 		// enable input accpeting when enter button is pressed
-		userInput.addActionListener(enterAction);
+		userInput.addKeyListener(this);
+		this.setFocusable(true);
+		this.addKeyListener(this);
 
 		// Initialise spellList model which all questions will be asked from and answers will be checked against
 		spellList = new SpellList();
@@ -462,6 +458,22 @@ public class QuizQuestion extends JPanel {
 	// use voiceGen to say stuff
 	public void sayText(String normal, String altered){
 		voiceGen.sayText(normal, altered);
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+			btnConfirmOrNext.doClick();
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
 
 }
