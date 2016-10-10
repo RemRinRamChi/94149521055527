@@ -146,7 +146,7 @@ public class SpellingAidMain extends JFrame {
 		makeSureAllNecessaryFilesArePresent();
 		
 		// set location here
-		
+		setLocationRelativeTo(null);
 	}
 	
 	// checks that all the files that are storing the statistics are present and create any files that do not exist
