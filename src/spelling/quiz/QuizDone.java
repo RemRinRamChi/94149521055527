@@ -100,6 +100,11 @@ public class QuizDone extends JPanel {
 		lblGoodJob.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(lblGoodJob, "Good Job");
 		
+		JLabel zeroReview = new JLabel("No words to review, consider trying another ");
+		userInteractionPanel.add(zeroReview, "No Review");
+		zeroReview.setHorizontalAlignment(SwingConstants.CENTER);
+		zeroReview.setFont(new Font("Arial", Font.PLAIN, 18));
+		
 		tryAnotherPanel = new JPanel();
 		tryAnotherPanel.setBounds(93, 305, 421, 30);
 		add(tryAnotherPanel);

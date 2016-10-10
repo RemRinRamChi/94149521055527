@@ -423,7 +423,6 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		mainFrame.getDonePanel().setLblResults(results);
 		if(mode == QuizMode.NoQuestions){
 			mainQuizDone.changeResultPanel("No Results");
-			mainQuizDone.changeUserInteraction("No Words");
 		} else {
 			mainQuizDone.changeResultPanel("Results");
 			if(corrects >= 9){
@@ -444,8 +443,10 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		} else if(mode == QuizMode.NoQuestions){
 			if(corrects == -1){
 				mainQuizDone.changeNextLevelPanel("Try");
+				mainQuizDone.changeUserInteraction("No Words");
 			} else if (corrects == -2){
 				mainQuizDone.changeNextLevelPanel("Review");
+				mainQuizDone.changeUserInteraction("No Review");
 			}
 		}
 		
