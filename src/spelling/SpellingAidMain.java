@@ -28,7 +28,7 @@ import java.awt.Dimension;
 public class SpellingAidMain extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel welcomeScreen;
+	private WelcomeScreen welcomeScreen;
 	private MainOptionsPanel mainOptions;
 	private QuizQuestion quizQuestion;
 	private SpellingAidStats voxSpellStats;
@@ -56,6 +56,7 @@ public class SpellingAidMain extends JFrame {
 		((CardLayout) contentPane.getLayout()).show(contentPane, mode);
 		// change size of main VoxSpell frame depending on the size of the panel contained within (width+20,height+40) 
 		if(mode.equals("Welcome")){
+			welcomeScreen.clearField();
 			setSize(470,490);
 		} else if (mode.equals("Main")){
 			mainOptions.setUserName(getUserName());

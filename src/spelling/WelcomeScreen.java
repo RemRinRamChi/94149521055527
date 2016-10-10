@@ -124,4 +124,11 @@ public class WelcomeScreen extends JPanel {
 		ClearStatistics.clearFile(spelling_aid_user);
 		Tools.record(spelling_aid_user, name);
 	}
+	
+	public void clearField(){
+		nameField.setText("");
+		nameField.requestFocus();
+	}
+	
+	
 }
