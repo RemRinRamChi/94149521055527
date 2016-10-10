@@ -408,6 +408,10 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		btnConfirmOrNext.setText("Done");
 		btnStop.setVisible(false); // no more stop quiz since quiz is done
 	}
+	
+	public void enableQuitButton(){
+		btnStop.setVisible(true);
+	}
 	// reset screen at the start of every quiz
 	public void resetScreen(){
 		setResultIndicator("");

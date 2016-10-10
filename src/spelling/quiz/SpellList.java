@@ -205,12 +205,14 @@ public class SpellList {
 					specialKeyToDetermineMode = -2;
 				}
 				spellingAidApp.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,specialKeyToDetermineMode);
+				spellingAidApp.enableQuitButton();
 			}
 			// stop the quiz and record progress when the whole quiz list has been covered
 			if(questionNo > getNoOfQuestions()){
 				recordFailedAndTriedWordsFromLevel();
 				// quiz is done, display results
 				spellingAidApp.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !",spellType,correctAnsCount);
+				spellingAidApp.enableQuitButton();
 			}
 		}
 
