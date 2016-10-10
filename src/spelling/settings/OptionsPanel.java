@@ -3,6 +3,7 @@ package spelling.settings;
 import javax.swing.JPanel;
 
 import spelling.SpellingAidMain;
+import spelling.VoiceGenerator.Voice;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -11,6 +12,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 /**
  * This is the GUI for the options panel
  * @author yyap601
@@ -81,8 +84,28 @@ public class OptionsPanel extends JPanel {
 			}
 		});
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnBack.setBounds(265, 209, 104, 41);
+		btnBack.setBounds(265, 278, 104, 41);
 		add(btnBack);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(comboBox.getSelectedItem().toString().equals("Default")){
+					mainFrame.setVoice("Default");
+				} else if (comboBox.getSelectedItem().toString().equals("Default")){
+					mainFrame.setVoice("Auckland");
+				}
+			}
+		});
+		comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Default", "Auckland"}));
+		comboBox.setBounds(223, 192, 146, 34);
+		add(comboBox);
+		
+		JLabel lblChangeVoice = new JLabel("Change Voice");
+		lblChangeVoice.setFont(new Font("Arial", Font.PLAIN, 16));
+		lblChangeVoice.setBounds(223, 166, 112, 14);
+		add(lblChangeVoice);
 
 	}
 	

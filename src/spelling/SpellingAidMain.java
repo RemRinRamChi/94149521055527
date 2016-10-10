@@ -70,7 +70,7 @@ public class SpellingAidMain extends JFrame {
 			setSize(490,640);
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
-			setSize(470,315);
+			setSize(470,380);
 		}
 		
 		// DOESN'T work on Linux
@@ -200,6 +200,10 @@ public class SpellingAidMain extends JFrame {
 			e.printStackTrace();
 		}
 		return name;
+	}
+
+	public void setVoice(String voice) {
+		quizQuestion.setFestivalVoice(voice);
 	}
 
 }

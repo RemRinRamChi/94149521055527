@@ -483,4 +483,13 @@ public class QuizQuestion extends JPanel implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 	}
 
+	public void setFestivalVoice(String voice) {
+		if(voice.equals("Default")){
+			theVoice = Voice.DEFAULT;
+		} else if(voice.equals("Auckland")){ 
+			theVoice = Voice.AUCKLAND;
+		}
+		voiceGen.setVoice(theVoice);
+	}
+
 }
