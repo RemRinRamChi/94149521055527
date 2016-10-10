@@ -43,7 +43,7 @@ public class WelcomeScreen extends JPanel {
 		
 		JLabel welcomeImage = new JLabel("");
 		welcomeImage.setBounds(0, 11, 450, 200);
-		welcomeImage.setIcon(new ImageIcon("img\\welcome.png"));
+		welcomeImage.setIcon(new ImageIcon("img/welcome.png"));
 		add(welcomeImage);
 		
 		JPanel panel = new JPanel();
