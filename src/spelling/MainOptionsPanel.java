@@ -23,6 +23,7 @@ import javax.swing.Box;
 
 public class MainOptionsPanel extends JPanel {
 	private SpellingAidMain mainFrame;
+	private JLabel lblHiUser;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -48,10 +49,10 @@ public class MainOptionsPanel extends JPanel {
 		avatar.setBounds(24, 11, 159, 184);
 		hiPanel.add(avatar);
 		
-		JLabel lblHiSherlock = new JLabel("Hi Sherlock");
-		lblHiSherlock.setFont(new Font("Arial", Font.PLAIN, 40));
-		lblHiSherlock.setBounds(193, 49, 235, 64);
-		hiPanel.add(lblHiSherlock);
+		lblHiUser = new JLabel("Hi");
+		lblHiUser.setFont(new Font("Arial", Font.PLAIN, 40));
+		lblHiUser.setBounds(193, 49, 235, 64);
+		hiPanel.add(lblHiUser);
 		
 		JLabel lblHereToHelp = new JLabel("I am here to help you \r\n");
 		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -164,5 +165,9 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnQuit.gridy = 6;
 		optionsPanel.add(btnQuit, gbc_btnQuit);
 
+	}
+	
+	public void setUserName(String name){
+		lblHiUser.setText("Hi "+name);
 	}
 }

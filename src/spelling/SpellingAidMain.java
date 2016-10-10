@@ -1,7 +1,10 @@
 package spelling;
 
 import java.awt.EventQueue;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -25,7 +28,7 @@ public class SpellingAidMain extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel welcomeScreen;
-	private JPanel mainOptions;
+	private MainOptionsPanel mainOptions;
 	private QuizQuestion quizQuestion;
 	private SpellingAidStats voxSpellStats;
 	private QuizDone doneQuizQuestion;
@@ -53,6 +56,7 @@ public class SpellingAidMain extends JFrame {
 		if(mode.equals("Welcome")){
 			setSize(470,490);
 		} else if (mode.equals("Main")){
+			mainOptions.setUserName(getUserName());
 			setSize(470,540);
 		} else if (mode.equals("Quiz")){
 			setSize(780,400);
@@ -103,8 +107,6 @@ public class SpellingAidMain extends JFrame {
 	 * Create the frame.
 	 */
 	public SpellingAidMain() {
-		// check for the presence of the hidden statistic files that are required
-		makeSureAllNecessaryFilesArePresent();
 		
 		setResizable(false);
 		setTitle("Welcome To VOXSPELL");
@@ -131,9 +133,10 @@ public class SpellingAidMain extends JFrame {
 		contentPane.add(doneQuizQuestion, "Done");
 		contentPane.add(voxSpellStats, "Stats");
 
-		
-		// first panel to be displayed is the welcome screen
-		changeCardPanel("Welcome");
+
+		// check for the presence of the hidden statistic files that are required
+		// CALLED AFTER ADDING PANELS TO DECIDE THE PANEL TO DISPLAY
+		makeSureAllNecessaryFilesArePresent();
 		
 		// set location here
 		
@@ -145,6 +148,8 @@ public class SpellingAidMain extends JFrame {
 		File spelling_aid_statistics = new File(".spelling_aid_statistics");
 		File spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		File spelling_aid_accuracy = new File(".spelling_aid_accuracy");
+		File spelling_aid_user = new File(".spelling_aid_user");
+
 		try{
 			if(! spelling_aid_failed.exists()){
 				spelling_aid_failed.createNewFile();
@@ -158,12 +163,35 @@ public class SpellingAidMain extends JFrame {
 			if(! spelling_aid_accuracy.exists()){
 				spelling_aid_accuracy.createNewFile();
 			}
+			if(! spelling_aid_user.exists()){
+				spelling_aid_user.createNewFile();
+				// first panel to be displayed is the welcome screen
+				changeCardPanel("Welcome");
+			} else {
+				// already gotten user's name
+				changeCardPanel("Main");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		// create special video with a background swingworker thread when the app starts
 		//VideoCreator createSpecialVideo = new VideoCreator();
 		//createSpecialVideo.execute();
+	}
+	
+	public String getUserName(){
+		String name = "";
+		File spelling_aid_user = new File(".spelling_aid_user");
+		BufferedReader readUserName;
+		try {
+			readUserName = new BufferedReader(new FileReader(spelling_aid_user));
+			name = readUserName.readLine();
+			readUserName.close();
+		} catch (Exception e) { //dangerous Exception
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
 	}
 
 }

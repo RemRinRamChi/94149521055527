@@ -2,6 +2,7 @@ package spelling;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -11,11 +12,15 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class WelcomeScreen extends JPanel {
 	private JTextField nameField;
 	private SpellingAidMain mainFrame;
+	private JButton btnConfirm;
 	
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -64,12 +69,41 @@ public class WelcomeScreen extends JPanel {
 		gbc_nameField.gridy = 1;
 		panel.add(nameField, gbc_nameField);
 		nameField.setColumns(10);
+		nameField.addKeyListener(new KeyListener(){
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER){
+					btnConfirm.doClick();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
-		JButton btnConfirm = new JButton("Confirm");
+		
+		btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.changeCardPanel("Main");
+				if(nameField.getText().equals("")){
+					JOptionPane.showMessageDialog(mainFrame, "Please enter your name (e.g. Sherlock)", "What is your name?", JOptionPane.ERROR_MESSAGE);
+					nameField.requestFocus();
+				} else {
+					storeUserName(nameField.getText());
+					mainFrame.changeCardPanel("Main");
+				}
 			}
 		});
 		GridBagConstraints gbc_btnConfirm = new GridBagConstraints();
@@ -80,5 +114,11 @@ public class WelcomeScreen extends JPanel {
 		gbc_btnConfirm.gridy = 2;
 		panel.add(btnConfirm, gbc_btnConfirm);
 
+		nameField.requestFocus();
+	}
+	
+	private void storeUserName(String name){
+		File spelling_aid_user = new File(".spelling_aid_user");
+		Tools.record(spelling_aid_user, name);
 	}
 }
