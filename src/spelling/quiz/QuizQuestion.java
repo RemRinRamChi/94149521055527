@@ -37,6 +37,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 	private JLabel spellQuery;
 	private JButton btnConfirmOrNext;
 	private JButton btnStop;
+	private JButton btnListenAgain;
 	private JLabel resultIndicator;
 	private JLabel firstAttempt;
 	private JLabel secondAttempt;
@@ -139,7 +140,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		add(userInput);
 		userInput.setColumns(10);
 
-		JButton btnListenAgain = new JButton("Listen again");
+		btnListenAgain = new JButton("Listen again");
 		btnListenAgain.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnListenAgain.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -463,8 +464,10 @@ public class QuizQuestion extends JPanel implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_ENTER){
+		if(e.getKeyCode() == KeyEvent.VK_ENTER ||e.getKeyCode() == KeyEvent.VK_DOWN){
 			btnConfirmOrNext.doClick();
+		} else if(e.getKeyCode() == KeyEvent.VK_UP){
+			btnListenAgain.doClick();
 		}
 	}
 
