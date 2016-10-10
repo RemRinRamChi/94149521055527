@@ -18,7 +18,7 @@ import javax.swing.SwingWorker;
  * and storing results of spelling tests in data structures
  * so that mastered/faulted/failed word numbers and accuracy
  * rates for each level are correctly displayed.
- * @authors yyap601 hchu167
+ * @authors yyap601 
  *
  */
 public class SpellingAidStatistics extends SwingWorker<Void,String>{

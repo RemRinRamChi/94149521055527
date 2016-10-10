@@ -21,7 +21,7 @@ import spelling.statistics.SpellingAidStats;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 /**
- * 
+ * This is the main frame with a panel of card layout which switches between different GUIs
  * @author yyap601
  *
  */
@@ -66,6 +66,7 @@ public class SpellingAidMain extends JFrame {
 		} else if (mode.equals("Done")){
 			setSize(610,430);
 		} else if (mode.equals("Stats")){
+			voxSpellStats.setUserName(getUserName());
 			setSize(490,640);
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());

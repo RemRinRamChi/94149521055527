@@ -27,7 +27,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Thos is the GUI for the quiz questions
+ * @author yyap601
+ *
+ */
 public class QuizQuestion extends JPanel implements KeyListener{
 	// QuizQuestion GUI components
 	private JTextField userInput;
@@ -108,7 +112,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		setLayout(null);
 
 		JLabel avatar = new JLabel("\r\n");
-		avatar.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img\\avatar.png"));
 		avatar.setBounds(28, 36, 154, 150);
 		add(avatar);
 

@@ -17,7 +17,11 @@ import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
-
+/**
+ * This is the GUI that's displayed when the user is done with aquiz
+ * @author yyap601
+ *
+ */
 public class QuizDone extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JLabel lblResults;
@@ -146,7 +150,7 @@ public class QuizDone extends JPanel {
 		tryAnotherPanel.add(btnReviewAnotherLevel, "Review");
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img\\avatar.png"));
 		avatar.setBounds(20, 42, 159, 150);
 		add(avatar);
 		

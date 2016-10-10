@@ -20,7 +20,7 @@ import spelling.settings.ClearStatistics;
  * and generate festival commands during the spelling quiz.
  * Getter functions are also used so GUI output and statistics
  * can be linked in a proper manner.
- * @authors yyap601 hchu167
+ * @authors yyap601 
  *
  */
 public class SpellList {

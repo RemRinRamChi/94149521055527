@@ -20,7 +20,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
-
+/**
+ * This is the panel which contains the main VoxSpell options
+ * @author yyap601
+ *
+ */
 public class MainOptionsPanel extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JLabel lblHiUser;
@@ -45,7 +49,7 @@ public class MainOptionsPanel extends JPanel {
 		hiPanel.setLayout(null);
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img\\avatar.png"));
 		avatar.setBounds(24, 11, 159, 184);
 		hiPanel.add(avatar);
 		

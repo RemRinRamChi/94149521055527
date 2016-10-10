@@ -18,7 +18,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.awt.event.ActionEvent;
-
+/**
+ * This is the GUI to welcome the user if it is the user's first time or when the user decides the change names
+ * @author yyap601
+ *
+ */
 public class WelcomeScreen extends JPanel {
 	private JTextField nameField;
 	private SpellingAidMain mainFrame;
@@ -39,7 +43,7 @@ public class WelcomeScreen extends JPanel {
 		
 		JLabel welcomeImage = new JLabel("");
 		welcomeImage.setBounds(0, 11, 450, 200);
-		welcomeImage.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\welcome.png"));
+		welcomeImage.setIcon(new ImageIcon("img\\welcome.png"));
 		add(welcomeImage);
 		
 		JPanel panel = new JPanel();

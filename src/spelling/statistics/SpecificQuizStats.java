@@ -23,6 +23,11 @@ import java.awt.event.ActionEvent;
 ///////// TESTER you don't have to read this as it is not used
 
 // to be decided whether to use or not
+/**
+ * 
+ * @author yyap601
+ *
+ */
 public class SpecificQuizStats extends JPanel {
 	private JTable table;
 	private SpellingAidMain mainFrame;

@@ -11,7 +11,7 @@ import spelling.settings.ClearStatistics;
  * 
  * This class governs the main logic for generating festival voices
  * for pronouncing sentences and spelling words
- * @authors yyap601 hchu167
+ * @authors yyap601 
  *
  */
 public class VoiceGenerator extends SwingWorker<Void, Void>{

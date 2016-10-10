@@ -11,7 +11,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * This is the GUI for the options panel
+ * @author yyap601
+ *
+ */
 public class OptionsPanel extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JLabel lblName;

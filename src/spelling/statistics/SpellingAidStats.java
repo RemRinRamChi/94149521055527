@@ -16,12 +16,17 @@ import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
 import javax.swing.DefaultComboBoxModel;
-
+/**
+ * This is the GUI for the spelling aid statistics
+ * @author yyap601
+ *
+ */
 public class SpellingAidStats extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JPanel specificQuiz;
 	private JPanel statsPanel;
 	private JTextArea statsTextArea;
+	private JLabel lblHi;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -55,11 +60,11 @@ public class SpellingAidStats extends JPanel {
 		add(friendlyPanel);
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("C:\\Users\\YaoJian\\Downloads\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img\\avatar.png"));
 		avatar.setBounds(24, 11, 159, 155);
 		friendlyPanel.add(avatar);
 		
-		JLabel lblHi = new JLabel("Hi Sherlock");
+		lblHi = new JLabel("Hi Sherlock");
 		lblHi.setFont(new Font("Arial", Font.PLAIN, 40));
 		lblHi.setBounds(193, 31, 235, 64);
 		friendlyPanel.add(lblHi);
@@ -139,5 +144,9 @@ public class SpellingAidStats extends JPanel {
 	
 	public void clearStatsArea(){
 		statsTextArea.setText("");
+	}
+	
+	public void setUserName(String name){
+		lblHi.setText("Hi "+name);
 	}
 }

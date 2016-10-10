@@ -20,7 +20,11 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
-
+/**
+ * This is the dialog to choose the quiz
+ * @author yyap601
+ *
+ */
 public class QuizChooser extends JDialog implements ActionListener {
 	private SpellingAidMain mainFrame;
 	private QuizQuestion mainQuizPanel;
