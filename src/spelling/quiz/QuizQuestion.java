@@ -112,7 +112,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		setLayout(null);
 
 		JLabel avatar = new JLabel("\r\n");
-		avatar.setIcon(new ImageIcon("img\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img/avatar.png"));
 		avatar.setBounds(28, 36, 154, 150);
 		add(avatar);
 

@@ -49,7 +49,7 @@ public class MainOptionsPanel extends JPanel {
 		hiPanel.setLayout(null);
 		
 		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("img\\avatar.png"));
+		avatar.setIcon(new ImageIcon("img/avatar.png"));
 		avatar.setBounds(24, 11, 159, 184);
 		hiPanel.add(avatar);
 		
