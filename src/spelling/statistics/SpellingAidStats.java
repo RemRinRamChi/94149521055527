@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
+import javax.swing.DefaultComboBoxModel;
 
 public class SpellingAidStats extends JPanel {
 	private SpellingAidMain mainFrame;
@@ -92,6 +93,7 @@ public class SpellingAidStats extends JPanel {
 		lblMoreInfo.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		JComboBox quizComboBox = new JComboBox();
+		quizComboBox.setModel(new DefaultComboBoxModel(new String[] {"pls click this 1st", "", "This combobox ", "contains all the ", "quiz levels tried ", "by the user, ", "when u click ", "select quiz, it ", "displays things ", "that are similar ", "to when u click ", "\"Select Quiz\" now", ",functionality ", "coming soon", "", "thanks"}));
 		quizComboBox.setFont(new Font("Arial", Font.PLAIN, 11));
 		quizComboBox.setBounds(11, 336, 226, 22);
 		overallStatsPanel.add(quizComboBox);

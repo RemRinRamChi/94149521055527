@@ -75,16 +75,16 @@ public class SpecificQuizStats extends JPanel {
 		table.setFont(new Font("Arial", Font.PLAIN, 14));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
+				{"a", null},
+				{null, "the"},
+				{"hi", null},
+				{null, "you"},
 				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
+				{"When you click one of the", ""},
+				{"rows, it will display", ""},
+				{"the 3 stats below", ""},
+				{"for a specific", null},
+				{"word", null},
 				{null, null},
 				{null, null},
 				{null, null},
@@ -92,7 +92,7 @@ public class SpecificQuizStats extends JPanel {
 				{null, null},
 			},
 			new String[] {
-				"Correct", "Incorrect"
+				"Last try Correct", "Last try Incorrect"
 			}
 		) {
 			Class[] columnTypes = new Class[] {

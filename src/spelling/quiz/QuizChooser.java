@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.DefaultComboBoxModel;
 
 public class QuizChooser extends JDialog implements ActionListener {
 	private SpellingAidMain mainFrame;
@@ -39,6 +40,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 	public QuizChooser() {
+		getContentPane().setFont(new Font("Arial", Font.PLAIN, 14));
 		setTitle("Choose Quiz");
 		setName("dialog216");
 		setModal(true);
@@ -135,6 +137,8 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(lblUseOwnList);
 		
 		JComboBox ownListComboBox = new JComboBox();
+		ownListComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+		ownListComboBox.setModel(new DefaultComboBoxModel(new String[] {"coming soon (pls click)", "", "The quizzes associated ", "with the user's own list", "will be in this combobox", "and it should work the", "same way as the ", "default list", "", "Functionality ", "coming soon"}));
 		ownListComboBox.setBounds(32, 210, 223, 29);
 		getContentPane().add(ownListComboBox);
 		

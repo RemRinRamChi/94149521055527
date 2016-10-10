@@ -272,7 +272,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		currentStreak.setBounds(623, 98, 127, 14);
 		add(currentStreak);
 
-		longestStreak = new JLabel(": ");
+		longestStreak = new JLabel(": (coming soon)");
 		longestStreak.setFont(new Font("Arial", Font.PLAIN, 13));
 		longestStreak.setBounds(623, 122, 127, 14);
 		add(longestStreak);

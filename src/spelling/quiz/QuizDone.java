@@ -2,11 +2,14 @@ package spelling.quiz;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
 import spelling.SpellingAidMain;
 import spelling.quiz.SpellList.QuizMode;
+import spelling.settings.ClearStatistics;
 
 import java.awt.Color;
 import javax.swing.JButton;
@@ -71,11 +74,23 @@ public class QuizDone extends JPanel {
 		rewardPanel.setLayout(null);
 		
 		JButton btnVideo = new JButton("Video Reward");
+		btnVideo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// should switch panel to be gone after one click, reward only received once
+				JOptionPane.showMessageDialog(mainFrame,"The big bunny video should be playing (coming soon)", "Video Reward", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnVideo.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnVideo.setBounds(0, 47, 194, 28);
 		rewardPanel.add(btnVideo);
 		
 		JButton btnAudio = new JButton("Audio Reward");
+		btnAudio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// should switch panel to be gone after one click, reward only received once
+				JOptionPane.showMessageDialog(mainFrame,"Cheering message (coming soon)", "Audio Reward", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnAudio.setFont(new Font("Arial", Font.PLAIN, 13));
 		btnAudio.setBounds(227, 47, 194, 28);
 		rewardPanel.add(btnAudio);
