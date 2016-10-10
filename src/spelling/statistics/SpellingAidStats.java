@@ -87,26 +87,32 @@ public class SpellingAidStats extends JPanel {
 		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
 		statsTextArea.setEditable(false);
 		
+		JPanel implementationComingSoon = new JPanel();
+		implementationComingSoon.setVisible(false);
+		implementationComingSoon.setBounds(10, 311, 227, 81);
+		overallStatsPanel.add(implementationComingSoon);
+		implementationComingSoon.setLayout(null);
+		
 		JLabel lblMoreInfo = new JLabel("More on a specific quiz:");
-		lblMoreInfo.setBounds(10, 311, 176, 22);
-		overallStatsPanel.add(lblMoreInfo);
+		lblMoreInfo.setBounds(0, 0, 176, 22);
+		implementationComingSoon.add(lblMoreInfo);
 		lblMoreInfo.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		JComboBox quizComboBox = new JComboBox();
+		quizComboBox.setBounds(1, 25, 226, 22);
+		implementationComingSoon.add(quizComboBox);
 		quizComboBox.setModel(new DefaultComboBoxModel(new String[] {"pls click this 1st", "", "This combobox ", "contains all the ", "quiz levels tried ", "by the user, ", "when u click ", "select quiz, it ", "displays things ", "that are similar ", "to when u click ", "\"Select Quiz\" now", ",functionality ", "coming soon", "", "thanks"}));
 		quizComboBox.setFont(new Font("Arial", Font.PLAIN, 11));
-		quizComboBox.setBounds(11, 336, 226, 22);
-		overallStatsPanel.add(quizComboBox);
 		
 		JButton btnSelectQuiz = new JButton("Select Quiz");
+		btnSelectQuiz.setBounds(2, 58, 89, 23);
+		implementationComingSoon.add(btnSelectQuiz);
 		btnSelectQuiz.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnSelectQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				changeCardPanel("Specific");
 			}
 		});
-		btnSelectQuiz.setBounds(12, 369, 89, 23);
-		overallStatsPanel.add(btnSelectQuiz);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setBounds(349, 325, 89, 67);

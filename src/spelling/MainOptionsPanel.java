@@ -134,11 +134,10 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnViewStatistics.gridy = 4;
 		optionsPanel.add(btnViewStatistics, gbc_btnViewStatistics);
 		
-		JButton btnSettings = new JButton("Clear Statistics");
+		JButton btnSettings = new JButton("Options");
 		btnSettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//CLEAR STATS info dialog
-				JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+				mainFrame.changeCardPanel("Settings");
 			}
 		});
 		btnSettings.setFocusPainted(false);

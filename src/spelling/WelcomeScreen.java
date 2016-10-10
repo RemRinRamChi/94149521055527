@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import javax.swing.JTextField;
 
+import spelling.settings.ClearStatistics;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -119,6 +121,7 @@ public class WelcomeScreen extends JPanel {
 	
 	private void storeUserName(String name){
 		File spelling_aid_user = new File(".spelling_aid_user");
+		ClearStatistics.clearFile(spelling_aid_user);
 		Tools.record(spelling_aid_user, name);
 	}
 }

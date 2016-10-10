@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
 import spelling.quiz.QuizQuestion;
+import spelling.settings.OptionsPanel;
 import spelling.statistics.SpellingAidStats;
 
 import java.awt.CardLayout;
@@ -32,6 +33,7 @@ public class SpellingAidMain extends JFrame {
 	private QuizQuestion quizQuestion;
 	private SpellingAidStats voxSpellStats;
 	private QuizDone doneQuizQuestion;
+	private OptionsPanel optionsPanel;
 
 	public SpellingAidStats getVoxSpellStats(){
 		return voxSpellStats;
@@ -65,7 +67,8 @@ public class SpellingAidMain extends JFrame {
 		} else if (mode.equals("Stats")){
 			setSize(490,640);
 		} else if (mode.equals("Settings")){
-			setSize(20,40);
+			optionsPanel.setUserName(getUserName());
+			setSize(470,315);
 		}
 		
 		// DOESN'T work on Linux
@@ -125,6 +128,7 @@ public class SpellingAidMain extends JFrame {
 		doneQuizQuestion = new QuizDone(this);
 		quizQuestion = new QuizQuestion(this,doneQuizQuestion);
 		voxSpellStats= new SpellingAidStats(this);
+		optionsPanel = new OptionsPanel(this);
 		
 		// add panels corresponding to different states of VoxSpell into content pane
 		contentPane.add(welcomeScreen,"Welcome");
@@ -132,6 +136,7 @@ public class SpellingAidMain extends JFrame {
 		contentPane.add(quizQuestion, "Quiz");
 		contentPane.add(doneQuizQuestion, "Done");
 		contentPane.add(voxSpellStats, "Stats");
+		contentPane.add(optionsPanel, "Settings");
 
 
 		// check for the presence of the hidden statistic files that are required
@@ -179,7 +184,8 @@ public class SpellingAidMain extends JFrame {
 		//createSpecialVideo.execute();
 	}
 	
-	public String getUserName(){
+	// might want to change this
+	private static String getUserName(){
 		String name = "";
 		File spelling_aid_user = new File(".spelling_aid_user");
 		BufferedReader readUserName;

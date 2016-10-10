@@ -19,6 +19,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
+///////// TESTER you don't have to read this as it is not used
+
+// to be decided whether to use or not
 public class SpecificQuizStats extends JPanel {
 	private JTable table;
 	private SpellingAidMain mainFrame;

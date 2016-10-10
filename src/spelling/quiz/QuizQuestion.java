@@ -135,7 +135,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 
 		userInput = new JTextField();
 		userInput.setFont(new Font("Arial", Font.PLAIN, 14));
-		userInput.setBounds(213, 173, 286, 20);
+		userInput.setBounds(213, 173, 286, 30);
 		add(userInput);
 		userInput.setColumns(10);
 
@@ -154,7 +154,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 				}
 			}
 		});
-		btnListenAgain.setBounds(213, 204, 168, 31);
+		btnListenAgain.setBounds(213, 214, 168, 31);
 		add(btnListenAgain);
 
 		btnConfirmOrNext = new JButton("Confirm");
@@ -174,12 +174,12 @@ public class QuizQuestion extends JPanel implements KeyListener{
 
 			}
 		});
-		btnConfirmOrNext.setBounds(391, 204, 108, 31);
+		btnConfirmOrNext.setBounds(391, 214, 108, 31);
 		add(btnConfirmOrNext);
 
 		JLabel lblYouOnlyHave = new JLabel("You only have 2 attempts");
 		lblYouOnlyHave.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblYouOnlyHave.setBounds(213, 256, 258, 14);
+		lblYouOnlyHave.setBounds(213, 256, 258, 20);
 		add(lblYouOnlyHave);
 
 		JLabel lblstAttempt = new JLabel("1st attempt");
@@ -234,7 +234,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 				}
 			}
 		});
-		btnStop.setBounds(554, 204, 114, 31);
+		btnStop.setBounds(554, 214, 114, 31);
 		add(btnStop);
 
 		JLabel lblCurrentQuiz = new JLabel("Current Quiz ");
@@ -394,7 +394,7 @@ public class QuizQuestion extends JPanel implements KeyListener{
 		lblSpellAgain.setVisible(yesOrNo);
 	}
 	public void setDefinition(String definition){
-		definitionArea.setText("Definition");
+		definitionArea.setText("Definition coming soon");
 	}
 	public void setCurrentQuiz(String quiz){
 		currentQuiz.setText(quiz);

@@ -139,7 +139,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		JComboBox ownListComboBox = new JComboBox();
 		ownListComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
 		ownListComboBox.setModel(new DefaultComboBoxModel(new String[] {"coming soon (pls click)", "", "The quizzes associated ", "with the user's own list", "will be in this combobox", "and it should work the", "same way as the ", "default list", "", "Functionality ", "coming soon"}));
-		ownListComboBox.setBounds(32, 210, 223, 29);
+		ownListComboBox.setBounds(32, 210, 202, 29);
 		getContentPane().add(ownListComboBox);
 		
 		JButton btnConfirmLvl = new JButton("OK");
@@ -158,6 +158,13 @@ public class QuizChooser extends JDialog implements ActionListener {
 		btnCancel.setFocusPainted(false);
 		btnCancel.setBounds(130, 259, 89, 29);
 		getContentPane().add(btnCancel);
+		
+		JButton button = new JButton(".");
+		button.setToolTipText("this should open up a file chooser to choose the user's own list which overwrites the last user list");
+		button.setFont(new Font("Arial", Font.PLAIN, 11));
+		button.setFocusPainted(false);
+		button.setBounds(240, 210, 16, 29);
+		getContentPane().add(button);
 		
 		// centre dialog
 		setLocationRelativeTo(null);
