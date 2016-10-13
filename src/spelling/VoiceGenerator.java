@@ -11,7 +11,7 @@ import spelling.settings.ClearStatistics;
  * 
  * This class governs the main logic for generating festival voices
  * for pronouncing sentences and spelling words
- * @authors yyap601 
+ * @authors yyap601 hchu167
  *
  */
 public class VoiceGenerator extends SwingWorker<Void, Void>{
@@ -20,13 +20,22 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 		private double pitch;
 		private double range;
 		private File schemeFile;
+		
+		// texts to be said in background
 		private String swingWorkerChangedText;
 		private String swingWorkerNormalText;
+		
 		public static enum Voice{
 			DEFAULT,AUCKLAND;
 		}
 		
-		// constructor to construct a voice generator with chosen voice and speed
+		/**
+		 * constructor to construct a voice generator with chosen voice and speed
+		 * @param chosenVoice chosenVoice: chosen festival voice 
+		 * @param chosenDurationStretch chosenDurationStretch: chosen duration stretch
+		 * @param pitch pitch: pitch
+		 * @param range range: range
+		 */
 		public VoiceGenerator(Voice chosenVoice, double chosenDurationStretch, double pitch, double range){
 			makeSureScmFileIsPresent();
 			schemeFile = new File(".spelling_aid_voice.scm");
@@ -38,13 +47,19 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 			
 		}
 		
-		// to change the preferred voice
+		/**
+		 * Change the preferred voice
+		 * @param chosenVoice chosenVoice: chosen festival voice 
+		 */
 		public void setVoice(Voice chosenVoice){
 			voice=chosenVoice;
 		}
 		
-		// this function gets passed in 2 strings, 1 which is the text to be said in normal speed, 
-		// the other which is the text to be said in the chosen duration stretch
+		/**
+		 * Say 2 different texts at different speeds
+		 * @param normalSpeedText normalSpeedText: text to be said in normal speed
+		 * @param changedText changedText: text to be said in the chosen duration stretch
+		 */
 		public void sayText(String normalSpeedText,String changedText){
 			double originalStretch = stretch;
 			ClearStatistics.clearFile(schemeFile);
@@ -77,7 +92,9 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 			stretch = originalStretch;
 		}
 		
-		// make sure scheme file is present for writing or typing
+		/**
+		 *  make sure scheme file is present for writing or typing
+		 */
 		private void makeSureScmFileIsPresent() {
 			File scmFile = new File(".spelling_aid_voice.scm");
 			try{
@@ -90,11 +107,19 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 			}
 		}
 		
+		/**
+		 * set the text to be said in the background
+		 * @param normal normal: text to be said in normal speed
+		 * @param changed changed: text to be said in the chosen duration stretch
+		 */
 		public void setTextForSwingWorker(String normal, String changed){
 			swingWorkerChangedText = changed;
 			swingWorkerNormalText = normal;
 		}
 
+		/**
+		 * says text in background
+		 */
 		protected Void doInBackground() throws Exception {
 			sayText(swingWorkerNormalText,swingWorkerChangedText);
 			return null;

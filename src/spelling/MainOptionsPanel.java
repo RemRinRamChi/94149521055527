@@ -127,12 +127,6 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		gbc_lblPleaseSelectOne.gridx = 1;
 		gbc_lblPleaseSelectOne.gridy = 1;
 		optionsPanel.add(lblPleaseSelectOne, gbc_lblPleaseSelectOne);
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 1;
-		gbc_btnNewButton.gridy = 2;
-		optionsPanel.add(btnNewQuiz, gbc_btnNewButton);
 
 		// New Quiz button
 		btnNewQuiz = new JButton("New Quiz");
@@ -140,6 +134,13 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		btnNewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
 		btnNewQuiz.addActionListener(this);
 
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.fill = GridBagConstraints.BOTH;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridy = 2;
+		optionsPanel.add(btnNewQuiz, gbc_btnNewButton);
+		
 		// vertical strut
 		Component verticalStrut = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
