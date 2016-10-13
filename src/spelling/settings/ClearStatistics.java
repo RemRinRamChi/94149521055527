@@ -12,14 +12,19 @@ import java.io.PrintWriter;
  */
 public class ClearStatistics {
 
-	// function to return information message and at the same time clear all the statistic files
+	/**
+	 *  function to return information message and at the same time clear all the statistic files
+	 * @return The information message to be displayed
+	 */
 	public static String clearStats(){
 		String infoMsg = "All Spelling Statistics Cleared";
 		clear();
 		return infoMsg;
 	}
 
-	// function to clear all the statistic files
+	/**
+	 *  function to clear all the statistic files
+	 */
 	private static void clear(){
 		clearFile(new File(".spelling_aid_tried_words"));
 		clearFile(new File(".spelling_aid_failed"));
@@ -27,7 +32,10 @@ public class ClearStatistics {
 		clearFile(new File(".spelling_aid_accuracy"));
 	}
 
-	// function to clear a single statistic file
+	/**
+	 *  function to clear a single statistic file
+	 * @param file file to clear
+	 */
 	public static void clearFile(File file){
 		PrintWriter writer;
 		try {

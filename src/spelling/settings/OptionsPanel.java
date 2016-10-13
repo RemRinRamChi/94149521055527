@@ -109,6 +109,10 @@ public class OptionsPanel extends JPanel {
 
 	}
 	
+	/**
+	 * Set user name to be displayed as the current user name
+	 * @param name current user name
+	 */
 	public void setUserName(String name){
 		lblName.setText(name);
 	}
