@@ -36,16 +36,18 @@ public class WelcomeScreen extends JPanel {
 		mainFrame = contentFrame;
 	}
 	/**
-	 * Create the panel.
+	 * Create the panel and components for the WelcomeScreen.
 	 */
 	public WelcomeScreen() {
 		setLayout(null);
 		
+		//Welcome image
 		JLabel welcomeImage = new JLabel("");
 		welcomeImage.setBounds(0, 11, 450, 200);
 		welcomeImage.setIcon(new ImageIcon("img/welcome.png"));
 		add(welcomeImage);
 		
+		//Set welcome screen to be of grid bag layout
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 210, 430, 229);
 		add(panel);
@@ -56,6 +58,7 @@ public class WelcomeScreen extends JPanel {
 		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
+		//Label asking what the user want to be called
 		JLabel nameQuery = new JLabel("What would you like to be called ?");
 		nameQuery.setFont(new Font("Arial", Font.PLAIN, 18));
 		GridBagConstraints gbc_nameQuery = new GridBagConstraints();
@@ -65,6 +68,7 @@ public class WelcomeScreen extends JPanel {
 		gbc_nameQuery.gridy = 0;
 		panel.add(nameQuery, gbc_nameQuery);
 		
+		//Text field to let the user type in his/her name
 		nameField = new JTextField();
 		nameField.setToolTipText("(e.g. Sherlock)");
 		nameField.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -76,29 +80,19 @@ public class WelcomeScreen extends JPanel {
 		panel.add(nameField, gbc_nameField);
 		nameField.setColumns(10);
 		nameField.addKeyListener(new KeyListener(){
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
+			//listen to ENTER key to click the confirm button
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					btnConfirm.doClick();
 				}
 			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+			public void keyTyped(KeyEvent e) {
 			}
-			
+			public void keyReleased(KeyEvent e) {
+			}
 		});
 		
-		
+		// confirm name button
 		btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnConfirm.addActionListener(new ActionListener() {
@@ -123,12 +117,14 @@ public class WelcomeScreen extends JPanel {
 		nameField.requestFocus();
 	}
 	
+	//store confirmed user name in a file after clearing the last name 
 	private void storeUserName(String name){
 		File spelling_aid_user = new File(".spelling_aid_user");
 		ClearStatistics.clearFile(spelling_aid_user);
 		Tools.record(spelling_aid_user, name);
 	}
 	
+	//clear the name field, for when the user is changing names 
 	public void clearField(){
 		nameField.setText("");
 		nameField.requestFocus();
