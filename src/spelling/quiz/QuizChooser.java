@@ -24,7 +24,7 @@ import java.awt.Color;
  */
 public class QuizChooser extends JDialog implements ActionListener {
 	private SpellingAidMain mainFrame;
-	private QuizQuestion mainQuizPanel;
+	private Quiz mainQuizPanel;
 	private QuizMode theMode;
 	private JFileChooser ownListChooser = new JFileChooser();
 	private JButton chooseFile;
@@ -33,7 +33,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
-	public QuizChooser(SpellingAidMain contentFrame, QuizQuestion quizPanel, QuizMode mode){
+	public QuizChooser(SpellingAidMain contentFrame, Quiz quizPanel, QuizMode mode){
 		this();
 		mainFrame = contentFrame;
 		mainQuizPanel = quizPanel;

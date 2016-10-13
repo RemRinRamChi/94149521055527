@@ -52,7 +52,7 @@ public class SpellList {
 	private String userAnswer = "0";
 
 	// This is the SPELLING AID APP
-	private QuizQuestion spellingAidApp;
+	private Quiz spellingAidApp;
 
 	// Number of correct answers
 	private int correctAnsCount = 0;
@@ -117,7 +117,7 @@ public class SpellList {
 	}
 
 	// Creates a list of words to test according to level and mode
-	public void createLevelList(int level, QuizMode spellingType, QuizQuestion spellAidApp){
+	public void createLevelList(int level, QuizMode spellingType, Quiz spellAidApp){
 		
 		// For every level these following variables start as follows
 		spellingAidApp = spellAidApp;

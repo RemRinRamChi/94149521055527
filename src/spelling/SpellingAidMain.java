@@ -14,7 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
-import spelling.quiz.QuizQuestion;
+import spelling.quiz.Quiz;
 import spelling.settings.OptionsPanel;
 import spelling.statistics.SpellingAidStats;
 
@@ -30,7 +30,7 @@ public class SpellingAidMain extends JFrame {
 	private JPanel contentPane;
 	private WelcomeScreen welcomeScreen;
 	private MainOptionsPanel mainOptions;
-	private QuizQuestion quizQuestion;
+	private Quiz quizQuestion;
 	private SpellingAidStats voxSpellStats;
 	private QuizDone doneQuizQuestion;
 	private OptionsPanel optionsPanel;
@@ -116,7 +116,7 @@ public class SpellingAidMain extends JFrame {
 		welcomeScreen = new WelcomeScreen(this);
 		mainOptions = new MainOptionsPanel(this);
 		doneQuizQuestion = new QuizDone(this);
-		quizQuestion = new QuizQuestion(this,doneQuizQuestion);
+		quizQuestion = new Quiz(this,doneQuizQuestion);
 		voxSpellStats= new SpellingAidStats(this);
 		optionsPanel = new OptionsPanel(this);
 		
@@ -180,7 +180,7 @@ public class SpellingAidMain extends JFrame {
 	public SpellingAidStats getVoxSpellStats(){
 		return voxSpellStats;
 	}
-	public QuizQuestion getQuizQuestion() {
+	public Quiz getQuizQuestion() {
 		return quizQuestion;
 	}
 	public QuizDone getDonePanel() {
