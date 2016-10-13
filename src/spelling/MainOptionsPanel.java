@@ -25,9 +25,14 @@ import javax.swing.Box;
  * @author yyap601
  *
  */
-public class MainOptionsPanel extends JPanel {
+public class MainOptionsPanel extends JPanel implements ActionListener{
 	private SpellingAidMain mainFrame;
 	private JLabel lblHiUser;
+	private JButton btnNewQuiz;
+	private JButton btnReviewQuiz;
+	private JButton btnViewStatistics;
+	private JButton btnSettings;
+	private JButton btnQuit;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -37,32 +42,73 @@ public class MainOptionsPanel extends JPanel {
 		mainFrame = contentFrame;
 	}
 	/**
-	 * Create the panel.
+	 * Create the MainOptionsPanel and layout its components.
 	 */
 	public MainOptionsPanel() {
+		createAndLayoutComponents();
+	}
+
+	/**
+	 * Set the name to put besides "Hi" when the application is greeting the user
+	 * @param name name: user's name
+	 */
+	public void setUserName(String name){
+		lblHiUser.setText("Hi "+name);
+	}
+
+	// perform appropriate actions based on button press
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btnNewQuiz){ // New Quiz
+			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New);
+			quizChooser.setVisible(true);
+		} else if(e.getSource()==btnReviewQuiz){ // Review Quiz
+			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review);
+			quizChooser.setVisible(true);
+		} else if(e.getSource()==btnViewStatistics){ // View Statistics
+			// instantiate the statistics object and execute it
+			SpellingAidStatistics statsWin = new SpellingAidStatistics(mainFrame.getVoxSpellStats());
+			statsWin.execute();
+			mainFrame.changeCardPanel("Stats");
+		} else if(e.getSource()==btnSettings){ // Settings
+			mainFrame.changeCardPanel("Settings");
+		} else if(e.getSource()==btnQuit){ // Quit
+			mainFrame.dispose();
+		}
+	}
+
+	/**
+	 *  Create all components and lay them out properly
+	 */
+	private void createAndLayoutComponents(){
+		// set absolute layout
 		setLayout(null);
-		
+
+		// Panel to say hi to user
 		JPanel hiPanel = new JPanel();
 		hiPanel.setBackground(Color.WHITE);
 		hiPanel.setBounds(0, 11, 450, 200);
 		add(hiPanel);
 		hiPanel.setLayout(null);
-		
+
+		// avatar
 		JLabel avatar = new JLabel("");
 		avatar.setIcon(new ImageIcon("img/avatar.png"));
 		avatar.setBounds(24, 11, 159, 184);
 		hiPanel.add(avatar);
-		
+
+		// greeting label
 		lblHiUser = new JLabel("Hi");
 		lblHiUser.setFont(new Font("Arial", Font.PLAIN, 40));
 		lblHiUser.setBounds(193, 49, 235, 64);
 		hiPanel.add(lblHiUser);
-		
+
+		// "I am here to help you"
 		JLabel lblHereToHelp = new JLabel("I am here to help you \r\n");
 		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereToHelp.setBounds(193, 113, 247, 53);
 		hiPanel.add(lblHereToHelp);
-		
+
+		// panel containing main options
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setBounds(10, 222, 430, 267);
 		add(optionsPanel);
@@ -72,24 +118,8 @@ public class MainOptionsPanel extends JPanel {
 		gbl_optionsPanel.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_optionsPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		optionsPanel.setLayout(gbl_optionsPanel);
-		
-		JButton btnNewButton = new JButton("New Quiz");
-		btnNewButton.setFocusPainted(false);
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New);
-				quizChooser.setVisible(true);
-			}
-		});
-		
-		Component verticalStrut = Box.createVerticalStrut(20);
-		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
-		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
-		gbc_verticalStrut.gridx = 1;
-		gbc_verticalStrut.gridy = 0;
-		optionsPanel.add(verticalStrut, gbc_verticalStrut);
-		
+
+		// "Please select one of the following options" label
 		JLabel lblPleaseSelectOne = new JLabel("Please select one of the following options");
 		lblPleaseSelectOne.setFont(new Font("Arial", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblPleaseSelectOne = new GridBagConstraints();
@@ -102,15 +132,25 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 2;
-		optionsPanel.add(btnNewButton, gbc_btnNewButton);
-		
-		JButton btnReviewQuiz = new JButton("Review Quiz\r\n");
-		btnReviewQuiz.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review);
-				quizChooser.setVisible(true);
-			}
-		});
+		optionsPanel.add(btnNewQuiz, gbc_btnNewButton);
+
+		// New Quiz button
+		btnNewQuiz = new JButton("New Quiz");
+		btnNewQuiz.setFocusPainted(false);
+		btnNewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnNewQuiz.addActionListener(this);
+
+		// vertical strut
+		Component verticalStrut = Box.createVerticalStrut(20);
+		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
+		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);
+		gbc_verticalStrut.gridx = 1;
+		gbc_verticalStrut.gridy = 0;
+		optionsPanel.add(verticalStrut, gbc_verticalStrut);
+
+		// Review Quiz button
+		btnReviewQuiz = new JButton("Review Quiz\r\n");
+		btnReviewQuiz.addActionListener(this);
 		btnReviewQuiz.setFocusPainted(false);
 		btnReviewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnReviewQuiz = new GridBagConstraints();
@@ -119,16 +159,10 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnReviewQuiz.gridx = 1;
 		gbc_btnReviewQuiz.gridy = 3;
 		optionsPanel.add(btnReviewQuiz, gbc_btnReviewQuiz);
-		
-		JButton btnViewStatistics = new JButton("View Statistics");
-		btnViewStatistics.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// instantiate the statistics object and execute it
-				SpellingAidStatistics statsWin = new SpellingAidStatistics(mainFrame.getVoxSpellStats());
-				statsWin.execute();
-				mainFrame.changeCardPanel("Stats");
-			}
-		});
+
+		// View Statistics button
+		btnViewStatistics = new JButton("View Statistics");
+		btnViewStatistics.addActionListener(this);
 		btnViewStatistics.setFocusPainted(false);
 		btnViewStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnViewStatistics = new GridBagConstraints();
@@ -137,13 +171,10 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnViewStatistics.gridx = 1;
 		gbc_btnViewStatistics.gridy = 4;
 		optionsPanel.add(btnViewStatistics, gbc_btnViewStatistics);
-		
-		JButton btnSettings = new JButton("Options");
-		btnSettings.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mainFrame.changeCardPanel("Settings");
-			}
-		});
+
+		// Settings button
+		btnSettings = new JButton("Options");
+		btnSettings.addActionListener(this);
 		btnSettings.setFocusPainted(false);
 		btnSettings.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
@@ -152,13 +183,10 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnSettings.gridx = 1;
 		gbc_btnSettings.gridy = 5;
 		optionsPanel.add(btnSettings, gbc_btnSettings);
-		
-		JButton btnQuit = new JButton("Quit");
-		btnQuit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.dispose();
-			}
-		});
+
+		// Quit button
+		btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(this);
 		btnQuit.setFocusPainted(false);
 		btnQuit.setFont(new Font("Arial", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnQuit = new GridBagConstraints();
@@ -167,10 +195,6 @@ public class MainOptionsPanel extends JPanel {
 		gbc_btnQuit.gridx = 1;
 		gbc_btnQuit.gridy = 6;
 		optionsPanel.add(btnQuit, gbc_btnQuit);
+	}
 
-	}
-	
-	public void setUserName(String name){
-		lblHiUser.setText("Hi "+name);
-	}
 }

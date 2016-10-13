@@ -117,14 +117,19 @@ public class WelcomeScreen extends JPanel {
 		nameField.requestFocus();
 	}
 	
-	//store confirmed user name in a file after clearing the last name 
+	/**
+	 * Store confirmed user name in a file after clearing the last name 
+	 * @param name name: user's name
+	 */
 	private void storeUserName(String name){
 		File spelling_aid_user = new File(".spelling_aid_user");
 		ClearStatistics.clearFile(spelling_aid_user);
 		Tools.record(spelling_aid_user, name);
 	}
 	
-	//clear the name field, for when the user is changing names 
+	/**
+	 * Clear the name field, for when the user is changing names 
+	 */
 	public void clearField(){
 		nameField.setText("");
 		nameField.requestFocus();
