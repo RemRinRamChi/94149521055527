@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 import spelling.quiz.QuizDone;
 import spelling.quiz.Quiz;
 import spelling.settings.OptionsPanel;
-import spelling.statistics.SpellingAidStats;
+import spelling.statistics.StatisticsViewController;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -31,7 +31,7 @@ public class SpellingAidMain extends JFrame {
 	private WelcomeScreen welcomeScreen;
 	private MainOptionsPanel mainOptions;
 	private Quiz quizQuestion;
-	private SpellingAidStats voxSpellStats;
+	private StatisticsViewController voxSpellStats;
 	private QuizDone doneQuizQuestion;
 	private OptionsPanel optionsPanel;
 
@@ -117,7 +117,7 @@ public class SpellingAidMain extends JFrame {
 		mainOptions = new MainOptionsPanel(this);
 		doneQuizQuestion = new QuizDone(this);
 		quizQuestion = new Quiz(this,doneQuizQuestion);
-		voxSpellStats= new SpellingAidStats(this);
+		voxSpellStats= new StatisticsViewController(this);
 		optionsPanel = new OptionsPanel(this);
 		
 		// add panels corresponding to different states of VoxSpell into content pane
@@ -177,7 +177,7 @@ public class SpellingAidMain extends JFrame {
 	}
 
 	// getters
-	public SpellingAidStats getVoxSpellStats(){
+	public StatisticsViewController getVoxSpellStats(){
 		return voxSpellStats;
 	}
 	public Quiz getQuizQuestion() {

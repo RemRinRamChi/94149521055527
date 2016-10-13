@@ -31,13 +31,13 @@ import java.awt.event.ActionEvent;
 public class SpecificQuizStats extends JPanel {
 	private JTable table;
 	private SpellingAidMain mainFrame;
-	private SpellingAidStats mainStats;
+	private StatisticsViewController mainStats;
 
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
-	public SpecificQuizStats(SpellingAidMain contentFrame, SpellingAidStats contentStats){
+	public SpecificQuizStats(SpellingAidMain contentFrame, StatisticsViewController contentStats){
 		this();
 		mainFrame = contentFrame;		
 		mainStats = contentStats;

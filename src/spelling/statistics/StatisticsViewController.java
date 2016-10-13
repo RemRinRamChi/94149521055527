@@ -21,7 +21,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author yyap601
  *
  */
-public class SpellingAidStats extends JPanel {
+public class StatisticsViewController extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JPanel specificQuiz;
 	private JPanel statsPanel;
@@ -31,7 +31,7 @@ public class SpellingAidStats extends JPanel {
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
-	public SpellingAidStats(SpellingAidMain contentFrame){
+	public StatisticsViewController(SpellingAidMain contentFrame){
 		this();
 		mainFrame = contentFrame;
 		specificQuiz = new SpecificQuizStats(mainFrame,this);
@@ -50,7 +50,7 @@ public class SpellingAidStats extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SpellingAidStats() {
+	public StatisticsViewController() {
 		setLayout(null);
 		
 		JPanel friendlyPanel = new JPanel();

@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import spelling.quiz.QuizChooser;
 import spelling.quiz.SpellList.QuizMode;
 import spelling.settings.ClearStatistics;
-import spelling.statistics.SpellingAidStatistics;
+import spelling.statistics.StatisticsModel;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -66,7 +66,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 			quizChooser.setVisible(true);
 		} else if(e.getSource()==btnViewStatistics){ // View Statistics
 			// instantiate the statistics object and execute it
-			SpellingAidStatistics statsWin = new SpellingAidStatistics(mainFrame.getVoxSpellStats());
+			StatisticsModel statsWin = new StatisticsModel(mainFrame.getVoxSpellStats());
 			statsWin.execute();
 			mainFrame.changeCardPanel("Stats");
 		} else if(e.getSource()==btnSettings){ // Settings

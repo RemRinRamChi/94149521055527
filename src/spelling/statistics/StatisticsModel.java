@@ -21,10 +21,10 @@ import javax.swing.SwingWorker;
  * @authors yyap601 
  *
  */
-public class SpellingAidStatistics extends SwingWorker<Void,String>{
+public class StatisticsModel extends SwingWorker<Void,String>{
 
 	// This is the SPELLING AID STATSGUI
-	SpellingAidStats spellingAidStats;
+	StatisticsViewController spellingAidStats;
 
 	// Files for statistics reading
 	File spelling_aid_tried_words;
@@ -42,7 +42,7 @@ public class SpellingAidStatistics extends SwingWorker<Void,String>{
 	int zeroWords; // counter to check if there are no words
 
 
-	public SpellingAidStatistics(SpellingAidStats spellingAidStatsGUI){
+	public StatisticsModel(StatisticsViewController spellingAidStatsGUI){
 
 		// initialise variables appropriately
 		spellingAidStats=spellingAidStatsGUI;
