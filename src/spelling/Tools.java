@@ -10,7 +10,7 @@ import java.io.PrintWriter;
  * 
  * This class is a collection of helper functions 
  * that are used in multiple classes
- * @authors yyap601 
+ * @authors yyap601 hchu167
  *
  */
 public class Tools {

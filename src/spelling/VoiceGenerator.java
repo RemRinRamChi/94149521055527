@@ -31,10 +31,10 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 		
 		/**
 		 * constructor to construct a voice generator with chosen voice and speed
-		 * @param chosenVoice chosenVoice: chosen festival voice 
-		 * @param chosenDurationStretch chosenDurationStretch: chosen duration stretch
-		 * @param pitch pitch: pitch
-		 * @param range range: range
+		 * @param chosenVoice chosen festival voice 
+		 * @param chosenDurationStretch chosen duration stretch
+		 * @param pitch pitch
+		 * @param range range
 		 */
 		public VoiceGenerator(Voice chosenVoice, double chosenDurationStretch, double pitch, double range){
 			makeSureScmFileIsPresent();
@@ -109,8 +109,8 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 		
 		/**
 		 * set the text to be said in the background
-		 * @param normal normal: text to be said in normal speed
-		 * @param changed changed: text to be said in the chosen duration stretch
+		 * @param normal text to be said in normal speed
+		 * @param changed text to be said in the chosen duration stretch
 		 */
 		public void setTextForSwingWorker(String normal, String changed){
 			swingWorkerChangedText = changed;

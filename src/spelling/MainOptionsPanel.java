@@ -50,7 +50,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 	/**
 	 * Set the name to put besides "Hi" when the application is greeting the user
-	 * @param name name: user's name
+	 * @param name user's name
 	 */
 	public void setUserName(String name){
 		lblHiUser.setText("Hi "+name);

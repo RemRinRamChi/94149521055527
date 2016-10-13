@@ -35,18 +35,6 @@ public class SpellingAidMain extends JFrame {
 	private QuizDone doneQuizQuestion;
 	private OptionsPanel optionsPanel;
 
-	public SpellingAidStats getVoxSpellStats(){
-		return voxSpellStats;
-	}
-	
-	public QuizQuestion getQuizQuestion() {
-		return quizQuestion;
-	}
-	
-	public QuizDone getDonePanel() {
-		return doneQuizQuestion;
-	}
-
 	/**
 	 * Change panel displayed within main frame
 	 * @param mode The state VoxSpell is currently in.
@@ -80,7 +68,7 @@ public class SpellingAidMain extends JFrame {
 	}
 
 	/**
-	 * Launch the application.
+	 * Launch VOXSPELL.
 	 */
 	public static void main(String[] args) {
 	    try 
@@ -149,7 +137,9 @@ public class SpellingAidMain extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	
-	// checks that all the files that are storing the statistics are present and create any files that do not exist
+	/**
+	 *  checks that all the files that are storing the statistics are present and create any files that do not exist
+	 */
 	private void makeSureAllNecessaryFilesArePresent() {
 		File spelling_aid_failed = new File(".spelling_aid_failed");
 		File spelling_aid_statistics = new File(".spelling_aid_statistics");
@@ -172,10 +162,10 @@ public class SpellingAidMain extends JFrame {
 			}
 			if(! spelling_aid_user.exists()){
 				spelling_aid_user.createNewFile();
-				// first panel to be displayed is the welcome screen
+				// first panel to be displayed is the welcome screen if there isn't a previous user name
 				changeCardPanel("Welcome");
 			} else {
-				// already gotten user's name
+				// go straight to main panel if user's name is already known
 				changeCardPanel("Main");
 			}
 		} catch (IOException e) {
@@ -185,8 +175,20 @@ public class SpellingAidMain extends JFrame {
 		//VideoCreator createSpecialVideo = new VideoCreator();
 		//createSpecialVideo.execute();
 	}
-	
-	// might want to change this
+
+	// getters
+	public SpellingAidStats getVoxSpellStats(){
+		return voxSpellStats;
+	}
+	public QuizQuestion getQuizQuestion() {
+		return quizQuestion;
+	}
+	public QuizDone getDonePanel() {
+		return doneQuizQuestion;
+	}
+	/**
+	 * Get user's name from the store user name
+	 */
 	private static String getUserName(){
 		String name = "";
 		File spelling_aid_user = new File(".spelling_aid_user");
@@ -195,13 +197,16 @@ public class SpellingAidMain extends JFrame {
 			readUserName = new BufferedReader(new FileReader(spelling_aid_user));
 			name = readUserName.readLine();
 			readUserName.close();
-		} catch (Exception e) { //dangerous Exception
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return name;
 	}
 
+	/**
+	 * Change voice generator of VoxSpell
+	 * @param voice festival's voice
+	 */
 	public void setVoice(String voice) {
 		quizQuestion.setFestivalVoice(voice);
 	}

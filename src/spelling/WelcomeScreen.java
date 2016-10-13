@@ -119,7 +119,7 @@ public class WelcomeScreen extends JPanel {
 	
 	/**
 	 * Store confirmed user name in a file after clearing the last name 
-	 * @param name name: user's name
+	 * @param name user's name
 	 */
 	private void storeUserName(String name){
 		File spelling_aid_user = new File(".spelling_aid_user");
