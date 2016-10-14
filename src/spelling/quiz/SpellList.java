@@ -39,7 +39,7 @@ public class SpellList {
 	// Current Streak
 	int currentStreak;
 	// Current Level
-	int currentLevel;
+	String currentLevel;
 	// True if question has been attempted (according to current question)
 	private boolean attempt = false; 
 	private boolean endOfQuestion = false;
@@ -65,26 +65,31 @@ public class SpellList {
 
 	// Files that contains the word list and statistics
 	File wordList;
+	File usersList;
 	File spelling_aid_tried_words;
 	File spelling_aid_failed;
 	File spelling_aid_statistics;
 	File spelling_aid_accuracy;
 
 	// ArrayLists for storing file contents for easier processing later according to levels
-	HashMap<Integer, ArrayList<String>> mapOfWords;
-	HashMap<Integer, ArrayList<String>> mapOfFailedWords;
-	HashMap<Integer, ArrayList<String>> mapOfTriedWords;
+	HashMap<String, ArrayList<String>> mapOfWords;
+	HashMap<String, ArrayList<String>> mapOfFailedWords;
+	HashMap<String, ArrayList<String>> mapOfTriedWords;
 
 	// Hashmaps to store accuracy related values for every level
-	HashMap<Integer,Integer> totalAsked;
-	HashMap<Integer,Integer> totalCorrect;
+	HashMap<String,Integer> totalAsked;
+	HashMap<String,Integer> totalCorrect;
 
+	// Hashmap to store special key related to the extra spell list
+	HashMap<String,Integer> userLevelKeys;
+	
 	/**
 	 * Constructor of spellinglist model for current session 
 	 */
 	public SpellList(){
 		// Files that contains the word list and statistics
 		wordList = new File("NZCER-spelling-lists.txt");
+		usersList = new File("USER-spelling-lists.txt");
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_failed = new File(".spelling_aid_failed");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
@@ -102,7 +107,7 @@ public class SpellList {
 	}
 
 	// get number of questions
-	public int getCurrentLevel(){
+	public String getCurrentLevel(){
 		return currentLevel;
 	}
 
@@ -117,7 +122,7 @@ public class SpellList {
 	}
 
 	// Creates a list of words to test according to level and mode
-	public void createLevelList(int level, QuizMode spellingType, Quiz spellAidApp){
+	public void createLevelList(String level, QuizMode spellingType, Quiz spellAidApp){
 		
 		// For every level these following variables start as follows
 		spellingAidApp = spellAidApp;
@@ -129,13 +134,13 @@ public class SpellList {
 		status = QuizState.Asking;
 
 		// update quiz field with level NEED TO CHANGE FOR CUSTOM LIST
-		spellingAidApp.setCurrentQuiz(": NZCER level "+level);
+		spellingAidApp.setCurrentQuiz(": "+level);
 
 		// size of question list, might change depending on size of word list
 		int questionListSize = 10;
 
 		// choose list to read from according to mode
-		HashMap<Integer, ArrayList<String>> wordMap;
+		HashMap<String, ArrayList<String>> wordMap;
 		if(spellingType==QuizMode.New){
 			wordMap = mapOfWords;
 		} else {
@@ -384,21 +389,21 @@ public class SpellList {
 		Arrays.sort(triedKeys);
 
 		for(Object key : failedKeys){
-			int dKey = (Integer)key;
-			Tools.record(spelling_aid_failed,"%Level "+dKey);
+			String dKey = (String)key;
+			Tools.record(spelling_aid_failed,"%"+dKey);
 			for(String wordToRecord : mapOfFailedWords.get(dKey)){
 				Tools.record(spelling_aid_failed,wordToRecord);
 			}
 		}	
 		for(Object key : triedKeys){
-			int dKey = (Integer)key;
-			Tools.record(spelling_aid_tried_words,"%Level "+dKey);
+			String dKey = (String)key;
+			Tools.record(spelling_aid_tried_words,"%"+dKey);
 			for(String wordToRecord : mapOfTriedWords.get(dKey)){
 				Tools.record(spelling_aid_tried_words,wordToRecord);
 			}
 		}	
 		for(Object key : accuracyKeys){
-			int dKey = (Integer)key;
+			String dKey = (String)key;
 			Tools.record(spelling_aid_accuracy,dKey+" "+totalAsked.get(dKey)+" "+totalCorrect.get(dKey));
 		}
 
@@ -438,11 +443,11 @@ public class SpellList {
 
 	// Go through all the statistic files and also the file containing the word list 
 	private void initialiseListsToStoreValuesFromWordAndStatsList(){
-		mapOfWords = new HashMap<Integer, ArrayList<String>>();
-		mapOfFailedWords = new HashMap<Integer, ArrayList<String>>();
-		mapOfTriedWords = new HashMap<Integer, ArrayList<String>>();
-		totalAsked = new HashMap<Integer,Integer>();
-		totalCorrect = new HashMap<Integer,Integer>();
+		mapOfWords = new HashMap<String, ArrayList<String>>();
+		mapOfFailedWords = new HashMap<String, ArrayList<String>>();
+		mapOfTriedWords = new HashMap<String, ArrayList<String>>();
+		totalAsked = new HashMap<String,Integer>();
+		totalCorrect = new HashMap<String,Integer>();
 
 		try {
 			// start adding file contents to the appropriate array list
@@ -452,36 +457,48 @@ public class SpellList {
 			String word = readWordList.readLine();
 			// array to store words in a level
 			ArrayList<String> wordsInALevel = new ArrayList<String>();
-			// level at which the word storage is happening
-			int newSpellingLevel = 1;
 			while(word != null){
 				// % = level and so do appropriate things
 				if(word.charAt(0) == '%'){
-					String[] levelNo = word.split(" ");
-					newSpellingLevel = Integer.parseInt(levelNo[1]);
+					String levelNo = word.substring(1);
 					wordsInALevel = new ArrayList<String>();
-					mapOfWords.put(newSpellingLevel,wordsInALevel);
+					mapOfWords.put(levelNo,wordsInALevel);
 				} else {
 					wordsInALevel.add(word);
 				}
 				word = readWordList.readLine();
 			}
 			readWordList.close();
+			
+			// USER's WORDLIST
+			BufferedReader readUserList = new BufferedReader(new FileReader(usersList));
+			String userWord = readUserList.readLine();
+			// array to store words in a level
+			wordsInALevel = new ArrayList<String>();
+			while(userWord != null){
+				// % = level and so do appropriate things
+				if(userWord.charAt(0) == '%'){
+					String levelName = userWord.substring(1);
+					wordsInALevel = new ArrayList<String>();
+					mapOfWords.put(levelName,wordsInALevel);
+				} else {
+					wordsInALevel.add(userWord);
+				}
+				userWord = readUserList.readLine();
+			}
+			readUserList.close();
 
 			// TRIED WORDS
 			BufferedReader readTriedList = new BufferedReader(new FileReader(spelling_aid_tried_words));
 			String triedWord = readTriedList.readLine();
 			// array to store words in a level
 			ArrayList<String> triedWordsInALevel = new ArrayList<String>();
-			// level at which the word storage is happening
-			int triedLevel = 1;
 			while(triedWord != null){
 				// % = level and so do appropriate things
 				if(triedWord.charAt(0) == '%'){
-					String[] levelNo = triedWord.split(" ");
-					triedLevel = Integer.parseInt(levelNo[1]);
+					String levelNo = triedWord.substring(1);
 					triedWordsInALevel = new ArrayList<String>();
-					mapOfTriedWords.put(triedLevel,triedWordsInALevel);
+					mapOfTriedWords.put(levelNo,triedWordsInALevel);
 				} else {
 					triedWordsInALevel.add(triedWord);
 				}
@@ -494,15 +511,12 @@ public class SpellList {
 			String failedWord = readFailList.readLine();
 			// array to store words to review in a level
 			ArrayList<String> wordsToReviewInALevel = new ArrayList<String>();
-			// level at which the word storage is happening
-			int reviewLevel = 1;
 			while(failedWord != null){
 				// % = level and so do appropriate things
 				if(failedWord.charAt(0) == '%'){
-					String[] levelNo = failedWord.split(" ");
-					reviewLevel = Integer.parseInt(levelNo[1]);
+					String levelNo = failedWord.substring(1);
 					wordsToReviewInALevel = new ArrayList<String>();
-					mapOfFailedWords.put(reviewLevel,wordsToReviewInALevel);
+					mapOfFailedWords.put(levelNo,wordsToReviewInALevel);
 				} else {
 					wordsToReviewInALevel.add(failedWord);
 				}
@@ -515,8 +529,8 @@ public class SpellList {
 			String accuracyLine = readAccuracyList.readLine();
 			while(accuracyLine != null){
 				String[] accuracyLog = accuracyLine.split(" ");
-				totalAsked.put(Integer.parseInt(accuracyLog[0]), Integer.parseInt(accuracyLog[1]));
-				totalCorrect.put(Integer.parseInt(accuracyLog[0]), Integer.parseInt(accuracyLog[2]));
+				totalAsked.put(accuracyLog[0], Integer.parseInt(accuracyLog[1]));
+				totalCorrect.put(accuracyLog[0], Integer.parseInt(accuracyLog[2]));
 				accuracyLine = readAccuracyList.readLine();
 			}
 			readAccuracyList.close();
@@ -526,27 +540,40 @@ public class SpellList {
 		}
 	}
 
-	// for the GUI to set the answer
+	/**
+	 * For the view controller to set the answer
+	 * @param theUserAnswer user's answer from the view controller
+	 */
 	public void setAnswer(String theUserAnswer){
 		userAnswer=theUserAnswer;
 	}
-	
+	/**
+	 * Check word length difference
+	 * @param w1 word 1
+	 * @param w2 word 2
+	 * @return length difference
+	 */
 	private int checkLetterDiff(String w1, String w2){
 		return Math.abs(w1.length()-w2.length());
 	}
-	
+	/**
+	 * Increment the current streak count and update the label
+	 */
 	private void incrementCurrentStreak(){
 		currentStreak++;
 		spellingAidApp.setCurrentStreak(": "+currentStreak);
 	}
-	
+	/**
+	 * Resent current streak count and update the label
+	 */
 	private void resetCurrentStreak(){
 		currentStreak = 0;
 		spellingAidApp.setCurrentStreak(": "+currentStreak);
 	}
-	
+	/**
+	 * Update the label showing the correct questions count
+	 */
 	private void updateCorrectQuestionsCountLabel(){
 		spellingAidApp.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+questionNo);
 	}
-
 }

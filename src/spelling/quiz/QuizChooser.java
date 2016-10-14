@@ -1,11 +1,13 @@
 package spelling.quiz;
 
 import javax.swing.JButton;
+import static java.nio.file.StandardCopyOption.*;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import spelling.SpellingAidMain;
+import spelling.Tools;
 import spelling.quiz.SpellList.QuizMode;
 
 import javax.swing.JLabel;
@@ -13,7 +15,11 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -22,13 +28,25 @@ import java.awt.Color;
  * @author yyap601
  *
  */
-public class QuizChooser extends JDialog implements ActionListener {
+public class QuizChooser extends JDialog implements ActionListener{
 	private SpellingAidMain mainFrame;
 	private Quiz mainQuizPanel;
 	private QuizMode theMode;
 	private JFileChooser ownListChooser = new JFileChooser();
 	private JButton chooseFile;
 	private JLabel lblChosenList;
+	private JButton btn1;
+	private JButton btn2;
+	private JButton btn3;
+	private JButton btn4;
+	private JButton btn5;
+	private JButton btn6;
+	private JButton btn7;
+	private JButton btn8;
+	private JButton btn9;
+	private JButton btn10;
+	private JButton btn11;
+	private JButton btnR;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -62,10 +80,12 @@ public class QuizChooser extends JDialog implements ActionListener {
 		if(e.getSource()==chooseFile){
 			int returnVal = ownListChooser.showDialog(this, "Choose list");
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File file = ownListChooser.getSelectedFile();
-				// Change chosen list label approprately
-				lblChosenList.setText("Chosen list: " + file.getName());
-				// TODO
+				File ownFile = ownListChooser.getSelectedFile();
+				// Change chosen list label appropriately
+				lblChosenList.setText("Chosen list: " + ownFile.getName());
+				ArrayList<String> combo = Tools.replaceFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt"));
+				mainQuizPanel.updateSpellList(new SpellList());
+				
 			} 
 		} else { // when a level from the default list was chosen
 			dispose();
@@ -74,10 +94,10 @@ public class QuizChooser extends JDialog implements ActionListener {
 			if(chosenButton.equals("?")){
 				// get a random level from 1 to 11 if the random button was chosen
 				Random rand = new Random();
-				int  randomLvl = rand.nextInt(11);
+				int  randomLvl = rand.nextInt(11)  + 1;
 				chosenButton = randomLvl+"";
 			}
-			mainQuizPanel.startQuiz(chosenButton,theMode);
+			mainQuizPanel.startQuiz("Level "+chosenButton,theMode);
 		}
 	}
 
@@ -101,7 +121,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(lblNZCERLevel);
 
 		// Create level 1 button
-		JButton btn1 = new JButton("1");
+		btn1 = new JButton("1");
 		btn1.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn1.addActionListener(this);
 		btn1.setFocusPainted(false);
@@ -109,7 +129,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn1);
 
 		// Create level 2 button
-		JButton btn2 = new JButton("2");
+		btn2 = new JButton("2");
 		btn2.addActionListener(this);
 		btn2.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn2.setFocusPainted(false);
@@ -117,7 +137,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn2);
 
 		// Create level 3 button
-		JButton btn3 = new JButton("3");
+		btn3 = new JButton("3");
 		btn3.addActionListener(this);
 		btn3.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn3.setFocusPainted(false);
@@ -125,7 +145,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn3);
 
 		// Create level 4 button
-		JButton btn4 = new JButton("4");
+		btn4 = new JButton("4");
 		btn4.addActionListener(this);
 		btn4.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn4.setFocusPainted(false);
@@ -133,7 +153,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn4);
 
 		// Create level 5 button
-		JButton btn5 = new JButton("5");
+		btn5 = new JButton("5");
 		btn5.addActionListener(this);
 		btn5.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn5.setFocusPainted(false);
@@ -141,7 +161,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn5);
 
 		// Create level 6 button
-		JButton btn6 = new JButton("6");
+		btn6 = new JButton("6");
 		btn6.addActionListener(this);
 		btn6.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn6.setFocusPainted(false);
@@ -149,7 +169,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn6);
 
 		// Create level 7 button
-		JButton btn7 = new JButton("7");
+		btn7 = new JButton("7");
 		btn7.addActionListener(this);
 		btn7.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn7.setFocusPainted(false);
@@ -157,7 +177,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn7);
 
 		// Create level 8 button
-		JButton btn8 = new JButton("8");
+		btn8 = new JButton("8");
 		btn8.addActionListener(this);
 		btn8.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn8.setFocusPainted(false);
@@ -165,7 +185,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn8);
 
 		// Create level 9 button
-		JButton btn9 = new JButton("9");
+		btn9 = new JButton("9");
 		btn9.addActionListener(this);
 		btn9.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn9.setFocusPainted(false);
@@ -173,7 +193,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn9);
 
 		// Create level 10 button
-		JButton btn10 = new JButton("10");
+		btn10 = new JButton("10");
 		btn10.addActionListener(this);
 		btn10.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn10.setFocusPainted(false);
@@ -181,7 +201,7 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn10);
 
 		// Create level 11 button
-		JButton btn11 = new JButton("11");
+		btn11 = new JButton("11");
 		btn11.addActionListener(this);
 		btn11.setFont(new Font("Arial", Font.PLAIN, 11));
 		btn11.setFocusPainted(false);
@@ -189,7 +209,8 @@ public class QuizChooser extends JDialog implements ActionListener {
 		getContentPane().add(btn11);
 
 		// Create RANDOM level button
-		JButton btnR = new JButton("?");
+		btnR = new JButton("?");
+		btnR.setToolTipText("Random Level");
 		btnR.addActionListener(this);
 		btnR.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnR.setFocusPainted(false);

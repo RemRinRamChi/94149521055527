@@ -2,11 +2,8 @@ package spelling.quiz;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-import java.awt.Toolkit;
 
 import javax.swing.SwingConstants;
 
@@ -100,6 +97,13 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			}
 		}
 	}
+	
+	/**
+	 * Updates the spell list when the user changes the own list
+	 */
+	public void updateSpellList(SpellList sList){
+		spellList=sList;
+	}
 
 	/**
 	 * Method to call to accept user input
@@ -186,7 +190,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		setCurrentStreak(":");
 		setNoOfCorrectSpellings(":");
 		//Start asking questions for the current quiz // NEED TO CHANGE THIS TO ACCEPT STRING
-		spellList.createLevelList(Integer.parseInt(quizLvl), mode,this);
+		spellList.createLevelList(quizLvl, mode,this);
 		quizAccuracy.setText(": "+ spellList.getLvlAccuracy()+"%");
 		questionAsker = spellList.getQuestionAsker();
 		questionAsker.execute();
