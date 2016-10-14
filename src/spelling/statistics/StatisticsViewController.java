@@ -30,7 +30,7 @@ public class StatisticsViewController extends JPanel {
 	private JTextArea statsTextArea;
 	private JLabel lblHi;
 	private JTabbedPane lvlAndWordStatsPane;
-	private JTable table;
+	private JTable triedWordsTable;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -60,22 +60,19 @@ public class StatisticsViewController extends JPanel {
 		statsTextArea.setEditable(false);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setFont(new Font("Arial", Font.PLAIN, 12));
 		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, scrollPane_1, null);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		triedWordsTable = new JTable();
+		triedWordsTable.setFont(new Font("Arial", Font.PLAIN, 15));
+		triedWordsTable.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column"
+				"WORD", "Mastered", "Faulted", "Failed"
 			}
 		));
-		scrollPane_1.setViewportView(table);
+		scrollPane_1.setViewportView(triedWordsTable);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setBounds(329, 560, 119, 31);
@@ -112,6 +109,18 @@ public class StatisticsViewController extends JPanel {
 
 	}
 	
+	public void addToTable(Object[] addRow){
+		DefaultTableModel tableModel = (DefaultTableModel) triedWordsTable.getModel();
+		tableModel.insertRow(tableModel.getRowCount(),addRow);
+	}
+	public void clearTable(){
+		DefaultTableModel tableModel = (DefaultTableModel) triedWordsTable.getModel();
+		int rowCount = tableModel.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			tableModel.removeRow(i);
+		}
+	}
+	
 	public void scrollToTop(){
 		statsTextArea.setCaretPosition(0);
 	}
@@ -127,4 +136,5 @@ public class StatisticsViewController extends JPanel {
 	public void setUserName(String name){
 		lblHi.setText("Hi "+name);
 	}
+	
 }

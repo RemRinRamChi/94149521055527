@@ -41,6 +41,11 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	// Hashmaps to store accuracy related values for every level
 	HashMap<String,Integer> totalAsked;
 	HashMap<String,Integer> totalCorrect;
+	
+	// Store mastered, faulted, failed coutns
+	HashMap<String,Integer> totalMastered = new HashMap<String,Integer>();
+	HashMap<String,Integer> totalFaulted = new HashMap<String,Integer>();
+	HashMap<String,Integer> totalFailed = new HashMap<String,Integer>();
 
 	int zeroWords; // counter to check if there are no words
 
@@ -119,6 +124,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		} else { // tried words file not empty
 			// go through all the attempted levels
 			for(String i : mapOfTriedWords.keySet()){
+
 				// get a list of attempted words according to the level
 				ArrayList<String> triedWordsList = mapOfTriedWords.get(i);
 				// ERROR handling: if there is a level but 0 content, just skip it
@@ -150,9 +156,11 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 					publish("     Mastered " + master + " ");
 					publish("     Faulted " + fault + " ");
 					publish("     Failed " + fail + " \n");
+					recordWordStats(wd,master,fault,fail);
 				}
 			}	
 		}
+		
 		return null;
 	}
 
@@ -164,6 +172,10 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	}
 	
 	protected void done(){
+		spellingAidStats.clearTable();
+		for(String s : returnTriedWords()){
+			spellingAidStats.addToTable(getWordStats(s));
+		}
 		spellingAidStats.scrollToTop();
 	}
 
@@ -179,7 +191,35 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	}
 	
 	public ArrayList<String> returnTriedWords() {
-		ArrayList<String> listOfTriedWords = new ArrayList<String>();
+		Collections.sort(listOfTriedWords);
 		return listOfTriedWords;
+	}
+	
+	private void recordWordStats(String word, int master, int fault, int fail){
+		if(totalMastered.get(word)==null){
+			totalMastered.put(word, master);
+		} else {
+			int mastered = totalMastered.get(word)+master;
+			totalMastered.put(word, mastered);
+		}
+
+		if(totalFaulted.get(word)==null){
+			totalFaulted.put(word, fault);
+		} else {
+			int faulted = totalFaulted.get(word)+fault;
+			totalFaulted.put(word, faulted);
+		}
+
+		if(totalFailed.get(word)==null){
+			totalFailed.put(word, fail);
+		} else {
+			int failed = totalFailed.get(word)+fail;
+			totalFailed.put(word, failed);
+		}
+	}
+	
+	private Object[] getWordStats(String word){
+		Object[] wordStats = new Object[]{word,totalMastered.get(word),totalFaulted.get(word),totalFailed.get(word)};
+		return wordStats;
 	}
 }
