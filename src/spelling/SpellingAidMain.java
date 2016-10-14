@@ -148,8 +148,6 @@ public class SpellingAidMain extends JFrame {
 		File spelling_aid_statistics = new File(".spelling_aid_statistics");
 		File spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		File spelling_aid_accuracy = new File(".spelling_aid_accuracy");
-		File spelling_aid_longest_streak = new File(".spelling_aid_longest_streak");
-
 		try{
 			if(! spelling_aid_failed.exists()){
 				spelling_aid_failed.createNewFile();
@@ -162,9 +160,6 @@ public class SpellingAidMain extends JFrame {
 			}
 			if(! spelling_aid_accuracy.exists()){
 				spelling_aid_accuracy.createNewFile();
-			}
-			if(! spelling_aid_longest_streak.exists()){
-				spelling_aid_longest_streak.createNewFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

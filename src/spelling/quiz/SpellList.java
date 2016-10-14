@@ -72,7 +72,6 @@ public class SpellList {
 	File spelling_aid_failed;
 	File spelling_aid_statistics;
 	File spelling_aid_accuracy;
-	File spelling_aid_longest_streak;
 
 	// ArrayLists for storing file contents for easier processing later according to levels
 	HashMap<String, ArrayList<String>> mapOfWords;
@@ -86,6 +85,9 @@ public class SpellList {
 	// Hashmap to store longest streak of each level
 	HashMap<String,Integer> longestLevelStreak = new HashMap<String,Integer>();
 
+	// Hashmap to store how many times a level has been attempted
+	HashMap<String,Integer> totalAttempts = new HashMap<String,Integer>();
+	
 	/**
 	 * Constructor of spellinglist model for current session 
 	 */
@@ -97,7 +99,6 @@ public class SpellList {
 		spelling_aid_failed = new File(".spelling_aid_failed");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
 		spelling_aid_accuracy = new File(".spelling_aid_accuracy");
-		spelling_aid_longest_streak = new File(".spelling_aid_longest_streak");
 
 		// INITIALISING LISTS TO STORE VALUES
 		initialiseListsToStoreValuesFromWordAndStatsList();
@@ -400,12 +401,10 @@ public class SpellList {
 		Object[] failedKeys = mapOfFailedWords.keySet().toArray();
 		Object[] triedKeys = mapOfFailedWords.keySet().toArray();
 		Object[] accuracyKeys = totalAsked.keySet().toArray();
-		Object[] streakKeys = longestLevelStreak.keySet().toArray();
 
 		ClearStatistics.clearFile(spelling_aid_failed);
 		ClearStatistics.clearFile(spelling_aid_tried_words);
 		ClearStatistics.clearFile(spelling_aid_accuracy);
-		ClearStatistics.clearFile(spelling_aid_longest_streak);
 		
 		Arrays.sort(failedKeys);
 		Arrays.sort(triedKeys);
@@ -430,12 +429,14 @@ public class SpellList {
 			Tools.record(spelling_aid_accuracy,dKey);
 			Tools.record(spelling_aid_accuracy, ""+totalAsked.get(dKey));
 			Tools.record(spelling_aid_accuracy, ""+totalCorrect.get(dKey));
-		}
-
-		for(Object key : streakKeys){
-			String dKey = (String)key;
-			Tools.record(spelling_aid_longest_streak,"%"+dKey);
-			Tools.record(spelling_aid_longest_streak,longestLevelStreak.get(dKey)+"");
+			Tools.record(spelling_aid_accuracy,longestLevelStreak.get(dKey)+"");
+			// if level is on first attempt
+			if(totalAttempts.get(dKey)==null){
+				Tools.record(spelling_aid_accuracy,1+"");
+			} else {
+				int tA = totalAttempts.get(dKey) + 1; // increment
+				Tools.record(spelling_aid_accuracy,tA+"");
+			}
 		}
 
 	}
@@ -575,19 +576,11 @@ public class SpellList {
 				String correctz = readAccuracyList.readLine();
 				totalAsked.put(log, Integer.parseInt(asked));
 				totalCorrect.put(log, Integer.parseInt(correctz));
+				longestLevelStreak.put(log,Integer.parseInt(readAccuracyList.readLine()));
+				totalAttempts.put(log, Integer.parseInt(readAccuracyList.readLine()));
 				accuracyLine = readAccuracyList.readLine();
 			}
 			readAccuracyList.close();
-
-			// LONGEST STREAK
-			BufferedReader readStreakList = new BufferedReader(new FileReader(spelling_aid_longest_streak));
-			String streakLine = readStreakList.readLine();
-			while(streakLine != null){
-				String levelNo = streakLine.substring(1);
-				longestLevelStreak.put(levelNo,Integer.parseInt(readStreakList.readLine()));
-				streakLine = readStreakList.readLine();
-			}
-			readStreakList.close();
 
 		} catch (IOException e){
 			e.printStackTrace();

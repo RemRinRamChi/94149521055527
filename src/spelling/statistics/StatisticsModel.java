@@ -23,7 +23,7 @@ import spelling.quiz.SpellList;
  * @authors yyap601 
  *
  */
-public class StatisticsModel extends SwingWorker<Void,String>{
+public class StatisticsModel extends SwingWorker<Void,String[]>{
 
 	// This is the SPELLING AID STATSGUI
 	StatisticsViewController spellingAidStats;
@@ -32,7 +32,6 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	File spelling_aid_tried_words;
 	File spelling_aid_statistics;
 	File spelling_aid_accuracy;
-	File spelling_aid_longest_streak;
 
 	// ArrayLists for storing file contents for easier processing later according to levels
 	HashMap<String, ArrayList<String>> mapOfTriedWords;	
@@ -43,6 +42,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	HashMap<String,Integer> totalAsked;
 	HashMap<String,Integer> totalCorrect;
 	HashMap<String,Integer> longestLevelStreak;
+	HashMap<String,Integer> totalAttempts;
 
 	// Store mastered, faulted, failed counts
 	HashMap<String,Integer> totalMastered = new HashMap<String,Integer>();
@@ -60,25 +60,16 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
 		spelling_aid_accuracy = new File(".spelling_aid_accuracy");
-		spelling_aid_longest_streak = new File(".spelling_aid_longest_streak");
 		mapOfTriedWords = new HashMap<String, ArrayList<String>>();
 		totalAsked = new HashMap<String,Integer>();
 		totalCorrect = new HashMap<String,Integer>();
 		longestLevelStreak = new HashMap<String,Integer>();
+		totalAttempts = new HashMap<String,Integer>();
 		wordStats = new ArrayList<String>();
 		listOfTriedWords = new ArrayList<String>();
 
 		// store variables in data structures
 		try {
-			// LONGEST STREAK
-			BufferedReader readStreakList = new BufferedReader(new FileReader(spelling_aid_longest_streak));
-			String streakLine = readStreakList.readLine();
-			while(streakLine != null){
-				String levelNo = streakLine.substring(1);
-				longestLevelStreak.put(levelNo,Integer.parseInt(readStreakList.readLine()));
-				streakLine = readStreakList.readLine();
-			}
-			readStreakList.close();
 
 			// LEVEL ACCURACY
 			BufferedReader readAccuracyList = new BufferedReader(new FileReader(spelling_aid_accuracy));
@@ -89,6 +80,8 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 				String correctz = readAccuracyList.readLine();
 				totalAsked.put(log, Integer.parseInt(asked));
 				totalCorrect.put(log, Integer.parseInt(correctz));
+				longestLevelStreak.put(log,Integer.parseInt(readAccuracyList.readLine()));
+				totalAttempts.put(log, Integer.parseInt(readAccuracyList.readLine()));
 				accuracyLine = readAccuracyList.readLine();
 			}
 			readAccuracyList.close();
@@ -129,10 +122,9 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 
 	// SWINGWORKER ~~
 	protected Void doInBackground(){
-		// new everytime , in case if
-		spellingAidStats.clearStatsArea();
+		spellingAidStats.clearLevelTable();
 		if(zeroWords == 0){
-			publish("\n There Are NO Attempted Words !!!"); //maybe become POP UP
+			//publish("\n There Are NO Attempted Words !!!"); //maybe become POP UP TODO
 		} else { // tried words file not empty
 			// go through all the attempted levels
 			for(String i : mapOfTriedWords.keySet()){
@@ -142,9 +134,10 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 				if(triedWordsList.size()==0){
 					continue;
 				}
-				// TITLE
-				publish("\n" +i+" Statistics :\n "+ longestLevelStreak.get(i)  +" : "+ triedWordsList.size() +"\t Accuracy : "+getAccuracy(i)+"%"+ "\n\n");
-
+				// LEVEL STATS
+				String [] lvlStats= new String[]{i,""+totalAttempts.get(i),""+longestLevelStreak.get(i),""+getAccuracy(i)};
+				publish(lvlStats);
+				
 				// SORT them
 				Collections.sort(triedWordsList);
 				// Check for statistic of words by getting matches and then display the results
@@ -164,10 +157,6 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 							}
 						}
 					}
-					publish(" "+wd + " :\n");
-					publish("     Mastered " + master + " ");
-					publish("     Faulted " + fault + " ");
-					publish("     Failed " + fail + " \n");
 					recordWordStats(wd,master,fault,fail);
 				}
 			}
@@ -177,19 +166,18 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	}
 
 	// this class displays data by publishing them to the JTextArea
-	protected void process(List<String> statsData) {
-		for (String data : statsData) {
-			spellingAidStats.appendText(data);
+	protected void process(List<String[]> statsData) {
+		for (String[] data : statsData) {
+			spellingAidStats.addToLevelTable(data);
 		}
 	}
 
 	protected void done(){
-		spellingAidStats.clearTable();
+		spellingAidStats.clearWordTable();
 		Collections.sort(listOfTriedWords);
 		for(String s : listOfTriedWords){
-			spellingAidStats.addToTable(getWordStats(s));
+			spellingAidStats.addToWordTable(getWordStats(s));
 		}
-		spellingAidStats.scrollToTop();
 	}
 
 	// calculate the accuracy for the current level

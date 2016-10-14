@@ -28,10 +28,10 @@ import javax.swing.ListSelectionModel;
 public class StatisticsViewController extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JPanel specificQuiz;
-	private JTextArea statsTextArea;
 	private JLabel lblHi;
 	private JTabbedPane lvlAndWordStatsPane;
 	private JTable triedWordsTable;
+	private JTable levelTable;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -52,17 +52,26 @@ public class StatisticsViewController extends JPanel {
 		lvlAndWordStatsPane.setBounds(10, 191, 450, 358);
 		add(lvlAndWordStatsPane);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		lvlAndWordStatsPane.addTab("Level Statistics", null, scrollPane, null);
+		JScrollPane levelScrollPane = new JScrollPane();
+		lvlAndWordStatsPane.addTab("Level Statistics", null, levelScrollPane, null);
 		
-		statsTextArea = new JTextArea();
-		scrollPane.setViewportView(statsTextArea);
-		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
-		statsTextArea.setEditable(false);
+		levelTable = new JTable();
+		levelTable.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"LEVEL", "Attempts", "Longest Streak", "Accuracy"
+			}
+		));
+		levelScrollPane.setViewportView(levelTable);
+		levelTable.setShowHorizontalLines(false);
+		levelTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		levelTable.setRowHeight(22);
+		levelTable.setFont(new Font("Arial", Font.PLAIN, 15));
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, scrollPane_1, null);
+		JScrollPane wordScrollPane = new JScrollPane();
+		wordScrollPane.setFont(new Font("Arial", Font.PLAIN, 12));
+		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, wordScrollPane, null);
 		
 		triedWordsTable = new JTable();
 		triedWordsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -77,7 +86,7 @@ public class StatisticsViewController extends JPanel {
 			}
 		));
 		
-		scrollPane_1.setViewportView(triedWordsTable);
+		wordScrollPane.setViewportView(triedWordsTable);
 		
 		JButton btnBack = new JButton("BACK");
 		btnBack.setBounds(329, 560, 119, 31);
@@ -114,32 +123,31 @@ public class StatisticsViewController extends JPanel {
 
 	}
 	
-	public void addToTable(Object[] addRow){
+	public void addToWordTable(Object[] addRow){
 		DefaultTableModel tableModel = (DefaultTableModel) triedWordsTable.getModel();
 		tableModel.insertRow(tableModel.getRowCount(),addRow);
 	}
-	public void clearTable(){
+	public void clearWordTable(){
 		DefaultTableModel tableModel = (DefaultTableModel) triedWordsTable.getModel();
 		int rowCount = tableModel.getRowCount();
 		for (int i = rowCount - 1; i >= 0; i--) {
 			tableModel.removeRow(i);
 		}
 	}
+	public void addToLevelTable(Object[] addRow){
+		DefaultTableModel tableModel = (DefaultTableModel) levelTable.getModel();
+		tableModel.insertRow(tableModel.getRowCount(),addRow);
+	}
+	public void clearLevelTable(){
+		DefaultTableModel tableModel = (DefaultTableModel) levelTable.getModel();
+		int rowCount = tableModel.getRowCount();
+		for (int i = rowCount - 1; i >= 0; i--) {
+			tableModel.removeRow(i);
+		}
+	}
 	
-	public void scrollToTop(){
-		statsTextArea.setCaretPosition(0);
-	}
-
-	public void appendText(String txt){
-		statsTextArea.append(txt);
-	}
-	
-	public void clearStatsArea(){
-		statsTextArea.setText("");
-	}
 	
 	public void setUserName(String name){
 		lblHi.setText("Hi "+name);
 	}
-	
 }
