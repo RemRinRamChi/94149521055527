@@ -334,7 +334,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			mainQuizDone.changeResultPanel("No Results");
 		} else {
 			mainQuizDone.changeResultPanel("Results");
-			if(corrects >= 9){ // have to change
+			if(corrects >= spellList.getNoOfQuestions()-1){ // have to change
 				if(mode == QuizMode.New){
 					mainQuizDone.changeUserInteraction("Rewards");
 				} else if(mode == QuizMode.Review){

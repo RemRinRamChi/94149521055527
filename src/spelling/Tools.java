@@ -40,7 +40,7 @@ public class Tools {
 			process = builder.start();
 			process.waitFor();
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace(); //Commented out for testing on Windows
 		}
 	}
 	

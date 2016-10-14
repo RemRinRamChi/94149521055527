@@ -32,6 +32,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	File spelling_aid_tried_words;
 	File spelling_aid_statistics;
 	File spelling_aid_accuracy;
+	File spelling_aid_longest_streak;
 
 	// ArrayLists for storing file contents for easier processing later according to levels
 	HashMap<String, ArrayList<String>> mapOfTriedWords;	
@@ -41,7 +42,8 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	// Hashmaps to store accuracy related values for every level
 	HashMap<String,Integer> totalAsked;
 	HashMap<String,Integer> totalCorrect;
-	
+	HashMap<String,Integer> longestLevelStreak;
+
 	// Store mastered, faulted, failed counts
 	HashMap<String,Integer> totalMastered = new HashMap<String,Integer>();
 	HashMap<String,Integer> totalFaulted = new HashMap<String,Integer>();
@@ -58,14 +60,26 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
 		spelling_aid_accuracy = new File(".spelling_aid_accuracy");
+		spelling_aid_longest_streak = new File(".spelling_aid_longest_streak");
 		mapOfTriedWords = new HashMap<String, ArrayList<String>>();
 		totalAsked = new HashMap<String,Integer>();
 		totalCorrect = new HashMap<String,Integer>();
+		longestLevelStreak = new HashMap<String,Integer>();
 		wordStats = new ArrayList<String>();
 		listOfTriedWords = new ArrayList<String>();
-		
+
 		// store variables in data structures
 		try {
+			// LONGEST STREAK
+			BufferedReader readStreakList = new BufferedReader(new FileReader(spelling_aid_longest_streak));
+			String streakLine = readStreakList.readLine();
+			while(streakLine != null){
+				String levelNo = streakLine.substring(1);
+				longestLevelStreak.put(levelNo,Integer.parseInt(readStreakList.readLine()));
+				streakLine = readStreakList.readLine();
+			}
+			readStreakList.close();
+
 			// LEVEL ACCURACY
 			BufferedReader readAccuracyList = new BufferedReader(new FileReader(spelling_aid_accuracy));
 			String accuracyLine = readAccuracyList.readLine();
@@ -118,7 +132,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		// new everytime , in case if
 		spellingAidStats.clearStatsArea();
 		if(zeroWords == 0){
-			publish("\n There Are NO Attempted Words !!!");
+			publish("\n There Are NO Attempted Words !!!"); //maybe become POP UP
 		} else { // tried words file not empty
 			// go through all the attempted levels
 			for(String i : mapOfTriedWords.keySet()){
@@ -129,8 +143,8 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 					continue;
 				}
 				// TITLE
-				publish("\n" +i+" Statistics :\n Attempted Words in Level : "+ triedWordsList.size() +"\t Accuracy : "+getAccuracy(i)+"%"+ "\n\n");
-				
+				publish("\n" +i+" Statistics :\n "+ longestLevelStreak.get(i)  +" : "+ triedWordsList.size() +"\t Accuracy : "+getAccuracy(i)+"%"+ "\n\n");
+
 				// SORT them
 				Collections.sort(triedWordsList);
 				// Check for statistic of words by getting matches and then display the results
@@ -158,7 +172,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 				}
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -168,7 +182,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 			spellingAidStats.appendText(data);
 		}
 	}
-	
+
 	protected void done(){
 		spellingAidStats.clearTable();
 		Collections.sort(listOfTriedWords);
@@ -188,7 +202,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		double accuracy = (noOfQuestionsAnsweredCorrectly/totalQuestionsAsked)*100.0;
 		return Math.round(accuracy*10.0)/10.0;
 	}
-	
+
 	private void recordWordStats(String word, int master, int fault, int fail){
 		if(totalMastered.get(word)==null){
 			totalMastered.put(word, master);
@@ -211,7 +225,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 			totalFailed.put(word, failed);
 		}
 	}
-	
+
 	private Object[] getWordStats(String word){
 		Object[] wordStats = new Object[]{word,totalMastered.get(word),totalFaulted.get(word),totalFailed.get(word)};
 		return wordStats;
