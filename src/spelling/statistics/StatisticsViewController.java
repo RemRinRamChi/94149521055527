@@ -3,11 +3,15 @@ package spelling.statistics;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JTextArea;
 
 import spelling.SpellingAidMain;
+import spelling.quiz.SpellList;
+import spelling.settings.ClearStatistics;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -118,6 +122,19 @@ public class StatisticsViewController extends JPanel {
 		lblHereAreSomeStats.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereAreSomeStats.setBounds(193, 95, 272, 53);
 		friendlyPanel.add(lblHereAreSomeStats);
+		
+		JButton btnClearStatistics = new JButton("Clear Statistics");
+		btnClearStatistics.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//CLEAR STATS info dialog
+				mainFrame.changeCardPanel("Main");
+				JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+				mainFrame.updateSpellingList(new SpellList());
+			}
+		});
+		btnClearStatistics.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnClearStatistics.setBounds(20, 560, 175, 31);
+		add(btnClearStatistics);
 
 
 
