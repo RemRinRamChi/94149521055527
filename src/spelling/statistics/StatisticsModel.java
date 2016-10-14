@@ -35,14 +35,14 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 
 	// ArrayLists for storing file contents for easier processing later according to levels
 	HashMap<String, ArrayList<String>> mapOfTriedWords;	
-	ArrayList<String> wordStats = new ArrayList<String>();
-	ArrayList<String> listOfTriedWords = new ArrayList<String>();
+	ArrayList<String> wordStats;
+	ArrayList<String> listOfTriedWords;
 
 	// Hashmaps to store accuracy related values for every level
 	HashMap<String,Integer> totalAsked;
 	HashMap<String,Integer> totalCorrect;
 	
-	// Store mastered, faulted, failed coutns
+	// Store mastered, faulted, failed counts
 	HashMap<String,Integer> totalMastered = new HashMap<String,Integer>();
 	HashMap<String,Integer> totalFaulted = new HashMap<String,Integer>();
 	HashMap<String,Integer> totalFailed = new HashMap<String,Integer>();
@@ -61,22 +61,20 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		mapOfTriedWords = new HashMap<String, ArrayList<String>>();
 		totalAsked = new HashMap<String,Integer>();
 		totalCorrect = new HashMap<String,Integer>();
-
+		wordStats = new ArrayList<String>();
+		listOfTriedWords = new ArrayList<String>();
+		
 		// store variables in data structures
 		try {
 			// LEVEL ACCURACY
 			BufferedReader readAccuracyList = new BufferedReader(new FileReader(spelling_aid_accuracy));
 			String accuracyLine = readAccuracyList.readLine();
 			while(accuracyLine != null){
-				int i = 0;
-				String[] accuracyLog = accuracyLine.split(" ");
-				for(String s : accuracyLog){
-					if(!SpellList.checkIfNumber(s)){
-						i++;
-					}
-				}
-				totalAsked.put(accuracyLog[0], Integer.parseInt(accuracyLog[i]));
-				totalCorrect.put(accuracyLog[0], Integer.parseInt(accuracyLog[i+1]));
+				String log = accuracyLine;
+				String asked = readAccuracyList.readLine();
+				String correctz = readAccuracyList.readLine();
+				totalAsked.put(log, Integer.parseInt(asked));
+				totalCorrect.put(log, Integer.parseInt(correctz));
 				accuracyLine = readAccuracyList.readLine();
 			}
 			readAccuracyList.close();
@@ -124,7 +122,6 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		} else { // tried words file not empty
 			// go through all the attempted levels
 			for(String i : mapOfTriedWords.keySet()){
-
 				// get a list of attempted words according to the level
 				ArrayList<String> triedWordsList = mapOfTriedWords.get(i);
 				// ERROR handling: if there is a level but 0 content, just skip it
@@ -133,6 +130,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 				}
 				// TITLE
 				publish("\n" +i+" Statistics :\n Attempted Words in Level : "+ triedWordsList.size() +"\t Accuracy : "+getAccuracy(i)+"%"+ "\n\n");
+				
 				// SORT them
 				Collections.sort(triedWordsList);
 				// Check for statistic of words by getting matches and then display the results
@@ -158,7 +156,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 					publish("     Failed " + fail + " \n");
 					recordWordStats(wd,master,fault,fail);
 				}
-			}	
+			}
 		}
 		
 		return null;
@@ -167,13 +165,14 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	// this class displays data by publishing them to the JTextArea
 	protected void process(List<String> statsData) {
 		for (String data : statsData) {
-			spellingAidStats.appendText(data);;
+			spellingAidStats.appendText(data);
 		}
 	}
 	
 	protected void done(){
 		spellingAidStats.clearTable();
-		for(String s : returnTriedWords()){
+		Collections.sort(listOfTriedWords);
+		for(String s : listOfTriedWords){
 			spellingAidStats.addToTable(getWordStats(s));
 		}
 		spellingAidStats.scrollToTop();
@@ -188,11 +187,6 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		}
 		double accuracy = (noOfQuestionsAnsweredCorrectly/totalQuestionsAsked)*100.0;
 		return Math.round(accuracy*10.0)/10.0;
-	}
-	
-	public ArrayList<String> returnTriedWords() {
-		Collections.sort(listOfTriedWords);
-		return listOfTriedWords;
 	}
 	
 	private void recordWordStats(String word, int master, int fault, int fail){

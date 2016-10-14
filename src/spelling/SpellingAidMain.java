@@ -14,6 +14,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
+import spelling.quiz.SpellList;
 import spelling.quiz.Quiz;
 import spelling.settings.OptionsPanel;
 import spelling.statistics.StatisticsViewController;
@@ -60,30 +61,30 @@ public class SpellingAidMain extends JFrame {
 			optionsPanel.setUserName(getUserName());
 			setSize(470,380);
 		}
-		
+
 		// DOESN'T work on Linux
 		// make sure to recentre main frame
 		//this.setLocationRelativeTo(null);
-		
+
 	}
 
 	/**
 	 * Launch VOXSPELL.
 	 */
 	public static void main(String[] args) {
-	    try 
-	    { 
-	    	// change look and feel on VoxSpell to windows L+F -- for Linux
-	    	UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
-	    } 
-	    catch(Exception e){ 
-	        try {
-		    	// change look and feel on VoxSpell to windows L+F -- for Windows
+		try 
+		{ 
+			// change look and feel on VoxSpell to windows L+F -- for Linux
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
+		} 
+		catch(Exception e){ 
+			try {
+				// change look and feel on VoxSpell to windows L+F -- for Windows
 				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
-	    }
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -100,7 +101,7 @@ public class SpellingAidMain extends JFrame {
 	 * Create the frame.
 	 */
 	public SpellingAidMain() {
-		
+
 		setResizable(false);
 		setTitle("Welcome To VOXSPELL");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,9 +109,12 @@ public class SpellingAidMain extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
+
 		// set main frame's content pane to be of card layout to take in panels to switch between them easily 
 		contentPane.setLayout(new CardLayout(0, 0));
+
+		// check for the presence of the hidden statistic files that are required
+		makeSureAllNecessaryFilesArePresent();
 		
 		// initialize panels corresponding to different states of VoxSpell
 		welcomeScreen = new WelcomeScreen(this);
@@ -119,7 +123,7 @@ public class SpellingAidMain extends JFrame {
 		quizQuestion = new Quiz(this,doneQuizQuestion);
 		voxSpellStats= new StatisticsViewController(this);
 		optionsPanel = new OptionsPanel(this);
-		
+
 		// add panels corresponding to different states of VoxSpell into content pane
 		contentPane.add(welcomeScreen,"Welcome");
 		contentPane.add(mainOptions, "Main");
@@ -129,14 +133,13 @@ public class SpellingAidMain extends JFrame {
 		contentPane.add(optionsPanel, "Settings");
 
 
-		// check for the presence of the hidden statistic files that are required
 		// CALLED AFTER ADDING PANELS TO DECIDE THE PANEL TO DISPLAY
-		makeSureAllNecessaryFilesArePresent();
-		
+		makeSureNameFileExists();
+
 		// set location here
 		setLocationRelativeTo(null);
 	}
-	
+
 	/**
 	 *  checks that all the files that are storing the statistics are present and create any files that do not exist
 	 */
@@ -145,7 +148,7 @@ public class SpellingAidMain extends JFrame {
 		File spelling_aid_statistics = new File(".spelling_aid_statistics");
 		File spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		File spelling_aid_accuracy = new File(".spelling_aid_accuracy");
-		File spelling_aid_user = new File(".spelling_aid_user");
+		File spelling_aid_longest_streak = new File(".spelling_aid_longest_streak");
 
 		try{
 			if(! spelling_aid_failed.exists()){
@@ -160,6 +163,20 @@ public class SpellingAidMain extends JFrame {
 			if(! spelling_aid_accuracy.exists()){
 				spelling_aid_accuracy.createNewFile();
 			}
+			if(! spelling_aid_longest_streak.exists()){
+				spelling_aid_longest_streak.createNewFile();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// create special video with a background swingworker thread when the app starts
+		//VideoCreator createSpecialVideo = new VideoCreator();
+		//createSpecialVideo.execute();
+	}
+
+	private void makeSureNameFileExists(){
+		File spelling_aid_user = new File(".spelling_aid_user");
+		try{
 			if(! spelling_aid_user.exists()){
 				spelling_aid_user.createNewFile();
 				// first panel to be displayed is the welcome screen if there isn't a previous user name
@@ -171,9 +188,6 @@ public class SpellingAidMain extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// create special video with a background swingworker thread when the app starts
-		//VideoCreator createSpecialVideo = new VideoCreator();
-		//createSpecialVideo.execute();
 	}
 
 	// getters
@@ -210,5 +224,11 @@ public class SpellingAidMain extends JFrame {
 	public void setVoice(String voice) {
 		quizQuestion.setFestivalVoice(voice);
 	}
-
+	
+	/**
+	 * Update spelling list
+	 */
+	public void updateSpellingList(SpellList sL){
+		quizQuestion.updateSpellList(sL);
+	}
 }

@@ -103,6 +103,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 */
 	public void updateSpellList(SpellList sList){
 		spellList=sList;
+		requestInputFocus();
 	}
 
 	/**

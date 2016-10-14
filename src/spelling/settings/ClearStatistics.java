@@ -29,7 +29,8 @@ public class ClearStatistics {
 		clearFile(new File(".spelling_aid_tried_words"));
 		clearFile(new File(".spelling_aid_failed"));
 		clearFile(new File(".spelling_aid_statistics"));		
-		clearFile(new File(".spelling_aid_accuracy"));
+		clearFile(new File(".spelling_aid_accuracy"));		
+		clearFile(new File(".spelling_aid_longest_streak"));
 	}
 
 	/**

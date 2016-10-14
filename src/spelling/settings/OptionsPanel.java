@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import spelling.SpellingAidMain;
 import spelling.VoiceGenerator.Voice;
+import spelling.quiz.SpellList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -71,6 +72,7 @@ public class OptionsPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				//CLEAR STATS info dialog
 				JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+				mainFrame.updateSpellingList(new SpellList());
 			}
 		});
 		btnClear.setFont(new Font("Arial", Font.PLAIN, 14));

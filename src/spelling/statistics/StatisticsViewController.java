@@ -19,6 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.ListSelectionModel;
 /**
  * This is the GUI for the spelling aid statistics
  * @author yyap601
@@ -64,6 +65,9 @@ public class StatisticsViewController extends JPanel {
 		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, scrollPane_1, null);
 		
 		triedWordsTable = new JTable();
+		triedWordsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		triedWordsTable.setRowHeight(22);
+		triedWordsTable.setShowHorizontalLines(false);
 		triedWordsTable.setFont(new Font("Arial", Font.PLAIN, 15));
 		triedWordsTable.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -72,6 +76,7 @@ public class StatisticsViewController extends JPanel {
 				"WORD", "Mastered", "Faulted", "Failed"
 			}
 		));
+		
 		scrollPane_1.setViewportView(triedWordsTable);
 		
 		JButton btnBack = new JButton("BACK");
