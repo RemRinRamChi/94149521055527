@@ -55,7 +55,7 @@ public class SpellingAidMain extends JFrame {
 			setSize(610,430);
 		} else if (mode.equals("Stats")){
 			voxSpellStats.setUserName(getUserName());
-			setSize(490,640);
+			setSize(490,650);
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
 			setSize(470,380);

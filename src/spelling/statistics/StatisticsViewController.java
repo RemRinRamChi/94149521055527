@@ -16,6 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 import javax.swing.JScrollPane;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 /**
  * This is the GUI for the spelling aid statistics
  * @author yyap601
@@ -24,9 +27,10 @@ import javax.swing.DefaultComboBoxModel;
 public class StatisticsViewController extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JPanel specificQuiz;
-	private JPanel statsPanel;
 	private JTextArea statsTextArea;
 	private JLabel lblHi;
+	private JTabbedPane lvlAndWordStatsPane;
+	private JTable table;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -34,17 +38,6 @@ public class StatisticsViewController extends JPanel {
 	public StatisticsViewController(SpellingAidMain contentFrame){
 		this();
 		mainFrame = contentFrame;
-		specificQuiz = new SpecificQuizStats(mainFrame,this);
-		statsPanel.add(specificQuiz, "Specific");
-	}
-	
-	/**
-	 * Change panel displayed within stats frame
-	 * @param mode The state VoxSpellStats is currently in.
-	 */
-	public void changeCardPanel(String mode){
-		// change panel to display according to mode 
-		((CardLayout) statsPanel.getLayout()).show(statsPanel, mode);
 	}
 	
 	/**
@@ -52,6 +45,47 @@ public class StatisticsViewController extends JPanel {
 	 */
 	public StatisticsViewController() {
 		setLayout(null);
+		
+		lvlAndWordStatsPane = new JTabbedPane(JTabbedPane.TOP);
+		lvlAndWordStatsPane.setFont(new Font("Arial", Font.PLAIN, 14));
+		lvlAndWordStatsPane.setBounds(10, 191, 450, 358);
+		add(lvlAndWordStatsPane);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		lvlAndWordStatsPane.addTab("Level Statistics", null, scrollPane, null);
+		
+		statsTextArea = new JTextArea();
+		scrollPane.setViewportView(statsTextArea);
+		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
+		statsTextArea.setEditable(false);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, scrollPane_1, null);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"New column", "New column", "New column", "New column"
+			}
+		));
+		scrollPane_1.setViewportView(table);
+		
+		JButton btnBack = new JButton("BACK");
+		btnBack.setBounds(329, 560, 119, 31);
+		add(btnBack);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mainFrame.changeCardPanel("Main");
+			}
+		});
+		btnBack.setFont(new Font("Arial", Font.PLAIN, 13));
 		
 		JPanel friendlyPanel = new JPanel();
 		friendlyPanel.setLayout(null);
@@ -73,61 +107,6 @@ public class StatisticsViewController extends JPanel {
 		lblHereAreSomeStats.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereAreSomeStats.setBounds(193, 95, 272, 53);
 		friendlyPanel.add(lblHereAreSomeStats);
-		
-		statsPanel = new JPanel();
-		statsPanel.setBounds(10, 191, 450, 392);
-		add(statsPanel);
-		statsPanel.setLayout(new CardLayout(0, 0));
-		
-		JPanel overallStatsPanel = new JPanel();
-		statsPanel.add(overallStatsPanel, "Overall");
-		overallStatsPanel.setLayout(null);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 450, 300);
-		overallStatsPanel.add(scrollPane);
-		
-		statsTextArea = new JTextArea();
-		scrollPane.setViewportView(statsTextArea);
-		statsTextArea.setFont(new Font("Arial", Font.PLAIN, 14));
-		statsTextArea.setEditable(false);
-		
-		JPanel implementationComingSoon = new JPanel();
-		implementationComingSoon.setVisible(false);
-		implementationComingSoon.setBounds(10, 311, 227, 81);
-		overallStatsPanel.add(implementationComingSoon);
-		implementationComingSoon.setLayout(null);
-		
-		JLabel lblMoreInfo = new JLabel("More on a specific quiz:");
-		lblMoreInfo.setBounds(0, 0, 176, 22);
-		implementationComingSoon.add(lblMoreInfo);
-		lblMoreInfo.setFont(new Font("Arial", Font.PLAIN, 15));
-		
-		JComboBox quizComboBox = new JComboBox();
-		quizComboBox.setBounds(1, 25, 226, 22);
-		implementationComingSoon.add(quizComboBox);
-		quizComboBox.setModel(new DefaultComboBoxModel(new String[] {"pls click this 1st", "", "This combobox ", "contains all the ", "quiz levels tried ", "by the user, ", "when u click ", "select quiz, it ", "displays things ", "that are similar ", "to when u click ", "\"Select Quiz\" now", ",functionality ", "coming soon", "", "thanks"}));
-		quizComboBox.setFont(new Font("Arial", Font.PLAIN, 11));
-		
-		JButton btnSelectQuiz = new JButton("Select Quiz");
-		btnSelectQuiz.setBounds(2, 58, 89, 23);
-		implementationComingSoon.add(btnSelectQuiz);
-		btnSelectQuiz.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnSelectQuiz.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				changeCardPanel("Specific");
-			}
-		});
-		
-		JButton btnBack = new JButton("BACK");
-		btnBack.setBounds(349, 325, 89, 67);
-		overallStatsPanel.add(btnBack);
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mainFrame.changeCardPanel("Main");
-			}
-		});
-		btnBack.setFont(new Font("Arial", Font.PLAIN, 13));
 
 
 

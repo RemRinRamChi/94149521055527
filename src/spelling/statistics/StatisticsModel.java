@@ -35,7 +35,8 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 
 	// ArrayLists for storing file contents for easier processing later according to levels
 	HashMap<String, ArrayList<String>> mapOfTriedWords;	
-	ArrayList<String> wordStats;
+	ArrayList<String> wordStats = new ArrayList<String>();
+	ArrayList<String> listOfTriedWords = new ArrayList<String>();
 
 	// Hashmaps to store accuracy related values for every level
 	HashMap<String,Integer> totalAsked;
@@ -52,7 +53,6 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
 		spelling_aid_accuracy = new File(".spelling_aid_accuracy");
-		wordStats = new ArrayList<String>();
 		mapOfTriedWords = new HashMap<String, ArrayList<String>>();
 		totalAsked = new HashMap<String,Integer>();
 		totalCorrect = new HashMap<String,Integer>();
@@ -88,6 +88,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 					triedWordsInALevel = new ArrayList<String>();
 					mapOfTriedWords.put(levelNo,triedWordsInALevel);
 				} else {
+					listOfTriedWords.add(triedWord);
 					triedWordsInALevel.add(triedWord);
 					zeroWords++; // if it is greater than 0 = there are statistics available for viewing
 				}
@@ -175,5 +176,10 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		}
 		double accuracy = (noOfQuestionsAnsweredCorrectly/totalQuestionsAsked)*100.0;
 		return Math.round(accuracy*10.0)/10.0;
+	}
+	
+	public ArrayList<String> returnTriedWords() {
+		ArrayList<String> listOfTriedWords = new ArrayList<String>();
+		return listOfTriedWords;
 	}
 }
