@@ -24,12 +24,12 @@ import spelling.settings.ClearStatistics;
  *
  */
 public class SpellList {
-	
+
 	// Only 2 types of quiz modes
 	public enum QuizMode{New, Review,NoQuestions};
 	public enum QuizState{Asking, Answering, Answered };
 
-	
+
 	// initialising variables to use during quiz TO KEEP TRACK OF QUESTIONS AND ATTEMPT COUNTS
 
 	// There are two spelling types: new and review
@@ -82,7 +82,7 @@ public class SpellList {
 
 	// Hashmap to store special key related to the extra spell list
 	HashMap<String,Integer> userLevelKeys;
-	
+
 	/**
 	 * Constructor of spellinglist model for current session 
 	 */
@@ -123,7 +123,7 @@ public class SpellList {
 
 	// Creates a list of words to test according to level and mode
 	public void createLevelList(String level, QuizMode spellingType, Quiz spellAidApp){
-		
+
 		// For every level these following variables start as follows
 		spellingAidApp = spellAidApp;
 		questionNo = 0;
@@ -166,11 +166,12 @@ public class SpellList {
 		HashMap<String,Integer> uniqueWordsToTest = new HashMap<String,Integer>();
 
 		// if the mode is review, the list size should be the size of the list if the size is less than 10
-		if(spellingType==QuizMode.Review){
-			if(listOfWordsToChooseFrom.size()<10){
-				questionListSize = listOfWordsToChooseFrom.size();
+		//if(spellingType==QuizMode.Review){ TODO
 
-			}
+		// the list size should be the size of the list if the size is less than 10
+		if(listOfWordsToChooseFrom.size()<10){
+			questionListSize = listOfWordsToChooseFrom.size();
+
 		}
 
 		// randomisation process
@@ -269,6 +270,8 @@ public class SpellList {
 
 			// starts at 0
 			wordToSpell = currentQuizList.get(questionNo);
+			//CHEATING//
+			System.out.println(wordToSpell);
 			// then increment the question no to represent the real question number
 			questionNo++;
 
@@ -298,15 +301,15 @@ public class SpellList {
 		} 
 
 		// if it is valid, start the checking 
-		
+
 		// set the attempted word to show user
 		if(!attempt){
 			spellingAidApp.setFirstAttempt(": "+userAnswer);
 		} else {
 			spellingAidApp.setSecondAttempt(": "+userAnswer);
 		}
-		
-		
+
+
 		// turn to lower case for BOTH and then compare
 		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
 			spellingAidApp.setResultIndicator("Correct !");
@@ -358,7 +361,7 @@ public class SpellList {
 				spellingAidApp.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			}
 			attempt = true; // question has been attempted
-			
+
 			resetCurrentStreak();
 		}
 
@@ -373,7 +376,7 @@ public class SpellList {
 			}
 			updateCorrectQuestionsCountLabel();
 		}
-		
+
 	}
 
 	/// This method records everything related to the current level to the file
@@ -465,21 +468,25 @@ public class SpellList {
 					wordsInALevel = new ArrayList<String>();
 					mapOfWords.put(levelNo,wordsInALevel);
 				} else {
-					wordsInALevel.add(word);
+					// prevent duplicates in a list
+					if(!wordsInALevel.contains(word)){
+						wordsInALevel.add(word);
+					}
 				}
 				word = readWordList.readLine();
 			}
 			readWordList.close();
-			
+
 			// USER's WORDLIST
 			BufferedReader readUserList = new BufferedReader(new FileReader(usersList));
 			String userWord = readUserList.readLine();
 			// array to store words in a level
 			wordsInALevel = new ArrayList<String>();
+			String levelName = "";
 			while(userWord != null){
 				// % = level and so do appropriate things
 				if(userWord.charAt(0) == '%'){
-					String levelName = userWord.substring(1);
+					levelName = userWord.substring(1);
 					if(mapOfWords.get(levelName)==null){
 						wordsInALevel = new ArrayList<String>();
 						mapOfWords.put(levelName,wordsInALevel);
@@ -487,8 +494,10 @@ public class SpellList {
 						wordsInALevel = mapOfWords.get(levelName);
 					}
 				} else {
-					wordsInALevel.add(userWord);
-
+					// prevent duplicates in a list
+					if(!wordsInALevel.contains(userWord)){
+						wordsInALevel.add(userWord);
+					}
 				}
 				userWord = readUserList.readLine();
 			}
@@ -593,13 +602,13 @@ public class SpellList {
 	 */
 	public static boolean checkIfNumber(String s){
 		try  
-		  {  
-		    double d = Double.parseDouble(s);  
-		  }  
-		  catch(NumberFormatException e)  
-		  {  
-		    return false;  
-		  }  
-		  return true; 
+		{  
+			double d = Double.parseDouble(s);  
+		}  
+		catch(NumberFormatException e)  
+		{  
+			return false;  
+		}  
+		return true; 
 	}
 }

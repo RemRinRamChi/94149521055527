@@ -73,7 +73,11 @@ public class QuizChooser extends JDialog implements ActionListener{
 
 		// create all components and lay them out properly
 		createAndLayoutComponents();
-
+		
+		// populate the combo box
+		DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.getLevelValues(new File("USER-spelling-lists.txt")));
+		ownListComboBox.setModel(combo);
+		
 		// centre dialog
 		setLocationRelativeTo(null);
 	}

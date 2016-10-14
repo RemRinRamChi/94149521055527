@@ -195,7 +195,6 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		quizAccuracy.setText(": "+ spellList.getLvlAccuracy()+"%");
 		questionAsker = spellList.getQuestionAsker();
 		questionAsker.execute();
-
 	}
 
 	/**
