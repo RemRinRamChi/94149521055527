@@ -11,6 +11,8 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
+import spelling.quiz.SpellList;
+
 
 /**
  * 
@@ -32,12 +34,12 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	File spelling_aid_accuracy;
 
 	// ArrayLists for storing file contents for easier processing later according to levels
-	HashMap<Integer, ArrayList<String>> mapOfTriedWords;	
+	HashMap<String, ArrayList<String>> mapOfTriedWords;	
 	ArrayList<String> wordStats;
 
 	// Hashmaps to store accuracy related values for every level
-	HashMap<Integer,Integer> totalAsked;
-	HashMap<Integer,Integer> totalCorrect;
+	HashMap<String,Integer> totalAsked;
+	HashMap<String,Integer> totalCorrect;
 
 	int zeroWords; // counter to check if there are no words
 
@@ -51,9 +53,9 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
 		spelling_aid_accuracy = new File(".spelling_aid_accuracy");
 		wordStats = new ArrayList<String>();
-		mapOfTriedWords = new HashMap<Integer, ArrayList<String>>();
-		totalAsked = new HashMap<Integer,Integer>();
-		totalCorrect = new HashMap<Integer,Integer>();
+		mapOfTriedWords = new HashMap<String, ArrayList<String>>();
+		totalAsked = new HashMap<String,Integer>();
+		totalCorrect = new HashMap<String,Integer>();
 
 		// store variables in data structures
 		try {
@@ -61,9 +63,15 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 			BufferedReader readAccuracyList = new BufferedReader(new FileReader(spelling_aid_accuracy));
 			String accuracyLine = readAccuracyList.readLine();
 			while(accuracyLine != null){
+				int i = 0;
 				String[] accuracyLog = accuracyLine.split(" ");
-				totalAsked.put(Integer.parseInt(accuracyLog[0]), Integer.parseInt(accuracyLog[1]));
-				totalCorrect.put(Integer.parseInt(accuracyLog[0]), Integer.parseInt(accuracyLog[2]));
+				for(String s : accuracyLog){
+					if(!SpellList.checkIfNumber(s)){
+						i++;
+					}
+				}
+				totalAsked.put(accuracyLog[0], Integer.parseInt(accuracyLog[i]));
+				totalCorrect.put(accuracyLog[0], Integer.parseInt(accuracyLog[i+1]));
 				accuracyLine = readAccuracyList.readLine();
 			}
 			readAccuracyList.close();
@@ -73,15 +81,12 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 			String triedWord = readTriedList.readLine();
 			// array to store words in a level
 			ArrayList<String> triedWordsInALevel = new ArrayList<String>();
-			// level at which the word storage is happening
-			int triedLevel = 1;
 			while(triedWord != null){
 				// % = level and so do appropriate things
 				if(triedWord.charAt(0) == '%'){
-					String[] levelNo = triedWord.split(" ");
-					triedLevel = Integer.parseInt(levelNo[1]);
+					String levelNo = triedWord.substring(1);
 					triedWordsInALevel = new ArrayList<String>();
-					mapOfTriedWords.put(triedLevel,triedWordsInALevel);
+					mapOfTriedWords.put(levelNo,triedWordsInALevel);
 				} else {
 					triedWordsInALevel.add(triedWord);
 					zeroWords++; // if it is greater than 0 = there are statistics available for viewing
@@ -112,7 +117,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 			publish("\n There Are NO Attempted Words !!!");
 		} else { // tried words file not empty
 			// go through all the attempted levels
-			for(int i : mapOfTriedWords.keySet()){
+			for(String i : mapOfTriedWords.keySet()){
 				// get a list of attempted words according to the level
 				ArrayList<String> triedWordsList = mapOfTriedWords.get(i);
 				// ERROR handling: if there is a level but 0 content, just skip it
@@ -120,7 +125,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 					continue;
 				}
 				// TITLE
-				publish("\n Level "+i+" Statistics :\n Attempted Words in Level : "+ triedWordsList.size() +"\t Accuracy : "+getAccuracy(i)+"%"+ "\n\n");
+				publish("\n" +i+" Statistics :\n Attempted Words in Level : "+ triedWordsList.size() +"\t Accuracy : "+getAccuracy(i)+"%"+ "\n\n");
 				// SORT them
 				Collections.sort(triedWordsList);
 				// Check for statistic of words by getting matches and then display the results
@@ -162,7 +167,7 @@ public class StatisticsModel extends SwingWorker<Void,String>{
 	}
 
 	// calculate the accuracy for the current level
-	public double getAccuracy(int level){
+	public double getAccuracy(String level){
 		double noOfQuestionsAnsweredCorrectly = totalCorrect.get(level);
 		double totalQuestionsAsked = totalAsked.get(level);
 		if(totalQuestionsAsked==0.0){

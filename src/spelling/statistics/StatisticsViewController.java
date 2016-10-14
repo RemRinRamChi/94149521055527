@@ -134,7 +134,6 @@ public class StatisticsViewController extends JPanel {
 	}
 	
 	public void scrollToTop(){
-		statsTextArea.setCaretPosition(1);
 		statsTextArea.setCaretPosition(0);
 	}
 

@@ -49,15 +49,17 @@ public class Tools {
 	 * @param from file to get contents from
 	 * @param to file to have its contents be replaced
 	 */
-	public static ArrayList<String> replaceFromToAndGetTitles(File from, File to){
+	public static String[] addFromToAndGetTitles(File from, File to){
 		ArrayList<String> returns = new ArrayList<String>();
-		ClearStatistics.clearFile(to);
+		ClearStatistics.clearFile(to);//
 		try {
 			BufferedReader readFromList = new BufferedReader(new FileReader(from));
 			String word = readFromList.readLine();
 			while(word != null){
 				if(word.charAt(0)=='%'){
-					returns.add(word);
+					if(!returns.contains(word.substring(1))){
+						returns.add(word.substring(1));
+					}
 				}
 				record(to,word);
 				word = readFromList.readLine();
@@ -66,6 +68,13 @@ public class Tools {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return returns;
+		String[] ws = new String[returns.size()];
+		int i = 0;
+		for(String w : returns){
+			ws[i] = w;
+			i++;
+		}
+		
+		return ws;
 	}
 }

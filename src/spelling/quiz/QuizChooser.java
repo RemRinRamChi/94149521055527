@@ -1,5 +1,7 @@
 package spelling.quiz;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import static java.nio.file.StandardCopyOption.*;
 import javax.swing.JDialog;
@@ -47,6 +49,8 @@ public class QuizChooser extends JDialog implements ActionListener{
 	private JButton btn10;
 	private JButton btn11;
 	private JButton btnR;
+	private JComboBox ownListComboBox;
+	private JButton btnConfirmLvl;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -83,10 +87,17 @@ public class QuizChooser extends JDialog implements ActionListener{
 				File ownFile = ownListChooser.getSelectedFile();
 				// Change chosen list label appropriately
 				lblChosenList.setText("Chosen list: " + ownFile.getName());
-				ArrayList<String> combo = Tools.replaceFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt"));
+				DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.addFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt")));
+				ownListComboBox.setModel(combo);
 				mainQuizPanel.updateSpellList(new SpellList());
-				
 			} 
+		} else if(e.getSource()==btnConfirmLvl){
+			if(!(ownListComboBox.getModel().getSize()==0)){
+				dispose();
+				mainFrame.changeCardPanel("Quiz");
+				String selection = (String) ownListComboBox.getSelectedItem();
+				mainQuizPanel.startQuiz(selection,theMode);
+			}
 		} else { // when a level from the default list was chosen
 			dispose();
 			mainFrame.changeCardPanel("Quiz");
@@ -212,16 +223,17 @@ public class QuizChooser extends JDialog implements ActionListener{
 		btnR = new JButton("?");
 		btnR.setToolTipText("Random Level");
 		btnR.addActionListener(this);
-		btnR.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnR.setFont(new Font("Arial", Font.PLAIN, 11));//
 		btnR.setFocusPainted(false);
 		btnR.setBounds(277, 120, 49, 48);
 		getContentPane().add(btnR);
 
 		// Create separator between default list and own list
-		JLabel label = new JLabel("___________________________________________________");
+		JLabel label = new JLabel("________________________________________________");
+		label.setFont(new Font("Arial", Font.PLAIN, 12));
 		label.setForeground(Color.LIGHT_GRAY);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(0, 164, 359, 29);
+		label.setBounds(0, 164, 375, 29);
 		getContentPane().add(label);
 
 		// Create title "Use own list" 
@@ -232,7 +244,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 		getContentPane().add(lblUseOwnList);
 
 		// Create combo box to have levels to choose from user's own list
-		JComboBox ownListComboBox = new JComboBox();
+		ownListComboBox = new JComboBox();
 		ownListComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
 		ownListComboBox.setBounds(32, 261, 202, 29);
 		getContentPane().add(ownListComboBox);
@@ -247,7 +259,8 @@ public class QuizChooser extends JDialog implements ActionListener{
 		getContentPane().add(chooseFile);
 
 		// Create "OK" button to confirm level from user's own list
-		JButton btnConfirmLvl = new JButton("OK");
+		btnConfirmLvl = new JButton("OK");
+		btnConfirmLvl.addActionListener(this);
 		btnConfirmLvl.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnConfirmLvl.setFocusPainted(false);
 		btnConfirmLvl.setBounds(277, 261, 49, 29);

@@ -113,7 +113,8 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		if(spellList.status == QuizState.Answering){
 			spellList.setAnswer(getAndClrInput());
 			spellList.status = QuizState.Answered;
-			ansChecker=spellList.getAnswerChecker();
+			ansChecker=spellList.getAnswerChecker()
+					;
 			ansChecker.execute();
 		}	
 

@@ -141,7 +141,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		gbc_btnNewButton.gridy = 2;
 		optionsPanel.add(btnNewQuiz, gbc_btnNewButton);
 		
-		// vertical strut
+		// vertical strut.substring(1)
 		Component verticalStrut = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
 		gbc_verticalStrut.insets = new Insets(0, 0, 5, 5);

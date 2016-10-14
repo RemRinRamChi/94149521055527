@@ -283,6 +283,7 @@ public class SpellList {
 
 	}
 
+
 	// This method checks if the answer is right and act accordingly
 	private void checkAnswer(){
 
@@ -479,10 +480,15 @@ public class SpellList {
 				// % = level and so do appropriate things
 				if(userWord.charAt(0) == '%'){
 					String levelName = userWord.substring(1);
-					wordsInALevel = new ArrayList<String>();
-					mapOfWords.put(levelName,wordsInALevel);
+					if(mapOfWords.get(levelName)==null){
+						wordsInALevel = new ArrayList<String>();
+						mapOfWords.put(levelName,wordsInALevel);
+					} else {
+						wordsInALevel = mapOfWords.get(levelName);
+					}
 				} else {
 					wordsInALevel.add(userWord);
+
 				}
 				userWord = readUserList.readLine();
 			}
@@ -528,9 +534,15 @@ public class SpellList {
 			BufferedReader readAccuracyList = new BufferedReader(new FileReader(spelling_aid_accuracy));
 			String accuracyLine = readAccuracyList.readLine();
 			while(accuracyLine != null){
+				int i = 0;
 				String[] accuracyLog = accuracyLine.split(" ");
-				totalAsked.put(accuracyLog[0], Integer.parseInt(accuracyLog[1]));
-				totalCorrect.put(accuracyLog[0], Integer.parseInt(accuracyLog[2]));
+				for(String s : accuracyLog){
+					if(!checkIfNumber(s)){
+						i++;
+					}
+				}
+				totalAsked.put(accuracyLog[0], Integer.parseInt(accuracyLog[i]));
+				totalCorrect.put(accuracyLog[0], Integer.parseInt(accuracyLog[i+1]));
 				accuracyLine = readAccuracyList.readLine();
 			}
 			readAccuracyList.close();
@@ -575,5 +587,19 @@ public class SpellList {
 	 */
 	private void updateCorrectQuestionsCountLabel(){
 		spellingAidApp.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+questionNo);
+	}
+	/**
+	 * Check if a String is a number
+	 */
+	public static boolean checkIfNumber(String s){
+		try  
+		  {  
+		    double d = Double.parseDouble(s);  
+		  }  
+		  catch(NumberFormatException e)  
+		  {  
+		    return false;  
+		  }  
+		  return true; 
 	}
 }
