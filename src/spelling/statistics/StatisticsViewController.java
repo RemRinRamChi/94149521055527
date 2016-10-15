@@ -130,10 +130,13 @@ public class StatisticsViewController extends JPanel {
 		JButton btnClearStatistics = new JButton("Clear Statistics");
 		btnClearStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//CLEAR STATS info dialog
-				mainFrame.changeCardPanel("Main");
-				JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
-				mainFrame.updateSpellingList(new SpellList());
+				int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All progress will be lost. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
+				if(userChoice == JOptionPane.YES_OPTION){
+					mainFrame.changeCardPanel("Main"); // go back to Main since no stats to display
+					//CLEAR STATS info dialog
+					JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+					mainFrame.updateSpellingList(new SpellList());
+				}
 			}
 		});
 		btnClearStatistics.setFont(new Font("Arial", Font.PLAIN, 13));
