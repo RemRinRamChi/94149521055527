@@ -47,19 +47,25 @@ public class SpellingAidMain extends JFrame {
 		if(mode.equals("Welcome")){
 			welcomeScreen.clearField();
 			setSize(470,490);
+			setTitle("Welcome To VOXSPELL");
 		} else if (mode.equals("Main")){
 			mainOptions.setUserName(getUserName());
 			setSize(470,540);
+			setTitle("Welcome To VOXSPELL");
 		} else if (mode.equals("Quiz")){
 			setSize(780,400);
+			setTitle("VOXPSELL Quiz");
 		} else if (mode.equals("Done")){
 			setSize(610,430);
+			setTitle("VOXPSELL Quiz Results");
 		} else if (mode.equals("Stats")){
 			voxSpellStats.setUserName(getUserName());
 			setSize(490,650);
+			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
 			setSize(470,380);
+			setTitle("VOXPSELL Settings");
 		}
 
 		// DOESN'T work on Linux

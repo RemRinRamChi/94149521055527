@@ -54,7 +54,7 @@ public class SpellList {
 	private String userAnswer = "0";
 
 	// This is the SPELLING AID APP
-	private Quiz spellingAidApp;
+	private Quiz spellingAidQuiz;
 
 	// Number of correct answers
 	private int correctAnsCount = 0;
@@ -126,11 +126,16 @@ public class SpellList {
 		return correctAnsCount;
 	}
 
-	// Creates a list of words to test according to level and mode
-	public void createLevelList(String level, QuizMode spellingType, Quiz spellAidApp){
+	/**
+	 * Creates a list of words to test according to level and mode
+	 * @param level
+	 * @param spellingType New or Review
+	 * @param quiz
+	 */
+	public void createLevelList(String level, QuizMode spellingType, Quiz quiz){
 
 		// For every level these following variables start as follows
-		spellingAidApp = spellAidApp;
+		spellingAidQuiz = quiz;
 		questionNo = 0;
 		correctAnsCount = 0;
 		resetCurrentStreak();
@@ -148,10 +153,10 @@ public class SpellList {
 		status = QuizState.Asking;
 
 		// update quiz field with level
-		spellingAidApp.setCurrentQuiz(": "+level);
+		spellingAidQuiz.setCurrentQuiz(": "+level);
 		
 		// update longest streak label
-		spellingAidApp.setLongestStreak(": " + longestStreak);
+		spellingAidQuiz.setLongestStreak(": " + longestStreak);
 
 		// size of question list, might change depending on size of word list
 		int questionListSize = 10;
@@ -207,13 +212,16 @@ public class SpellList {
 		currentTriedList = mapOfTriedWords.get(currentLevel);
 	}
 
-	// QuestionAsker is a swing worker class which asks the next question on the list.
-	// The swing worker terminates when the whole list is covered
+	/**
+	 * QuestionAsker is a swing worker class which asks the next question on the list.
+	 * The swing worker terminates when the whole list is covered
+	 *
+	 */
 	class QuestionAsker extends SwingWorker<Void, Void>{
 		protected Void doInBackground() throws Exception {
 			if(getNoOfQuestions()!=0){
 				// clear texts from previous question
-				spellingAidApp.resetScreen();
+				spellingAidQuiz.resetScreen();
 				askNextQuestion();
 			} 
 			return null;
@@ -227,26 +235,32 @@ public class SpellList {
 				} else if (spellType==QuizMode.Review){
 					specialKeyToDetermineMode = -2;
 				}
-				spellingAidApp.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,specialKeyToDetermineMode);
-				spellingAidApp.enableQuitButton();
+				spellingAidQuiz.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,specialKeyToDetermineMode);
+				spellingAidQuiz.enableQuitButton();
 			}
 			// stop the quiz and record progress when the whole quiz list has been covered
 			if(questionNo > getNoOfQuestions()){
-				recordFailedAndTriedWordsFromLevel();
+				recordStatisticsFromLevel();
 				// quiz is done, display results
-				spellingAidApp.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !",spellType,correctAnsCount);
-				spellingAidApp.enableQuitButton();
+				spellingAidQuiz.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !",spellType,correctAnsCount);
+				spellingAidQuiz.enableQuitButton();
 			}
 		}
 
 	}
 
-	// Method to return the QuestionAsker swing worker object
+	/**
+	 * Method to return the QuestionAsker swing worker object
+	 * @return
+	 */
 	public QuestionAsker getQuestionAsker(){
 		return new QuestionAsker();
 	}
 
-	// AnswerChecker is a swing worker class which checks the user's answer against the expected answer and acts accordingly
+	/**
+	 * AnswerChecker is a swing worker class which checks the user's answer against the expected answer and acts accordingly
+	 *
+	 */
 	class AnswerChecker extends SwingWorker<Void, Void>{
 		protected Void doInBackground() throws Exception {
 			checkAnswer();
@@ -257,29 +271,34 @@ public class SpellList {
 			// quit button is clicked <- not sure what this comment is doing here
 			if (status==QuizState.Asking){
 				// when a question is over and it is time to ask the next question
-				spellingAidApp.goOnToNextQuestion();
+				spellingAidQuiz.goOnToNextQuestion();
 				if(questionNo == getNoOfQuestions()){
-					spellingAidApp.setDoneButton();
+					spellingAidQuiz.setDoneButton();
 				}
 			}
 		}
 	}
 
-	// Method to return the AnswerChecker swing worker object
+	/**
+	 * Method to return the AnswerChecker swing worker object
+	 * @return
+	 */
 	public AnswerChecker getAnswerChecker(){
 		return new AnswerChecker();
 	}
 
-	// Start asking the new question
+	/**
+	 * Start asking the new question
+	 */
 	private void askNextQuestion(){
 		// make sure user input field is cleared everytime a question is asked
-		spellingAidApp.setUserInput("");
+		spellingAidQuiz.setUserInput("");
 		// < NoOfQuestion because questionNo is used to access the current quiz list's question which starts at 0 
 		// ie question 10 -> questionNo = 9
 		if(questionNo < getNoOfQuestions()){
 
 			// focus the answering area
-			spellingAidApp.requestInputFocus();
+			spellingAidQuiz.requestInputFocus();
 			// attempt is true only when the question has been attempted, so it starts as false
 			attempt = false;
 			// endOfQuestion is true when it is time to move on to the next question
@@ -292,8 +311,8 @@ public class SpellList {
 			// then increment the question no to represent the real question number
 			questionNo++;
 
-			spellingAidApp.setSpellQuery("Please spell word " + questionNo + " of " + currentQuizList.size() + ": ");
-			spellingAidApp.sayText("Please spell ",wordToSpell+",");
+			spellingAidQuiz.setSpellQuery("Please spell word " + questionNo + " of " + currentQuizList.size() + ": ");
+			spellingAidQuiz.sayText("Please spell ",wordToSpell+",");
 
 			// after ASKING, it is time for ANSWERING
 			status = QuizState.Answering;
@@ -304,16 +323,18 @@ public class SpellList {
 	}
 
 
-	// This method checks if the answer is right and act accordingly
+	/**
+	 * This method checks if the answer is right and act accordingly
+	 */
 	private void checkAnswer(){
 
 		// ensure that the answer is valid
 		if (!validInput(userAnswer)){
 			// warning dialog for invalid user input
-			JOptionPane.showMessageDialog(spellingAidApp, "Please enter in ALPHABETICAL LETTERS and use appropriate symbols.", "Input Warning",JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(spellingAidQuiz, "Oops! The answer field is blank, please enter something.", "Input Warning",JOptionPane.WARNING_MESSAGE);
 			// go back to ANSWERING since current answer is invalid
 			status = QuizState.Answering;
-			spellingAidApp.requestInputFocus();
+			spellingAidQuiz.requestInputFocus();
 			return;
 		} 
 
@@ -321,18 +342,18 @@ public class SpellList {
 
 		// set the attempted word to show user
 		if(!attempt){
-			spellingAidApp.setFirstAttempt(": "+userAnswer);
+			spellingAidQuiz.setFirstAttempt(": "+userAnswer);
 		} else {
-			spellingAidApp.setSecondAttempt(": "+userAnswer);
+			spellingAidQuiz.setSecondAttempt(": "+userAnswer);
 		}
 
 
 		// turn to lower case for BOTH and then compare
 		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
-			spellingAidApp.setResultIndicator("Correct !");
-			spellingAidApp.displaySpellAgainLabel(false);
+			spellingAidQuiz.setResultIndicator("Correct !");
+			spellingAidQuiz.displaySpellAgainLabel(false);
 			// Correct echoed if correct
-			spellingAidApp.sayText("Correct","");
+			spellingAidQuiz.sayText("Correct","");
 			if(!attempt){
 				Tools.record(spelling_aid_statistics,wordToSpell+" Mastered"); // store as mastered
 			} else {
@@ -354,16 +375,16 @@ public class SpellList {
 
 			incrementCurrentStreak();
 		} else {
-			spellingAidApp.setResultIndicator("Incorrect");
+			spellingAidQuiz.setResultIndicator("Incorrect");
 			if(!attempt){
-				spellingAidApp.displaySpellAgainLabel(true);
-				spellingAidApp.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
-				spellingAidApp.requestInputFocus();
+				spellingAidQuiz.displaySpellAgainLabel(true);
+				spellingAidQuiz.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
+				spellingAidQuiz.requestInputFocus();
 				// answer is wrong and a second chance is given and so back to ANSWERING
 				status = QuizState.Answering;
 			} else {
-				spellingAidApp.displaySpellAgainLabel(false);
-				spellingAidApp.sayText("Incorrect.",",");
+				spellingAidQuiz.displaySpellAgainLabel(false);
+				spellingAidQuiz.sayText("Incorrect.",",");
 				Tools.record(spelling_aid_statistics,wordToSpell+" Failed"); // store as failed
 				if(!currentFailedList.contains(wordToSpell)){ //add to failed list if it doesn't exist
 					currentFailedList.add(wordToSpell);
@@ -373,9 +394,9 @@ public class SpellList {
 				endOfQuestion = true;
 			}
 			if(!attempt){
-				spellingAidApp.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
+				spellingAidQuiz.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			} else {
-				spellingAidApp.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
+				spellingAidQuiz.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			}
 			attempt = true; // question has been attempted
 
@@ -396,8 +417,10 @@ public class SpellList {
 
 	}
 
-	/// This method records everything related to the current level to the file
-	public void recordFailedAndTriedWordsFromLevel(){
+	/**
+	 * This method records everything related to the current level to the file
+	 */
+	public void recordStatisticsFromLevel(){
 		Object[] failedKeys = mapOfFailedWords.keySet().toArray();
 		Object[] triedKeys = mapOfFailedWords.keySet().toArray();
 		Object[] accuracyKeys = totalAsked.keySet().toArray();
@@ -442,27 +465,24 @@ public class SpellList {
 	}
 
 
-	// function to ensure that the answer the user inputted is valid (in the format that can be accepted)
+	/**
+	 * function to ensure that the answer the user inputted is valid (in the format that can be accepted)
+	 * @param answer
+	 * @return
+	 */
 	private boolean validInput(String answer) {
 		char[] chars = answer.toCharArray();
 		// blank = unacceptable
 		if(answer.equals("")){
 			return false;
 		}
-		// first letter symbol = unacceptable
-		if(!Character.isLetter(chars[0])){
-			return false;
-		}
-		// accept any space or ' after first letter
-		for (char c : chars) {
-			if(!Character.isLetter(c) && (c != '\'') && (c != ' ')) {
-				return false;
-			}
-		}
 		return true;	
 	}
 
-	// calculate the accuracy for the current level
+	/**
+	 * calculate the accuracy for the current level
+	 * @return
+	 */
 	public double getLvlAccuracy(){
 		double noOfQuestionsAnsweredCorrectly = totalCorrect.get(currentLevel);
 		double totalQuestionsAsked = totalAsked.get(currentLevel);
@@ -473,7 +493,9 @@ public class SpellList {
 		return Math.round(accuracy*10.0)/10.0;
 	}
 
-	// Go through all the statistic files and also the file containing the word list 
+	/**
+	 * Go through all the statistic files and also the file containing the word list 
+	 */
 	private void initialiseListsToStoreValuesFromWordAndStatsList(){
 		mapOfWords = new HashMap<String, ArrayList<String>>();
 		mapOfFailedWords = new HashMap<String, ArrayList<String>>();
@@ -608,11 +630,11 @@ public class SpellList {
 	 */
 	private void incrementCurrentStreak(){
 		currentStreak++;
-		spellingAidApp.setCurrentStreak(": "+currentStreak);
+		spellingAidQuiz.setCurrentStreak(": "+currentStreak);
 		if(currentStreak > longestStreak){
 			longestStreak = currentStreak;
 			longestLevelStreak.put(currentLevel, longestStreak);
-			spellingAidApp.setLongestStreak(": "+longestStreak);
+			spellingAidQuiz.setLongestStreak(": "+longestStreak);
 		}
 	}
 	/**
@@ -620,13 +642,13 @@ public class SpellList {
 	 */
 	private void resetCurrentStreak(){
 		currentStreak = 0;
-		spellingAidApp.setCurrentStreak(": "+currentStreak);
+		spellingAidQuiz.setCurrentStreak(": "+currentStreak);
 	}
 	/**
 	 * Update the label showing the correct questions count
 	 */
 	private void updateCorrectQuestionsCountLabel(){
-		spellingAidApp.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+questionNo);
+		spellingAidQuiz.setNoOfCorrectSpellings(": "+correctAnsCount+"/"+questionNo);
 	}
 	/**
 	 * Check if a String is a number

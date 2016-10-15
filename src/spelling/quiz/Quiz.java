@@ -81,7 +81,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			// quiz only stoppable after a question is done asking (i.e. Answering state) or when is question is done answered
 			if(spellList.status==QuizState.Answering||btnConfirmOrNext.getText().equals("Next Question")){
 				// record stats even though stopped
-				spellList.recordFailedAndTriedWordsFromLevel();
+				spellList.recordStatisticsFromLevel();
 				// go back to main panel
 				mainFrame.changeCardPanel("Main");
 			}
