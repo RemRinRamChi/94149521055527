@@ -66,9 +66,8 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 			quizChooser.setVisible(true);
 		} else if(e.getSource()==btnViewStatistics){ // View Statistics
 			// instantiate the statistics object and execute it
-			StatisticsModel statsWin = new StatisticsModel(mainFrame.getVoxSpellStats());
+			StatisticsModel statsWin = new StatisticsModel(mainFrame);
 			statsWin.execute();
-			mainFrame.changeCardPanel("Stats");
 		} else if(e.getSource()==btnSettings){ // Settings
 			mainFrame.changeCardPanel("Settings");
 		} else if(e.getSource()==btnQuit){ // Quit

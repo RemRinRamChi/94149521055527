@@ -46,19 +46,20 @@ public class StatisticsViewController extends JPanel {
 	}
 	
 	/**
-	 * Create the panel.
+	 * Create the panel and layout the components appropriately
 	 */
 	public StatisticsViewController() {
-		setLayout(null);
+		setLayout(null); // absolute layout
 		
+		// Tabbed Pane to have two tabs "Level Stats", "Tried Words Stats"
 		lvlAndWordStatsPane = new JTabbedPane(JTabbedPane.TOP);
 		lvlAndWordStatsPane.setFont(new Font("Arial", Font.PLAIN, 14));
 		lvlAndWordStatsPane.setBounds(10, 191, 450, 358);
 		add(lvlAndWordStatsPane);
 		
+		// table for Level Stats
 		JScrollPane levelScrollPane = new JScrollPane();
 		lvlAndWordStatsPane.addTab("Level Statistics", null, levelScrollPane, null);
-		
 		levelTable = new JTable();
 		levelTable.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -73,10 +74,10 @@ public class StatisticsViewController extends JPanel {
 		levelTable.setRowHeight(22);
 		levelTable.setFont(new Font("Arial", Font.PLAIN, 15));
 		
+		// table for Tried Words
 		JScrollPane wordScrollPane = new JScrollPane();
 		wordScrollPane.setFont(new Font("Arial", Font.PLAIN, 12));
 		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, wordScrollPane, null);
-		
 		triedWordsTable = new JTable();
 		triedWordsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		triedWordsTable.setRowHeight(22);
@@ -92,6 +93,7 @@ public class StatisticsViewController extends JPanel {
 		
 		wordScrollPane.setViewportView(triedWordsTable);
 		
+		// back button
 		JButton btnBack = new JButton("BACK");
 		btnBack.setBounds(329, 560, 119, 31);
 		add(btnBack);
@@ -102,27 +104,29 @@ public class StatisticsViewController extends JPanel {
 		});
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 13));
 		
+		// Top panel with greetings and friendly avatar
 		JPanel friendlyPanel = new JPanel();
 		friendlyPanel.setLayout(null);
 		friendlyPanel.setBackground(Color.WHITE);
 		friendlyPanel.setBounds(0, 0, 475, 180);
 		add(friendlyPanel);
-		
+		// avatar
 		JLabel avatar = new JLabel("");
 		avatar.setIcon(new ImageIcon("img/avatar.png"));
 		avatar.setBounds(24, 11, 159, 155);
 		friendlyPanel.add(avatar);
-		
+		// Hi greeting
 		lblHi = new JLabel("Hi Sherlock");
 		lblHi.setFont(new Font("Arial", Font.PLAIN, 40));
 		lblHi.setBounds(193, 31, 235, 64);
 		friendlyPanel.add(lblHi);
-		
+		// interaction
 		JLabel lblHereAreSomeStats = new JLabel("Here are some statistics");
 		lblHereAreSomeStats.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereAreSomeStats.setBounds(193, 95, 272, 53);
 		friendlyPanel.add(lblHereAreSomeStats);
 		
+		// clear statistics button
 		JButton btnClearStatistics = new JButton("Clear Statistics");
 		btnClearStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,14 +140,18 @@ public class StatisticsViewController extends JPanel {
 		btnClearStatistics.setBounds(20, 560, 175, 31);
 		add(btnClearStatistics);
 
-
-
 	}
-	
+	/**
+	 * Add entry to TriedWords table
+	 * @param addRow
+	 */
 	public void addToWordTable(Object[] addRow){
 		DefaultTableModel tableModel = (DefaultTableModel) triedWordsTable.getModel();
 		tableModel.insertRow(tableModel.getRowCount(),addRow);
 	}
+	/**
+	 * Clear entries in TriedWords table
+	 */
 	public void clearWordTable(){
 		DefaultTableModel tableModel = (DefaultTableModel) triedWordsTable.getModel();
 		int rowCount = tableModel.getRowCount();
@@ -151,10 +159,17 @@ public class StatisticsViewController extends JPanel {
 			tableModel.removeRow(i);
 		}
 	}
+	/**
+	 * Add entry to LevelStats table
+	 * @param addRow
+	 */
 	public void addToLevelTable(Object[] addRow){
 		DefaultTableModel tableModel = (DefaultTableModel) levelTable.getModel();
 		tableModel.insertRow(tableModel.getRowCount(),addRow);
 	}
+	/**
+	 * Clear entries in LevelStats table
+	 */
 	public void clearLevelTable(){
 		DefaultTableModel tableModel = (DefaultTableModel) levelTable.getModel();
 		int rowCount = tableModel.getRowCount();
@@ -163,8 +178,22 @@ public class StatisticsViewController extends JPanel {
 		}
 	}
 	
-	
+	/**
+	 * Set the user's name in the greeting part
+	 * @param name
+	 */
 	public void setUserName(String name){
 		lblHi.setText("Hi "+name);
+	}
+	
+	/**
+	 * To check if there are any stats that are available
+	 * @return
+	 */
+	public boolean isStatsEmpty(){
+		if(levelTable.getRowCount()>0){
+			return false;
+		}
+		return true;
 	}
 }

@@ -9,8 +9,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
+import spelling.SpellingAidMain;
 import spelling.quiz.SpellList;
 
 
@@ -25,6 +27,8 @@ import spelling.quiz.SpellList;
  */
 public class StatisticsModel extends SwingWorker<Void,String[]>{
 
+	// mainFrame for changing cards
+	SpellingAidMain mainFrame;
 	// This is the SPELLING AID STATSGUI
 	StatisticsViewController spellingAidStats;
 
@@ -52,10 +56,11 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 	int zeroWords; // counter to check if there are no words
 
 
-	public StatisticsModel(StatisticsViewController spellingAidStatsGUI){
+	public StatisticsModel(SpellingAidMain main){
 
 		// initialise variables appropriately
-		spellingAidStats=spellingAidStatsGUI;
+		mainFrame = main;
+		spellingAidStats=main.getVoxSpellStats();
 		zeroWords = 0; 
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_statistics = new File(".spelling_aid_statistics");
@@ -168,19 +173,32 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 	// this class displays data by publishing them to the JTextArea
 	protected void process(List<String[]> statsData) {
 		for (String[] data : statsData) {
+			// add to level table
 			spellingAidStats.addToLevelTable(data);
 		}
 	}
 
 	protected void done(){
+		// add to tried words table in the end and not in process because there might be repeating words in different levels
 		spellingAidStats.clearWordTable();
 		Collections.sort(listOfTriedWords);
 		for(String s : listOfTriedWords){
 			spellingAidStats.addToWordTable(getWordStats(s));
 		}
+		// act accordingly to statistics state
+		if(mainFrame.getVoxSpellStats().isStatsEmpty()){
+			// empty so don't have to go in to stats
+			JOptionPane.showMessageDialog(mainFrame, "There are no attempted quizzes !", "VoxSpell Statistics Empty", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			mainFrame.changeCardPanel("Stats");
+		}
 	}
 
-	// calculate the accuracy for the current level
+	/**
+	 * Calculate the accuracy for the current level
+	 * @param level
+	 * @return level accuracy
+	 */
 	public double getAccuracy(String level){
 		double noOfQuestionsAnsweredCorrectly = totalCorrect.get(level);
 		double totalQuestionsAsked = totalAsked.get(level);
@@ -191,6 +209,13 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 		return Math.round(accuracy*10.0)/10.0;
 	}
 
+	/**
+	 * Record stats of each word
+	 * @param word word
+	 * @param master mastered counts
+	 * @param fault faulted counts
+	 * @param fail failed counts
+	 */
 	private void recordWordStats(String word, int master, int fault, int fail){
 		if(totalMastered.get(word)==null){
 			totalMastered.put(word, master);
@@ -214,6 +239,11 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 		}
 	}
 
+	/**
+	 * Return word stats in the form of an Object array to be appended to a table
+	 * @param word the word
+	 * @return Object array to be appended to a table
+	 */
 	private Object[] getWordStats(String word){
 		Object[] wordStats = new Object[]{word,totalMastered.get(word),totalFaulted.get(word),totalFailed.get(word)};
 		return wordStats;
