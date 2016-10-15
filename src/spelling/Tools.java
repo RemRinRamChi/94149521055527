@@ -74,37 +74,4 @@ public class Tools {
 		return ws;
 	}
 	
-	/**
-	 * Replace the contents of a file with another and returns the list of level names in a word list
-	 * @param from file to get contents from
-	 * @param to file to have its contents be replaced
-	 */
-	public static String[] addFromToAndGetTitles(File from, File to){
-		ArrayList<String> returns = new ArrayList<String>();
-		ClearStatistics.clearFile(to);//
-		try {
-			BufferedReader readFromList = new BufferedReader(new FileReader(from));
-			String word = readFromList.readLine();
-			while(word != null){
-				if(word.charAt(0)=='%'){
-					if(!returns.contains(word.substring(1))){
-						returns.add(word.substring(1));
-					}
-				}
-				record(to,word);
-				word = readFromList.readLine();
-			}
-			readFromList.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		String[] ws = new String[returns.size()];
-		int i = 0;
-		for(String w : returns){
-			ws[i] = w;
-			i++;
-		}
-		
-		return ws;
-	}
 }

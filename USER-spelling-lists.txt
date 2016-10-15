@@ -1,13 +1,15 @@
-%Heyo
-we
-are
+%Level 1
+a
+I
+it
 the
-world
+was
+and
+in
+my
+to
 we
-are
-the
-children
-%U kidding?
+%Level 2
 at
 had
 of
@@ -28,7 +30,7 @@ me
 so
 they
 you
-%Yeowww
+%Level 3
 about
 be
 go
@@ -59,7 +61,7 @@ get
 home
 one
 with
-%Testi
+%Level 4
 again
 do
 next
@@ -110,7 +112,7 @@ little
 over
 this 
 your
-%Lev5
+%Level 5
 am
 door
 last

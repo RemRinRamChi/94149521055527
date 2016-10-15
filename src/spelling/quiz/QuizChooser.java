@@ -11,6 +11,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import spelling.SpellingAidMain;
 import spelling.Tools;
 import spelling.quiz.SpellList.QuizMode;
+import spelling.settings.ClearStatistics;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -19,7 +20,10 @@ import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
@@ -90,8 +94,8 @@ public class QuizChooser extends JDialog implements ActionListener{
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File ownFile = ownListChooser.getSelectedFile();
 				// Change chosen list label appropriately
-				lblChosenList.setText("Chosen list: " + ownFile.getName());
-				DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.addFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt")));
+				lblChosenList.setText("Chosen list: " + ownFile.getName()); // TODO need to change this cause at start nothing
+				DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt")));
 				ownListComboBox.setModel(combo);
 				mainQuizPanel.updateSpellList(new SpellList());
 			} 
@@ -115,7 +119,54 @@ public class QuizChooser extends JDialog implements ActionListener{
 			mainQuizPanel.startQuiz("Level "+chosenButton,theMode);
 		}
 	}
-
+	
+	/**
+	 * Replace the contents of a file with another and returns the list of level names in a word list
+	 * @param from file to get contents from
+	 * @param to file to have its contents be replaced
+	 */
+	public static String[] addFromToAndGetTitles(File from, File to){
+		boolean levelExist = false;
+		ArrayList<String> returns = new ArrayList<String>();
+		ArrayList<String> wordsToCopy = new ArrayList<String>();
+		ClearStatistics.clearFile(to);//
+		try {
+			BufferedReader readFromList = new BufferedReader(new FileReader(from));
+			String word = readFromList.readLine();
+			while(word != null){
+				if(word.charAt(0)=='%'){
+					if(word.length()==1){
+						// TODO throw exception here coz No name for a level
+					}
+					levelExist = true;
+					if(!returns.contains(word.substring(1))){
+						returns.add(word.substring(1));
+					}
+				}
+				wordsToCopy.add(word);
+				word = readFromList.readLine();
+			}
+			readFromList.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		String[] ws = new String[returns.size()];
+		int i = 0;
+		for(String w : returns){
+			ws[i] = w;
+			i++;
+		}
+		
+		if(levelExist){
+			for(String word : wordsToCopy){
+				Tools.record(to,word);
+			}
+		} else {
+			//TODO
+		}
+		
+		return ws;
+	}
 	/**
 	 *  Create all components and lay them out properly
 	 */
@@ -291,4 +342,5 @@ public class QuizChooser extends JDialog implements ActionListener{
 		lblChosenList.setBounds(10, 227, 339, 29);
 		getContentPane().add(lblChosenList);
 	}
+
 }
