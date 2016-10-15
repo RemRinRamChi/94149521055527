@@ -63,7 +63,10 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	private double theVoicePitch;
 	private double theVoiceRange;
 	private JTextArea definitionArea;
-
+	
+	// flag to make quiz faster by going on to the next question immediately
+	private boolean fastFlag = true;
+	
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnConfirmOrNext){
@@ -136,10 +139,10 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 */
 	public void goOnToNextQuestion(){
 		btnConfirmOrNext.setText("Next Question");
-		// take note here coz maybe something wrong with accuracy recording in review quiz
-		//if(spellList.spellType.equals("new")){
 		quizAccuracy.setText(": "+spellList.getLvlAccuracy()+"%");
-		//}
+		if(fastFlag){
+			btnConfirmOrNext.doClick();
+		}
 
 	}
 
