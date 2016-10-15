@@ -32,11 +32,23 @@ public class QuizDone extends JPanel implements ActionListener{
 	private JButton btnTryAnotherLevel;
 	private JButton btnDone;
 	private JButton btnReviewAnotherLevel;
+	private JButton btnRetryLevel;
+	private String level; 
 
+	/**
+	 * Set results label
+	 * @param results
+	 */
 	public void setLblResults(String results) {
 		lblResults.setText(results);
 	}
-
+	/**
+	 * Set level
+	 * @param lvl
+	 */
+	public void setLevel(String lvl){
+		level = lvl;
+	}
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
@@ -60,13 +72,16 @@ public class QuizDone extends JPanel implements ActionListener{
 			// should switch panel to be gone after one click, reward only received once
 			JOptionPane.showMessageDialog(mainFrame,"MAYBE two different videosThe big bunny video should be playing (coming soon)", "Video Reward", JOptionPane.INFORMATION_MESSAGE);
 		} else if(e.getSource()==btnTryAnotherLevel){  // Try another level
-			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New); // another new quiz
+			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuiz(),QuizMode.New); // another new quiz
 			quizChooser.setVisible(true);
 		} else if(e.getSource()==btnReviewAnotherLevel){  // Review another level
-			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review); // another review quiz
+			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuiz(),QuizMode.Review); // another review quiz
 			quizChooser.setVisible(true);
 		} else if(e.getSource()==btnDone){ // DONE
 			mainFrame.changeCardPanel("Main"); // go back to main options
+		} else if(e.getSource()==btnRetryLevel){  // Review another level
+			mainFrame.changeCardPanel("Quiz");
+			mainFrame.getQuiz().startQuiz(level,QuizMode.New);
 		}
 	}
 
@@ -179,7 +194,7 @@ public class QuizDone extends JPanel implements ActionListener{
 
 		// Panel to contain components for trying another level
 		tryAnotherPanel = new JPanel();
-		tryAnotherPanel.setBounds(93, 305, 421, 30);
+		tryAnotherPanel.setBounds(93, 346, 421, 30);
 		add(tryAnotherPanel);
 		tryAnotherPanel.setLayout(new CardLayout(0, 0));
 
@@ -205,8 +220,15 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnDone = new JButton("DONE");
 		btnDone.addActionListener(this);
 		btnDone.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnDone.setBounds(93, 346, 421, 30);
+		btnDone.setBounds(93, 387, 421, 30);
 		add(btnDone);
+		
+		// retry level
+		btnRetryLevel = new JButton("RETRY LEVEL");
+		btnRetryLevel.addActionListener(this);
+		btnRetryLevel.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnRetryLevel.setBounds(93, 305, 421, 30);
+		add(btnRetryLevel);
 	}
 
 }

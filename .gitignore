@@ -15,3 +15,6 @@ hs_err_pid*
 
 # spelling aid statistics files
 .spelling_aid_*
+
+# img files
+*.png

@@ -56,7 +56,7 @@ public class SpellingAidMain extends JFrame {
 			setSize(780,400);
 			setTitle("VOXPSELL Quiz");
 		} else if (mode.equals("Done")){
-			setSize(610,430);
+			setSize(610,480);
 			setTitle("VOXPSELL Quiz Results");
 		} else if (mode.equals("Stats")){
 			voxSpellStats.setUserName(getUserName());
@@ -195,7 +195,7 @@ public class SpellingAidMain extends JFrame {
 	public StatisticsViewController getVoxSpellStats(){
 		return voxSpellStats;
 	}
-	public Quiz getQuizQuestion() {
+	public Quiz getQuiz() {
 		return quizQuestion;
 	}
 	public QuizDone getDonePanel() {

@@ -330,7 +330,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 * @param mode the quiz mode
 	 * @param corrects number of correct quesstions answered
 	 */
-	public void quizIsDone(String results,QuizMode mode, int corrects){
+	public void quizIsDone(String results,QuizMode mode, int corrects, String quizLevel){
 		// display results
 		mainFrame.getDonePanel().setLblResults(results);
 		if(mode == QuizMode.NoQuestions){
@@ -362,7 +362,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			}
 		}
 
-
+		mainQuizDone.setLevel(quizLevel);
 		// switch panel in card layout
 		mainFrame.changeCardPanel("Done");
 	}

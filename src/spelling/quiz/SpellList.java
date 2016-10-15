@@ -235,14 +235,14 @@ public class SpellList {
 				} else if (spellType==QuizMode.Review){
 					specialKeyToDetermineMode = -2;
 				}
-				spellingAidQuiz.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,specialKeyToDetermineMode);
+				spellingAidQuiz.quizIsDone("No questions in this quiz !",QuizMode.NoQuestions,specialKeyToDetermineMode,currentLevel);
 				spellingAidQuiz.enableQuitButton();
 			}
 			// stop the quiz and record progress when the whole quiz list has been covered
 			if(questionNo > getNoOfQuestions()){
 				recordStatisticsFromLevel();
 				// quiz is done, display results
-				spellingAidQuiz.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !",spellType,correctAnsCount);
+				spellingAidQuiz.quizIsDone(correctAnsCount +" out of "+ getNoOfQuestions() + " Correct !",spellType,correctAnsCount,currentLevel);
 				spellingAidQuiz.enableQuitButton();
 			}
 		}

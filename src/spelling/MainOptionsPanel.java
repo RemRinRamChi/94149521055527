@@ -59,10 +59,10 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnNewQuiz){ // New Quiz
-			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.New);
+			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuiz(),QuizMode.New);
 			quizChooser.setVisible(true);
 		} else if(e.getSource()==btnReviewQuiz){ // Review Quiz
-			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuizQuestion(),QuizMode.Review);
+			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuiz(),QuizMode.Review);
 			quizChooser.setVisible(true);
 		} else if(e.getSource()==btnViewStatistics){ // View Statistics
 			// instantiate the statistics object and execute it
@@ -92,7 +92,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		// avatar
 		JLabel avatar = new JLabel("");
 		avatar.setIcon(new ImageIcon("img/avatar.png"));
-		avatar.setBounds(24, 11, 159, 184);
+		avatar.setBounds(37, 11, 146, 184);
 		hiPanel.add(avatar);
 
 		// greeting label
