@@ -319,7 +319,6 @@ public class SpellList {
 			spellingAidQuiz.setSpellQuery("Please spell word " + questionNo + " of " + currentQuizList.size() + ": ");
 			DefinitionGetter.getDefinitionGetter(wordToSpell,spellingAidQuiz).execute();
 			spellingAidQuiz.sayText("Please spell ",wordToSpell+",");
-			System.out.println("Finished asking");
 
 			// after ASKING, it is time for ANSWERING
 			status = QuizState.Answering;
@@ -403,7 +402,7 @@ public class SpellList {
 			if(!attempt){
 				spellingAidQuiz.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			} else {
-				spellingAidQuiz.setSecondAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
+				spellingAidQuiz.setSecondAttemptResult("X "+wordToSpell);
 			}
 			attempt = true; // question has been attempted
 

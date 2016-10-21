@@ -438,6 +438,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		scrollPane.setBounds(213, 98, 286, 64);
 		add(scrollPane);
 		definitionArea = new JTextArea();
+		definitionArea.setWrapStyleWord(true);
 		definitionArea.setLineWrap(true);
 		definitionArea.setFont(new Font("Arial", Font.PLAIN, 13));
 		definitionArea.setEditable(false);

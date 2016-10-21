@@ -151,7 +151,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnVideo = new JButton("VIDEO REWARD");
 		btnVideo.addActionListener(this);
 		btnVideo.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnVideo.setBounds(0, 47, 421, 28);
+		btnVideo.setBounds(0, 47, 421, 39);
 		rewardPanel.add(btnVideo);
 		// claim reward label
 		JLabel lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
