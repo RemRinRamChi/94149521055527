@@ -72,7 +72,9 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 			mainFrame.changeCardPanel("Settings");
 		} else if(e.getSource()==btnQuit){ // Quit
 			//mainFrame.dispose();
-			new VideoPlayer();
+			VideoPlayer vPlayer = new VideoPlayer();
+			vPlayer.play();
+			vPlayer.setModal(true);
 		}
 	}
 

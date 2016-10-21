@@ -331,10 +331,13 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 * @param corrects number of correct quesstions answered
 	 */
 	public void quizIsDone(String results,QuizMode mode, int corrects, String quizLevel){
+		// set the level that can be displayed
+		mainQuizDone.setLevel(quizLevel);
 		// display results
 		mainFrame.getDonePanel().setLblResults(results);
 		if(mode == QuizMode.NoQuestions){
 			mainQuizDone.changeResultPanel("No Results");
+			
 		} else {
 			mainQuizDone.changeResultPanel("Results");
 			if(corrects >= spellList.getNoOfQuestions()-1){ // have to change
@@ -362,7 +365,6 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			}
 		}
 
-		mainQuizDone.setLevel(quizLevel);
 		// switch panel in card layout
 		mainFrame.changeCardPanel("Done");
 	}

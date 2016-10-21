@@ -24,10 +24,10 @@ import java.awt.CardLayout;
 public class QuizDone extends JPanel implements ActionListener{
 	private SpellingAidMain mainFrame;
 	private JLabel lblResults;
+	private JLabel noResults;
 	private JPanel userInteractionPanel;
 	private JPanel resultsPanel;
 	private JPanel tryAnotherPanel;
-	private JButton btnAudio;
 	private JButton btnVideo;
 	private JButton btnTryAnotherLevel;
 	private JButton btnDone;
@@ -87,6 +87,9 @@ public class QuizDone extends JPanel implements ActionListener{
 	 * @param mode "Results", "No Results"
 	 */
 	public void changeResultPanel(String mode){
+		if(mode.equals("No Results")){
+			noResults.setText("No words in "+level);
+		}
 		((CardLayout) resultsPanel.getLayout()).show(resultsPanel, mode);
 	}
 
@@ -110,6 +113,13 @@ public class QuizDone extends JPanel implements ActionListener{
 	 */
 	private void createAndLayoutComponents(){
 		setLayout(null); //absolute layout
+		
+		// retry level
+		btnRetryLevel = new JButton("RETRY LEVEL");
+		btnRetryLevel.addActionListener(this);
+		btnRetryLevel.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnRetryLevel.setBounds(93, 293, 421, 30);
+		add(btnRetryLevel);
 
 		// "Time for your results ..."
 		JLabel lblYourResults = new JLabel("Time for your results ...");
@@ -132,7 +142,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		lblResults.setFont(new Font("Arial", Font.PLAIN, 34));
 
 		// label to display when there are no results
-		JLabel noResults = new JLabel("No Results ");
+		noResults = new JLabel("No Results ");
 		noResults.setHorizontalAlignment(SwingConstants.CENTER);
 		noResults.setFont(new Font("Arial", Font.PLAIN, 34));
 		resultsPanel.add(noResults, "No Results");
@@ -151,7 +161,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnVideo = new JButton("VIDEO REWARD");
 		btnVideo.addActionListener(this);
 		btnVideo.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnVideo.setBounds(0, 47, 421, 39);
+		btnVideo.setBounds(0, 47, 421, 28);
 		rewardPanel.add(btnVideo);
 		// claim reward label
 		JLabel lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
@@ -160,8 +170,8 @@ public class QuizDone extends JPanel implements ActionListener{
 		rewardPanel.add(lblGoodJobPlease);
 
 		// "No Words" interation label
-		JLabel zeroQuestions = new JLabel("There are no words to spell in this quiz, try another ");
-		zeroQuestions.setFont(new Font("Arial", Font.PLAIN, 18));
+		JLabel zeroQuestions = new JLabel("There are no words to spell in this quiz, try another level ");
+		zeroQuestions.setFont(new Font("Arial", Font.PLAIN, 17));
 		zeroQuestions.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(zeroQuestions, "No Words"); // added to be switched as a card
 
@@ -178,14 +188,14 @@ public class QuizDone extends JPanel implements ActionListener{
 		userInteractionPanel.add(lblGoodJob, "Good Job"); // added to be switched as a card
 
 		// "No Review" interaction label
-		JLabel zeroReview = new JLabel("No words to review, consider trying another ");
+		JLabel zeroReview = new JLabel("No words to review, consider trying another level");
 		userInteractionPanel.add(zeroReview, "No Review"); // added to be switched as a card
 		zeroReview.setHorizontalAlignment(SwingConstants.CENTER);
 		zeroReview.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		// Panel to contain components for trying another level
 		tryAnotherPanel = new JPanel();
-		tryAnotherPanel.setBounds(93, 346, 421, 30);
+		tryAnotherPanel.setBounds(93, 334, 421, 30);
 		add(tryAnotherPanel);
 		tryAnotherPanel.setLayout(new CardLayout(0, 0));
 
@@ -211,15 +221,8 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnDone = new JButton("DONE");
 		btnDone.addActionListener(this);
 		btnDone.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnDone.setBounds(93, 387, 421, 30);
+		btnDone.setBounds(93, 375, 421, 30);
 		add(btnDone);
-		
-		// retry level
-		btnRetryLevel = new JButton("RETRY LEVEL");
-		btnRetryLevel.addActionListener(this);
-		btnRetryLevel.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnRetryLevel.setBounds(93, 305, 421, 30);
-		add(btnRetryLevel);
 	}
 
 }
