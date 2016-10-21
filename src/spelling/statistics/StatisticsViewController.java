@@ -58,11 +58,12 @@ public class StatisticsViewController extends JPanel {
 		JScrollPane levelScrollPane = new JScrollPane();
 		lvlAndWordStatsPane.addTab("Level Statistics", null, levelScrollPane, null);
 		levelTable = new JTable();
+		levelTable.setEnabled(false);
 		levelTable.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"LEVEL", "Attempts", "Longest Streak", "Accuracy"
+				"LEVEL", "Attempts", "Longest Streak", "Accuracy(%)"
 			}
 		));
 		levelScrollPane.setViewportView(levelTable);
@@ -76,6 +77,7 @@ public class StatisticsViewController extends JPanel {
 		wordScrollPane.setFont(new Font("Arial", Font.PLAIN, 12));
 		lvlAndWordStatsPane.addTab("Tried Words Statistics", null, wordScrollPane, null);
 		triedWordsTable = new JTable();
+		triedWordsTable.setEnabled(false);
 		triedWordsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		triedWordsTable.setRowHeight(22);
 		triedWordsTable.setShowHorizontalLines(false);

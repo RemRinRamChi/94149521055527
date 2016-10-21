@@ -71,7 +71,10 @@ public class QuizDone extends JPanel implements ActionListener{
 		if(e.getSource()==btnVideo){ // Video Reward
 			// educational youtube video
 			VideoPlayer vPlayer = new VideoPlayer();
-			vPlayer.play(); // TODO decide maybe only can view once
+			vPlayer.play(); 
+			// video reward is only received once
+			btnVideo.setEnabled(false);
+			btnVideo.setToolTipText("Video reward is only received once, please try another quiz to receive another.");
 		} else if(e.getSource()==btnTryAnotherLevel){  // Try another level
 			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuiz(),QuizMode.New); // another new quiz
 			quizChooser.setVisible(true);
@@ -102,8 +105,11 @@ public class QuizDone extends JPanel implements ActionListener{
 	 * @param mode "No Words", "Good Try", "Good Job", "No Review"
 	 */
 	public void changeUserInteraction(String mode){
-		if(mode.equals("Good Job")){
+		if(mode.equals("Rewards")){
 			AudioPlayer.getAudioPlayer(AudioReward.AllCorrect).execute();
+			// reenable everytime
+			btnVideo.setEnabled(true);
+			btnVideo.setToolTipText("");
 		} else if(mode.equals("Good Try")){
 			AudioPlayer.getAudioPlayer(AudioReward.NotAllCorrect).execute();
 		}
