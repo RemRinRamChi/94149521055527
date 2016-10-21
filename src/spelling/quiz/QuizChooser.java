@@ -14,6 +14,8 @@ import spelling.quiz.SpellList.QuizMode;
 import spelling.settings.ClearStatistics;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -77,11 +79,11 @@ public class QuizChooser extends JDialog implements ActionListener{
 
 		// create all components and lay them out properly
 		createAndLayoutComponents();
-		
+
 		// populate the combo box
 		DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.getLevelValues(new File("USER-spelling-lists.txt")));
 		ownListComboBox.setModel(combo);
-		
+
 		// centre dialog
 		setLocationRelativeTo(null);
 	}
@@ -94,10 +96,14 @@ public class QuizChooser extends JDialog implements ActionListener{
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File ownFile = ownListChooser.getSelectedFile();
 				// Change chosen list label appropriately
-				lblChosenList.setText("Chosen list: " + ownFile.getName()); // TODO need to change this cause at start nothing
-				DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt")));
-				ownListComboBox.setModel(combo);
-				mainQuizPanel.updateSpellList(new SpellList());
+				try {
+					lblChosenList.setText("Chosen list: " + ownFile.getName()); // TODO need to change this cause at start nothing
+					DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt")));
+					ownListComboBox.setModel(combo);
+					mainQuizPanel.updateSpellList(new SpellList());
+				} catch(InvalidWordListException iWE){
+					JOptionPane.showMessageDialog(this, iWE.getMessage(), "Invalid word list", JOptionPane.WARNING_MESSAGE);
+				}
 			} 
 		} else if(e.getSource()==btnConfirmLvl){
 			if(!(ownListComboBox.getModel().getSize()==0)){
@@ -119,26 +125,31 @@ public class QuizChooser extends JDialog implements ActionListener{
 			mainQuizPanel.startQuiz("Level "+chosenButton,theMode);
 		}
 	}
-	
+
 	/**
 	 * Replace the contents of a file with another and returns the list of level names in a word list
 	 * @param from file to get contents from
 	 * @param to file to have its contents be replaced
+	 * @throws InvalidWordListException 
 	 */
-	public static String[] addFromToAndGetTitles(File from, File to){
+	public static String[] addFromToAndGetTitles(File from, File to) throws InvalidWordListException{
 		boolean levelExist = false;
 		ArrayList<String> returns = new ArrayList<String>();
 		ArrayList<String> wordsToCopy = new ArrayList<String>();
-		ClearStatistics.clearFile(to);//
 		try {
 			BufferedReader readFromList = new BufferedReader(new FileReader(from));
 			String word = readFromList.readLine();
+			if(word == null){
+				throw new InvalidWordListException("Please make sure that the file is not empty.");
+			}
+			if(word.charAt(0)!='%'){
+				throw new InvalidWordListException("First line of file has to be a level name with '%' in the front.");
+			}
 			while(word != null){
 				if(word.charAt(0)=='%'){
 					if(word.length()==1){
-						// TODO throw exception here coz No name for a level
+						throw new InvalidWordListException("All levels must have a name.");
 					}
-					levelExist = true;
 					if(!returns.contains(word.substring(1))){
 						returns.add(word.substring(1));
 					}
@@ -156,15 +167,12 @@ public class QuizChooser extends JDialog implements ActionListener{
 			ws[i] = w;
 			i++;
 		}
-		
-		if(levelExist){
-			for(String word : wordsToCopy){
-				Tools.record(to,word);
-			}
-		} else {
-			//TODO
+
+		ClearStatistics.clearFile(to); // only start clearing when nothing is wrong
+		for(String word : wordsToCopy){
+			Tools.record(to,word);
 		}
-		
+
 		return ws;
 	}
 	/**
