@@ -7,7 +7,10 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+import spelling.AudioPlayer;
+import spelling.AudioPlayer.AudioReward;
 import spelling.SpellingAidMain;
+import spelling.VideoPlayer;
 import spelling.quiz.SpellList.QuizMode;
 
 import java.awt.Color;
@@ -66,8 +69,9 @@ public class QuizDone extends JPanel implements ActionListener{
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) { // Audio Reward
 		if(e.getSource()==btnVideo){ // Video Reward
-			// should switch panel to be gone after one click, reward only received once
-			JOptionPane.showMessageDialog(mainFrame,"MAYBE two different videosThe big bunny video should be playing (coming soon)", "Video Reward", JOptionPane.INFORMATION_MESSAGE);
+			// educational youtube video
+			VideoPlayer vPlayer = new VideoPlayer();
+			vPlayer.play(); // TODO decide maybe only can view once
 		} else if(e.getSource()==btnTryAnotherLevel){  // Try another level
 			QuizChooser quizChooser = new QuizChooser(mainFrame,mainFrame.getQuiz(),QuizMode.New); // another new quiz
 			quizChooser.setVisible(true);
@@ -98,6 +102,11 @@ public class QuizDone extends JPanel implements ActionListener{
 	 * @param mode "No Words", "Good Try", "Good Job", "No Review"
 	 */
 	public void changeUserInteraction(String mode){
+		if(mode.equals("Good Job")){
+			AudioPlayer.getAudioPlayer(AudioReward.AllCorrect).execute();
+		} else if(mode.equals("Good Try")){
+			AudioPlayer.getAudioPlayer(AudioReward.NotAllCorrect).execute();
+		}
 		((CardLayout) userInteractionPanel.getLayout()).show(userInteractionPanel, mode);
 	}
 
