@@ -13,13 +13,10 @@ import spelling.SpellingAidMain;
 import spelling.quiz.SpellList;
 import spelling.settings.ClearStatistics;
 
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.CardLayout;
 import javax.swing.JScrollPane;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;

@@ -29,7 +29,6 @@ public class SpellList {
 	public enum QuizMode{New, Review,NoQuestions};
 	public enum QuizState{Asking, Answering, Answered };
 
-
 	// initialising variables to use during quiz TO KEEP TRACK OF QUESTIONS AND ATTEMPT COUNTS
 
 	// There are two spelling types: new and review
@@ -210,6 +209,11 @@ public class SpellList {
 		currentQuizList = listOfWordsToTest;
 		currentFailedList = mapOfFailedWords.get(currentLevel);
 		currentTriedList = mapOfTriedWords.get(currentLevel);
+		
+		// reset list of definitions
+		//definitions = new HashMap<String,String>();
+		//definitionGen = new DefinitionGetter(currentQuizList,definitions);
+		//definitionGen.execute();
 	}
 
 	/**
@@ -310,9 +314,12 @@ public class SpellList {
 			System.out.println(wordToSpell);
 			// then increment the question no to represent the real question number
 			questionNo++;
-
+			
+			spellingAidQuiz.setDefinition("Loading definition ..."); // while loading definitions
 			spellingAidQuiz.setSpellQuery("Please spell word " + questionNo + " of " + currentQuizList.size() + ": ");
+			DefinitionGetter.getDefinitionGetter(wordToSpell,spellingAidQuiz).execute();
 			spellingAidQuiz.sayText("Please spell ",wordToSpell+",");
+			System.out.println("Finished asking");
 
 			// after ASKING, it is time for ANSWERING
 			status = QuizState.Answering;
@@ -471,7 +478,6 @@ public class SpellList {
 	 * @return
 	 */
 	private boolean validInput(String answer) {
-		char[] chars = answer.toCharArray();
 		// blank = unacceptable
 		if(answer.equals("")){
 			return false;
@@ -656,6 +662,7 @@ public class SpellList {
 	public static boolean checkIfNumber(String s){
 		try  
 		{  
+			@SuppressWarnings("unused")
 			double d = Double.parseDouble(s);  
 		}  
 		catch(NumberFormatException e)  

@@ -291,7 +291,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 * @param definition
 	 */
 	public void setDefinition(String definition){
-		definitionArea.setText("Definition coming soon");
+		definitionArea.setText(definition);
 	}
 	public void setCurrentQuiz(String quiz){
 		currentQuiz.setText(quiz);
@@ -403,6 +403,11 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		voiceGen.setVoice(theVoice);
 	}
 
+	public void scrollDefinitionAreaToTop(){
+		definitionArea.setCaretPosition(0); 
+	}
+	
+	
 	/**
 	 *  Create all components and lay them out properly
 	 */
@@ -433,6 +438,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		scrollPane.setBounds(213, 98, 286, 64);
 		add(scrollPane);
 		definitionArea = new JTextArea();
+		definitionArea.setLineWrap(true);
 		definitionArea.setFont(new Font("Arial", Font.PLAIN, 13));
 		definitionArea.setEditable(false);
 		scrollPane.setViewportView(definitionArea);
