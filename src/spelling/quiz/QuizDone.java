@@ -65,10 +65,7 @@ public class QuizDone extends JPanel implements ActionListener{
 
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) { // Audio Reward
-		if(e.getSource()==btnAudio){
-			// should switch panel to be gone after one click, reward only received once
-			JOptionPane.showMessageDialog(mainFrame,"Cheering message (coming soon)", "Audio Reward", JOptionPane.INFORMATION_MESSAGE);
-		} else if(e.getSource()==btnVideo){ // Video Reward
+		if(e.getSource()==btnVideo){ // Video Reward
 			// should switch panel to be gone after one click, reward only received once
 			JOptionPane.showMessageDialog(mainFrame,"MAYBE two different videosThe big bunny video should be playing (coming soon)", "Video Reward", JOptionPane.INFORMATION_MESSAGE);
 		} else if(e.getSource()==btnTryAnotherLevel){  // Try another level
@@ -151,17 +148,11 @@ public class QuizDone extends JPanel implements ActionListener{
 		userInteractionPanel.add(rewardPanel, "Rewards");
 		rewardPanel.setLayout(null);
 		// video reward button
-		btnVideo = new JButton("Video Reward");
+		btnVideo = new JButton("VIDEO REWARD");
 		btnVideo.addActionListener(this);
 		btnVideo.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnVideo.setBounds(0, 47, 194, 28);
+		btnVideo.setBounds(0, 47, 421, 28);
 		rewardPanel.add(btnVideo);
-		// audio reward button
-		btnAudio = new JButton("Audio Reward");
-		btnAudio.addActionListener(this);
-		btnAudio.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnAudio.setBounds(227, 47, 194, 28);
-		rewardPanel.add(btnAudio);
 		// claim reward label
 		JLabel lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
 		lblGoodJobPlease.setFont(new Font("Arial", Font.PLAIN, 20));
