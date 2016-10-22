@@ -44,7 +44,7 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	 * @param path path to the cheer 1 file
 	 */
 	public static void setCheer1(String path){
-		// TODO need what format?? for the file as well??hmmm
+		// TODO need what format?? for the file as well??hmmm mplayer^
 		File spelling_aid_user = new File(".spelling_aid_cheer");
 		Tools.record(spelling_aid_user,"1" + path);
 	}

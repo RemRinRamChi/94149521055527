@@ -176,7 +176,7 @@ public class SpellingAidMain extends JFrame {
 				spelling_aid_accuracy.createNewFile();
 			}
 			if(! spelling_aid_cheer.exists()){
-				spelling_aid_accuracy.createNewFile();
+				spelling_aid_cheer.createNewFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
