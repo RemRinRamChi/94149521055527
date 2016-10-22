@@ -64,13 +64,13 @@ public class SpellingAidMain extends JFrame {
 			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
-			setSize(460,560);
+			setSize(460,540);
 			setTitle("VOXPSELL Settings");
 		}
 
-		// DOESN'T work on Linux
+		// DOESN'T work on Linux or maybe Java 1.7//TODO
 		// make sure to recentre main frame
-		//this.setLocationRelativeTo(null);
+		this.setLocationRelativeTo(null);
 
 	}
 

@@ -24,6 +24,14 @@ import javax.swing.JSeparator;
 public class OptionsPanel extends JPanel {
 	private SpellingAidMain mainFrame;
 	private JLabel lblName;
+	private JButton btnChangeName;
+	private JButton btnClearStats;
+	private JButton btnBack;
+	private JButton btnClearPref;
+	private JButton btnCheer2;
+	private JButton btnCheer1;
+	private JComboBox themeComboBox;
+	private JComboBox voiceComboBox;
 	
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -53,23 +61,23 @@ public class OptionsPanel extends JPanel {
 		lblName.setBounds(144, 136, 104, 14);
 		add(lblName);
 		
-		JButton btnNewButton = new JButton("change");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnChangeName = new JButton("change");
+		btnChangeName.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.changeCardPanel("Welcome");
 			}
 		});
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnNewButton.setBounds(258, 132, 133, 23);
-		add(btnNewButton);
+		btnChangeName.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnChangeName.setBounds(258, 132, 133, 23);
+		add(btnChangeName);
 		
 		JLabel lblClearStatistics = new JLabel("Clear Statistics");
 		lblClearStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblClearStatistics.setBounds(42, 380, 206, 14);
+		lblClearStatistics.setBounds(42, 350, 206, 14);
 		add(lblClearStatistics);
 		
-		JButton btnClear = new JButton("clear");
-		btnClear.addActionListener(new ActionListener() {
+		btnClearStats = new JButton("clear");
+		btnClearStats.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All progress will be lost. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
 				if(userChoice == JOptionPane.YES_OPTION){
@@ -79,34 +87,34 @@ public class OptionsPanel extends JPanel {
 				}
 			}
 		});
-		btnClear.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnClear.setBounds(258, 376, 133, 23);
-		add(btnClear);
+		btnClearStats.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnClearStats.setBounds(258, 346, 133, 23);
+		add(btnClearStats);
 		
-		JButton btnBack = new JButton("BACK");
+		btnBack = new JButton("BACK");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.changeCardPanel("Main");
 			}
 		});
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnBack.setBounds(295, 462, 96, 36);
+		btnBack.setBounds(296, 442, 96, 36);
 		add(btnBack);
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.addActionListener(new ActionListener() {
+		voiceComboBox = new JComboBox();
+		voiceComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(comboBox.getSelectedItem().toString().equals("Default")){
+				if(voiceComboBox.getSelectedItem().toString().equals("Default")){
 					mainFrame.setVoice("Default");
-				} else if (comboBox.getSelectedItem().toString().equals("Auckland")){
+				} else if (voiceComboBox.getSelectedItem().toString().equals("Auckland")){
 					mainFrame.setVoice("Auckland");
 				}
 			}
 		});
-		comboBox.setFont(new Font("Arial", Font.PLAIN, 12));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Default", "Auckland"}));
-		comboBox.setBounds(258, 166, 133, 23);
-		add(comboBox);
+		voiceComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+		voiceComboBox.setModel(new DefaultComboBoxModel(new String[] {"Default", "Auckland"}));
+		voiceComboBox.setBounds(258, 166, 133, 23);
+		add(voiceComboBox);
 		
 		JLabel lblChangeVoice = new JLabel("VoxSpell Voice");
 		lblChangeVoice.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -115,73 +123,64 @@ public class OptionsPanel extends JPanel {
 		
 		JLabel lblClearPreferences = new JLabel("Clear Preferences");
 		lblClearPreferences.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblClearPreferences.setBounds(42, 414, 205, 14);
+		lblClearPreferences.setBounds(42, 384, 205, 14);
 		add(lblClearPreferences);
 		
-		JButton button = new JButton("clear");
-		button.setFont(new Font("Arial", Font.PLAIN, 12));
-		button.setBounds(258, 410, 133, 23);
-		add(button);
+		btnClearPref = new JButton("clear");
+		btnClearPref.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnClearPref.setBounds(258, 380, 133, 23);
+		add(btnClearPref);
 		
-		JLabel lblSetOwnReward = new JLabel("Own reward video");
-		lblSetOwnReward.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblSetOwnReward.setBounds(42, 204, 205, 14);
-		add(lblSetOwnReward);
+		JLabel lblSetOwnCheer1 = new JLabel("Own cheer 1");
+		lblSetOwnCheer1.setToolTipText("Cheering when user gets 100% right");
+		lblSetOwnCheer1.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSetOwnCheer1.setBounds(42, 242, 205, 14);
+		add(lblSetOwnCheer1);
 		
-		JButton btnSet = new JButton("set");
-		btnSet.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnSet.setBounds(258, 200, 133, 23);
-		add(btnSet);
+		btnCheer1 = new JButton("set");
+		btnCheer1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCheer1.setBounds(258, 238, 133, 23);
+		add(btnCheer1);
 		
-		JLabel lblSetOwnCheer = new JLabel("Own cheer 1");
-		lblSetOwnCheer.setToolTipText("Cheering when user gets 100% right");
-		lblSetOwnCheer.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblSetOwnCheer.setBounds(42, 240, 205, 14);
-		add(lblSetOwnCheer);
+		JLabel lblSetOwnCheer2 = new JLabel("Own cheer 2");
+		lblSetOwnCheer2.setToolTipText("Cheering when user gets less than 100% right");
+		lblSetOwnCheer2.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSetOwnCheer2.setBounds(42, 276, 205, 14);
+		add(lblSetOwnCheer2);
 		
-		JButton button_1 = new JButton("set");
-		button_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		button_1.setBounds(258, 236, 133, 23);
-		add(button_1);
+		btnCheer2 = new JButton("set");
+		btnCheer2.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCheer2.setBounds(258, 272, 133, 23);
+		add(btnCheer2);
 		
-		JLabel lblSetOwnNot = new JLabel("Own cheer 2");
-		lblSetOwnNot.setToolTipText("Cheering when user gets less than 100% right");
-		lblSetOwnNot.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblSetOwnNot.setBounds(42, 274, 205, 14);
-		add(lblSetOwnNot);
-		
-		JButton button_2 = new JButton("set");
-		button_2.setFont(new Font("Arial", Font.PLAIN, 12));
-		button_2.setBounds(258, 270, 133, 23);
-		add(button_2);
-		
-		JLabel lblChange = new JLabel("Set own preferences");
-		lblChange.setFont(new Font("Arial", Font.BOLD, 13));
-		lblChange.setBounds(42, 92, 349, 23);
-		add(lblChange);
+		JLabel lblSetPref = new JLabel("Set own preferences");
+		lblSetPref.setFont(new Font("Arial", Font.BOLD, 13));
+		lblSetPref.setBounds(42, 92, 349, 23);
+		add(lblSetPref);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(42, 117, 349, 8);
 		add(separator);
 		
-		JLabel lblClear = new JLabel("Clear settings");
-		lblClear.setFont(new Font("Arial", Font.BOLD, 13));
-		lblClear.setBounds(42, 336, 349, 23);
-		add(lblClear);
+		JLabel lblClearSettings = new JLabel("Clear settings");
+		lblClearSettings.setFont(new Font("Arial", Font.BOLD, 13));
+		lblClearSettings.setBounds(42, 306, 349, 23);
+		add(lblClearSettings);
 		
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(42, 361, 349, 8);
+		separator_1.setBounds(42, 331, 349, 8);
 		add(separator_1);
 		
-		JLabel lblBackgroundColour = new JLabel("Background colour");
+		JLabel lblBackgroundColour = new JLabel("VoxSpell Theme");
 		lblBackgroundColour.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblBackgroundColour.setBounds(42, 306, 205, 14);
+		lblBackgroundColour.setBounds(42, 204, 205, 14);
 		add(lblBackgroundColour);
 		
-		JButton btnChange = new JButton("change");
-		btnChange.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnChange.setBounds(258, 302, 133, 23);
-		add(btnChange);
+		themeComboBox = new JComboBox();
+		themeComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+		themeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Light", "Dark"}));
+		themeComboBox.setBounds(258, 200, 133, 23);
+		add(themeComboBox);
 
 	}
 	
