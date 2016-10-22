@@ -468,6 +468,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		btnListenAgain = new JButton("Listen again");
 		btnListenAgain.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnListenAgain.addActionListener(this);
+		btnListenAgain.addKeyListener(this);
 		btnListenAgain.setBounds(213, 214, 168, 31);
 		add(btnListenAgain);
 
@@ -475,6 +476,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		btnConfirmOrNext = new JButton("Confirm");
 		btnConfirmOrNext.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnConfirmOrNext.addActionListener(this);
+		btnConfirmOrNext.addKeyListener(this);
 		btnConfirmOrNext.setBounds(391, 214, 108, 31);
 		add(btnConfirmOrNext);
 
@@ -540,6 +542,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		btnStop.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnStop.setToolTipText("Only available during answring phase.");
 		btnStop.addActionListener(this);
+		btnStop.addKeyListener(this);
 		btnStop.setBounds(554, 214, 114, 31);
 		add(btnStop);
 
