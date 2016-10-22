@@ -92,7 +92,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// if choose file button is pressed
 		if(e.getSource()==chooseFile){
-			int returnVal = ownListChooser.showDialog(this, "Choose list");
+			int returnVal = ownListChooser.showDialog(this, "Choose own word list");
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File ownFile = ownListChooser.getSelectedFile();
 				// Change chosen list label appropriately

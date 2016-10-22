@@ -20,6 +20,7 @@ import spelling.settings.OptionsPanel;
 import spelling.statistics.StatisticsViewController;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 /**
  * This is the main frame with a panel of card layout which switches between different GUIs
@@ -35,6 +36,11 @@ public class SpellingAidMain extends JFrame {
 	private StatisticsViewController voxSpellStats;
 	private QuizDone doneQuizQuestion;
 	private OptionsPanel optionsPanel;
+	
+	// theme
+	public enum Theme{Light,Dark};
+	public static Color backgroundColor = Color.WHITE;
+	public static Color textColor = Color.BLACK;
 
 	/**
 	 * Change panel displayed within main frame
@@ -64,7 +70,7 @@ public class SpellingAidMain extends JFrame {
 			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
-			setSize(460,540);
+			setSize(460,560);
 			setTitle("VOXPSELL Settings");
 		}
 
@@ -224,6 +230,17 @@ public class SpellingAidMain extends JFrame {
 	 */
 	public void setVoice(String voice) {
 		quizQuestion.setFestivalVoice(voice);
+	}
+	
+	/**
+	 * 
+	 */
+	public void setTheme(Theme theme){
+		if(theme == Theme.Light){
+			// TODO
+		} else if (theme == Theme.Dark){
+			
+		}
 	}
 	
 	/**

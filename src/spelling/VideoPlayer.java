@@ -44,14 +44,14 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 	private JButton stopBtn;
 
 	/**
-	 * Create the video player dialog.
+	 * Create the video player dialog by creating and laying out the components appropriately.
 	 */
 	public VideoPlayer() {
 		setResizable(false);
 		addWindowListener(this);
 		setTitle("Video Reward");
 		setBounds(100, 100, 675, 470);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(null); // absolute layout
 		contentPanel.setBounds(0, 0, 669, 390);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel);
@@ -62,6 +62,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			getContentPane().add(buttonPane);
 			buttonPane.setLayout(null);
 			{
+				// pause/play button
 				pauseBtn = new JButton("PAUSE");
 				pauseBtn.setBounds(178, 11, 150, 30);
 				pauseBtn.setActionCommand("");
@@ -70,18 +71,21 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 				getRootPane().setDefaultButton(pauseBtn);
 			}
 			
+			// muted/unmute button
 			muteBtn = new JButton("MUTE");
 			muteBtn.setActionCommand("Cancel");
 			muteBtn.setBounds(338, 11, 150, 30);
 			muteBtn.addActionListener(this);
 			buttonPane.add(muteBtn);
 			
+			// stop button
 			stopBtn = new JButton("STOP");
 			stopBtn.setActionCommand("Cancel");
 			stopBtn.setBounds(498, 11, 150, 30);
 			stopBtn.addActionListener(this);
 			buttonPane.add(stopBtn);
 			
+			// time label that changes over time
 			timeLbl = new JLabel("TIME");
 			timeLbl.setHorizontalAlignment(SwingConstants.LEFT);
 			timeLbl.setFont(new Font("Arial", Font.PLAIN, 13));
