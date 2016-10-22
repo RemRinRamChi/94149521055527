@@ -186,9 +186,6 @@ public class SpellList {
 		ArrayList<String> listOfWordsToTest = new ArrayList<String>();
 		HashMap<String,Integer> uniqueWordsToTest = new HashMap<String,Integer>();
 
-		// if the mode is review, the list size should be the size of the list if the size is less than 10
-		//if(spellingType==QuizMode.Review){ TODO testing
-
 		// the list size should be the size of the list if the size is less than 10
 		if(listOfWordsToChooseFrom.size()<10){
 			questionListSize = listOfWordsToChooseFrom.size();
@@ -378,7 +375,8 @@ public class SpellList {
 			endOfQuestion = true;
 			// answer is correct and so proceed to ASKING the next question
 			status = QuizState.Asking;
-
+			// correct so dont have to show user the wrong answer
+			spellingAidQuiz.setCorrectFlag();
 			incrementCurrentStreak();
 		} else {
 			spellingAidQuiz.setResultIndicator("Incorrect");

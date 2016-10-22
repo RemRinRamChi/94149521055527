@@ -65,7 +65,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	private JTextArea definitionArea;
 	
 	// flag to make quiz faster by going on to the next question immediately
-	private boolean fastFlag = true;
+	private boolean correctFlag = false;
 	
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) {
@@ -140,12 +140,22 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	public void goOnToNextQuestion(){
 		btnConfirmOrNext.setText("Next Question");
 		quizAccuracy.setText(": "+spellList.getLvlAccuracy()+"%");
-		if(fastFlag){
+		// if user got answer correct move on immediately, else let user look at the correct answer first
+		if(correctFlag){
+			// set it to false initially for the next question
+			correctFlag = false;
 			btnConfirmOrNext.doClick();
 		}
 
 	}
-
+	
+	/**
+	 *  Set flag to be correct
+	 */
+	public void setCorrectFlag(){
+		correctFlag = true;
+	}
+	
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */

@@ -180,6 +180,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		rewardPanel.add(btnVideo);
 		// claim reward label
 		JLabel lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
+		lblGoodJobPlease.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGoodJobPlease.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblGoodJobPlease.setBounds(0, 0, 421, 43);
 		rewardPanel.add(lblGoodJobPlease);

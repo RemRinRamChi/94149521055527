@@ -1,6 +1,7 @@
 package spelling.quiz;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.concurrent.ExecutionException;
 
 import javax.swing.SwingWorker;
@@ -95,8 +96,12 @@ public class DefinitionGetter extends SwingWorker<String,Void>{
 			definition = definition.substring(0, colonPos);
 		} catch (HttpStatusException hE){
 			definition = "There are no definitions available for this word.";
+		} catch (UnknownHostException hE){
+			// when user doesn't have internet connection
+			definition = "Please make sure you have internet connection for this to work.";
 		} catch (IOException ioE){
 			ioE.printStackTrace();
+
 		}
 		return definition;
 	}
