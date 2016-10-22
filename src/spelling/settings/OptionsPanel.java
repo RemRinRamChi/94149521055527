@@ -6,6 +6,7 @@ import spelling.AudioPlayer;
 import spelling.SpellingAidMain;
 import spelling.SpellingAidMain.Theme;
 import spelling.VoiceGenerator.Voice;
+import spelling.quiz.InvalidWordListException;
 import spelling.quiz.SpellList;
 
 import javax.swing.JLabel;
@@ -14,16 +15,20 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  * This is the GUI for the options panel
  * @author yyap601
  *
  */
 public class OptionsPanel extends JPanel implements ActionListener{
+	private JFileChooser cheeringFileChooser = new JFileChooser();
 	private SpellingAidMain mainFrame;
 	private JLabel lblName;
 	private JButton btnChangeName;
@@ -40,6 +45,11 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	 */
 	public OptionsPanel(SpellingAidMain contentFrame){
 		this();
+		// Make sure that the file chooser only accepts (*.mp3) and (*.wav) files
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("AUDIO FILES (*.mp3)/(*.wav)", "mp3", "wav");
+		cheeringFileChooser.setFileFilter(filter);
+		cheeringFileChooser.setAcceptAllFileFilterUsed(false);
+		
 		mainFrame = contentFrame;
 	}
 	
@@ -59,10 +69,16 @@ public class OptionsPanel extends JPanel implements ActionListener{
 			} else if (voiceComboBox.getSelectedItem().toString().equals("Dark")){
 				mainFrame.setTheme(Theme.Dark);
 			}
-		} else if(e.getSource()==btnCheer1){ // SET CHEERING VOICE 1
-			AudioPlayer.setCheer1("");//TODO
-		} else if(e.getSource()==btnCheer2){ // SET CHEERING VOICE 2
-			AudioPlayer.setCheer2("");//TODO
+		} else if(e.getSource()==btnCheer1 || e.getSource()==btnCheer2){ // SET CHEERING VOICE 
+			int returnVal = cheeringFileChooser.showDialog(this, "Choose audio file");
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File ownFile = cheeringFileChooser.getSelectedFile();
+				if(e.getSource()==btnCheer1){
+					AudioPlayer.setCheer1(ownFile.getAbsolutePath());
+				} else {
+					AudioPlayer.setCheer2(ownFile.getAbsolutePath());
+				}
+			} 
 		} else if(e.getSource()==btnClearStats){ // CLEAR STATISTICS
 			int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All progress will be lost. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
 			if(userChoice == JOptionPane.YES_OPTION){
