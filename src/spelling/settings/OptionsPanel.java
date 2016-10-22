@@ -64,9 +64,9 @@ public class OptionsPanel extends JPanel implements ActionListener{
 				mainFrame.setVoice("Auckland");
 			}
 		} else if(e.getSource()==themeComboBox){ // CHANGE VOXSPELL THEME
-			if(voiceComboBox.getSelectedItem().toString().equals("Light")){
+			if(themeComboBox.getSelectedItem().toString().equals("Light")){
 				mainFrame.setTheme(Theme.Light);
-			} else if (voiceComboBox.getSelectedItem().toString().equals("Dark")){
+			} else if (themeComboBox.getSelectedItem().toString().equals("Dark")){
 				mainFrame.setTheme(Theme.Dark);
 			}
 		} else if(e.getSource()==btnCheer1 || e.getSource()==btnCheer2){ // SET CHEERING VOICE 
@@ -89,7 +89,10 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		} else if(e.getSource()==btnClearPref){ // CLEAR PREFERENCES
 			int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All preferences will be resetted, this includes own cheering voice and not current name. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
 			if(userChoice == JOptionPane.YES_OPTION){
-				// TODO
+				// clear preferences for own cheer file, VoxSpell voice and VoxSpell theme
+				ClearStatistics.clearFile(new File(".spelling_aid_other_prefs"));
+				ClearStatistics.clearFile(new File(".spelling_aid_cheer"));
+				mainFrame.applyPreferences();
 			}
 		} else if(e.getSource()==btnBack){ // GO BACK TO MAIN OPTIONS
 			mainFrame.changeCardPanel("Main");
@@ -98,6 +101,12 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		
 	}
 	
+	public void setSelectedVoice(String selected){
+		voiceComboBox.setSelectedItem(selected);
+	}
+	public void setSelectedTheme(String selected){
+		themeComboBox.setSelectedItem(selected);
+	}
 	
 	/**
 	 * Create the options panel and lay out its components appropriately.
@@ -214,9 +223,9 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		lblBackgroundColour.setBounds(42, 204, 205, 14);
 		add(lblBackgroundColour);
 		themeComboBox = new JComboBox();
+		themeComboBox.addActionListener(this);
 		themeComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
 		themeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Light", "Dark"}));
-		themeComboBox.addActionListener(this);
 		themeComboBox.setBounds(258, 200, 133, 23);
 		add(themeComboBox);
 

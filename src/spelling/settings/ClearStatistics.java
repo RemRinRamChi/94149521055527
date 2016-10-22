@@ -18,14 +18,14 @@ public class ClearStatistics {
 	 */
 	public static String clearStats(){
 		String infoMsg = "All Spelling Statistics Cleared";
-		clear();
+		clearStatsFiles();
 		return infoMsg;
 	}
 
 	/**
 	 *  function to clear all the statistic files
 	 */
-	private static void clear(){
+	private static void clearStatsFiles(){
 		clearFile(new File(".spelling_aid_tried_words"));
 		clearFile(new File(".spelling_aid_failed"));
 		clearFile(new File(".spelling_aid_statistics"));		

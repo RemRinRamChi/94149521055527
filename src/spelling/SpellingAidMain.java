@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import spelling.quiz.QuizDone;
 import spelling.quiz.SpellList;
 import spelling.quiz.Quiz;
+import spelling.settings.ClearStatistics;
 import spelling.settings.OptionsPanel;
 import spelling.statistics.StatisticsViewController;
 
@@ -36,11 +37,11 @@ public class SpellingAidMain extends JFrame {
 	private StatisticsViewController voxSpellStats;
 	private QuizDone doneQuizQuestion;
 	private OptionsPanel optionsPanel;
-	
+
 	// theme
 	public enum Theme{Light,Dark};
-	public static Color backgroundColor = Color.WHITE;
-	public static Color textColor = Color.BLACK;
+	public static Color backgroundColor;
+	public static Color textColor;
 
 	/**
 	 * Change panel displayed within main frame
@@ -127,7 +128,7 @@ public class SpellingAidMain extends JFrame {
 
 		// check for the presence of the hidden statistic files that are required
 		makeSureAllNecessaryFilesArePresent();
-		
+
 		// initialize panels corresponding to different states of VoxSpell
 		welcomeScreen = new WelcomeScreen(this);
 		mainOptions = new MainOptionsPanel(this);
@@ -148,6 +149,8 @@ public class SpellingAidMain extends JFrame {
 		// CALLED AFTER ADDING PANELS TO DECIDE THE PANEL TO DISPLAY
 		makeSureNameFileExists();
 
+		applyPreferences();
+		
 		// set location here
 		setLocationRelativeTo(null);
 	}
@@ -161,7 +164,8 @@ public class SpellingAidMain extends JFrame {
 		File spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		File spelling_aid_accuracy = new File(".spelling_aid_accuracy");
 		File spelling_aid_cheer = new File(".spelling_aid_cheer");
-		
+		File spelling_aid_other_prefs = new File(".spelling_aid_other_prefs");
+
 		try{
 			if(! spelling_aid_failed.exists()){
 				spelling_aid_failed.createNewFile();
@@ -177,6 +181,9 @@ public class SpellingAidMain extends JFrame {
 			}
 			if(! spelling_aid_cheer.exists()){
 				spelling_aid_cheer.createNewFile();
+			}
+			if(! spelling_aid_other_prefs.exists()){
+				spelling_aid_other_prefs.createNewFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -230,24 +237,59 @@ public class SpellingAidMain extends JFrame {
 	}
 
 	/**
+	 * This method applies user's preferences to VOXSpell every time it starts and also when the user changes it
+	 */
+	public void applyPreferences(){
+		File prefFile = new File(".spelling_aid_other_prefs");
+		String preferredTheme = "Light";
+		String preferredVoice = "Default";
+		backgroundColor = Color.WHITE;
+		textColor = Color.BLACK;
+		try {
+			// get the most recent setted preferences
+			BufferedReader readPreferences = new BufferedReader(new FileReader(prefFile));
+			String pref = readPreferences.readLine();
+			while(pref != null){
+				if(pref.charAt(0)=='v'){
+					preferredVoice = pref.substring(1);
+				} else if(pref.charAt(0)=='t'){
+					preferredTheme = pref.substring(1);
+				}
+				pref = readPreferences.readLine();
+			}
+			readPreferences.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// tidy up the .spelling_aid_cheer to have only 2 cheer file paths
+		ClearStatistics.clearFile(prefFile);
+		optionsPanel.setSelectedVoice(preferredVoice);
+		optionsPanel.setSelectedTheme(preferredTheme);
+	}
+	
+	/**
 	 * Change voice generator of VoxSpell
 	 * @param voice festival's voice
 	 */
 	public void setVoice(String voice) {
 		quizQuestion.setFestivalVoice(voice);
+		Tools.record(new File(".spelling_aid_other_prefs"), "v"+voice);
 	}
-	
+
 	/**
-	 * 
+	 * Change VOXSPELL's theme
+	 * @param theme VOXSPELL's colout theme
 	 */
 	public void setTheme(Theme theme){
 		if(theme == Theme.Light){
-			// TODO
+			// TODO something to do with setting the backgound/text colour
+			Tools.record(new File(".spelling_aid_other_prefs"), "tLight");
 		} else if (theme == Theme.Dark){
-			
+			Tools.record(new File(".spelling_aid_other_prefs"), "tDark");
+
 		}
 	}
-	
+
 	/**
 	 * Update spelling list
 	 */
