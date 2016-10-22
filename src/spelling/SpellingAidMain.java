@@ -50,28 +50,28 @@ public class SpellingAidMain extends JFrame {
 	public void changeCardPanel(String mode){
 		// change panel to display according to mode 
 		((CardLayout) contentPane.getLayout()).show(contentPane, mode);
-		// change size of main VoxSpell frame depending on the size of the panel contained within (width+20,height+40) 
+		// change size of main VoxSpell frame depending on the size of the panel contained within (width+16,height+40) 
 		if(mode.equals("Welcome")){
 			welcomeScreen.clearField();
-			setSize(470,490);
+			setSize(464,490);
 			setTitle("Welcome To VOXSPELL");
 		} else if (mode.equals("Main")){
 			mainOptions.setUserName(getUserName());
-			setSize(470,540);
+			setSize(464,540);
 			setTitle("Welcome To VOXSPELL");
 		} else if (mode.equals("Quiz")){
-			setSize(780,400);
+			setSize(776,400);
 			setTitle("VOXPSELL Quiz");
 		} else if (mode.equals("Done")){
-			setSize(610,480);
+			setSize(606,480);
 			setTitle("VOXPSELL Quiz Results");
 		} else if (mode.equals("Stats")){
 			voxSpellStats.setUserName(getUserName());
-			setSize(490,650);
+			setSize(486,650);
 			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
-			setSize(460,560);
+			setSize(456,560);
 			setTitle("VOXPSELL Settings");
 		}
 
@@ -92,8 +92,8 @@ public class SpellingAidMain extends JFrame {
 		} 
 		catch(Exception e){ 
 			try {
-				// change look and feel on VoxSpell to windows L+F -- for Windows
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				// change look and feel on VoxSpell to nimbus L+F -- for Windows
+				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
