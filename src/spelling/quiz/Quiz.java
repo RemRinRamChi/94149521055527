@@ -350,7 +350,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			
 		} else {
 			mainQuizDone.changeResultPanel("Results");
-			if(corrects >= spellList.getNoOfQuestions()-1){ // have to change
+			if(corrects >= spellList.getNoOfQuestions()-1 && corrects != 0){ // if 0 then not counted
 				if(mode == QuizMode.New){
 					mainQuizDone.changeUserInteraction("Rewards");
 				} else if(mode == QuizMode.Review){
