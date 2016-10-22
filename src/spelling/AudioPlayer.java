@@ -1,23 +1,31 @@
 package spelling;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.SwingWorker;
 
+import spelling.quiz.InvalidWordListException;
+import spelling.settings.ClearStatistics;
+
 public class AudioPlayer extends SwingWorker<Void, Void>{
-	public enum AudioReward{AllCorrect,NotAllCorrect}; //TODO
+	public enum AudioReward{AllCorrect,NotAllCorrect}; 
 	private AudioReward rewardType;
+	private String cheer1;
+	private String cheer2;
 	
 	public AudioPlayer(AudioReward type){
+		scanCheerFile();
 		rewardType = type;
 	}
 	
 	protected Void doInBackground() throws Exception {
 		if(rewardType.equals(AudioReward.AllCorrect)){
-			Tools.processStarter("mplayer mp3/test.mp3");		
+			Tools.processStarter("mplayer "+cheer1);		
 		} else if(rewardType.equals(AudioReward.NotAllCorrect)){
-			Tools.processStarter("mplayer mp3/test.mp3");		
+			Tools.processStarter("mplayer "+cheer2);		
 		} 
 		return null;
 	}
@@ -36,7 +44,9 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	 * @param path path to the cheer 1 file
 	 */
 	public static void setCheer1(String path){
-		// TODO need what format??
+		// TODO need what format?? for the file as well??hmmm
+		File spelling_aid_user = new File(".spelling_aid_cheer");
+		Tools.record(spelling_aid_user,"1" + path);
 	}
 	
 	/**
@@ -44,22 +54,39 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	 * @param path path to the cheer 2 file
 	 */
 	public static void setCheer2(String path){
-		
+		File spelling_aid_user = new File(".spelling_aid_cheer");
+		Tools.record(spelling_aid_user,"2" + path);
 	}
 	
 	/**
-	 *  make sure cheer file is present to check if user has set any preferred cheering
+	 * Scan the cheer file to know which audio files to play for cheering
 	 */
-	private void makeSureCheerFileIsPresent() {
+	private void scanCheerFile() {
 		File cheerFile = new File(".spelling_aid_cheer");
-		try{
-			if(! cheerFile.exists()){
-				cheerFile.createNewFile();
+		// default cheer file
+		cheer1 = "mp3/test.mp3";
+		cheer2 = "mp3/test.mp3";
+		try {
+			// get the most recent setted cheer files
+			BufferedReader readCheerPath = new BufferedReader(new FileReader(cheerFile));
+			String path = readCheerPath.readLine();
+			while(path != null){
+				if(path.charAt(0)=='1'){
+					cheer1 = path.substring(1);
+				} else if(path.charAt(0)=='2'){
+					cheer2 = path.substring(1);
+				}
+				path = readCheerPath.readLine();
 			}
+			readCheerPath.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-
 		}
+		// tidy up the .spelling_aid_cheer to have only 2 cheer file paths
+		ClearStatistics.clearFile(cheerFile);
+		Tools.record(cheerFile, "1"+cheer1);
+		Tools.record(cheerFile, "2"+cheer2);
+		
 	}
 	
 }
