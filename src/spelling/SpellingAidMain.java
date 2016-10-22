@@ -64,7 +64,7 @@ public class SpellingAidMain extends JFrame {
 			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
-			setSize(470,380);
+			setSize(460,560);
 			setTitle("VOXPSELL Settings");
 		}
 

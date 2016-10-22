@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JSeparator;
 /**
  * This is the GUI for the options panel
  * @author yyap601
@@ -38,36 +39,36 @@ public class OptionsPanel extends JPanel {
 		setLayout(null);
 		
 		JLabel lblSettings = new JLabel("Options");
-		lblSettings.setFont(new Font("Arial", Font.PLAIN, 26));
-		lblSettings.setBounds(42, 24, 146, 41);
+		lblSettings.setFont(new Font("Arial", Font.PLAIN, 24));
+		lblSettings.setBounds(42, 30, 146, 52);
 		add(lblSettings);
 		
 		JLabel lblNewLabel = new JLabel("Current Name :");
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblNewLabel.setBounds(42, 89, 112, 14);
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblNewLabel.setBounds(42, 136, 112, 14);
 		add(lblNewLabel);
 		
 		lblName = new JLabel("name");
-		lblName.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblName.setBounds(156, 76, 213, 41);
+		lblName.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblName.setBounds(144, 136, 104, 14);
 		add(lblName);
 		
-		JButton btnNewButton = new JButton("Change Name");
+		JButton btnNewButton = new JButton("change");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.changeCardPanel("Welcome");
 			}
 		});
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnNewButton.setBounds(42, 114, 133, 35);
+		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnNewButton.setBounds(258, 132, 133, 23);
 		add(btnNewButton);
 		
 		JLabel lblClearStatistics = new JLabel("Clear Statistics");
-		lblClearStatistics.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblClearStatistics.setBounds(42, 166, 112, 14);
+		lblClearStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblClearStatistics.setBounds(42, 380, 206, 14);
 		add(lblClearStatistics);
 		
-		JButton btnClear = new JButton("Clear");
+		JButton btnClear = new JButton("clear");
 		btnClear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All progress will be lost. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
@@ -78,8 +79,8 @@ public class OptionsPanel extends JPanel {
 				}
 			}
 		});
-		btnClear.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnClear.setBounds(42, 191, 133, 35);
+		btnClear.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnClear.setBounds(258, 376, 133, 23);
 		add(btnClear);
 		
 		JButton btnBack = new JButton("BACK");
@@ -88,8 +89,8 @@ public class OptionsPanel extends JPanel {
 				mainFrame.changeCardPanel("Main");
 			}
 		});
-		btnBack.setFont(new Font("Arial", Font.PLAIN, 18));
-		btnBack.setBounds(265, 278, 104, 41);
+		btnBack.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnBack.setBounds(295, 462, 96, 36);
 		add(btnBack);
 		
 		final JComboBox comboBox = new JComboBox();
@@ -102,15 +103,85 @@ public class OptionsPanel extends JPanel {
 				}
 			}
 		});
-		comboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+		comboBox.setFont(new Font("Arial", Font.PLAIN, 12));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Default", "Auckland"}));
-		comboBox.setBounds(223, 192, 146, 34);
+		comboBox.setBounds(258, 166, 133, 23);
 		add(comboBox);
 		
-		JLabel lblChangeVoice = new JLabel("Change Voice");
-		lblChangeVoice.setFont(new Font("Arial", Font.PLAIN, 16));
-		lblChangeVoice.setBounds(223, 166, 112, 14);
+		JLabel lblChangeVoice = new JLabel("VoxSpell Voice");
+		lblChangeVoice.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblChangeVoice.setBounds(42, 170, 112, 14);
 		add(lblChangeVoice);
+		
+		JLabel lblClearPreferences = new JLabel("Clear Preferences");
+		lblClearPreferences.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblClearPreferences.setBounds(42, 414, 205, 14);
+		add(lblClearPreferences);
+		
+		JButton button = new JButton("clear");
+		button.setFont(new Font("Arial", Font.PLAIN, 12));
+		button.setBounds(258, 410, 133, 23);
+		add(button);
+		
+		JLabel lblSetOwnReward = new JLabel("Own reward video");
+		lblSetOwnReward.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSetOwnReward.setBounds(42, 204, 205, 14);
+		add(lblSetOwnReward);
+		
+		JButton btnSet = new JButton("set");
+		btnSet.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnSet.setBounds(258, 200, 133, 23);
+		add(btnSet);
+		
+		JLabel lblSetOwnCheer = new JLabel("Own cheer 1");
+		lblSetOwnCheer.setToolTipText("Cheering when user gets 100% right");
+		lblSetOwnCheer.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSetOwnCheer.setBounds(42, 240, 205, 14);
+		add(lblSetOwnCheer);
+		
+		JButton button_1 = new JButton("set");
+		button_1.setFont(new Font("Arial", Font.PLAIN, 12));
+		button_1.setBounds(258, 236, 133, 23);
+		add(button_1);
+		
+		JLabel lblSetOwnNot = new JLabel("Own cheer 2");
+		lblSetOwnNot.setToolTipText("Cheering when user gets less than 100% right");
+		lblSetOwnNot.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSetOwnNot.setBounds(42, 274, 205, 14);
+		add(lblSetOwnNot);
+		
+		JButton button_2 = new JButton("set");
+		button_2.setFont(new Font("Arial", Font.PLAIN, 12));
+		button_2.setBounds(258, 270, 133, 23);
+		add(button_2);
+		
+		JLabel lblChange = new JLabel("Set own preferences");
+		lblChange.setFont(new Font("Arial", Font.BOLD, 13));
+		lblChange.setBounds(42, 92, 349, 23);
+		add(lblChange);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(42, 117, 349, 8);
+		add(separator);
+		
+		JLabel lblClear = new JLabel("Clear settings");
+		lblClear.setFont(new Font("Arial", Font.BOLD, 13));
+		lblClear.setBounds(42, 336, 349, 23);
+		add(lblClear);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(42, 361, 349, 8);
+		add(separator_1);
+		
+		JLabel lblBackgroundColour = new JLabel("Background colour");
+		lblBackgroundColour.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblBackgroundColour.setBounds(42, 306, 205, 14);
+		add(lblBackgroundColour);
+		
+		JButton btnChange = new JButton("change");
+		btnChange.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnChange.setBounds(258, 302, 133, 23);
+		add(btnChange);
 
 	}
 	
