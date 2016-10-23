@@ -162,15 +162,32 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	}
 
 	/**
-	 * Method to call to accept user input
+	 * disable all buttons in quiz question (in answering or done phase)
+	 */
+	public void disableAllButtons(){
+		btnConfirmOrNext.setEnabled(false);
+		btnStop.setEnabled(false);
+		btnListenAgain.setEnabled(false);
+	}
+	
+	/**
+	 * enable all buttons in quiz question (only when not in asking phase)
+	 */
+	public void enableAllButtons(){
+		btnConfirmOrNext.setEnabled(true);
+		btnStop.setEnabled(true);
+		btnListenAgain.setEnabled(true);		
+	}
+	
+	/**
+	 * Method to call to accept user input, only works in answering state
 	 */
 	private void takeInUserInput(){
 		// only take in input when it is in the ANSWERING phase
 		if(spellList.status == QuizState.Answering){
 			spellList.setAnswer(getAndClrInput());
 			spellList.status = QuizState.Answered;
-			ansChecker=spellList.getAnswerChecker()
-					;
+			ansChecker=spellList.getAnswerChecker();
 			ansChecker.execute();
 		}	
 
@@ -191,6 +208,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 */
 	public void goOnToNextQuestion(){
 		btnConfirmOrNext.setText("Next Question");
+		enableAllButtons();// need to be able to click to proceed
 		quizAccuracy.setText(": "+spellList.getLvlAccuracy()+"%");
 		// if user got answer correct move on immediately, else let user look at the correct answer first
 		if(correctFlag){
@@ -571,53 +589,53 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		// show current quiz
 		lblCurrentQuiz = new JLabel("Current Quiz ");
 		lblCurrentQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCurrentQuiz.setBounds(517, 73, 108, 14);
+		lblCurrentQuiz.setBounds(523, 75, 108, 14);
 		add(lblCurrentQuiz);
 		currentQuiz = new JLabel(": ");
 		currentQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
-		currentQuiz.setBounds(647, 75, 127, 14);
+		currentQuiz.setBounds(653, 77, 127, 14);
 		add(currentQuiz);
 		
 		// show current streak
 		lblCurrentStreak = new JLabel("Current Streak");
 		lblCurrentStreak.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblCurrentStreak.setBounds(517, 98, 118, 14);
+		lblCurrentStreak.setBounds(523, 100, 118, 14);
 		add(lblCurrentStreak);
 		currentStreak = new JLabel(": ");
 		currentStreak.setFont(new Font("Arial", Font.PLAIN, 14));
-		currentStreak.setBounds(647, 100, 127, 14);
+		currentStreak.setBounds(653, 102, 127, 14);
 		add(currentStreak);
 		
 		// show longest streak
 		lblLongeststreak = new JLabel("Longest Streak\r\n");
 		lblLongeststreak.setVerticalAlignment(SwingConstants.TOP);
 		lblLongeststreak.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblLongeststreak.setBounds(517, 122, 96, 20);
+		lblLongeststreak.setBounds(523, 124, 96, 20);
 		add(lblLongeststreak);
 		longestStreak = new JLabel(": ");
 		longestStreak.setFont(new Font("Arial", Font.PLAIN, 14));
-		longestStreak.setBounds(647, 124, 127, 14);
+		longestStreak.setBounds(653, 126, 127, 14);
 		add(longestStreak);
 		
 		// show words spelled correctly
 		lblSpelledCorrectly = new JLabel("Spelled Correctly");
 		lblSpelledCorrectly.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblSpelledCorrectly.setBounds(517, 147, 118, 14);
+		lblSpelledCorrectly.setBounds(523, 149, 118, 14);
 		add(lblSpelledCorrectly);
 		noOfCorrectSpellings = new JLabel(": ");
 		noOfCorrectSpellings.setFont(new Font("Arial", Font.PLAIN, 14));
-		noOfCorrectSpellings.setBounds(647, 149, 127, 14);
+		noOfCorrectSpellings.setBounds(653, 151, 127, 14);
 		add(noOfCorrectSpellings);
 		
 		// show quiz accuracy
 		lblQuizAccuracy = new JLabel("Quiz Accuracy\r\n");
 		lblQuizAccuracy.setVerticalAlignment(SwingConstants.TOP);
 		lblQuizAccuracy.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblQuizAccuracy.setBounds(517, 172, 108, 20);
+		lblQuizAccuracy.setBounds(523, 174, 108, 20);
 		add(lblQuizAccuracy);
 		quizAccuracy = new JLabel(": ");
 		quizAccuracy.setFont(new Font("Arial", Font.PLAIN, 14));
-		quizAccuracy.setBounds(647, 174, 127, 14);
+		quizAccuracy.setBounds(653, 176, 127, 14);
 		add(quizAccuracy);
 
 	}

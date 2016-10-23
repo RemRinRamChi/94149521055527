@@ -150,6 +150,7 @@ public class SpellList {
 		currentLevel = level;
 		spellType=spellingType;
 		status = QuizState.Asking;
+		spellingAidQuiz.enableAllButtons();
 
 		// update quiz field with level
 		spellingAidQuiz.setCurrentQuiz(": "+level);
@@ -321,6 +322,7 @@ public class SpellList {
 
 			// after ASKING, it is time for ANSWERING
 			status = QuizState.Answering;
+			spellingAidQuiz.enableAllButtons();
 		} else {
 			questionNo++;
 		}
@@ -339,6 +341,7 @@ public class SpellList {
 			JOptionPane.showMessageDialog(spellingAidQuiz, "Oops! The answer field is blank, please enter something.", "Input Warning",JOptionPane.WARNING_MESSAGE);
 			// go back to ANSWERING since current answer is invalid
 			status = QuizState.Answering;
+			spellingAidQuiz.enableAllButtons();
 			spellingAidQuiz.requestInputFocus();
 			return;
 		} 
@@ -375,6 +378,7 @@ public class SpellList {
 			endOfQuestion = true;
 			// answer is correct and so proceed to ASKING the next question
 			status = QuizState.Asking;
+			spellingAidQuiz.disableAllButtons();
 			// correct so dont have to show user the wrong answer
 			spellingAidQuiz.setCorrectFlag();
 			incrementCurrentStreak();
@@ -384,6 +388,7 @@ public class SpellList {
 				spellingAidQuiz.requestInputFocus();
 				// answer is wrong and a second chance is given and so back to ANSWERING
 				status = QuizState.Answering;
+				spellingAidQuiz.enableAllButtons();
 			} else {
 				spellingAidQuiz.sayText("Incorrect.",",");
 				Tools.record(spelling_aid_statistics,wordToSpell+" Failed"); // store as failed
@@ -392,6 +397,7 @@ public class SpellList {
 				}
 				// answer is wrong on second attempt and so back to ASKING
 				status = QuizState.Asking;
+				spellingAidQuiz.enableAllButtons();
 				endOfQuestion = true;
 			}
 			if(!attempt){
