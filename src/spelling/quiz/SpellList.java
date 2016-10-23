@@ -89,7 +89,7 @@ public class SpellList {
 	 */
 	public SpellList(){
 		// Files that contains the word list and statistics
-		wordList = new File(".NZCER-spelling-lists.txt");
+		wordList = new File("NZCER-spelling-lists.txt");
 		usersList = new File(".USER-spelling-lists.txt");
 		spelling_aid_tried_words = new File(".spelling_aid_tried_words");
 		spelling_aid_failed = new File(".spelling_aid_failed");

@@ -69,9 +69,6 @@ public class SpellingAidMain extends JFrame {
 			setTitle("VOXPSELL Settings");
 		}
 
-		// DOESN'T work on Linux or maybe Java 1.7//TODO
-		// make sure to recentre main frame
-		this.setLocationRelativeTo(null);
 
 	}
 
@@ -81,16 +78,11 @@ public class SpellingAidMain extends JFrame {
 	public static void main(String[] args) {
 		try 
 		{ 
-			// change look and feel on VoxSpell to windows L+F -- for Linux
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		} 
 		catch(Exception e){ 
-			try {
-				// change look and feel on VoxSpell to nimbus L+F -- for Windows
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
+			e.printStackTrace();
+
 		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -145,7 +137,7 @@ public class SpellingAidMain extends JFrame {
 		makeSureNameFileExists();
 
 		applyPreferences();
-		
+
 		// set location here
 		setLocationRelativeTo(null);
 	}
@@ -257,7 +249,7 @@ public class SpellingAidMain extends JFrame {
 		ClearFiles.clearFile(prefFile);
 		optionsPanel.setSelectedVoice(preferredVoice);
 	}
-	
+
 	/**
 	 * Change voice generator of VoxSpell
 	 * @param voice festival's voice
