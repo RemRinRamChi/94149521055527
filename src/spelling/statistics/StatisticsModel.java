@@ -129,7 +129,7 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 	protected Void doInBackground(){
 		spellingAidStats.clearLevelTable();
 		if(zeroWords == 0){
-			//publish("\n There Are NO Attempted Words !!!"); //maybe become POP UP TODO
+			//no words
 		} else { // tried words file not empty
 			// go through all the attempted levels
 			for(String i : mapOfTriedWords.keySet()){

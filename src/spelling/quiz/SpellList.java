@@ -86,7 +86,7 @@ public class SpellList {
 
 	// Hashmap to store how many times a level has been attempted
 	HashMap<String,Integer> totalAttempts = new HashMap<String,Integer>();
-	
+
 	/**
 	 * Constructor of spellinglist model for current session 
 	 */
@@ -138,22 +138,22 @@ public class SpellList {
 		questionNo = 0;
 		correctAnsCount = 0;
 		resetCurrentStreak();
-		
+
 		if(longestLevelStreak.get(level)==null){
 			longestStreak = currentStreak;
 			longestLevelStreak.put(level, longestStreak);
-			
+
 		} else {
 			longestStreak = longestLevelStreak.get(level);
 		}
-		
+
 		currentLevel = level;
 		spellType=spellingType;
 		status = QuizState.Asking;
 
 		// update quiz field with level
 		spellingAidQuiz.setCurrentQuiz(": "+level);
-		
+
 		// update longest streak label
 		spellingAidQuiz.setLongestStreak(": " + longestStreak);
 
@@ -179,7 +179,12 @@ public class SpellList {
 		if(totalAsked.get(currentLevel)==null){
 			totalAsked.put(currentLevel, 0);
 			totalCorrect.put(currentLevel, 0);
+			totalAttempts.put(currentLevel, 0);
 		}
+		
+		// record an attempt
+		int tA = totalAttempts.get(currentLevel)+1;
+		totalAttempts.put(currentLevel,tA);
 
 		// produce 10 random words from the correct list of words
 		ArrayList<String> listOfWordsToChooseFrom = wordMap.get(level);
@@ -206,11 +211,8 @@ public class SpellList {
 		currentQuizList = listOfWordsToTest;
 		currentFailedList = mapOfFailedWords.get(currentLevel);
 		currentTriedList = mapOfTriedWords.get(currentLevel);
-		
-		// reset list of definitions
-		//definitions = new HashMap<String,String>();
-		//definitionGen = new DefinitionGetter(currentQuizList,definitions);
-		//definitionGen.execute();
+
+
 	}
 
 	/**
@@ -311,7 +313,7 @@ public class SpellList {
 			System.out.println(wordToSpell);
 			// then increment the question no to represent the real question number
 			questionNo++;
-			
+
 			spellingAidQuiz.setDefinition("Loading definition ..."); // while loading definitions
 			spellingAidQuiz.setSpellQuery("Please spell word " + questionNo + " of " + currentQuizList.size() + ": ");
 			DefinitionGetter.getDefinitionGetter(wordToSpell,spellingAidQuiz).execute();
@@ -427,7 +429,7 @@ public class SpellList {
 		ClearStatistics.clearFile(spelling_aid_failed);
 		ClearStatistics.clearFile(spelling_aid_tried_words);
 		ClearStatistics.clearFile(spelling_aid_accuracy);
-		
+
 		Arrays.sort(failedKeys);
 		Arrays.sort(triedKeys);
 
@@ -452,13 +454,8 @@ public class SpellList {
 			Tools.record(spelling_aid_accuracy, ""+totalAsked.get(dKey));
 			Tools.record(spelling_aid_accuracy, ""+totalCorrect.get(dKey));
 			Tools.record(spelling_aid_accuracy,longestLevelStreak.get(dKey)+"");
-			// if level is on first attempt
-			if(totalAttempts.get(dKey)==null){
-				Tools.record(spelling_aid_accuracy,1+"");
-			} else {
-				int tA = totalAttempts.get(dKey) + 1; // increment
-				Tools.record(spelling_aid_accuracy,tA+"");
-			}
+			Tools.record(spelling_aid_accuracy,totalAttempts.get(dKey)+"");
+
 		}
 
 	}
@@ -663,5 +660,5 @@ public class SpellList {
 		}  
 		return true; 
 	}
-	
+
 }
