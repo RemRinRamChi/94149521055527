@@ -25,7 +25,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 /**
- * Thos is the GUI for the quiz questions
+ * This is the GUI class for the quiz questions which is the View Controller of the quiz questions
+ * for users to answer questions in
  * @author yyap601
  *
  */

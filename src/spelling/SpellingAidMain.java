@@ -3,28 +3,27 @@ package spelling;
 import java.awt.EventQueue;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import spelling.quiz.QuizDone;
 import spelling.quiz.SpellList;
 import spelling.quiz.Quiz;
-import spelling.settings.ClearStatistics;
+import spelling.settings.ClearFiles;
 import spelling.settings.OptionsPanel;
 import spelling.statistics.StatisticsViewController;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 /**
- * This is the main frame with a panel of card layout which switches between different GUIs
+ * This is the VoxSpell main frame with a panel of card layout which switches between different states
+ * , it handles the resizing of the main frame corresponding to different states (e.g. new quiz and statistics)
+ * It also makes sure that all necessary files for the spelling aid are present.
  * @author yyap601
  *
  */
@@ -188,10 +187,8 @@ public class SpellingAidMain extends JFrame {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// create special video with a background swingworker thread when the app starts
-		//VideoCreator createSpecialVideo = new VideoCreator();
-		//createSpecialVideo.execute();
 	}
+
 
 	private void makeSureNameFileExists(){
 		File spelling_aid_user = new File(".spelling_aid_user");
@@ -257,7 +254,7 @@ public class SpellingAidMain extends JFrame {
 			e.printStackTrace();
 		}
 		// tidy up the .spelling_aid_cheer to have only 2 cheer file paths
-		ClearStatistics.clearFile(prefFile);
+		ClearFiles.clearFile(prefFile);
 		optionsPanel.setSelectedVoice(preferredVoice);
 	}
 	

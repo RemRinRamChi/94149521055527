@@ -9,13 +9,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import spelling.settings.ClearStatistics;
 
 /**
  * 
- * This class is a collection of helper functions 
- * that are used in multiple classes
- * @authors yyap601 hchu167
+ * This class is a collection of helper functions that are used in multiple classes
+ * @authors yyap601
  *
  */
 public class Tools {

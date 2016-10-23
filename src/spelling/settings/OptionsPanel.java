@@ -4,8 +4,6 @@ import javax.swing.JPanel;
 
 import spelling.AudioPlayer;
 import spelling.SpellingAidMain;
-import spelling.VoiceGenerator.Voice;
-import spelling.quiz.InvalidWordListException;
 import spelling.quiz.SpellList;
 
 import javax.swing.JLabel;
@@ -23,7 +21,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
- * This is the GUI for the options panel
+ * This is the GUI for the options panel which contains options to change name
+ * , change cheering audio files, change festival voice and also clear settings
  * @author yyap601
  *
  */
@@ -86,16 +85,13 @@ public class OptionsPanel extends JPanel implements ActionListener{
 			int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All progress will be lost. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
 			if(userChoice == JOptionPane.YES_OPTION){
 				//CLEAR STATS info dialog
-				JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(mainFrame, ClearFiles.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
 				mainFrame.updateSpellingList(new SpellList());
 			}
 		} else if(e.getSource()==btnClearPref){ // CLEAR PREFERENCES
 			int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All preferences will be resetted, this includes own cheering voice and own list, not current name. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
 			if(userChoice == JOptionPane.YES_OPTION){
-				// clear preferences for own cheer file, VoxSpell voice and VoxSpell theme
-				ClearStatistics.clearFile(new File(".spelling_aid_other_prefs"));
-				ClearStatistics.clearFile(new File(".spelling_aid_cheer"));
-				ClearStatistics.clearFile(new File(".USER-spelling-lists.txt"));
+				JOptionPane.showMessageDialog(mainFrame, ClearFiles.clearPrefs(), "VoxSpell Preferences Cleared", JOptionPane.INFORMATION_MESSAGE);
 				mainFrame.applyPreferences();
 			}
 		} else if(e.getSource()==btnBack){ // GO BACK TO MAIN OPTIONS
@@ -105,6 +101,10 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		
 	}
 	
+	/**
+	 * set selected festival voice
+	 * @param selected
+	 */
 	public void setSelectedVoice(String selected){
 		voiceComboBox.setSelectedItem(selected);
 	}

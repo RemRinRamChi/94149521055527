@@ -6,10 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.Random;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -21,19 +19,21 @@ import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.runtime.RuntimeUtil;
 
 import com.sun.jna.Native;
-import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
+/**
+ * This class utilizes vlcj to play videos as a video reward in a quiz
+ * @author YaoJian
+ *
+ */
 public class VideoPlayer extends JDialog implements ActionListener,WindowListener{
 
 	// 5 different videos
-	private final String bigBuckBunnyVideo = "vids/bigbucknarrated.mp4";
+	private final String bigBuckBunnyVideo = "vids/.bigbucknarrated.mp4"; // hidden because it is a reward, not supposed to be found by user
 	
 	private final JPanel contentPanel = new JPanel();
 	private EmbeddedMediaPlayerComponent mediaPlayerComponent;

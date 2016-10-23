@@ -6,11 +6,12 @@ import java.io.PrintWriter;
 
 /**
  * 
- * This class contains functions that clear the statistic files and displays a confirmation to the user
+ * This class contains functions that clears files and also functions that clear all statistic and 
+ * preferences files at the same time
  * @authors yyap601 
  *
  */
-public class ClearStatistics {
+public class ClearFiles {
 
 	/**
 	 *  function to return information message and at the same time clear all the statistic files
@@ -18,20 +19,27 @@ public class ClearStatistics {
 	 */
 	public static String clearStats(){
 		String infoMsg = "All Spelling Statistics Cleared";
-		clearStatsFiles();
-		return infoMsg;
-	}
-
-	/**
-	 *  function to clear all the statistic files
-	 */
-	private static void clearStatsFiles(){
 		clearFile(new File(".spelling_aid_tried_words"));
 		clearFile(new File(".spelling_aid_failed"));
 		clearFile(new File(".spelling_aid_statistics"));		
 		clearFile(new File(".spelling_aid_accuracy"));		
 		clearFile(new File(".spelling_aid_longest_streak"));
+		return infoMsg;
 	}
+
+	/**
+	 *  function to return information message and at the same time clear all the preferences files
+	 * @return The information message to be displayed
+	 */
+	public static String clearPrefs(){
+		String infoMsg = "Preferences cleared !";
+		clearFile(new File(".spelling_aid_other_prefs"));
+		clearFile(new File(".spelling_aid_cheer"));
+		clearFile(new File(".USER-spelling-lists.txt"));
+		return infoMsg;
+	}
+	
+	
 
 	/**
 	 *  function to clear a single statistic file

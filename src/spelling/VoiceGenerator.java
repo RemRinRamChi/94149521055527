@@ -5,12 +5,12 @@ import java.io.IOException;
 
 import javax.swing.SwingWorker;
 
-import spelling.settings.ClearStatistics;
+import spelling.settings.ClearFiles;
 
 /**
  * 
- * This class governs the main logic for generating festival voices
- * for pronouncing sentences and spelling words
+ * This class governs the main logic for generating festival voices for pronouncing sentences
+ * and spelling words
  * @authors yyap601 hchu167
  *
  */
@@ -62,7 +62,7 @@ public class VoiceGenerator extends SwingWorker<Void, Void>{
 		 */
 		public void sayText(String normalSpeedText,String changedText){
 			double originalStretch = stretch;
-			ClearStatistics.clearFile(schemeFile);
+			ClearFiles.clearFile(schemeFile);
 			if(voice == Voice.DEFAULT){
 				// to make "a" sound more appropriately
 				if(changedText.equals("a,")){

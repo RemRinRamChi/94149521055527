@@ -12,14 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import spelling.Tools;
-import spelling.settings.ClearStatistics;
+import spelling.settings.ClearFiles;
 
 /**
  * 
- * This class controls the logic to ask questions 
- * and generate festival commands during the spelling quiz.
- * Getter functions are also used so GUI output and statistics
- * can be linked in a proper manner.
+ * This class controls the logic to ask questions and generate festival commands during the spelling quiz.
  * @authors yyap601 
  *
  */
@@ -438,9 +435,9 @@ public class SpellList {
 		Object[] triedKeys = mapOfFailedWords.keySet().toArray();
 		Object[] accuracyKeys = totalAsked.keySet().toArray();
 
-		ClearStatistics.clearFile(spelling_aid_failed);
-		ClearStatistics.clearFile(spelling_aid_tried_words);
-		ClearStatistics.clearFile(spelling_aid_accuracy);
+		ClearFiles.clearFile(spelling_aid_failed);
+		ClearFiles.clearFile(spelling_aid_tried_words);
+		ClearFiles.clearFile(spelling_aid_accuracy);
 
 		Arrays.sort(failedKeys);
 		Arrays.sort(triedKeys);

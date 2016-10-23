@@ -1,9 +1,8 @@
 package spelling.quiz;
 
-import javax.swing.ComboBoxModel;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import static java.nio.file.StandardCopyOption.*;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,7 +10,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import spelling.SpellingAidMain;
 import spelling.Tools;
 import spelling.quiz.SpellList.QuizMode;
-import spelling.settings.ClearStatistics;
+import spelling.settings.ClearFiles;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,19 +19,16 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 /**
- * This is the dialog to choose the quiz
+ * This is the dialog to choose the quiz to be initiated, it also allows the user to choose own list
  * @author yyap601
  *
  */
@@ -225,7 +221,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 			i++;
 		}
 
-		ClearStatistics.clearFile(to); // only start clearing when nothing is wrong
+		ClearFiles.clearFile(to); // only start clearing when nothing is wrong
 		for(String word : wordsToCopy){
 			Tools.record(to,word);
 		}

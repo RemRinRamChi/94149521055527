@@ -11,7 +11,7 @@ import javax.swing.JTextArea;
 
 import spelling.SpellingAidMain;
 import spelling.quiz.SpellList;
-import spelling.settings.ClearStatistics;
+import spelling.settings.ClearFiles;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -23,7 +23,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 /**
- * This is the GUI for the spelling aid statistics
+ * This is the view controller for the spelling aid statistics which consists
+ * of 2 tables in tabbed panes displaying results that are specific to a level and also
+ * statistics specific to words
  * @author yyap601
  *
  */
@@ -139,7 +141,7 @@ public class StatisticsViewController extends JPanel {
 				if(userChoice == JOptionPane.YES_OPTION){
 					mainFrame.changeCardPanel("Main"); // go back to Main since no stats to display
 					//CLEAR STATS info dialog
-					JOptionPane.showMessageDialog(mainFrame, ClearStatistics.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(mainFrame, ClearFiles.clearStats(), "VoxSpell Statistics Cleared", JOptionPane.INFORMATION_MESSAGE);
 					mainFrame.updateSpellingList(new SpellList());
 				}
 			}

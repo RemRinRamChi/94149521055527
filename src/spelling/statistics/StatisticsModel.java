@@ -14,15 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
 import spelling.SpellingAidMain;
-import spelling.quiz.SpellList;
 
 
 /**
  * 
- * This class controls the logic to create hidden statistics files
- * and storing results of spelling tests in data structures
- * so that mastered/faulted/failed word numbers and accuracy
- * rates for each level are correctly displayed.
+ * StatisticsModel is a model for statistics which holds all the statistics data, it can be 
+ * run as a swingworker to return statistics data to the view controller
  * @authors yyap601 
  *
  */

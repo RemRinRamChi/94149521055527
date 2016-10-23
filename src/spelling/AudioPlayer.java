@@ -7,9 +7,12 @@ import java.io.IOException;
 
 import javax.swing.SwingWorker;
 
-import spelling.quiz.InvalidWordListException;
-import spelling.settings.ClearStatistics;
-
+import spelling.settings.ClearFiles;
+/**
+ * AudioPlayer is a class which can play an audio file in a background thread
+ * @author yyap601
+ *
+ */
 public class AudioPlayer extends SwingWorker<Void, Void>{
 	public enum AudioReward{AllCorrect,NotAllCorrect}; 
 	private AudioReward rewardType;
@@ -21,6 +24,7 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 		rewardType = type;
 	}
 	
+	// run in backgrounf
 	protected Void doInBackground() throws Exception {
 		if(rewardType.equals(AudioReward.AllCorrect)){
 			Tools.processStarter("mplayer "+cheer1);		
@@ -83,7 +87,7 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 			e.printStackTrace();
 		}
 		// tidy up the .spelling_aid_cheer to have only 2 cheer file paths
-		ClearStatistics.clearFile(cheerFile);
+		ClearFiles.clearFile(cheerFile);
 		Tools.record(cheerFile, "1"+cheer1);
 		Tools.record(cheerFile, "2"+cheer2);
 		

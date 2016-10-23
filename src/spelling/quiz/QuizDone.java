@@ -2,7 +2,6 @@ package spelling.quiz;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -20,7 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.CardLayout;
 /**
- * This is the GUI that's displayed when the user is done with aquiz
+ * This is the GUI that's displayed when the user is done with a quiz, displaying the results 
+ * and advancing options and also rewards
  * @author yyap601
  *
  */

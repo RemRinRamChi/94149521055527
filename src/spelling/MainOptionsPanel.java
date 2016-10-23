@@ -4,11 +4,9 @@ import javax.swing.JPanel;
 
 import spelling.quiz.QuizChooser;
 import spelling.quiz.SpellList.QuizMode;
-import spelling.settings.ClearStatistics;
 import spelling.statistics.StatisticsModel;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
@@ -22,7 +20,8 @@ import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.SwingConstants;
 /**
- * This is the panel which contains the main VoxSpell options
+ * This is the panel which contains the main VoxSpell options 
+ * {New Quiz, Review Quiz, View Statistics, Options and Quit}
  * @author yyap601
  *
  */

@@ -12,7 +12,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 /**
- * This class is a swingworker class which obtains the definition for a word
+ * This class is a swingworker class which obtains the definition for a word by extracting
+ * the definition content from dictionary.com for a specific word from the html file using jsoup
  * @author yyap601
  *
  */
