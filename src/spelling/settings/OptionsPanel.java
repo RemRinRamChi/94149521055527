@@ -90,11 +90,12 @@ public class OptionsPanel extends JPanel implements ActionListener{
 				mainFrame.updateSpellingList(new SpellList());
 			}
 		} else if(e.getSource()==btnClearPref){ // CLEAR PREFERENCES
-			int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All preferences will be resetted, this includes own cheering voice and not current name. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
+			int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All preferences will be resetted, this includes own cheering voice and own list, not current name. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
 			if(userChoice == JOptionPane.YES_OPTION){
 				// clear preferences for own cheer file, VoxSpell voice and VoxSpell theme
 				ClearStatistics.clearFile(new File(".spelling_aid_other_prefs"));
 				ClearStatistics.clearFile(new File(".spelling_aid_cheer"));
+				ClearStatistics.clearFile(new File(".USER-spelling-lists.txt"));
 				mainFrame.applyPreferences();
 			}
 		} else if(e.getSource()==btnBack){ // GO BACK TO MAIN OPTIONS

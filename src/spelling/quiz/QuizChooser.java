@@ -84,7 +84,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 		createAndLayoutComponents();
 
 		// populate the combo box
-		DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.getLevelValues(new File("USER-spelling-lists.txt")));
+		DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.getLevelValues(new File(".USER-spelling-lists.txt")));
 		ownListComboBox.setModel(combo);
 		applyTheme();
 		// centre dialog
@@ -155,7 +155,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 				File ownFile = ownListChooser.getSelectedFile();
 				// Change chosen list label appropriately
 				try {
-					DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromToAndGetTitles(ownFile,new File("USER-spelling-lists.txt")));
+					DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromToAndGetTitles(ownFile,new File(".USER-spelling-lists.txt")));
 					ownListComboBox.setModel(combo);
 					mainQuizPanel.updateSpellList(new SpellList());
 				} catch(InvalidWordListException iWE){

@@ -161,6 +161,7 @@ public class SpellingAidMain extends JFrame {
 		File spelling_aid_accuracy = new File(".spelling_aid_accuracy");
 		File spelling_aid_cheer = new File(".spelling_aid_cheer");
 		File spelling_aid_other_prefs = new File(".spelling_aid_other_prefs");
+		File userList = new File(".USER-spelling-lists.txt");
 
 		try{
 			if(! spelling_aid_failed.exists()){
@@ -180,6 +181,9 @@ public class SpellingAidMain extends JFrame {
 			}
 			if(! spelling_aid_other_prefs.exists()){
 				spelling_aid_other_prefs.createNewFile();
+			}
+			if(! userList.exists()){
+				userList.createNewFile();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
