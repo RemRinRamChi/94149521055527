@@ -147,7 +147,7 @@ public class SpellList {
 		currentLevel = level;
 		spellType=spellingType;
 		status = QuizState.Asking;
-		spellingAidQuiz.enableAllButtons();
+		spellingAidQuiz.disableAllButtons();
 
 		// update quiz field with level
 		spellingAidQuiz.setCurrentQuiz(": "+level);
@@ -398,7 +398,7 @@ public class SpellList {
 				}
 				// answer is wrong on second attempt and so back to ASKING
 				status = QuizState.Asking;
-				spellingAidQuiz.enableAllButtons();
+				spellingAidQuiz.disableAllButtons();
 				endOfQuestion = true;
 			}
 			if(!attempt){
