@@ -24,12 +24,12 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 		rewardType = type;
 	}
 	
-	// run in backgrounf
+	// run in background
 	protected Void doInBackground() throws Exception {
 		if(rewardType.equals(AudioReward.AllCorrect)){
-			Tools.processStarter("mplayer "+cheer1);		
+			Tools.processStarter("ffplay -t 5 -autoexit "+cheer1+" -nodisp");		
 		} else if(rewardType.equals(AudioReward.NotAllCorrect)){
-			Tools.processStarter("mplayer "+cheer2);		
+			Tools.processStarter("ffplay -t 5 -autoexit "+cheer2+" -nodisp");		
 		} 
 		return null;
 	}
