@@ -38,11 +38,6 @@ public class SpellingAidMain extends JFrame {
 	private QuizDone doneQuizQuestion;
 	private OptionsPanel optionsPanel;
 
-	// theme
-	public enum Theme{Light,Dark};
-	public static Color backgroundColor;
-	public static Color textColor;
-
 	/**
 	 * Change panel displayed within main frame
 	 * @param mode The state VoxSpell is currently in.
@@ -71,7 +66,7 @@ public class SpellingAidMain extends JFrame {
 			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());
-			setSize(456,560);
+			setSize(456,525);
 			setTitle("VOXPSELL Settings");
 		}
 
@@ -242,10 +237,7 @@ public class SpellingAidMain extends JFrame {
 	 */
 	public void applyPreferences(){
 		File prefFile = new File(".spelling_aid_other_prefs");
-		String preferredTheme = "Light";
 		String preferredVoice = "Default";
-		backgroundColor = Color.WHITE;
-		textColor = Color.BLACK;
 		try {
 			// get the most recent setted preferences
 			BufferedReader readPreferences = new BufferedReader(new FileReader(prefFile));
@@ -253,9 +245,7 @@ public class SpellingAidMain extends JFrame {
 			while(pref != null){
 				if(pref.charAt(0)=='v'){
 					preferredVoice = pref.substring(1);
-				} else if(pref.charAt(0)=='t'){
-					preferredTheme = pref.substring(1);
-				}
+				} 
 				pref = readPreferences.readLine();
 			}
 			readPreferences.close();
@@ -265,7 +255,6 @@ public class SpellingAidMain extends JFrame {
 		// tidy up the .spelling_aid_cheer to have only 2 cheer file paths
 		ClearStatistics.clearFile(prefFile);
 		optionsPanel.setSelectedVoice(preferredVoice);
-		optionsPanel.setSelectedTheme(preferredTheme);
 	}
 	
 	/**
@@ -277,19 +266,6 @@ public class SpellingAidMain extends JFrame {
 		Tools.record(new File(".spelling_aid_other_prefs"), "v"+voice);
 	}
 
-	/**
-	 * Change VOXSPELL's theme
-	 * @param theme VOXSPELL's colout theme
-	 */
-	public void setTheme(Theme theme){
-		if(theme == Theme.Light){
-			// TODO something to do with setting the backgound/text colour
-			Tools.record(new File(".spelling_aid_other_prefs"), "tLight");
-		} else if (theme == Theme.Dark){
-			Tools.record(new File(".spelling_aid_other_prefs"), "tDark");
-
-		}
-	}
 
 	/**
 	 * Update spelling list

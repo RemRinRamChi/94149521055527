@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 
 import spelling.AudioPlayer;
 import spelling.SpellingAidMain;
-import spelling.SpellingAidMain.Theme;
 import spelling.VoiceGenerator.Voice;
 import spelling.quiz.InvalidWordListException;
 import spelling.quiz.SpellList;
@@ -38,11 +37,9 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	private JButton btnClearPref;
 	private JButton btnCheer2;
 	private JButton btnCheer1;
-	private JComboBox themeComboBox;
 	private JComboBox voiceComboBox;
 	private JLabel lblNewLabel;
 	private JLabel lblChangeVoice;
-	private JLabel lblBackgroundColour;
 	private JLabel lblSetOwnCheer1;
 	private JLabel lblSetOwnCheer2;
 	private JLabel lblSetPref;
@@ -110,12 +107,6 @@ public class OptionsPanel extends JPanel implements ActionListener{
 			} else if (voiceComboBox.getSelectedItem().toString().equals("Auckland")){ 
 				mainFrame.setVoice("Auckland");
 			}
-		} else if(e.getSource()==themeComboBox){ // CHANGE VOXSPELL THEME
-			if(themeComboBox.getSelectedItem().toString().equals("Light")){
-				mainFrame.setTheme(Theme.Light);
-			} else if (themeComboBox.getSelectedItem().toString().equals("Dark")){
-				mainFrame.setTheme(Theme.Dark);
-			}
 		} else if(e.getSource()==btnCheer1 || e.getSource()==btnCheer2){ // SET CHEERING VOICE 
 			int returnVal = cheeringFileChooser.showDialog(this, "Choose audio file");
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -151,9 +142,6 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	public void setSelectedVoice(String selected){
 		voiceComboBox.setSelectedItem(selected);
 	}
-	public void setSelectedTheme(String selected){
-		themeComboBox.setSelectedItem(selected);
-	}
 	
 	/**
 	 * Create the options panel and lay out its components appropriately.
@@ -185,19 +173,19 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		// CLEAR STATISTICS label and button
 		lblClearStatistics = new JLabel("Clear Statistics");
 		lblClearStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblClearStatistics.setBounds(42, 350, 206, 14);
+		lblClearStatistics.setBounds(42, 322, 206, 14);
 		add(lblClearStatistics);
 		btnClearStats = new JButton("clear");
 		btnClearStats.addActionListener(this);
 		btnClearStats.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnClearStats.setBounds(258, 346, 133, 23);
+		btnClearStats.setBounds(258, 318, 133, 23);
 		add(btnClearStats);
 		
 		// BACK button
 		btnBack = new JButton("BACK");
 		btnBack.addActionListener(this);
 		btnBack.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnBack.setBounds(296, 442, 96, 36);
+		btnBack.setBounds(295, 405, 96, 36);
 		add(btnBack);
 		
 		// Change VOXSPELL VOICE combo box and label
@@ -215,36 +203,36 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		// CLEAR PREFERENCES label and button
 		lblClearPreferences = new JLabel("Clear Preferences");
 		lblClearPreferences.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblClearPreferences.setBounds(42, 384, 205, 14);
+		lblClearPreferences.setBounds(42, 356, 205, 14);
 		add(lblClearPreferences);
 		btnClearPref = new JButton("clear");
 		btnClearPref.addActionListener(this);
 		btnClearPref.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnClearPref.setBounds(258, 380, 133, 23);
+		btnClearPref.setBounds(258, 352, 133, 23);
 		add(btnClearPref);
 		
 		// Own cheer 1 label and button (when user gets 100% right)
 		lblSetOwnCheer1 = new JLabel("Own cheer 1");
 		lblSetOwnCheer1.setToolTipText("Cheering when user gets 100% right");
 		lblSetOwnCheer1.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblSetOwnCheer1.setBounds(42, 242, 205, 14);
+		lblSetOwnCheer1.setBounds(42, 204, 205, 14);
 		add(lblSetOwnCheer1);
 		btnCheer1 = new JButton("set");
 		btnCheer1.addActionListener(this);
 		btnCheer1.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnCheer1.setBounds(258, 238, 133, 23);
+		btnCheer1.setBounds(258, 200, 133, 23);
 		add(btnCheer1);
 		
 		// Own cheer 2 label and button (when user gets less than 100% right)
 		lblSetOwnCheer2 = new JLabel("Own cheer 2");
 		lblSetOwnCheer2.setToolTipText("Cheering when user gets less than 100% right");
 		lblSetOwnCheer2.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblSetOwnCheer2.setBounds(42, 276, 205, 14);
+		lblSetOwnCheer2.setBounds(42, 238, 205, 14);
 		add(lblSetOwnCheer2);
 		btnCheer2 = new JButton("set");
 		btnCheer2.addActionListener(this);
 		btnCheer2.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnCheer2.setBounds(258, 272, 133, 23);
+		btnCheer2.setBounds(258, 234, 133, 23);
 		add(btnCheer2);
 		
 		// Set own preferences label
@@ -258,23 +246,11 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		// Clear settings label
 		lblClearSettings = new JLabel("Clear settings");
 		lblClearSettings.setFont(new Font("Arial", Font.BOLD, 13));
-		lblClearSettings.setBounds(42, 306, 349, 23);
+		lblClearSettings.setBounds(42, 278, 349, 23);
 		add(lblClearSettings);
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(42, 331, 349, 8);
+		separator_1.setBounds(42, 303, 349, 8);
 		add(separator_1);
-		
-		// Change VOXSPELL THEME label and combo box
-		lblBackgroundColour = new JLabel("VoxSpell Theme");
-		lblBackgroundColour.setFont(new Font("Arial", Font.PLAIN, 14));
-		lblBackgroundColour.setBounds(42, 204, 205, 14);
-		add(lblBackgroundColour);
-		themeComboBox = new JComboBox();
-		themeComboBox.addActionListener(this);
-		themeComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
-		themeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Light", "Dark"}));
-		themeComboBox.setBounds(258, 200, 133, 23);
-		add(themeComboBox);
 		
 		applyTheme();
 
