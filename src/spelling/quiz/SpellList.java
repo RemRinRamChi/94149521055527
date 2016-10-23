@@ -395,7 +395,7 @@ public class SpellList {
 			if(!attempt){
 				spellingAidQuiz.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			} else {
-				spellingAidQuiz.setSecondAttemptResult("X "+wordToSpell);
+				spellingAidQuiz.setSecondAttemptResult(wordToSpell);
 			}
 			attempt = true; // question has been attempted
 

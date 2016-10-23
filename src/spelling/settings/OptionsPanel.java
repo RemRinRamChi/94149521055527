@@ -30,7 +30,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class OptionsPanel extends JPanel implements ActionListener{
 	private JFileChooser cheeringFileChooser = new JFileChooser();
 	private SpellingAidMain mainFrame;
-	private JLabel lblName;
 	private JButton btnChangeName;
 	private JButton btnClearStats;
 	private JButton btnBack;
@@ -38,6 +37,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	private JButton btnCheer2;
 	private JButton btnCheer1;
 	private JComboBox voiceComboBox;
+	private JLabel lblName;
 	private JLabel lblNewLabel;
 	private JLabel lblChangeVoice;
 	private JLabel lblSetOwnCheer1;
@@ -53,35 +53,43 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	 */
 	public void applyTheme(){
 		Color backgroundColour = new Color(255,255,255);
-		Color bannerColour = new Color(250,250,250);
 		Color buttonText = new Color(255,255,255);
 		Color normalText = new Color(0,0,0);
 		Color buttonColour = new Color(15,169,249);
-		/*
+
+		
 		// background color
 		this.setBackground(backgroundColour);
-		// option pane color
-		optionsPanel.setBackground(backgroundColour);
-		
-		// banner color
-		hiPanel.setBackground(bannerColour);
 		
 		// normal text
-		lblHiUser.setForeground(normalText);
-		lblHereToHelp.setForeground(normalText);
-		lblPleaseSelectOne.setForeground(normalText);
+		lblName.setForeground(normalText);
+		lblNewLabel.setForeground(normalText);
+		lblChangeVoice.setForeground(normalText);
+		lblSetOwnCheer1.setForeground(normalText);
+		lblSetOwnCheer2.setForeground(normalText);
+		lblSetPref.setForeground(normalText);
+		lblClearSettings.setForeground(normalText);
+		lblClearStatistics.setForeground(normalText);
+		lblClearPreferences.setForeground(normalText);
+		lblSettings.setForeground(normalText);
+		
 		// button text
-		btnNewQuiz.setForeground(buttonText);
-		btnReviewQuiz.setForeground(buttonText);
-		btnViewStatistics.setForeground(buttonText);
-		btnSettings.setForeground(buttonText);
-		btnQuit.setForeground(buttonText);
+		btnChangeName.setForeground(buttonText);
+		btnClearStats.setForeground(buttonText);
+		btnBack.setForeground(buttonText);
+		btnClearPref.setForeground(buttonText);
+		btnCheer2.setForeground(buttonText);
+		btnCheer1.setForeground(buttonText);
+		voiceComboBox.setForeground(buttonText);
+
 		// normal button color
-		btnNewQuiz.setBackground(buttonColour);
-		btnReviewQuiz.setBackground(buttonColour);
-		btnViewStatistics.setBackground(buttonColour);
-		btnSettings.setBackground(buttonColour);
-		btnQuit.setBackground(buttonColour);*/
+		btnChangeName.setBackground(buttonColour);
+		btnClearStats.setBackground(buttonColour);
+		btnBack.setBackground(buttonColour);
+		btnClearPref.setBackground(buttonColour);
+		btnCheer2.setBackground(buttonColour);
+		btnCheer1.setBackground(buttonColour);
+		voiceComboBox.setBackground(buttonColour);
 	}
 	
 	/**
@@ -166,7 +174,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		// Change NAME button
 		btnChangeName = new JButton("change");
 		btnChangeName.addActionListener(this);
-		btnChangeName.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnChangeName.setFont(new Font("Arial", Font.BOLD, 14));
 		btnChangeName.setBounds(258, 132, 133, 23);
 		add(btnChangeName);
 		
@@ -177,21 +185,21 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(lblClearStatistics);
 		btnClearStats = new JButton("clear");
 		btnClearStats.addActionListener(this);
-		btnClearStats.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnClearStats.setFont(new Font("Arial", Font.BOLD, 14));
 		btnClearStats.setBounds(258, 318, 133, 23);
 		add(btnClearStats);
 		
 		// BACK button
 		btnBack = new JButton("BACK");
 		btnBack.addActionListener(this);
-		btnBack.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnBack.setFont(new Font("Arial", Font.BOLD, 14));
 		btnBack.setBounds(295, 405, 96, 36);
 		add(btnBack);
 		
 		// Change VOXSPELL VOICE combo box and label
 		voiceComboBox = new JComboBox();
 		voiceComboBox.addActionListener(this);
-		voiceComboBox.setFont(new Font("Arial", Font.PLAIN, 12));
+		voiceComboBox.setFont(new Font("Arial", Font.PLAIN, 14));
 		voiceComboBox.setModel(new DefaultComboBoxModel(new String[] {"Default", "Auckland"}));
 		voiceComboBox.setBounds(258, 166, 133, 23);
 		add(voiceComboBox);
@@ -207,7 +215,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(lblClearPreferences);
 		btnClearPref = new JButton("clear");
 		btnClearPref.addActionListener(this);
-		btnClearPref.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnClearPref.setFont(new Font("Arial", Font.BOLD, 14));
 		btnClearPref.setBounds(258, 352, 133, 23);
 		add(btnClearPref);
 		
@@ -219,7 +227,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(lblSetOwnCheer1);
 		btnCheer1 = new JButton("set");
 		btnCheer1.addActionListener(this);
-		btnCheer1.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCheer1.setFont(new Font("Arial", Font.BOLD, 14));
 		btnCheer1.setBounds(258, 200, 133, 23);
 		add(btnCheer1);
 		
@@ -231,13 +239,13 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(lblSetOwnCheer2);
 		btnCheer2 = new JButton("set");
 		btnCheer2.addActionListener(this);
-		btnCheer2.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCheer2.setFont(new Font("Arial", Font.BOLD, 14));
 		btnCheer2.setBounds(258, 234, 133, 23);
 		add(btnCheer2);
 		
 		// Set own preferences label
 		lblSetPref = new JLabel("Set own preferences");
-		lblSetPref.setFont(new Font("Arial", Font.BOLD, 13));
+		lblSetPref.setFont(new Font("Arial", Font.BOLD, 14));
 		lblSetPref.setBounds(42, 92, 349, 23);
 		add(lblSetPref);
 		JSeparator separator = new JSeparator();
@@ -245,7 +253,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(separator);
 		// Clear settings label
 		lblClearSettings = new JLabel("Clear settings");
-		lblClearSettings.setFont(new Font("Arial", Font.BOLD, 13));
+		lblClearSettings.setFont(new Font("Arial", Font.BOLD, 14));
 		lblClearSettings.setBounds(42, 278, 349, 23);
 		add(lblClearSettings);
 		JSeparator separator_1 = new JSeparator();

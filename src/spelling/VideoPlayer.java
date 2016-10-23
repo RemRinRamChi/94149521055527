@@ -97,7 +97,6 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 				pauseBtn.setActionCommand("");
 				pauseBtn.addActionListener(this);
 				buttonPane.add(pauseBtn);
-				getRootPane().setDefaultButton(pauseBtn);
 			}
 			
 			// muted/unmute button
@@ -137,11 +136,12 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				long time = (long)(video.getTime()/1000.0);
-				timeLbl.setText("00: "+String.valueOf(time));
+				timeLbl.setText(String.valueOf(time)+" seconds");
 			}
 		});
         timer.start();
         applyTheme();
+        setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	

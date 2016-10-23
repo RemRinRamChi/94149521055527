@@ -50,8 +50,8 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 	 * Create the MainOptionsPanel and layout its components.
 	 */
 	public MainOptionsPanel() {
-		setBackground(new Color(245, 245, 245));
 		createAndLayoutComponents();
+		applyTheme();
 	}
 
 	/**
@@ -240,7 +240,6 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		gbc_btnQuit.gridy = 6;
 		optionsPanel.add(btnQuit, gbc_btnQuit);
 
-		applyTheme();
 	}
 
 }

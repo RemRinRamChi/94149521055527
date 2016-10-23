@@ -59,7 +59,7 @@ public class SpellingAidMain extends JFrame {
 			setTitle("VOXPSELL Quiz");
 		} else if (mode.equals("Done")){
 			setSize(606,540);
-			setTitle("VOXPSELL Quiz Results");
+			setTitle("VOXPSELL Quiz Results for "+doneQuizQuestion.getLevel());
 		} else if (mode.equals("Stats")){
 			voxSpellStats.setUserName(getUserName());
 			setSize(486,690);

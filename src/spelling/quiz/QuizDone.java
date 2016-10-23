@@ -45,17 +45,18 @@ public class QuizDone extends JPanel implements ActionListener{
 	private JButton btnReviewAnotherLevel;
 	private JButton btnRetryLevel;
 	private String level; 
+	private JLabel lblLevel;
 
 	/**
 	 * Apply colour to components
 	 */
 	public void applyTheme(){
-		Color backgroundColour = new Color(250,250,250);
+		Color backgroundColour = new Color(255,255,255);
 		Color buttonText = new Color(255,255,255);
 		Color normalText = new Color(0,0,0);
 		Color buttonColour = new Color(15,169,249);
 		
-		resultsPanel.setBackground(Color.WHITE);
+		resultsPanel.setBackground(new Color(250,250,250));
 		// background color
 		this.setBackground(backgroundColour);
 		userInteractionPanel.setBackground(backgroundColour);
@@ -71,6 +72,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		lblGoodJob.setForeground(normalText);
 		zeroReview.setForeground(normalText);
 		lblYourResults.setForeground(normalText);
+		lblLevel.setForeground(normalText);
 		
 		// button text
 		btnVideo.setForeground(buttonText);
@@ -95,11 +97,18 @@ public class QuizDone extends JPanel implements ActionListener{
 		lblResults.setText(results);
 	}
 	/**
-	 * Set level
+	 * Set level of quiz done
 	 * @param lvl
 	 */
 	public void setLevel(String lvl){
 		level = lvl;
+		lblLevel.setText("Quiz: "+lvl);
+	}
+	/**
+	 * Return the level of quiz done
+	 */
+	public String getLevel(){
+		return level;
 	}
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -183,19 +192,19 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnRetryLevel = new JButton("RETRY LEVEL");
 		btnRetryLevel.addActionListener(this);
 		btnRetryLevel.setFont(new Font("Arial", Font.BOLD, 14));
-		btnRetryLevel.setBounds(93, 356, 421, 30);
+		btnRetryLevel.setBounds(86, 339, 421, 30);
 		add(btnRetryLevel);
 
 		// "Time for your results ..."
 		lblYourResults = new JLabel("Time for your results ...");
 		lblYourResults.setFont(new Font("Arial", Font.PLAIN, 24));
-		lblYourResults.setBounds(189, 39, 391, 43);
+		lblYourResults.setBounds(182, 22, 391, 56);
 		add(lblYourResults);
 
 		// Panel containing the results label and a white background
 		resultsPanel = new JPanel();
 		resultsPanel.setBackground(Color.WHITE);
-		resultsPanel.setBounds(189, 93, 354, 156);
+		resultsPanel.setBounds(182, 76, 354, 156);
 		add(resultsPanel);
 		resultsPanel.setLayout(new CardLayout(0, 0));
 
@@ -204,7 +213,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		resultsPanel.add(lblResults, "Results");
 		lblResults.setBackground(Color.LIGHT_GRAY);
 		lblResults.setHorizontalAlignment(SwingConstants.CENTER);
-		lblResults.setFont(new Font("Arial", Font.PLAIN, 34));
+		lblResults.setFont(new Font("Arial", Font.PLAIN, 30));
 
 		// label to display when there are no results
 		noResults = new JLabel("No Results ");
@@ -214,7 +223,7 @@ public class QuizDone extends JPanel implements ActionListener{
 
 		// Panel containing the type of feedback QuizDone provides according to results
 		userInteractionPanel = new JPanel();
-		userInteractionPanel.setBounds(93, 271, 421, 86);
+		userInteractionPanel.setBounds(86, 254, 421, 86);
 		add(userInteractionPanel);
 		userInteractionPanel.setLayout(new CardLayout(0, 0)); // card layout
 
@@ -231,13 +240,13 @@ public class QuizDone extends JPanel implements ActionListener{
 		// claim reward label
 		lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
 		lblGoodJobPlease.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGoodJobPlease.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblGoodJobPlease.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblGoodJobPlease.setBounds(0, 0, 421, 43);
 		rewardPanel.add(lblGoodJobPlease);
 
 		// "No Words" interation label
-		zeroQuestions = new JLabel("There are no words to spell in this quiz, try another level ");
-		zeroQuestions.setFont(new Font("Arial", Font.PLAIN, 17));
+		zeroQuestions = new JLabel("There are no words in this level, try another level ");
+		zeroQuestions.setFont(new Font("Arial", Font.PLAIN, 18));
 		zeroQuestions.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(zeroQuestions, "No Words"); // added to be switched as a card
 
@@ -249,7 +258,7 @@ public class QuizDone extends JPanel implements ActionListener{
 
 		// "Good Job" interaction label
 		lblGoodJob = new JLabel("Good Job ! Try another level ?");
-		lblGoodJob.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblGoodJob.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblGoodJob.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(lblGoodJob, "Good Job"); // added to be switched as a card
 
@@ -261,7 +270,7 @@ public class QuizDone extends JPanel implements ActionListener{
 
 		// Panel to contain components for trying another level
 		tryAnotherPanel = new JPanel();
-		tryAnotherPanel.setBounds(93, 397, 421, 30);
+		tryAnotherPanel.setBounds(86, 380, 421, 30);
 		add(tryAnotherPanel);
 		tryAnotherPanel.setLayout(new CardLayout(0, 0));
 
@@ -274,21 +283,27 @@ public class QuizDone extends JPanel implements ActionListener{
 		// review another level button
 		btnReviewAnotherLevel = new JButton("REVIEW ANOTHER LEVEL\r\n");
 		btnReviewAnotherLevel.addActionListener(this);// added to be switched as a card
-		btnReviewAnotherLevel.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnReviewAnotherLevel.setFont(new Font("Arial", Font.BOLD, 14));
 		tryAnotherPanel.add(btnReviewAnotherLevel, "Review");
 
 		// avatar
 		avatar = new JLabel("");
 		avatar.setIcon(new ImageIcon("img/GoodJob.png"));
-		avatar.setBounds(20, 24, 159, 246);
+		avatar.setBounds(39, 32, 142, 231);
 		add(avatar);
 
 		// done button
 		btnDone = new JButton("DONE");
 		btnDone.addActionListener(this);
 		btnDone.setFont(new Font("Arial", Font.BOLD, 14));
-		btnDone.setBounds(93, 438, 421, 30);
+		btnDone.setBounds(86, 421, 421, 30);
 		add(btnDone);
+		
+		// level label at the bottom
+		lblLevel = new JLabel("Level");
+		lblLevel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblLevel.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblLevel.setBounds(304, 463, 203, 16);
+		add(lblLevel);
 	}
-
 }
