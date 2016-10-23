@@ -312,8 +312,6 @@ public class SpellList {
 
 			// starts at 0
 			wordToSpell = currentQuizList.get(questionNo);
-			//CHEATING//
-			System.out.println(wordToSpell);
 			// then increment the question no to represent the real question number
 			questionNo++;
 
