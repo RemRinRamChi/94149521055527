@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -103,7 +104,9 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 					triedWordsInALevel = new ArrayList<String>();
 					mapOfTriedWords.put(levelNo,triedWordsInALevel);
 				} else {
-					listOfTriedWords.add(triedWord);
+					if(! listOfTriedWords.contains(triedWord)){
+						listOfTriedWords.add(triedWord); // don't want to have duplicates
+					}
 					triedWordsInALevel.add(triedWord);
 					zeroWords++; // if it is greater than 0 = there are statistics available for viewing
 				}
@@ -131,8 +134,13 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 		if(zeroWords == 0){
 			//no words
 		} else { // tried words file not empty
+			Object[] sortedKeys = mapOfTriedWords.keySet().toArray();
+			Arrays.sort(sortedKeys);
+
+
 			// go through all the attempted levels
-			for(String i : mapOfTriedWords.keySet()){
+			for(Object j : sortedKeys){
+				String i = (String)j;
 				// get a list of attempted words according to the level
 				ArrayList<String> triedWordsList = mapOfTriedWords.get(i);
 				// ERROR handling: if there is a level but 0 content, just skip it
@@ -217,26 +225,9 @@ public class StatisticsModel extends SwingWorker<Void,String[]>{
 	 * @param fail failed counts
 	 */
 	private void recordWordStats(String word, int master, int fault, int fail){
-		if(totalMastered.get(word)==null){
-			totalMastered.put(word, master);
-		} else {
-			int mastered = totalMastered.get(word)+master;
-			totalMastered.put(word, mastered);
-		}
-
-		if(totalFaulted.get(word)==null){
-			totalFaulted.put(word, fault);
-		} else {
-			int faulted = totalFaulted.get(word)+fault;
-			totalFaulted.put(word, faulted);
-		}
-
-		if(totalFailed.get(word)==null){
-			totalFailed.put(word, fail);
-		} else {
-			int failed = totalFailed.get(word)+fail;
-			totalFailed.put(word, failed);
-		}
+		totalMastered.put(word, master);
+		totalFaulted.put(word, fault);
+		totalFailed.put(word, fail);
 	}
 
 	/**
