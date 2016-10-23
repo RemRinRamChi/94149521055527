@@ -21,6 +21,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 /**
  * This is the GUI for the spelling aid statistics
  * @author yyap601
@@ -111,8 +112,9 @@ public class StatisticsViewController extends JPanel {
 		add(friendlyPanel);
 		// avatar
 		JLabel avatar = new JLabel("");
+		avatar.setVerticalAlignment(SwingConstants.BOTTOM);
 		avatar.setIcon(new ImageIcon("img/avatar.png"));
-		avatar.setBounds(24, 11, 159, 155);
+		avatar.setBounds(24, 0, 159, 180);
 		friendlyPanel.add(avatar);
 		// Hi greeting
 		lblHi = new JLabel("Hi Sherlock");

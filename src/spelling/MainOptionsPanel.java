@@ -20,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.SwingConstants;
 /**
  * This is the panel which contains the main VoxSpell options
  * @author yyap601
@@ -27,7 +28,11 @@ import javax.swing.Box;
  */
 public class MainOptionsPanel extends JPanel implements ActionListener{
 	private SpellingAidMain mainFrame;
+	private JPanel hiPanel;
+	private JPanel optionsPanel;
 	private JLabel lblHiUser;
+	private JLabel lblHereToHelp;
+	private JLabel lblPleaseSelectOne;
 	private JButton btnNewQuiz;
 	private JButton btnReviewQuiz;
 	private JButton btnViewStatistics;
@@ -45,6 +50,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 	 * Create the MainOptionsPanel and layout its components.
 	 */
 	public MainOptionsPanel() {
+		setBackground(new Color(245, 245, 245));
 		createAndLayoutComponents();
 	}
 
@@ -75,6 +81,38 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		}
 	}
 
+	public void applyTheme(){
+		Color bC = new Color(250,250,250);
+		Color banC = new Color(255,255,255);
+		Color oC = new Color(250,250,250);
+		Color nT = new Color(255,255,255);
+		Color bT = new Color(15,169,249);
+		Color nB = new Color(15,169,249);
+		// background color
+		this.setBackground(bC);
+		// banner color
+		hiPanel.setBackground(banC);
+		// option pane color
+		optionsPanel.setBackground(oC);
+		
+		// back text
+		lblHiUser.setForeground(bT);
+		lblHereToHelp.setForeground(bT);
+		lblPleaseSelectOne.setForeground(bT);
+		// normal text
+		btnNewQuiz.setForeground(nT);
+		btnReviewQuiz.setForeground(nT);
+		btnViewStatistics.setForeground(nT);
+		btnSettings.setForeground(nT);
+		btnQuit.setForeground(nT);
+		// normal button color
+		btnNewQuiz.setBackground(nB);
+		btnReviewQuiz.setBackground(nB);
+		btnViewStatistics.setBackground(nB);
+		btnSettings.setBackground(nB);
+		btnQuit.setBackground(nB);
+	}
+
 	/**
 	 *  Create all components and lay them out properly
 	 */
@@ -83,7 +121,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		setLayout(null);
 
 		// Panel to say hi to user
-		JPanel hiPanel = new JPanel();
+		hiPanel = new JPanel();
 		hiPanel.setBackground(Color.WHITE);
 		hiPanel.setBounds(0, 11, 450, 200);
 		add(hiPanel);
@@ -91,8 +129,9 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// avatar
 		JLabel avatar = new JLabel("");
+		avatar.setVerticalAlignment(SwingConstants.BOTTOM);
 		avatar.setIcon(new ImageIcon("img/avatar.png"));
-		avatar.setBounds(37, 11, 146, 184);
+		avatar.setBounds(26, 11, 146, 189);
 		hiPanel.add(avatar);
 
 		// greeting label
@@ -102,13 +141,14 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		hiPanel.add(lblHiUser);
 
 		// "I am here to help you"
-		JLabel lblHereToHelp = new JLabel("I am here to help you \r\n");
+		lblHereToHelp = new JLabel("I am here to help you \r\n");
 		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereToHelp.setBounds(193, 113, 247, 53);
 		hiPanel.add(lblHereToHelp);
 
 		// panel containing main options
-		JPanel optionsPanel = new JPanel();
+		optionsPanel = new JPanel();
+		optionsPanel.setBackground(new Color(245, 245, 245));
 		optionsPanel.setBounds(10, 222, 430, 267);
 		add(optionsPanel);
 		GridBagLayout gbl_optionsPanel = new GridBagLayout();
@@ -119,7 +159,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		optionsPanel.setLayout(gbl_optionsPanel);
 
 		// "Please select one of the following options" label
-		JLabel lblPleaseSelectOne = new JLabel("Please select one of the following options");
+		lblPleaseSelectOne = new JLabel("Please select one of the following options");
 		lblPleaseSelectOne.setFont(new Font("Arial", Font.PLAIN, 16));
 		GridBagConstraints gbc_lblPleaseSelectOne = new GridBagConstraints();
 		gbc_lblPleaseSelectOne.insets = new Insets(0, 0, 5, 5);
@@ -130,7 +170,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		// New Quiz button
 		btnNewQuiz = new JButton("New Quiz");
 		btnNewQuiz.setFocusPainted(false);
-		btnNewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnNewQuiz.setFont(new Font("Arial", Font.BOLD, 16));
 		btnNewQuiz.addActionListener(this);
 
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -139,7 +179,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 2;
 		optionsPanel.add(btnNewQuiz, gbc_btnNewButton);
-		
+
 		// vertical strut.substring(1)
 		Component verticalStrut = Box.createVerticalStrut(20);
 		GridBagConstraints gbc_verticalStrut = new GridBagConstraints();
@@ -152,7 +192,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		btnReviewQuiz = new JButton("Review Quiz\r\n");
 		btnReviewQuiz.addActionListener(this);
 		btnReviewQuiz.setFocusPainted(false);
-		btnReviewQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnReviewQuiz.setFont(new Font("Arial", Font.BOLD, 16));
 		GridBagConstraints gbc_btnReviewQuiz = new GridBagConstraints();
 		gbc_btnReviewQuiz.fill = GridBagConstraints.BOTH;
 		gbc_btnReviewQuiz.insets = new Insets(0, 0, 5, 5);
@@ -164,7 +204,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		btnViewStatistics = new JButton("View Statistics");
 		btnViewStatistics.addActionListener(this);
 		btnViewStatistics.setFocusPainted(false);
-		btnViewStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnViewStatistics.setFont(new Font("Arial", Font.BOLD, 16));
 		GridBagConstraints gbc_btnViewStatistics = new GridBagConstraints();
 		gbc_btnViewStatistics.fill = GridBagConstraints.BOTH;
 		gbc_btnViewStatistics.insets = new Insets(0, 0, 5, 5);
@@ -176,7 +216,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		btnSettings = new JButton("Options");
 		btnSettings.addActionListener(this);
 		btnSettings.setFocusPainted(false);
-		btnSettings.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnSettings.setFont(new Font("Arial", Font.BOLD, 16));
 		GridBagConstraints gbc_btnSettings = new GridBagConstraints();
 		gbc_btnSettings.fill = GridBagConstraints.BOTH;
 		gbc_btnSettings.insets = new Insets(0, 0, 5, 5);
@@ -188,13 +228,15 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(this);
 		btnQuit.setFocusPainted(false);
-		btnQuit.setFont(new Font("Arial", Font.PLAIN, 14));
+		btnQuit.setFont(new Font("Arial", Font.BOLD, 16));
 		GridBagConstraints gbc_btnQuit = new GridBagConstraints();
 		gbc_btnQuit.fill = GridBagConstraints.BOTH;
 		gbc_btnQuit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnQuit.gridx = 1;
 		gbc_btnQuit.gridy = 6;
 		optionsPanel.add(btnQuit, gbc_btnQuit);
+
+		applyTheme();
 	}
 
 }

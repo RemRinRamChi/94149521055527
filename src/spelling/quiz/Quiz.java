@@ -428,8 +428,8 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 
 		// avatar
 		JLabel avatar = new JLabel("\r\n");
-		avatar.setIcon(new ImageIcon("img/avatar.png"));
-		avatar.setBounds(28, 36, 154, 150);
+		avatar.setIcon(new ImageIcon("img/avatar2.png"));
+		avatar.setBounds(28, 36, 154, 286);
 		add(avatar);
 
 		// "Please spell word ? of ?" label
