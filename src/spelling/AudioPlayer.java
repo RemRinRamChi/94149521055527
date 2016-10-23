@@ -64,8 +64,8 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	private void scanCheerFile() {
 		File cheerFile = new File(".spelling_aid_cheer");
 		// default cheer file
-		cheer1 = "mp3/test.mp3";
-		cheer2 = "mp3/test.mp3";
+		cheer1 = "mp3/Reward.mp3";
+		cheer2 = "mp3/GoodTry.mp3";
 		try {
 			// get the most recent setted cheer files
 			BufferedReader readCheerPath = new BufferedReader(new FileReader(cheerFile));

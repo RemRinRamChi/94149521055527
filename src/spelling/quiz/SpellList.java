@@ -182,10 +182,6 @@ public class SpellList {
 			totalCorrect.put(currentLevel, 0);
 			totalAttempts.put(currentLevel, 0);
 		}
-		
-		// record an attempt
-		int tA = totalAttempts.get(currentLevel)+1;
-		totalAttempts.put(currentLevel,tA);
 
 		// produce 10 random words from the correct list of words
 		ArrayList<String> listOfWordsToChooseFrom = wordMap.get(level);
@@ -208,11 +204,19 @@ public class SpellList {
 
 		}
 
+		// only record as an attempt if the quiz is a new quiz, not review
+		if(spellingType==QuizMode.New){
+			// record an attempt
+			int tA = totalAttempts.get(currentLevel)+1;
+			totalAttempts.put(currentLevel,tA);
+		}
+		
 		// initialise lists to quiz and also change statistics
 		currentQuizList = listOfWordsToTest;
 		currentFailedList = mapOfFailedWords.get(currentLevel);
 		currentTriedList = mapOfTriedWords.get(currentLevel);
 
+		
 
 	}
 
