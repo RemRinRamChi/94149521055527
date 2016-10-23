@@ -60,14 +60,14 @@ public class SpellingAidMain extends JFrame {
 			setSize(464,540);
 			setTitle("Welcome To VOXSPELL");
 		} else if (mode.equals("Quiz")){
-			setSize(776,400);
+			setSize(796,400);
 			setTitle("VOXPSELL Quiz");
 		} else if (mode.equals("Done")){
-			setSize(606,480);
+			setSize(606,540);
 			setTitle("VOXPSELL Quiz Results");
 		} else if (mode.equals("Stats")){
 			voxSpellStats.setUserName(getUserName());
-			setSize(486,650);
+			setSize(486,690);
 			setTitle("VOXPSELL Statistics");
 		} else if (mode.equals("Settings")){
 			optionsPanel.setUserName(getUserName());

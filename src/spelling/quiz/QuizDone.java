@@ -25,9 +25,17 @@ import java.awt.CardLayout;
  *
  */
 public class QuizDone extends JPanel implements ActionListener{
+	private JLabel avatar;
 	private SpellingAidMain mainFrame;
 	private JLabel lblResults;
 	private JLabel noResults;
+	private JLabel lblGoodJobPlease;
+	private JLabel zeroQuestions;
+	private JLabel lblGoodTry;
+	private JLabel lblGoodJob;
+	private JLabel zeroReview;
+	private JLabel lblYourResults;
+	private JPanel rewardPanel;
 	private JPanel userInteractionPanel;
 	private JPanel resultsPanel;
 	private JPanel tryAnotherPanel;
@@ -38,6 +46,47 @@ public class QuizDone extends JPanel implements ActionListener{
 	private JButton btnRetryLevel;
 	private String level; 
 
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(250,250,250);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		
+		resultsPanel.setBackground(Color.WHITE);
+		// background color
+		this.setBackground(backgroundColour);
+		userInteractionPanel.setBackground(backgroundColour);
+		rewardPanel.setBackground(backgroundColour);
+		tryAnotherPanel.setBackground(backgroundColour);
+
+		// normal text
+		lblResults.setForeground(normalText);
+		noResults.setForeground(normalText);
+		lblGoodJobPlease.setForeground(normalText);
+		zeroQuestions.setForeground(normalText);
+		lblGoodTry.setForeground(normalText);
+		lblGoodJob.setForeground(normalText);
+		zeroReview.setForeground(normalText);
+		lblYourResults.setForeground(normalText);
+		
+		// button text
+		btnVideo.setForeground(buttonText);
+		btnTryAnotherLevel.setForeground(buttonText);
+		btnDone.setForeground(buttonText);
+		btnReviewAnotherLevel.setForeground(buttonText);
+		btnRetryLevel.setForeground(buttonText);
+		
+		// normal button color
+		btnVideo.setBackground(buttonColour);
+		btnTryAnotherLevel.setBackground(buttonColour);
+		btnDone.setBackground(buttonColour);
+		btnReviewAnotherLevel.setBackground(buttonColour);
+		btnRetryLevel.setBackground(buttonColour);
+	}
+	
 	/**
 	 * Set results label
 	 * @param results
@@ -64,6 +113,7 @@ public class QuizDone extends JPanel implements ActionListener{
 	 */
 	public QuizDone() {
 		createAndLayoutComponents();
+		applyTheme();
 	}
 
 	// perform appropriate actions based on button press
@@ -132,20 +182,20 @@ public class QuizDone extends JPanel implements ActionListener{
 		// retry level
 		btnRetryLevel = new JButton("RETRY LEVEL");
 		btnRetryLevel.addActionListener(this);
-		btnRetryLevel.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnRetryLevel.setBounds(93, 293, 421, 30);
+		btnRetryLevel.setFont(new Font("Arial", Font.BOLD, 14));
+		btnRetryLevel.setBounds(93, 356, 421, 30);
 		add(btnRetryLevel);
 
 		// "Time for your results ..."
-		JLabel lblYourResults = new JLabel("Time for your results ...");
-		lblYourResults.setFont(new Font("Arial", Font.PLAIN, 22));
-		lblYourResults.setBounds(189, 31, 401, 37);
+		lblYourResults = new JLabel("Time for your results ...");
+		lblYourResults.setFont(new Font("Arial", Font.PLAIN, 24));
+		lblYourResults.setBounds(189, 39, 391, 43);
 		add(lblYourResults);
 
 		// Panel containing the results label and a white background
 		resultsPanel = new JPanel();
 		resultsPanel.setBackground(Color.WHITE);
-		resultsPanel.setBounds(189, 79, 373, 113);
+		resultsPanel.setBounds(189, 93, 354, 156);
 		add(resultsPanel);
 		resultsPanel.setLayout(new CardLayout(0, 0));
 
@@ -164,54 +214,54 @@ public class QuizDone extends JPanel implements ActionListener{
 
 		// Panel containing the type of feedback QuizDone provides according to results
 		userInteractionPanel = new JPanel();
-		userInteractionPanel.setBounds(93, 208, 421, 86);
+		userInteractionPanel.setBounds(93, 271, 421, 86);
 		add(userInteractionPanel);
 		userInteractionPanel.setLayout(new CardLayout(0, 0)); // card layout
 
 		// rewards panel with the rewards buttons
-		JPanel rewardPanel = new JPanel();
+		rewardPanel = new JPanel();
 		userInteractionPanel.add(rewardPanel, "Rewards");
 		rewardPanel.setLayout(null);
 		// video reward button
 		btnVideo = new JButton("VIDEO REWARD");
 		btnVideo.addActionListener(this);
-		btnVideo.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnVideo.setFont(new Font("Arial", Font.BOLD, 14));
 		btnVideo.setBounds(0, 47, 421, 28);
 		rewardPanel.add(btnVideo);
 		// claim reward label
-		JLabel lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
+		lblGoodJobPlease = new JLabel("Good job! Please claim your reward");
 		lblGoodJobPlease.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGoodJobPlease.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblGoodJobPlease.setBounds(0, 0, 421, 43);
 		rewardPanel.add(lblGoodJobPlease);
 
 		// "No Words" interation label
-		JLabel zeroQuestions = new JLabel("There are no words to spell in this quiz, try another level ");
+		zeroQuestions = new JLabel("There are no words to spell in this quiz, try another level ");
 		zeroQuestions.setFont(new Font("Arial", Font.PLAIN, 17));
 		zeroQuestions.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(zeroQuestions, "No Words"); // added to be switched as a card
 
 		// "Good Try" interaction label
-		JLabel lblGoodTry = new JLabel("Good try ! You can definitely do better next time !");
+		lblGoodTry = new JLabel("Good try ! You can definitely do better next time !");
 		lblGoodTry.setFont(new Font("Arial", Font.PLAIN, 18));
 		lblGoodTry.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(lblGoodTry, "Good Try"); // added to be switched as a card
 
 		// "Good Job" interaction label
-		JLabel lblGoodJob = new JLabel("Good Job ! Try another level ?");
+		lblGoodJob = new JLabel("Good Job ! Try another level ?");
 		lblGoodJob.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblGoodJob.setHorizontalAlignment(SwingConstants.CENTER);
 		userInteractionPanel.add(lblGoodJob, "Good Job"); // added to be switched as a card
 
 		// "No Review" interaction label
-		JLabel zeroReview = new JLabel("No words to review, consider trying another level");
+		zeroReview = new JLabel("No words to review, consider trying another level");
 		userInteractionPanel.add(zeroReview, "No Review"); // added to be switched as a card
 		zeroReview.setHorizontalAlignment(SwingConstants.CENTER);
 		zeroReview.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		// Panel to contain components for trying another level
 		tryAnotherPanel = new JPanel();
-		tryAnotherPanel.setBounds(93, 334, 421, 30);
+		tryAnotherPanel.setBounds(93, 397, 421, 30);
 		add(tryAnotherPanel);
 		tryAnotherPanel.setLayout(new CardLayout(0, 0));
 
@@ -219,7 +269,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnTryAnotherLevel = new JButton("TRY ANOTHER LEVEL\r\n");
 		tryAnotherPanel.add(btnTryAnotherLevel, "Try");// added to be switched as a card
 		btnTryAnotherLevel.addActionListener(this);
-		btnTryAnotherLevel.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnTryAnotherLevel.setFont(new Font("Arial", Font.BOLD, 14));
 
 		// review another level button
 		btnReviewAnotherLevel = new JButton("REVIEW ANOTHER LEVEL\r\n");
@@ -228,16 +278,16 @@ public class QuizDone extends JPanel implements ActionListener{
 		tryAnotherPanel.add(btnReviewAnotherLevel, "Review");
 
 		// avatar
-		JLabel avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("img/avatar.png"));
-		avatar.setBounds(20, 42, 159, 150);
+		avatar = new JLabel("");
+		avatar.setIcon(new ImageIcon("img/GoodJob.png"));
+		avatar.setBounds(20, 24, 159, 246);
 		add(avatar);
 
 		// done button
 		btnDone = new JButton("DONE");
 		btnDone.addActionListener(this);
-		btnDone.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnDone.setBounds(93, 375, 421, 30);
+		btnDone.setFont(new Font("Arial", Font.BOLD, 14));
+		btnDone.setBounds(93, 438, 421, 30);
 		add(btnDone);
 	}
 

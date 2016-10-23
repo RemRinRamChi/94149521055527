@@ -12,6 +12,7 @@ import spelling.quiz.SpellList;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -39,6 +40,52 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	private JButton btnCheer1;
 	private JComboBox themeComboBox;
 	private JComboBox voiceComboBox;
+	private JLabel lblNewLabel;
+	private JLabel lblChangeVoice;
+	private JLabel lblBackgroundColour;
+	private JLabel lblSetOwnCheer1;
+	private JLabel lblSetOwnCheer2;
+	private JLabel lblSetPref;
+	private JLabel lblClearSettings;
+	private JLabel lblClearStatistics;
+	private JLabel lblClearPreferences;
+	private JLabel lblSettings;
+	
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color bannerColour = new Color(250,250,250);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		/*
+		// background color
+		this.setBackground(backgroundColour);
+		// option pane color
+		optionsPanel.setBackground(backgroundColour);
+		
+		// banner color
+		hiPanel.setBackground(bannerColour);
+		
+		// normal text
+		lblHiUser.setForeground(normalText);
+		lblHereToHelp.setForeground(normalText);
+		lblPleaseSelectOne.setForeground(normalText);
+		// button text
+		btnNewQuiz.setForeground(buttonText);
+		btnReviewQuiz.setForeground(buttonText);
+		btnViewStatistics.setForeground(buttonText);
+		btnSettings.setForeground(buttonText);
+		btnQuit.setForeground(buttonText);
+		// normal button color
+		btnNewQuiz.setBackground(buttonColour);
+		btnReviewQuiz.setBackground(buttonColour);
+		btnViewStatistics.setBackground(buttonColour);
+		btnSettings.setBackground(buttonColour);
+		btnQuit.setBackground(buttonColour);*/
+	}
 	
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -114,12 +161,12 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	public OptionsPanel() {
 		setLayout(null);
 		// Options label
-		JLabel lblSettings = new JLabel("Options");
+		lblSettings = new JLabel("Options");
 		lblSettings.setFont(new Font("Arial", Font.PLAIN, 24));
 		lblSettings.setBounds(42, 30, 146, 52);
 		add(lblSettings);
 		// "Current Name :"
-		JLabel lblNewLabel = new JLabel("Current Name :");
+		lblNewLabel = new JLabel("Current Name :");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNewLabel.setBounds(42, 136, 112, 14);
 		add(lblNewLabel);
@@ -136,7 +183,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(btnChangeName);
 		
 		// CLEAR STATISTICS label and button
-		JLabel lblClearStatistics = new JLabel("Clear Statistics");
+		lblClearStatistics = new JLabel("Clear Statistics");
 		lblClearStatistics.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblClearStatistics.setBounds(42, 350, 206, 14);
 		add(lblClearStatistics);
@@ -160,13 +207,13 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		voiceComboBox.setModel(new DefaultComboBoxModel(new String[] {"Default", "Auckland"}));
 		voiceComboBox.setBounds(258, 166, 133, 23);
 		add(voiceComboBox);
-		JLabel lblChangeVoice = new JLabel("VoxSpell Voice");
+		lblChangeVoice = new JLabel("VoxSpell Voice");
 		lblChangeVoice.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblChangeVoice.setBounds(42, 170, 112, 14);
 		add(lblChangeVoice);
 		
 		// CLEAR PREFERENCES label and button
-		JLabel lblClearPreferences = new JLabel("Clear Preferences");
+		lblClearPreferences = new JLabel("Clear Preferences");
 		lblClearPreferences.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblClearPreferences.setBounds(42, 384, 205, 14);
 		add(lblClearPreferences);
@@ -177,7 +224,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(btnClearPref);
 		
 		// Own cheer 1 label and button (when user gets 100% right)
-		JLabel lblSetOwnCheer1 = new JLabel("Own cheer 1");
+		lblSetOwnCheer1 = new JLabel("Own cheer 1");
 		lblSetOwnCheer1.setToolTipText("Cheering when user gets 100% right");
 		lblSetOwnCheer1.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblSetOwnCheer1.setBounds(42, 242, 205, 14);
@@ -189,7 +236,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(btnCheer1);
 		
 		// Own cheer 2 label and button (when user gets less than 100% right)
-		JLabel lblSetOwnCheer2 = new JLabel("Own cheer 2");
+		lblSetOwnCheer2 = new JLabel("Own cheer 2");
 		lblSetOwnCheer2.setToolTipText("Cheering when user gets less than 100% right");
 		lblSetOwnCheer2.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblSetOwnCheer2.setBounds(42, 276, 205, 14);
@@ -201,7 +248,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(btnCheer2);
 		
 		// Set own preferences label
-		JLabel lblSetPref = new JLabel("Set own preferences");
+		lblSetPref = new JLabel("Set own preferences");
 		lblSetPref.setFont(new Font("Arial", Font.BOLD, 13));
 		lblSetPref.setBounds(42, 92, 349, 23);
 		add(lblSetPref);
@@ -209,7 +256,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		separator.setBounds(42, 117, 349, 8);
 		add(separator);
 		// Clear settings label
-		JLabel lblClearSettings = new JLabel("Clear settings");
+		lblClearSettings = new JLabel("Clear settings");
 		lblClearSettings.setFont(new Font("Arial", Font.BOLD, 13));
 		lblClearSettings.setBounds(42, 306, 349, 23);
 		add(lblClearSettings);
@@ -218,7 +265,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(separator_1);
 		
 		// Change VOXSPELL THEME label and combo box
-		JLabel lblBackgroundColour = new JLabel("VoxSpell Theme");
+		lblBackgroundColour = new JLabel("VoxSpell Theme");
 		lblBackgroundColour.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblBackgroundColour.setBounds(42, 204, 205, 14);
 		add(lblBackgroundColour);
@@ -228,6 +275,8 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		themeComboBox.setModel(new DefaultComboBoxModel(new String[] {"Light", "Dark"}));
 		themeComboBox.setBounds(258, 200, 133, 23);
 		add(themeComboBox);
+		
+		applyTheme();
 
 	}
 	

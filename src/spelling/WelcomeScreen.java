@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import spelling.settings.ClearStatistics;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -27,7 +28,31 @@ public class WelcomeScreen extends JPanel {
 	private JTextField nameField;
 	private SpellingAidMain mainFrame;
 	private JButton btnConfirm;
+	private JPanel panel;
+	private JLabel nameQuery;
 	
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color bannerColour = new Color(250,250,250);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		
+		// background color
+		this.setBackground(backgroundColour);
+		panel.setBackground(backgroundColour);
+		
+		// normal text
+		nameQuery.setForeground(normalText);
+
+		// button text
+		btnConfirm.setForeground(buttonText);
+		// normal button color
+		btnConfirm.setBackground(buttonColour);
+	}
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
 	 */
@@ -48,7 +73,7 @@ public class WelcomeScreen extends JPanel {
 		add(welcomeImage);
 		
 		//Set welcome screen to be of grid bag layout
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBounds(10, 210, 430, 229);
 		add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -59,7 +84,7 @@ public class WelcomeScreen extends JPanel {
 		panel.setLayout(gbl_panel);
 		
 		//Label asking what the user want to be called
-		JLabel nameQuery = new JLabel("What would you like to be called ?");
+		nameQuery = new JLabel("What would you like to be called ?");
 		nameQuery.setFont(new Font("Arial", Font.PLAIN, 18));
 		GridBagConstraints gbc_nameQuery = new GridBagConstraints();
 		gbc_nameQuery.anchor = GridBagConstraints.SOUTH;
@@ -94,7 +119,7 @@ public class WelcomeScreen extends JPanel {
 		
 		// confirm name button
 		btnConfirm = new JButton("Confirm");
-		btnConfirm.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnConfirm.setFont(new Font("Arial", Font.BOLD, 14));
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(nameField.getText().equals("")){
@@ -113,7 +138,7 @@ public class WelcomeScreen extends JPanel {
 		gbc_btnConfirm.gridx = 1;
 		gbc_btnConfirm.gridy = 2;
 		panel.add(btnConfirm, gbc_btnConfirm);
-
+		applyTheme();
 		nameField.requestFocus();
 	}
 	

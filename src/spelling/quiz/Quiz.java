@@ -38,7 +38,6 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	private JButton btnConfirmOrNext;
 	private JButton btnStop;
 	private JButton btnListenAgain;
-	private JLabel resultIndicator;
 	private JLabel firstAttempt;
 	private JLabel secondAttempt;
 	private JLabel firstAttemptResult;
@@ -48,7 +47,15 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	private JLabel longestStreak;
 	private JLabel noOfCorrectSpellings;
 	private JLabel quizAccuracy;
-	private JLabel lblSpellAgain;
+	private JLabel lblNewLabel;
+	private JLabel lblYouOnlyHave;
+	private JLabel lblCurrentQuiz;
+	private JLabel lblCurrentStreak;
+	private JLabel lblLongeststreak;
+	private JLabel lblSpelledCorrectly;
+	private JLabel lblQuizAccuracy;
+	private JLabel lblstAttempt;
+	private JLabel lblndAttempt;
 
 	// spell list, question asker and answer checker to run the quiz
 	private SpellList spellList;
@@ -66,6 +73,51 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	
 	// flag to make quiz faster by going on to the next question immediately
 	private boolean correctFlag = false;
+	
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+
+		firstAttemptResult.setForeground(new Color(255,0,110));
+		secondAttemptResult.setForeground(new Color(255,0,0));
+		
+		// background color
+		this.setBackground(backgroundColour);
+		
+		// back text
+		spellQuery.setForeground(normalText);
+		definitionArea.setForeground(normalText);
+		lblstAttempt.setForeground(normalText);
+		lblndAttempt.setForeground(normalText);
+		firstAttempt.setForeground(normalText);
+		secondAttempt.setForeground(normalText);
+		currentQuiz.setForeground(normalText);
+		currentStreak.setForeground(normalText);
+		longestStreak.setForeground(normalText);
+		noOfCorrectSpellings.setForeground(normalText);
+		quizAccuracy.setForeground(normalText);
+		lblNewLabel.setForeground(normalText);
+		lblYouOnlyHave.setForeground(normalText);
+		lblCurrentQuiz.setForeground(normalText);
+		lblCurrentStreak.setForeground(normalText);
+		lblLongeststreak.setForeground(normalText);
+		lblSpelledCorrectly.setForeground(normalText);
+		lblQuizAccuracy.setForeground(normalText);
+		
+		// normal text
+		btnConfirmOrNext.setForeground(buttonText);
+		btnStop.setForeground(buttonText);
+		btnListenAgain.setForeground(buttonText);
+		// normal button color
+		btnConfirmOrNext.setBackground(buttonColour);
+		btnStop.setBackground(buttonColour);
+		btnListenAgain.setBackground(buttonColour);
+	}
 	
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) {
@@ -190,6 +242,8 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		this.setFocusable(true);
 		this.addKeyListener(this);
 
+		applyTheme();
+		
 		// Initialise spellList model which all questions will be asked from and answers will be checked against
 		spellList = new SpellList();
 	}
@@ -230,13 +284,6 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 */
 	public void setSpellQuery(String query) {
 		spellQuery.setText(query);
-	}
-	/**
-	 * Set the text in the result indicator {Correct,Incorrect}
-	 * @param result whether the user is right or wrong
-	 */
-	public void setResultIndicator(String result) {
-		resultIndicator.setText(result);
 	}
 	public String getFirstAttempt() {
 		return firstAttempt.getText();
@@ -290,13 +337,6 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		userInput.requestFocus();
 	}
 	/**
-	 * Whether to display the "Incorrect spell again"
-	 * @param yesOrNo
-	 */
-	public void displaySpellAgainLabel(boolean yesOrNo){
-		lblSpellAgain.setVisible(yesOrNo);
-	}
-	/**
 	 * Set definition for a quiz question
 	 * @param definition
 	 */
@@ -323,8 +363,6 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 * Reset screen at the start of every quiz to clear up anything from previous sessions
 	 */
 	public void resetScreen(){
-		setResultIndicator("");
-		displaySpellAgainLabel(false);
 		setFirstAttempt("");
 		setSecondAttempt(":");
 		setFirstAttempt(":");
@@ -428,7 +466,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 
 		// avatar
 		JLabel avatar = new JLabel("\r\n");
-		avatar.setIcon(new ImageIcon("img/avatar2.png"));
+		avatar.setIcon(new ImageIcon("img/LongAvatar.png"));
 		avatar.setBounds(28, 36, 154, 286);
 		add(avatar);
 
@@ -440,8 +478,8 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		add(spellQuery);
 
 		// "Definition:" label
-		JLabel lblNewLabel = new JLabel("Definition:");
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblNewLabel = new JLabel("Definition:");
+		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblNewLabel.setBounds(213, 75, 86, 14);
 		add(lblNewLabel);
 
@@ -450,12 +488,13 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		scrollPane.setBounds(213, 98, 286, 64);
 		add(scrollPane);
 		definitionArea = new JTextArea();
+		definitionArea.setForeground(new Color(0, 0, 0));
 		definitionArea.setWrapStyleWord(true);
 		definitionArea.setLineWrap(true);
-		definitionArea.setFont(new Font("Arial", Font.PLAIN, 13));
+		definitionArea.setFont(new Font("Arial", Font.PLAIN, 14));
 		definitionArea.setEditable(false);
 		scrollPane.setViewportView(definitionArea);
-		definitionArea.setBackground(Color.LIGHT_GRAY);
+		definitionArea.setBackground(new Color(250,250,250));
 
 		// user input field
 		userInput = new JTextField();
@@ -466,34 +505,34 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 
 		// listen again button
 		btnListenAgain = new JButton("Listen again");
-		btnListenAgain.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnListenAgain.setFont(new Font("Arial", Font.BOLD, 14));
 		btnListenAgain.addActionListener(this);
 		btnListenAgain.addKeyListener(this);
-		btnListenAgain.setBounds(213, 214, 168, 31);
+		btnListenAgain.setBounds(213, 214, 144, 31);
 		add(btnListenAgain);
 
 		// confirm button or next question button
 		btnConfirmOrNext = new JButton("Confirm");
-		btnConfirmOrNext.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnConfirmOrNext.setFont(new Font("Arial", Font.BOLD, 14));
 		btnConfirmOrNext.addActionListener(this);
 		btnConfirmOrNext.addKeyListener(this);
-		btnConfirmOrNext.setBounds(391, 214, 108, 31);
+		btnConfirmOrNext.setBounds(365, 214, 134, 31);
 		add(btnConfirmOrNext);
 
 		// "You only have 2 attempts" label
-		JLabel lblYouOnlyHave = new JLabel("You only have 2 attempts");
-		lblYouOnlyHave.setFont(new Font("Arial", Font.PLAIN, 13));
+		lblYouOnlyHave = new JLabel("You have only 2 attempts");
+		lblYouOnlyHave.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblYouOnlyHave.setBounds(213, 256, 258, 20);
 		add(lblYouOnlyHave);
 
 		// "1st attempt" label
-		JLabel lblstAttempt = new JLabel("1st attempt");
+		lblstAttempt = new JLabel("1st attempt");
 		lblstAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblstAttempt.setBounds(213, 281, 86, 20);
 		add(lblstAttempt);
 
 		// "2nd attempt" label
-		JLabel lblndAttempt = new JLabel("2nd attempt");
+		lblndAttempt = new JLabel("2nd attempt");
 		lblndAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblndAttempt.setBounds(213, 302, 86, 20);
 		add(lblndAttempt);
@@ -501,45 +540,28 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		// shows the user's first attempt
 		firstAttempt = new JLabel(": ");
 		firstAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
-		firstAttempt.setBounds(309, 281, 86, 20);
+		firstAttempt.setBounds(309, 281, 134, 20);
 		add(firstAttempt);
 
 		// shows the user's second attempt
 		secondAttempt = new JLabel(": ");
 		secondAttempt.setFont(new Font("Arial", Font.PLAIN, 14));
-		secondAttempt.setBounds(309, 302, 86, 20);
+		secondAttempt.setBounds(309, 302, 134, 20);
 		add(secondAttempt);
-
-		// result indicator indicating what the result of the user's attempt is
-		resultIndicator = new JLabel("");
-		resultIndicator.setBackground(Color.LIGHT_GRAY);
-		resultIndicator.setForeground(Color.MAGENTA);
-		resultIndicator.setHorizontalAlignment(SwingConstants.CENTER);
-		resultIndicator.setFont(new Font("Arial", Font.PLAIN, 22));
-		resultIndicator.setBounds(21, 212, 182, 23);
-		add(resultIndicator);
-		// "Try once more" label
-		lblSpellAgain = new JLabel("Try one more");
-		lblSpellAgain.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSpellAgain.setForeground(Color.MAGENTA);
-		lblSpellAgain.setFont(new Font("Arial", Font.PLAIN, 18));
-		lblSpellAgain.setBackground(Color.LIGHT_GRAY);
-		lblSpellAgain.setBounds(21, 246, 182, 23);
-		add(lblSpellAgain);
 		
 		// shows how many letters off is the user's answer
 		firstAttemptResult = new JLabel("");
 		firstAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
-		firstAttemptResult.setBounds(413, 281, 255, 20);
+		firstAttemptResult.setBounds(453, 281, 215, 20);
 		add(firstAttemptResult);
 		secondAttemptResult = new JLabel("");
 		secondAttemptResult.setFont(new Font("Arial", Font.BOLD, 14));
-		secondAttemptResult.setBounds(413, 302, 255, 20);
+		secondAttemptResult.setBounds(453, 302, 215, 20);
 		add(secondAttemptResult);
 
 		// stop quiz button
 		btnStop = new JButton("Stop\r\n Quiz");
-		btnStop.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnStop.setFont(new Font("Arial", Font.BOLD, 14));
 		btnStop.setToolTipText("Only available during answring phase.");
 		btnStop.addActionListener(this);
 		btnStop.addKeyListener(this);
@@ -547,55 +569,56 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		add(btnStop);
 
 		// show current quiz
-		JLabel lblCurrentQuiz = new JLabel("Current Quiz ");
-		lblCurrentQuiz.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblCurrentQuiz.setBounds(517, 73, 77, 14);
+		lblCurrentQuiz = new JLabel("Current Quiz ");
+		lblCurrentQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblCurrentQuiz.setBounds(517, 73, 108, 14);
 		add(lblCurrentQuiz);
 		currentQuiz = new JLabel(": ");
-		currentQuiz.setFont(new Font("Arial", Font.PLAIN, 13));
-		currentQuiz.setBounds(623, 73, 127, 14);
+		currentQuiz.setFont(new Font("Arial", Font.PLAIN, 14));
+		currentQuiz.setBounds(647, 75, 127, 14);
 		add(currentQuiz);
 		
 		// show current streak
-		JLabel lblCurrentStreak = new JLabel("Current Streak");
-		lblCurrentStreak.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblCurrentStreak.setBounds(517, 98, 96, 14);
+		lblCurrentStreak = new JLabel("Current Streak");
+		lblCurrentStreak.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblCurrentStreak.setBounds(517, 98, 118, 14);
 		add(lblCurrentStreak);
 		currentStreak = new JLabel(": ");
-		currentStreak.setFont(new Font("Arial", Font.PLAIN, 13));
-		currentStreak.setBounds(623, 98, 127, 14);
+		currentStreak.setFont(new Font("Arial", Font.PLAIN, 14));
+		currentStreak.setBounds(647, 100, 127, 14);
 		add(currentStreak);
 		
 		// show longest streak
-		JLabel lblLongeststreak = new JLabel("Longest Streak\r\n");
-		lblLongeststreak.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblLongeststreak.setBounds(517, 122, 96, 14);
+		lblLongeststreak = new JLabel("Longest Streak\r\n");
+		lblLongeststreak.setVerticalAlignment(SwingConstants.TOP);
+		lblLongeststreak.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblLongeststreak.setBounds(517, 122, 96, 20);
 		add(lblLongeststreak);
-		longestStreak = new JLabel(": (coming soon)");
-		longestStreak.setFont(new Font("Arial", Font.PLAIN, 13));
-		longestStreak.setBounds(623, 122, 127, 14);
+		longestStreak = new JLabel(": ");
+		longestStreak.setFont(new Font("Arial", Font.PLAIN, 14));
+		longestStreak.setBounds(647, 124, 127, 14);
 		add(longestStreak);
 		
 		// show words spelled correctly
-		JLabel lblSpelledCorrectly = new JLabel("Spelled Correctly");
-		lblSpelledCorrectly.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblSpelledCorrectly.setBounds(517, 147, 108, 14);
+		lblSpelledCorrectly = new JLabel("Spelled Correctly");
+		lblSpelledCorrectly.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblSpelledCorrectly.setBounds(517, 147, 118, 14);
 		add(lblSpelledCorrectly);
 		noOfCorrectSpellings = new JLabel(": ");
-		noOfCorrectSpellings.setFont(new Font("Arial", Font.PLAIN, 13));
-		noOfCorrectSpellings.setBounds(623, 147, 127, 14);
+		noOfCorrectSpellings.setFont(new Font("Arial", Font.PLAIN, 14));
+		noOfCorrectSpellings.setBounds(647, 149, 127, 14);
 		add(noOfCorrectSpellings);
 		
 		// show quiz accuracy
-		JLabel lblQuizAccuracy = new JLabel("Quiz Accuracy\r\n");
-		lblQuizAccuracy.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblQuizAccuracy.setBounds(517, 172, 96, 14);
+		lblQuizAccuracy = new JLabel("Quiz Accuracy\r\n");
+		lblQuizAccuracy.setVerticalAlignment(SwingConstants.TOP);
+		lblQuizAccuracy.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblQuizAccuracy.setBounds(517, 172, 108, 20);
 		add(lblQuizAccuracy);
 		quizAccuracy = new JLabel(": ");
-		quizAccuracy.setFont(new Font("Arial", Font.PLAIN, 13));
-		quizAccuracy.setBounds(623, 172, 127, 14);
+		quizAccuracy.setFont(new Font("Arial", Font.PLAIN, 14));
+		quizAccuracy.setBounds(647, 174, 127, 14);
 		add(quizAccuracy);
 
 	}
-
 }

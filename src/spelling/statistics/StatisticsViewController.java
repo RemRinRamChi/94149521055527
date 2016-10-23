@@ -29,11 +29,14 @@ import javax.swing.SwingConstants;
  */
 public class StatisticsViewController extends JPanel {
 	private SpellingAidMain mainFrame;
-	private JPanel specificQuiz;
 	private JLabel lblHi;
+	private JLabel lblHereAreSomeStats;
 	private JTabbedPane lvlAndWordStatsPane;
 	private JTable triedWordsTable;
 	private JTable levelTable;
+	private JPanel friendlyPanel;
+	private JButton btnClearStatistics;
+	private JButton btnBack;
 
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -44,6 +47,39 @@ public class StatisticsViewController extends JPanel {
 	}
 	
 	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color bannerColour = new Color(250,250,250);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		
+		// background color
+		this.setBackground(backgroundColour);
+		lvlAndWordStatsPane.setBackground(backgroundColour);
+		
+		// banner color
+		friendlyPanel.setBackground(bannerColour);
+		// option pane color
+
+		
+		// back text
+		lblHi.setForeground(normalText);
+		lblHereAreSomeStats.setForeground(normalText);
+
+		// normal text
+		btnClearStatistics.setForeground(buttonText);
+		btnBack.setForeground(buttonText);
+
+		// normal button color
+		btnClearStatistics.setBackground(buttonColour);
+		btnBack.setBackground(buttonColour);
+
+	}
+	
+	/**
 	 * Create the panel and layout the components appropriately
 	 */
 	public StatisticsViewController() {
@@ -51,8 +87,9 @@ public class StatisticsViewController extends JPanel {
 		
 		// Tabbed Pane to have two tabs "Level Stats", "Tried Words Stats"
 		lvlAndWordStatsPane = new JTabbedPane(JTabbedPane.TOP);
+		lvlAndWordStatsPane.setBackground(new Color(192, 192, 192));
 		lvlAndWordStatsPane.setFont(new Font("Arial", Font.PLAIN, 14));
-		lvlAndWordStatsPane.setBounds(10, 191, 450, 358);
+		lvlAndWordStatsPane.setBounds(10, 203, 450, 358);
 		add(lvlAndWordStatsPane);
 		
 		// table for Level Stats
@@ -94,21 +131,21 @@ public class StatisticsViewController extends JPanel {
 		wordScrollPane.setViewportView(triedWordsTable);
 		
 		// back button
-		JButton btnBack = new JButton("BACK");
-		btnBack.setBounds(329, 560, 119, 31);
+		btnBack = new JButton("BACK");
+		btnBack.setBounds(329, 586, 119, 31);
 		add(btnBack);
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mainFrame.changeCardPanel("Main");
 			}
 		});
-		btnBack.setFont(new Font("Arial", Font.PLAIN, 13));
+		btnBack.setFont(new Font("Arial", Font.BOLD, 14));
 		
 		// Top panel with greetings and friendly avatar
-		JPanel friendlyPanel = new JPanel();
+		friendlyPanel = new JPanel();
 		friendlyPanel.setLayout(null);
 		friendlyPanel.setBackground(Color.WHITE);
-		friendlyPanel.setBounds(0, 0, 475, 180);
+		friendlyPanel.setBounds(0, 11, 470, 179);
 		add(friendlyPanel);
 		// avatar
 		JLabel avatar = new JLabel("");
@@ -118,17 +155,17 @@ public class StatisticsViewController extends JPanel {
 		friendlyPanel.add(avatar);
 		// Hi greeting
 		lblHi = new JLabel("Hi Sherlock");
-		lblHi.setFont(new Font("Arial", Font.PLAIN, 40));
+		lblHi.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblHi.setBounds(193, 31, 235, 64);
 		friendlyPanel.add(lblHi);
 		// interaction
-		JLabel lblHereAreSomeStats = new JLabel("Here are some statistics");
+		lblHereAreSomeStats = new JLabel("Here are some statistics");
 		lblHereAreSomeStats.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereAreSomeStats.setBounds(193, 95, 272, 53);
 		friendlyPanel.add(lblHereAreSomeStats);
 		
 		// clear statistics button
-		JButton btnClearStatistics = new JButton("Clear Statistics");
+		btnClearStatistics = new JButton("Clear Statistics");
 		btnClearStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int userChoice = JOptionPane.showConfirmDialog (mainFrame, "All progress will be lost. (Continue?)","Warning",JOptionPane.WARNING_MESSAGE);
@@ -140,9 +177,10 @@ public class StatisticsViewController extends JPanel {
 				}
 			}
 		});
-		btnClearStatistics.setFont(new Font("Arial", Font.PLAIN, 13));
-		btnClearStatistics.setBounds(20, 560, 175, 31);
+		btnClearStatistics.setFont(new Font("Arial", Font.BOLD, 14));
+		btnClearStatistics.setBounds(20, 586, 175, 31);
 		add(btnClearStatistics);
+		applyTheme();
 
 	}
 	/**

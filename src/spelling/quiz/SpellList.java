@@ -353,8 +353,6 @@ public class SpellList {
 
 		// turn to lower case for BOTH and then compare
 		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
-			spellingAidQuiz.setResultIndicator("Correct !");
-			spellingAidQuiz.displaySpellAgainLabel(false);
 			// Correct echoed if correct
 			spellingAidQuiz.sayText("Correct","");
 			if(!attempt){
@@ -379,15 +377,12 @@ public class SpellList {
 			spellingAidQuiz.setCorrectFlag();
 			incrementCurrentStreak();
 		} else {
-			spellingAidQuiz.setResultIndicator("Incorrect");
 			if(!attempt){
-				spellingAidQuiz.displaySpellAgainLabel(true);
 				spellingAidQuiz.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
 				spellingAidQuiz.requestInputFocus();
 				// answer is wrong and a second chance is given and so back to ANSWERING
 				status = QuizState.Answering;
 			} else {
-				spellingAidQuiz.displaySpellAgainLabel(false);
 				spellingAidQuiz.sayText("Incorrect.",",");
 				Tools.record(spelling_aid_statistics,wordToSpell+" Failed"); // store as failed
 				if(!currentFailedList.contains(wordToSpell)){ //add to failed list if it doesn't exist

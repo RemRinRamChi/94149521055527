@@ -1,6 +1,7 @@
 package spelling;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -44,6 +45,33 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 	private JButton stopBtn;
 
 	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		
+		// background color
+		this.setBackground(backgroundColour);
+		contentPanel.setBackground(backgroundColour);
+		buttonPane.setBackground(backgroundColour);
+		
+		// normal text
+		timeLbl.setForeground(normalText);
+
+		// button text
+		pauseBtn.setForeground(buttonText);
+		muteBtn.setForeground(buttonText);
+		stopBtn.setForeground(buttonText);
+		// normal button color
+		pauseBtn.setBackground(buttonColour);
+		muteBtn.setBackground(buttonColour);
+		stopBtn.setBackground(buttonColour);
+	}
+	
+	/**
 	 * Create the video player dialog by creating and laying out the components appropriately.
 	 */
 	public VideoPlayer() {
@@ -64,6 +92,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			{
 				// pause/play button
 				pauseBtn = new JButton("PAUSE");
+				pauseBtn.setFont(new Font("Arial", Font.BOLD, 14));
 				pauseBtn.setBounds(178, 11, 150, 30);
 				pauseBtn.setActionCommand("");
 				pauseBtn.addActionListener(this);
@@ -73,6 +102,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			
 			// muted/unmute button
 			muteBtn = new JButton("MUTE");
+			muteBtn.setFont(new Font("Arial", Font.BOLD, 14));
 			muteBtn.setActionCommand("Cancel");
 			muteBtn.setBounds(338, 11, 150, 30);
 			muteBtn.addActionListener(this);
@@ -80,6 +110,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			
 			// stop button
 			stopBtn = new JButton("STOP");
+			stopBtn.setFont(new Font("Arial", Font.BOLD, 14));
 			stopBtn.setActionCommand("Cancel");
 			stopBtn.setBounds(498, 11, 150, 30);
 			stopBtn.addActionListener(this);
@@ -88,8 +119,8 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			// time label that changes over time
 			timeLbl = new JLabel("TIME");
 			timeLbl.setHorizontalAlignment(SwingConstants.LEFT);
-			timeLbl.setFont(new Font("Arial", Font.PLAIN, 13));
-			timeLbl.setBounds(29, 12, 150, 27);
+			timeLbl.setFont(new Font("Arial", Font.PLAIN, 16));
+			timeLbl.setBounds(16, 12, 150, 27);
 			buttonPane.add(timeLbl);
 		}
 		
@@ -106,11 +137,11 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				long time = (long)(video.getTime()/1000.0);
-				timeLbl.setText("Seconds passed: "+String.valueOf(time));
+				timeLbl.setText("00: "+String.valueOf(time));
 			}
 		});
         timer.start();
-		
+        applyTheme();
 		setVisible(true);
 	}
 	

@@ -81,36 +81,40 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		}
 	}
 
+	/**
+	 * Apply colour to components
+	 */
 	public void applyTheme(){
-		Color bC = new Color(255,255,255);
-		Color banC = new Color(245,245,245);
-		Color oC = new Color(255,255,255);
-		Color nT = new Color(255,255,255);
-		Color bT = new Color(15,169,249);
-		Color nB = new Color(15,169,249);
-		// background color
-		this.setBackground(bC);
-		// banner color
-		hiPanel.setBackground(banC);
-		// option pane color
-		optionsPanel.setBackground(oC);
+		Color backgroundColour = new Color(255,255,255);
+		Color bannerColour = new Color(250,250,250);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
 		
-		// back text
-		lblHiUser.setForeground(new Color(0,0,0));
-		lblHereToHelp.setForeground(new Color(0,0,0));
-		lblPleaseSelectOne.setForeground(bT);
+		// background color
+		this.setBackground(backgroundColour);
+		// option pane color
+		optionsPanel.setBackground(backgroundColour);
+		
+		// banner color
+		hiPanel.setBackground(bannerColour);
+		
 		// normal text
-		btnNewQuiz.setForeground(nT);
-		btnReviewQuiz.setForeground(nT);
-		btnViewStatistics.setForeground(nT);
-		btnSettings.setForeground(nT);
-		btnQuit.setForeground(nT);
+		lblHiUser.setForeground(normalText);
+		lblHereToHelp.setForeground(normalText);
+		lblPleaseSelectOne.setForeground(normalText);
+		// button text
+		btnNewQuiz.setForeground(buttonText);
+		btnReviewQuiz.setForeground(buttonText);
+		btnViewStatistics.setForeground(buttonText);
+		btnSettings.setForeground(buttonText);
+		btnQuit.setForeground(buttonText);
 		// normal button color
-		btnNewQuiz.setBackground(nB);
-		btnReviewQuiz.setBackground(nB);
-		btnViewStatistics.setBackground(nB);
-		btnSettings.setBackground(nB);
-		btnQuit.setBackground(nB);
+		btnNewQuiz.setBackground(buttonColour);
+		btnReviewQuiz.setBackground(buttonColour);
+		btnViewStatistics.setBackground(buttonColour);
+		btnSettings.setBackground(buttonColour);
+		btnQuit.setBackground(buttonColour);
 	}
 
 	/**
@@ -136,13 +140,13 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// greeting label
 		lblHiUser = new JLabel("Hi");
-		lblHiUser.setFont(new Font("Arial", Font.PLAIN, 34));
+		lblHiUser.setFont(new Font("Arial", Font.PLAIN, 36));
 		lblHiUser.setBounds(197, 37, 235, 64);
 		hiPanel.add(lblHiUser);
 
 		// "I am here to help you"
 		lblHereToHelp = new JLabel("I am here to help you \r\n");
-		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 22));
 		lblHereToHelp.setBounds(197, 100, 247, 53);
 		hiPanel.add(lblHereToHelp);
 
