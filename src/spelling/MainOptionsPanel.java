@@ -82,9 +82,9 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 	}
 
 	public void applyTheme(){
-		Color bC = new Color(250,250,250);
-		Color banC = new Color(255,255,255);
-		Color oC = new Color(250,250,250);
+		Color bC = new Color(255,255,255);
+		Color banC = new Color(245,245,245);
+		Color oC = new Color(255,255,255);
 		Color nT = new Color(255,255,255);
 		Color bT = new Color(15,169,249);
 		Color nB = new Color(15,169,249);
@@ -96,8 +96,8 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		optionsPanel.setBackground(oC);
 		
 		// back text
-		lblHiUser.setForeground(bT);
-		lblHereToHelp.setForeground(bT);
+		lblHiUser.setForeground(new Color(0,0,0));
+		lblHereToHelp.setForeground(new Color(0,0,0));
 		lblPleaseSelectOne.setForeground(bT);
 		// normal text
 		btnNewQuiz.setForeground(nT);
@@ -123,7 +123,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		// Panel to say hi to user
 		hiPanel = new JPanel();
 		hiPanel.setBackground(Color.WHITE);
-		hiPanel.setBounds(0, 11, 450, 200);
+		hiPanel.setBounds(0, 11, 450, 180);
 		add(hiPanel);
 		hiPanel.setLayout(null);
 
@@ -131,25 +131,25 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 		JLabel avatar = new JLabel("");
 		avatar.setVerticalAlignment(SwingConstants.BOTTOM);
 		avatar.setIcon(new ImageIcon("img/avatar.png"));
-		avatar.setBounds(26, 11, 146, 189);
+		avatar.setBounds(26, 6, 146, 174);
 		hiPanel.add(avatar);
 
 		// greeting label
 		lblHiUser = new JLabel("Hi");
-		lblHiUser.setFont(new Font("Arial", Font.PLAIN, 40));
-		lblHiUser.setBounds(193, 49, 235, 64);
+		lblHiUser.setFont(new Font("Arial", Font.PLAIN, 34));
+		lblHiUser.setBounds(197, 37, 235, 64);
 		hiPanel.add(lblHiUser);
 
 		// "I am here to help you"
 		lblHereToHelp = new JLabel("I am here to help you \r\n");
-		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 22));
-		lblHereToHelp.setBounds(193, 113, 247, 53);
+		lblHereToHelp.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblHereToHelp.setBounds(197, 100, 247, 53);
 		hiPanel.add(lblHereToHelp);
 
 		// panel containing main options
 		optionsPanel = new JPanel();
 		optionsPanel.setBackground(new Color(245, 245, 245));
-		optionsPanel.setBounds(10, 222, 430, 267);
+		optionsPanel.setBounds(10, 214, 430, 267);
 		add(optionsPanel);
 		GridBagLayout gbl_optionsPanel = new GridBagLayout();
 		gbl_optionsPanel.columnWidths = new int[]{100, 250, 100, 0};
