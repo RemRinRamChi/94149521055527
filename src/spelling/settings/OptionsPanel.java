@@ -48,49 +48,6 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	private JLabel lblClearPreferences;
 	private JLabel lblSettings;
 	
-	/**
-	 * Apply colour to components
-	 */
-	public void applyTheme(){
-		Color backgroundColour = new Color(255,255,255);
-		Color buttonText = new Color(255,255,255);
-		Color normalText = new Color(0,0,0);
-		Color buttonColour = new Color(15,169,249);
-
-		
-		// background color
-		this.setBackground(backgroundColour);
-		
-		// normal text
-		lblName.setForeground(normalText);
-		lblNewLabel.setForeground(normalText);
-		lblChangeVoice.setForeground(normalText);
-		lblSetOwnCheer1.setForeground(normalText);
-		lblSetOwnCheer2.setForeground(normalText);
-		lblSetPref.setForeground(normalText);
-		lblClearSettings.setForeground(normalText);
-		lblClearStatistics.setForeground(normalText);
-		lblClearPreferences.setForeground(normalText);
-		lblSettings.setForeground(normalText);
-		
-		// button text
-		btnChangeName.setForeground(buttonText);
-		btnClearStats.setForeground(buttonText);
-		btnBack.setForeground(buttonText);
-		btnClearPref.setForeground(buttonText);
-		btnCheer2.setForeground(buttonText);
-		btnCheer1.setForeground(buttonText);
-		voiceComboBox.setForeground(buttonText);
-
-		// normal button color
-		btnChangeName.setBackground(buttonColour);
-		btnClearStats.setBackground(buttonColour);
-		btnBack.setBackground(buttonColour);
-		btnClearPref.setBackground(buttonColour);
-		btnCheer2.setBackground(buttonColour);
-		btnCheer1.setBackground(buttonColour);
-		voiceComboBox.setBackground(buttonColour);
-	}
 	
 	/**
 	 * Create the panel after taking in the main frame so that panel can be switched based on state.
@@ -262,6 +219,50 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		
 		applyTheme();
 
+	}
+	
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+
+		
+		// background color
+		this.setBackground(backgroundColour);
+		
+		// normal text
+		lblName.setForeground(normalText);
+		lblNewLabel.setForeground(normalText);
+		lblChangeVoice.setForeground(normalText);
+		lblSetOwnCheer1.setForeground(normalText);
+		lblSetOwnCheer2.setForeground(normalText);
+		lblSetPref.setForeground(normalText);
+		lblClearSettings.setForeground(normalText);
+		lblClearStatistics.setForeground(normalText);
+		lblClearPreferences.setForeground(normalText);
+		lblSettings.setForeground(normalText);
+		
+		// button text
+		btnChangeName.setForeground(buttonText);
+		btnClearStats.setForeground(buttonText);
+		btnBack.setForeground(buttonText);
+		btnClearPref.setForeground(buttonText);
+		btnCheer2.setForeground(buttonText);
+		btnCheer1.setForeground(buttonText);
+		voiceComboBox.setForeground(buttonText);
+
+		// normal button color
+		btnChangeName.setBackground(buttonColour);
+		btnClearStats.setBackground(buttonColour);
+		btnBack.setBackground(buttonColour);
+		btnClearPref.setBackground(buttonColour);
+		btnCheer2.setBackground(buttonColour);
+		btnCheer1.setBackground(buttonColour);
+		voiceComboBox.setBackground(buttonColour);
 	}
 	
 	/**

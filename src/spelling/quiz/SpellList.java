@@ -297,6 +297,7 @@ public class SpellList {
 	private void askNextQuestion(){
 		// make sure user input field is cleared everytime a question is asked
 		spellingAidQuiz.setUserInput("");
+		spellingAidQuiz.setTeachingAvatar();
 		// < NoOfQuestion because questionNo is used to access the current quiz list's question which starts at 0 
 		// ie question 10 -> questionNo = 9
 		if(questionNo < getNoOfQuestions()){
@@ -383,6 +384,7 @@ public class SpellList {
 			spellingAidQuiz.setCorrectFlag();
 			incrementCurrentStreak();
 		} else {
+			spellingAidQuiz.setIncorrectAvatar();
 			if(!attempt){
 				spellingAidQuiz.sayText("Incorrect, try once more: "+",",wordToSpell+","+wordToSpell+",");
 				spellingAidQuiz.requestInputFocus();

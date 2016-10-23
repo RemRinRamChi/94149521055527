@@ -47,39 +47,6 @@ public class StatisticsViewController extends JPanel {
 	}
 	
 	/**
-	 * Apply colour to components
-	 */
-	public void applyTheme(){
-		Color backgroundColour = new Color(255,255,255);
-		Color bannerColour = new Color(250,250,250);
-		Color buttonText = new Color(255,255,255);
-		Color normalText = new Color(0,0,0);
-		Color buttonColour = new Color(15,169,249);
-		
-		// background color
-		this.setBackground(backgroundColour);
-		lvlAndWordStatsPane.setBackground(backgroundColour);
-		
-		// banner color
-		friendlyPanel.setBackground(bannerColour);
-		// option pane color
-
-		
-		// back text
-		lblHi.setForeground(normalText);
-		lblHereAreSomeStats.setForeground(normalText);
-
-		// normal text
-		btnClearStatistics.setForeground(buttonText);
-		btnBack.setForeground(buttonText);
-
-		// normal button color
-		btnClearStatistics.setBackground(buttonColour);
-		btnBack.setBackground(buttonColour);
-
-	}
-	
-	/**
 	 * Create the panel and layout the components appropriately
 	 */
 	public StatisticsViewController() {
@@ -183,6 +150,39 @@ public class StatisticsViewController extends JPanel {
 		applyTheme();
 
 	}
+	
+	
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color bannerColour = new Color(250,250,250);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		
+		// background color
+		this.setBackground(backgroundColour);
+		lvlAndWordStatsPane.setBackground(backgroundColour);
+		
+		// banner color
+		friendlyPanel.setBackground(bannerColour);
+		
+		// normal text
+		lblHi.setForeground(normalText);
+		lblHereAreSomeStats.setForeground(normalText);
+
+		// button text
+		btnClearStatistics.setForeground(buttonText);
+		btnBack.setForeground(buttonText);
+
+		// normal button color
+		btnClearStatistics.setBackground(buttonColour);
+		btnBack.setBackground(buttonColour);
+
+	}
+	
 	/**
 	 * Add entry to TriedWords table
 	 * @param addRow

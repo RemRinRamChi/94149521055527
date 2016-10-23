@@ -44,32 +44,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 	private JLabel timeLbl;
 	private JButton stopBtn;
 
-	/**
-	 * Apply colour to components
-	 */
-	public void applyTheme(){
-		Color backgroundColour = new Color(255,255,255);
-		Color buttonText = new Color(255,255,255);
-		Color normalText = new Color(0,0,0);
-		Color buttonColour = new Color(15,169,249);
-		
-		// background color
-		this.setBackground(backgroundColour);
-		contentPanel.setBackground(backgroundColour);
-		buttonPane.setBackground(backgroundColour);
-		
-		// normal text
-		timeLbl.setForeground(normalText);
 
-		// button text
-		pauseBtn.setForeground(buttonText);
-		muteBtn.setForeground(buttonText);
-		stopBtn.setForeground(buttonText);
-		// normal button color
-		pauseBtn.setBackground(buttonColour);
-		muteBtn.setBackground(buttonColour);
-		stopBtn.setBackground(buttonColour);
-	}
 	
 	/**
 	 * Create the video player dialog by creating and laying out the components appropriately.
@@ -143,6 +118,33 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
         applyTheme();
         setLocationRelativeTo(null);
 		setVisible(true);
+	}
+	
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+		
+		// background color
+		this.setBackground(backgroundColour);
+		contentPanel.setBackground(backgroundColour);
+		buttonPane.setBackground(backgroundColour);
+		
+		// normal text
+		timeLbl.setForeground(normalText);
+
+		// button text
+		pauseBtn.setForeground(buttonText);
+		muteBtn.setForeground(buttonText);
+		stopBtn.setForeground(buttonText);
+		// normal button color
+		pauseBtn.setBackground(buttonColour);
+		muteBtn.setBackground(buttonColour);
+		stopBtn.setBackground(buttonColour);
 	}
 	
 	// play video

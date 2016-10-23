@@ -73,51 +73,8 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	
 	// flag to make quiz faster by going on to the next question immediately
 	private boolean correctFlag = false;
+	private JLabel avatar;
 	
-	/**
-	 * Apply colour to components
-	 */
-	public void applyTheme(){
-		Color backgroundColour = new Color(255,255,255);
-		Color buttonText = new Color(255,255,255);
-		Color normalText = new Color(0,0,0);
-		Color buttonColour = new Color(15,169,249);
-
-		firstAttemptResult.setForeground(new Color(255,0,110));
-		secondAttemptResult.setForeground(new Color(255,0,0));
-		
-		// background color
-		this.setBackground(backgroundColour);
-		
-		// back text
-		spellQuery.setForeground(normalText);
-		definitionArea.setForeground(normalText);
-		lblstAttempt.setForeground(normalText);
-		lblndAttempt.setForeground(normalText);
-		firstAttempt.setForeground(normalText);
-		secondAttempt.setForeground(normalText);
-		currentQuiz.setForeground(normalText);
-		currentStreak.setForeground(normalText);
-		longestStreak.setForeground(normalText);
-		noOfCorrectSpellings.setForeground(normalText);
-		quizAccuracy.setForeground(normalText);
-		lblNewLabel.setForeground(normalText);
-		lblYouOnlyHave.setForeground(normalText);
-		lblCurrentQuiz.setForeground(normalText);
-		lblCurrentStreak.setForeground(normalText);
-		lblLongeststreak.setForeground(normalText);
-		lblSpelledCorrectly.setForeground(normalText);
-		lblQuizAccuracy.setForeground(normalText);
-		
-		// normal text
-		btnConfirmOrNext.setForeground(buttonText);
-		btnStop.setForeground(buttonText);
-		btnListenAgain.setForeground(buttonText);
-		// normal button color
-		btnConfirmOrNext.setBackground(buttonColour);
-		btnStop.setBackground(buttonColour);
-		btnListenAgain.setBackground(buttonColour);
-	}
 	
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) {
@@ -220,6 +177,20 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	}
 	
 	/**
+	 * Set the avatar to be in the Teaching mode (when festival is asking question)
+	 */
+	public void setTeachingAvatar(){
+		avatar.setIcon(new ImageIcon("img/Asking.png"));
+	}
+	
+	/**
+	 * Set the avatar to be in the Sad mode (when user answers wrongly)
+	 */
+	public void setIncorrectAvatar(){
+		avatar.setIcon(new ImageIcon("img/Incorrect.png"));
+	}
+	
+	/**
 	 *  Set flag to be correct
 	 */
 	public void setCorrectFlag(){
@@ -266,6 +237,51 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		spellList = new SpellList();
 	}
 
+	/**
+	 * Apply colour to components
+	 */
+	public void applyTheme(){
+		Color backgroundColour = new Color(255,255,255);
+		Color buttonText = new Color(255,255,255);
+		Color normalText = new Color(0,0,0);
+		Color buttonColour = new Color(15,169,249);
+
+		firstAttemptResult.setForeground(new Color(255,0,110));
+		secondAttemptResult.setForeground(new Color(255,0,0));
+		
+		// background color
+		this.setBackground(backgroundColour);
+		
+		// normal text
+		spellQuery.setForeground(normalText);
+		definitionArea.setForeground(normalText);
+		lblstAttempt.setForeground(normalText);
+		lblndAttempt.setForeground(normalText);
+		firstAttempt.setForeground(normalText);
+		secondAttempt.setForeground(normalText);
+		currentQuiz.setForeground(normalText);
+		currentStreak.setForeground(normalText);
+		longestStreak.setForeground(normalText);
+		noOfCorrectSpellings.setForeground(normalText);
+		quizAccuracy.setForeground(normalText);
+		lblNewLabel.setForeground(normalText);
+		lblYouOnlyHave.setForeground(normalText);
+		lblCurrentQuiz.setForeground(normalText);
+		lblCurrentStreak.setForeground(normalText);
+		lblLongeststreak.setForeground(normalText);
+		lblSpelledCorrectly.setForeground(normalText);
+		lblQuizAccuracy.setForeground(normalText);
+		
+		// button text
+		btnConfirmOrNext.setForeground(buttonText);
+		btnStop.setForeground(buttonText);
+		btnListenAgain.setForeground(buttonText);
+		// normal button color
+		btnConfirmOrNext.setBackground(buttonColour);
+		btnStop.setBackground(buttonColour);
+		btnListenAgain.setBackground(buttonColour);
+	}
+	
 	/**
 	 * Start a spelling quiz
 	 * @param quizLvl quiz level selected by user
@@ -401,6 +417,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		mainQuizDone.setLevel(quizLevel);
 		// display results
 		mainFrame.getDonePanel().setLblResults(results);
+		mainQuizDone.setNormalAvatar(); // default avatart interaction
 		if(mode == QuizMode.NoQuestions){
 			mainQuizDone.changeResultPanel("No Results");
 			
@@ -409,6 +426,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 			if(corrects >= spellList.getNoOfQuestions()-1 && corrects != 0){ // if 0 then not counted
 				if(mode == QuizMode.New){
 					mainQuizDone.changeUserInteraction("Rewards");
+					mainQuizDone.setRewardsAvatar(); // when user gets enough amount right, unlock rewards avatar
 				} else if(mode == QuizMode.Review){
 					mainQuizDone.changeUserInteraction("Good Job");
 				}
@@ -483,9 +501,9 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		setLayout(null); //absolute layout
 
 		// avatar
-		JLabel avatar = new JLabel("\r\n");
+		avatar = new JLabel("\r\n");
 		avatar.setIcon(new ImageIcon("img/LongAvatar.png"));
-		avatar.setBounds(28, 36, 154, 286);
+		avatar.setBounds(19, 36, 182, 286);
 		add(avatar);
 
 		// "Please spell word ? of ?" label

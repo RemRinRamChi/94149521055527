@@ -46,7 +46,56 @@ public class QuizDone extends JPanel implements ActionListener{
 	private JButton btnRetryLevel;
 	private String level; 
 	private JLabel lblLevel;
-
+	
+	/**
+	 * Set results label
+	 * @param results
+	 */
+	public void setLblResults(String results) {
+		lblResults.setText(results);
+	}
+	/**
+	 * Set level of quiz done
+	 * @param lvl
+	 */
+	public void setLevel(String lvl){
+		level = lvl;
+		lblLevel.setText("Quiz: "+lvl);
+	}
+	/**
+	 * Return the level of quiz done
+	 */
+	public String getLevel(){
+		return level;
+	}
+	/**
+	 * Set the avatar to be in the Good Job mode (1 less than total questions right (not 0))
+	 */
+	public void setRewardsAvatar(){
+		avatar.setIcon(new ImageIcon("img/Rewards.png"));
+	}
+	
+	/**
+	 * Set the avatar to be in the Good Try mode (not Good Job mode)
+	 */
+	public void setNormalAvatar(){
+		avatar.setIcon(new ImageIcon("img/LongAvatar.png"));
+	}
+	/**
+	 * Create the panel after taking in the main frame so that panel can be switched based on state.
+	 */
+	public QuizDone(SpellingAidMain contentFrame){
+		this();
+		mainFrame = contentFrame;
+	}
+	/**
+	 * Create the panel.
+	 */
+	public QuizDone() {
+		createAndLayoutComponents();
+		applyTheme();
+	}
+	
 	/**
 	 * Apply colour to components
 	 */
@@ -89,42 +138,6 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnRetryLevel.setBackground(buttonColour);
 	}
 	
-	/**
-	 * Set results label
-	 * @param results
-	 */
-	public void setLblResults(String results) {
-		lblResults.setText(results);
-	}
-	/**
-	 * Set level of quiz done
-	 * @param lvl
-	 */
-	public void setLevel(String lvl){
-		level = lvl;
-		lblLevel.setText("Quiz: "+lvl);
-	}
-	/**
-	 * Return the level of quiz done
-	 */
-	public String getLevel(){
-		return level;
-	}
-	/**
-	 * Create the panel after taking in the main frame so that panel can be switched based on state.
-	 */
-	public QuizDone(SpellingAidMain contentFrame){
-		this();
-		mainFrame = contentFrame;
-	}
-	/**
-	 * Create the panel.
-	 */
-	public QuizDone() {
-		createAndLayoutComponents();
-		applyTheme();
-	}
-
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) { // Audio Reward
 		if(e.getSource()==btnVideo){ // Video Reward
@@ -191,6 +204,12 @@ public class QuizDone extends JPanel implements ActionListener{
 		// retry level
 		btnRetryLevel = new JButton("RETRY LEVEL");
 		btnRetryLevel.addActionListener(this);
+		
+				// avatar
+				avatar = new JLabel("");
+				avatar.setIcon(new ImageIcon("img/GoodJob.png"));
+				avatar.setBounds(39, 32, 142, 231);
+				add(avatar);
 		btnRetryLevel.setFont(new Font("Arial", Font.BOLD, 14));
 		btnRetryLevel.setBounds(86, 339, 421, 30);
 		add(btnRetryLevel);
@@ -285,12 +304,6 @@ public class QuizDone extends JPanel implements ActionListener{
 		btnReviewAnotherLevel.addActionListener(this);// added to be switched as a card
 		btnReviewAnotherLevel.setFont(new Font("Arial", Font.BOLD, 14));
 		tryAnotherPanel.add(btnReviewAnotherLevel, "Review");
-
-		// avatar
-		avatar = new JLabel("");
-		avatar.setIcon(new ImageIcon("img/GoodJob.png"));
-		avatar.setBounds(39, 32, 142, 231);
-		add(avatar);
 
 		// done button
 		btnDone = new JButton("DONE");

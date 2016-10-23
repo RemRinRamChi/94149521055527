@@ -70,6 +70,27 @@ public class QuizChooser extends JDialog implements ActionListener{
 		theMode = mode;
 	}
 
+	
+	/**
+	 * Create the dialog and its components.
+	 */
+	public QuizChooser() {
+		// Make sure that the file chooser only accepts (*.txt) files
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES (*.txt)", "txt", "text");
+		ownListChooser.setFileFilter(filter);
+		ownListChooser.setAcceptAllFileFilterUsed(false);
+
+		// create all components and lay them out properly
+		createAndLayoutComponents();
+
+		// populate the combo box
+		DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.getLevelValues(new File("USER-spelling-lists.txt")));
+		ownListComboBox.setModel(combo);
+		applyTheme();
+		// centre dialog
+		setLocationRelativeTo(null);
+	}
+	
 	/**
 	 * Apply colour to components
 	 */
@@ -125,26 +146,6 @@ public class QuizChooser extends JDialog implements ActionListener{
 		ownListComboBox.setBackground(buttonColour);
 	}
 	
-	/**
-	 * Create the dialog and its components.
-	 */
-	public QuizChooser() {
-		// Make sure that the file chooser only accepts (*.txt) files
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES (*.txt)", "txt", "text");
-		ownListChooser.setFileFilter(filter);
-		ownListChooser.setAcceptAllFileFilterUsed(false);
-
-		// create all components and lay them out properly
-		createAndLayoutComponents();
-
-		// populate the combo box
-		DefaultComboBoxModel combo = new DefaultComboBoxModel(Tools.getLevelValues(new File("USER-spelling-lists.txt")));
-		ownListComboBox.setModel(combo);
-		applyTheme();
-		// centre dialog
-		setLocationRelativeTo(null);
-	}
-
 	// perform appropriate actions based on button press
 	public void actionPerformed(ActionEvent e) {
 		// if choose file button is pressed
@@ -371,7 +372,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 		// Add button that opens up a file chooser to allow user to choose own list
 		chooseFile = new JButton("...");
 		chooseFile.addActionListener(this);
-		chooseFile.setToolTipText("this should open up a file chooser to choose the user's own list which overwrites the last user list");
+		chooseFile.setToolTipText("Choose own list to quiz on");
 		chooseFile.setFont(new Font("Arial", Font.BOLD, 14));
 		chooseFile.setFocusPainted(false);
 		chooseFile.setBounds(240, 240, 35, 29);
