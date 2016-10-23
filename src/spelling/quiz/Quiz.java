@@ -82,7 +82,9 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 		if(e.getSource()==btnConfirmOrNext){
 			if(btnConfirmOrNext.getText().equals("Confirm")){
 				takeInUserInput();
+				disableAllButtons(); // festival speaking
 			} else if (btnConfirmOrNext.getText().equals("Next Question")||btnConfirmOrNext.getText().equals("Done")){
+				disableAllButtons(); // festival speaking
 				// ask question when it is supposed to
 				if(spellList.status == QuizState.Asking){
 					btnConfirmOrNext.setText("Confirm");
@@ -311,7 +313,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 	 * Set user's input
 	 */
 	public void setUserInput(String input) {
-		userInput.setText(input);;
+		userInput.setText(input);
 	}
 	/**
 	 * Set "Please spell ..." query

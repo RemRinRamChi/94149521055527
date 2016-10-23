@@ -187,8 +187,8 @@ public class QuizChooser extends JDialog implements ActionListener{
 	 */
 	public static String[] addFromToAndGetTitles(File from, File to) throws InvalidWordListException{
 		boolean levelExist = false;
-		ArrayList<String> returns = new ArrayList<String>();
-		ArrayList<String> wordsToCopy = new ArrayList<String>();
+		ArrayList<String> returns = new ArrayList<String>(); // the level titles to return
+		ArrayList<String> wordsToCopy = new ArrayList<String>(); // the words to copy from a file
 		try {
 			BufferedReader readFromList = new BufferedReader(new FileReader(from));
 			String word = readFromList.readLine();
