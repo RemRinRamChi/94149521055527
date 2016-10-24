@@ -71,6 +71,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 	 * Create the dialog and its components.
 	 */
 	public QuizChooser() {
+		setResizable(false);
 		// Make sure that the file chooser only accepts (*.txt) files
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES (*.txt)", "txt", "text");
 		ownListChooser.setFileFilter(filter);
@@ -214,7 +215,8 @@ public class QuizChooser extends JDialog implements ActionListener{
 			}
 			readFromList.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			// if user choose to type in own file name for a file that doesn't exist
+			throw new InvalidWordListException("Make sure that the file exist.");
 		}
 		
 		// return the titles of the list to be displayed in the combo box

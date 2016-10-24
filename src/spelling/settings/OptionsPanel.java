@@ -75,10 +75,14 @@ public class OptionsPanel extends JPanel implements ActionListener{
 			int returnVal = cheeringFileChooser.showDialog(this, "Choose audio file");
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				File ownFile = cheeringFileChooser.getSelectedFile();
-				if(e.getSource()==btnCheer1){
-					AudioPlayer.setCheer1(ownFile.getAbsolutePath());
+				if(! ownFile.exists()){ // if user choose to type in own file name for a file that doesn't exist
+					JOptionPane.showMessageDialog(this, "Please make sure that the audio file exists.", "Invalid audio file", JOptionPane.WARNING_MESSAGE);
 				} else {
-					AudioPlayer.setCheer2(ownFile.getAbsolutePath());
+					if(e.getSource()==btnCheer1){
+						AudioPlayer.setCheer1(ownFile.getAbsolutePath());
+					} else {
+						AudioPlayer.setCheer2(ownFile.getAbsolutePath());
+					}
 				}
 			} 
 		} else if(e.getSource()==btnClearStats){ // CLEAR STATISTICS
