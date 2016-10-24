@@ -26,6 +26,15 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	
 	// run in background
 	protected Void doInBackground() throws Exception {
+		// if user deleted his own audio file, use back the default
+		if(! new File(cheer1).exists()){
+			cheer1 = "mp3/Reward.mp3";
+		}
+		if(! new File(cheer2).exists()){
+			cheer2 = "mp3/GoodTry.mp3";
+		}
+		
+		// play the audio file
 		if(rewardType.equals(AudioReward.AllCorrect)){
 			Tools.processStarter("ffplay -t 5 -autoexit "+cheer1+" -nodisp");		
 		} else if(rewardType.equals(AudioReward.NotAllCorrect)){
