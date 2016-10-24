@@ -46,6 +46,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 	private JLabel lblClearStatistics;
 	private JLabel lblClearPreferences;
 	private JLabel lblSettings;
+	private JButton btnHelp;
 	
 	
 	/**
@@ -100,7 +101,9 @@ public class OptionsPanel extends JPanel implements ActionListener{
 			}
 		} else if(e.getSource()==btnBack){ // GO BACK TO MAIN OPTIONS
 			mainFrame.changeCardPanel("Main");
-		} 
+		} else if(e.getSource()==btnHelp){ 
+			JOptionPane.showMessageDialog(mainFrame, "Please look at the USER_MANUAL.pdf file provided.", "VoxSpell Help", JOptionPane.INFORMATION_MESSAGE);
+		}
 		
 		
 	}
@@ -221,6 +224,14 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(42, 303, 349, 8);
 		add(separator_1);
+		// Help button
+		btnHelp = new JButton("Help");
+		btnHelp.setForeground(Color.WHITE);
+		btnHelp.setFont(new Font("Arial", Font.BOLD, 14));
+		btnHelp.setBackground(new Color(15, 169, 249));
+		btnHelp.setBounds(42, 405, 96, 36);
+		btnHelp.addActionListener(this);
+		add(btnHelp);
 		
 		applyTheme();
 
@@ -259,6 +270,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		btnCheer2.setForeground(buttonText);
 		btnCheer1.setForeground(buttonText);
 		voiceComboBox.setForeground(buttonText);
+		btnHelp.setForeground(buttonText);
 
 		// normal button color
 		btnChangeName.setBackground(buttonColour);
@@ -268,6 +280,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		btnCheer2.setBackground(buttonColour);
 		btnCheer1.setBackground(buttonColour);
 		voiceComboBox.setBackground(buttonColour);
+		btnHelp.setBackground(buttonColour);
 	}
 	
 	/**
