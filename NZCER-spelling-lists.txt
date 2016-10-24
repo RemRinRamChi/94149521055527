@@ -193,7 +193,7 @@ bus
 end
 gave
 its
-lot 
+lot
 cat
 even
 getting
@@ -288,7 +288,7 @@ work
 died
 girl
 look
-small 
+small
 won
 doing
 gone

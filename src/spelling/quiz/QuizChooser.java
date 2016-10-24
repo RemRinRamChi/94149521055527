@@ -151,7 +151,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 				File ownFile = ownListChooser.getSelectedFile();
 				// Change chosen list label appropriately
 				try {
-					DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromToAndGetTitles(ownFile,new File(".USER-spelling-lists.txt")));
+					DefaultComboBoxModel combo = new DefaultComboBoxModel(addFromAFileToAnotherFileAndGetTitles(ownFile,new File(".USER-spelling-lists.txt")));
 					ownListComboBox.setModel(combo);
 					mainQuizPanel.updateSpellList(new SpellList());
 				} catch(InvalidWordListException iWE){
@@ -185,7 +185,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 	 * @param to file to have its contents be replaced
 	 * @throws InvalidWordListException 
 	 */
-	public static String[] addFromToAndGetTitles(File from, File to) throws InvalidWordListException{
+	public static String[] addFromAFileToAnotherFileAndGetTitles(File from, File to) throws InvalidWordListException{
 		boolean levelExist = false;
 		ArrayList<String> returns = new ArrayList<String>(); // the level titles to return
 		ArrayList<String> wordsToCopy = new ArrayList<String>(); // the words to copy from a file
@@ -204,16 +204,20 @@ public class QuizChooser extends JDialog implements ActionListener{
 						throw new InvalidWordListException("All levels must have a name.");
 					}
 					if(!returns.contains(word.substring(1))){
-						returns.add(word.substring(1));
+						String trimmedWord = word.substring(1).trim();
+						returns.add(trimmedWord);
 					}
 				}
-				wordsToCopy.add(word);
+				String trimmedWord = word.trim();
+				wordsToCopy.add(trimmedWord);
 				word = readFromList.readLine();
 			}
 			readFromList.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		// return the titles of the list to be displayed in the combo box
 		String[] ws = new String[returns.size()];
 		int i = 0;
 		for(String w : returns){
@@ -222,6 +226,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 		}
 
 		ClearFiles.clearFile(to); // only start clearing when nothing is wrong
+		// copy all the words from the selected file to the special user's own list file
 		for(String word : wordsToCopy){
 			Tools.record(to,word);
 		}

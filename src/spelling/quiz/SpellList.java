@@ -356,8 +356,8 @@ public class SpellList {
 		}
 
 
-		// turn to lower case for BOTH and then compare, trim so that outer white spaces are not considered
-		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase().trim())){
+		// turn to lower case for BOTH and then compare
+		if(userAnswer.toLowerCase().equals(wordToSpell.toLowerCase())){
 			// Correct echoed if correct
 			spellingAidQuiz.sayText("Correct","");
 			if(!attempt){
@@ -402,8 +402,7 @@ public class SpellList {
 				endOfQuestion = true;
 			}
 			if(!attempt){
-				//trim so that outer white spaces are not considered and then get letter differences
-				spellingAidQuiz.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell.trim()) +" letter(s) off");
+				spellingAidQuiz.setFirstAttemptResult(checkLetterDiff(userAnswer,wordToSpell) +" letter(s) off");
 			} else {
 				spellingAidQuiz.setSecondAttemptResult(wordToSpell);
 			}
