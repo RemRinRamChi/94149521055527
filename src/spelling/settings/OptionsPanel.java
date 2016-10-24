@@ -102,7 +102,15 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		} else if(e.getSource()==btnBack){ // GO BACK TO MAIN OPTIONS
 			mainFrame.changeCardPanel("Main");
 		} else if(e.getSource()==btnHelp){ 
-			JOptionPane.showMessageDialog(mainFrame, "Please look at the USER_MANUAL.pdf file provided.", "VoxSpell Help", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(mainFrame, ""
+					+ "New Quiz: Start a new spelling quiz (maximum of 10 words will be asked)\n"
+					+ "Review Quiz: Review a spelling quiz and be asked on the questions that you have gotten wrong previously (maximum of 10 words will be asked)\n"
+					+ "View Statistics: Show statistics on each level attempted and also statistics on each word attempted\n"
+					+ "Options: Change or clear preferences (VoxSpell asking voice, VoxSpell cheering voice)\n"
+					+ "\n"
+					+ "Notes: cheer files can only be mp3 or wav files, user's own spelling list can only be text or txt files\n"
+					+ "\n"
+					+ "Please look at the USER_MANUAL.pdf file provided for more detailed help.", "VoxSpell Help", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		

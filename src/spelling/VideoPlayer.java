@@ -27,7 +27,7 @@ import javax.swing.SwingConstants;
 
 /**
  * This class utilizes vlcj to play videos as a video reward in a quiz
- * @author YaoJian
+ * @author yyap601
  *
  */
 public class VideoPlayer extends JDialog implements ActionListener,WindowListener{
