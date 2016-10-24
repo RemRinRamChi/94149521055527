@@ -98,6 +98,7 @@ public class WelcomeScreen extends JPanel {
 		
 		// confirm name button
 		btnConfirm = new JButton("Confirm");
+		btnConfirm.setToolTipText("Confirm name");
 		btnConfirm.setFont(new Font("Arial", Font.BOLD, 14));
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

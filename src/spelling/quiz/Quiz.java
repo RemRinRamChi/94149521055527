@@ -544,6 +544,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 
 		// listen again button
 		btnListenAgain = new JButton("Listen again");
+		btnListenAgain.setToolTipText("Listen to word again");
 		btnListenAgain.setFont(new Font("Arial", Font.BOLD, 14));
 		btnListenAgain.addActionListener(this);
 		btnListenAgain.addKeyListener(this);
@@ -552,6 +553,7 @@ public class Quiz extends JPanel implements KeyListener, ActionListener{
 
 		// confirm button or next question button
 		btnConfirmOrNext = new JButton("Confirm");
+		btnConfirmOrNext.setToolTipText("");
 		btnConfirmOrNext.setFont(new Font("Arial", Font.BOLD, 14));
 		btnConfirmOrNext.addActionListener(this);
 		btnConfirmOrNext.addKeyListener(this);

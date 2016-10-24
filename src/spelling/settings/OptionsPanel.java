@@ -138,6 +138,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(lblName);
 		// Change NAME button
 		btnChangeName = new JButton("change");
+		btnChangeName.setToolTipText("Change your name, statistics will not be affected");
 		btnChangeName.addActionListener(this);
 		btnChangeName.setFont(new Font("Arial", Font.BOLD, 14));
 		btnChangeName.setBounds(258, 132, 133, 23);
@@ -149,6 +150,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		lblClearStatistics.setBounds(42, 322, 206, 14);
 		add(lblClearStatistics);
 		btnClearStats = new JButton("clear");
+		btnClearStats.setToolTipText("Clear sattistics/progress for all level");
 		btnClearStats.addActionListener(this);
 		btnClearStats.setFont(new Font("Arial", Font.BOLD, 14));
 		btnClearStats.setBounds(258, 318, 133, 23);
@@ -179,6 +181,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		lblClearPreferences.setBounds(42, 356, 205, 14);
 		add(lblClearPreferences);
 		btnClearPref = new JButton("clear");
+		btnClearPref.setToolTipText("Clear own cheers and voice preference and also the own spelling list");
 		btnClearPref.addActionListener(this);
 		btnClearPref.setFont(new Font("Arial", Font.BOLD, 14));
 		btnClearPref.setBounds(258, 352, 133, 23);
@@ -191,6 +194,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		lblSetOwnCheer1.setBounds(42, 204, 205, 14);
 		add(lblSetOwnCheer1);
 		btnCheer1 = new JButton("set");
+		btnCheer1.setToolTipText("Set cheering sound for when you get at least one less then the total number of questions right");
 		btnCheer1.addActionListener(this);
 		btnCheer1.setFont(new Font("Arial", Font.BOLD, 14));
 		btnCheer1.setBounds(258, 200, 133, 23);
@@ -203,6 +207,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		lblSetOwnCheer2.setBounds(42, 238, 205, 14);
 		add(lblSetOwnCheer2);
 		btnCheer2 = new JButton("set");
+		btnCheer2.setToolTipText("Set cheering sound for when you get less than at least one less then the total number of questions right");
 		btnCheer2.addActionListener(this);
 		btnCheer2.setFont(new Font("Arial", Font.BOLD, 14));
 		btnCheer2.setBounds(258, 234, 133, 23);
@@ -226,6 +231,7 @@ public class OptionsPanel extends JPanel implements ActionListener{
 		add(separator_1);
 		// Help button
 		btnHelp = new JButton("Help");
+		btnHelp.setToolTipText("Please have a look at the USER_MANUAL.pdf provided");
 		btnHelp.setForeground(Color.WHITE);
 		btnHelp.setFont(new Font("Arial", Font.BOLD, 14));
 		btnHelp.setBackground(new Color(15, 169, 249));

@@ -67,6 +67,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			{
 				// pause/play button
 				pauseBtn = new JButton("PAUSE");
+				pauseBtn.setToolTipText("PLAY/PAUSE the video");
 				pauseBtn.setFont(new Font("Arial", Font.BOLD, 14));
 				pauseBtn.setBounds(178, 11, 150, 30);
 				pauseBtn.setActionCommand("");
@@ -76,6 +77,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			
 			// muted/unmute button
 			muteBtn = new JButton("MUTE");
+			muteBtn.setToolTipText("MUTE/UNMUTE the video");
 			muteBtn.setFont(new Font("Arial", Font.BOLD, 14));
 			muteBtn.setActionCommand("Cancel");
 			muteBtn.setBounds(338, 11, 150, 30);
@@ -84,6 +86,7 @@ public class VideoPlayer extends JDialog implements ActionListener,WindowListene
 			
 			// stop button
 			stopBtn = new JButton("STOP");
+			stopBtn.setToolTipText("Stop and quit the video");
 			stopBtn.setFont(new Font("Arial", Font.BOLD, 14));
 			stopBtn.setActionCommand("Cancel");
 			stopBtn.setBounds(498, 11, 150, 30);

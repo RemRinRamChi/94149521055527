@@ -53,7 +53,7 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	}
 	
 	/**
-	 * Set cheer 1 for when user gets 100% right
+	 * Set cheer 1 for when user gets at least 1 less than the total number of questions right
 	 * @param path path to the cheer 1 file
 	 */
 	public static void setCheer1(String path){
@@ -63,7 +63,7 @@ public class AudioPlayer extends SwingWorker<Void, Void>{
 	}
 	
 	/**
-	 * Set cheer 2 for when user gets less than 100% right
+	 * Set cheer 1 for when user gets less than at least 1 less than the total number of questions right
 	 * @param path path to the cheer 2 file
 	 */
 	public static void setCheer2(String path){

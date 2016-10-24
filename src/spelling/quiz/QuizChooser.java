@@ -360,7 +360,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 		getContentPane().add(label);
 
 		// Create title "Use own list" 
-		lblUseOwnList = new JLabel("Use own list");
+		lblUseOwnList = new JLabel("Choose your own level");
 		lblUseOwnList.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUseOwnList.setFont(new Font("Arial", Font.PLAIN, 20));
 		lblUseOwnList.setBounds(0, 194, 359, 35);
@@ -383,6 +383,7 @@ public class QuizChooser extends JDialog implements ActionListener{
 
 		// Create "OK" button to confirm level from user's own list
 		btnConfirmLvl = new JButton("OK");
+		btnConfirmLvl.setToolTipText("Confirm own list level");
 		btnConfirmLvl.addActionListener(this);
 		btnConfirmLvl.setFont(new Font("Arial", Font.BOLD, 14));
 		btnConfirmLvl.setFocusPainted(false);

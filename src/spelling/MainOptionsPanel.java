@@ -172,6 +172,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// New Quiz button
 		btnNewQuiz = new JButton("New Quiz");
+		btnNewQuiz.setToolTipText("Start a new spelling quiz");
 		btnNewQuiz.setFocusPainted(false);
 		btnNewQuiz.setFont(new Font("Arial", Font.BOLD, 16));
 		btnNewQuiz.addActionListener(this);
@@ -193,6 +194,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// Review Quiz button
 		btnReviewQuiz = new JButton("Review Quiz\r\n");
+		btnReviewQuiz.setToolTipText("Review a spelling quiz");
 		btnReviewQuiz.addActionListener(this);
 		btnReviewQuiz.setFocusPainted(false);
 		btnReviewQuiz.setFont(new Font("Arial", Font.BOLD, 16));
@@ -205,6 +207,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// View Statistics button
 		btnViewStatistics = new JButton("View Statistics");
+		btnViewStatistics.setToolTipText("Look at quiz results");
 		btnViewStatistics.addActionListener(this);
 		btnViewStatistics.setFocusPainted(false);
 		btnViewStatistics.setFont(new Font("Arial", Font.BOLD, 16));
@@ -217,6 +220,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// Settings button
 		btnSettings = new JButton("Options");
+		btnSettings.setToolTipText("Change settings");
 		btnSettings.addActionListener(this);
 		btnSettings.setFocusPainted(false);
 		btnSettings.setFont(new Font("Arial", Font.BOLD, 16));
@@ -229,6 +233,7 @@ public class MainOptionsPanel extends JPanel implements ActionListener{
 
 		// Quit button
 		btnQuit = new JButton("Quit");
+		btnQuit.setToolTipText("Quit VoxSpell");
 		btnQuit.addActionListener(this);
 		btnQuit.setFocusPainted(false);
 		btnQuit.setFont(new Font("Arial", Font.BOLD, 16));

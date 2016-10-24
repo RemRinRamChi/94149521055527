@@ -203,6 +203,7 @@ public class QuizDone extends JPanel implements ActionListener{
 		
 		// retry level
 		btnRetryLevel = new JButton("RETRY LEVEL");
+		btnRetryLevel.setToolTipText("Retry the level in a new spelling quiz");
 		btnRetryLevel.addActionListener(this);
 		
 				// avatar
